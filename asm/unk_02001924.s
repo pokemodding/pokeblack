@@ -8,7 +8,7 @@
 	thumb_func_start FUN_02001924
 FUN_02001924: ; 0x02001924
 	push {r3, r4, r5, r6, r7, lr}
-	ldr r6, [pc, #80]      ; Load 0x020AA1AC from literal pool (DAT_02001974)
+	ldr r6, [pc, #76]      ; Load 0x020AA1AC from literal pool (DAT_02001974)
 	mov r1, #0x1C
 	ldr r2, [r6, #4]
 	ldr r3, [pc, #72]      ; Load 0x020AA1B8 from literal pool (DAT_02001978)
@@ -45,7 +45,6 @@ LAB_02001964:
 	strh r5, [r4, #4]
 	add r0, r7, #0
 	pop {r3, r4, r5, r6, r7, pc}
-	.balign 4, 0
 DAT_02001974:
 	.word 0x020AA1AC
 DAT_02001978:

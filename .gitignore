@@ -43,3 +43,7 @@ tools/*.o
 #Squid's insane diary entries
 PROGRESS.md
 
+linker.ld
+*.py
+/tools/mwccarm
+tools/README.md

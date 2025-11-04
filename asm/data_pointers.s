@@ -114,8 +114,8 @@ DAT_02002114:
 DAT_02002350:
 	.word 0x020AA260  ; HeapManagerState pointer
 
-	.global SUB_0200238c
-SUB_0200238c:
+	.global sub_0200238c
+sub_0200238c:
 	.word 0x020AA260  ; HeapManagerState pointer
 
 	.global DAT_02002354

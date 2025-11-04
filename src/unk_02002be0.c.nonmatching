@@ -17,7 +17,7 @@
 //
 // buffer: Pointer to the buffer to reverse
 // length: Number of bytes in the buffer
-void FUN_02002be0(u8* buffer, u32 length) {
+void sub_02002be0(u8* buffer, u32 length) {
     u32 i;
     u32 halfLength = length >> 1;  // Divide by 2
     

@@ -10,8 +10,8 @@
 extern void* DAT_02002a88;  // Points to 0x02140488 - resource object array
 
 // External functions
-extern s32 FUN_02002868(void* resourceObject);  // Validates resource object
-extern void FUN_02002948(void* resourceObject); // Destroys/cleans up resource object
+extern s32 sub_02002868(void* resourceObject);  // Validates resource object
+extern void sub_02002948(void* resourceObject); // Destroys/cleans up resource object
 
 #define RESOURCE_OBJECT_SIZE 0x34  // 52 bytes per resource object
 
@@ -22,20 +22,20 @@ extern void FUN_02002948(void* resourceObject); // Destroys/cleans up resource o
 //
 // index: Index into the resource object array
 // Returns: 1 if resource is valid, 0 if invalid or cleaned up
-s32 FUN_02002a64(u32 index) {
+s32 sub_02002a64(u32 index) {
     void** resourceArray = (void**)DAT_02002a88;
     
     // Calculate offset: index * 52 bytes
     u32 offset = index * RESOURCE_OBJECT_SIZE;
     void* resourceObject = (void*)((u8*)resourceArray + offset);
     
-    s32 isValid = FUN_02002868(resourceObject);
+    s32 isValid = sub_02002868(resourceObject);
     
     if (isValid != 0) {
         return 1;  // Resource is valid
     }
     
     // Resource is invalid, clean it up
-    FUN_02002948(resourceObject);
+    sub_02002948(resourceObject);
     return 0;
 }

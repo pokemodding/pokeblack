@@ -4,7 +4,7 @@
 extern u32 DAT_020027c8;  // = 0x00003443
 extern u32 DAT_020027cc;  // = 0x000064E1
 
-// after cleanup. It's called by FUN_02002948 as the final step in resource destruction.
+// after cleanup. It's called by sub_02002948 as the final step in resource destruction.
 //
 // ResourceObject structure (52 bytes = 0x34):
 //   +0x00: state flag
@@ -24,7 +24,7 @@ extern u32 DAT_020027cc;  // = 0x000064E1
 //
 // Returns: void
 //
-void FUN_020027a4(void* objPtr) {
+void sub_020027a4(void* objPtr) {
     u32* obj32 = (u32*)objPtr;
     u8* obj8 = (u8*)objPtr;
     

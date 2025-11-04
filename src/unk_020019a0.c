@@ -5,9 +5,9 @@ extern u32 DAT_020019c0;  // Points to 0x020AA1AC
 extern u32 DAT_020019c4;  // Points to 0x020AA1B8
 
 // External function declaration
-extern u32 SUB_02070894(u32 param);
+extern u32 sub_02070894(u32 param);
 
-u32 FUN_020019a0(u32 param) {
+u32 sub_020019a0(u32 param) {
     u32* ptr1 = (u32*)DAT_020019c0;  // 0x020AA1AC
     u32* ptr2 = (u32*)DAT_020019c4;  // 0x020AA1B8
     
@@ -23,7 +23,7 @@ u32 FUN_020019a0(u32 param) {
     u32* ptr3 = (u32*)ptr1[2];  // offset +0x8 from 0x020AA1AC = 0x020AA1B4
     u32 value = ptr3[0];
     
-    u32 result = SUB_02070894(value);
+    u32 result = sub_02070894(value);
     
     // Store result at block+0x18
     block[6] = result;  // offset +0x18

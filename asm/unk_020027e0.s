@@ -2,18 +2,18 @@
 
     .text
 
-    .extern SUB_02070450
-    .extern SUB_0207057c
-    .extern SUB_020705a4
-    .extern SUB_02086638
-    .extern SUB_0209800c
+    .extern sub_02070450
+    .extern sub_0207057c
+    .extern sub_020705a4
+    .extern sub_02086638
+    .extern sub_0209800c
 
-thumb_func_start FUN_020027e0
-FUN_020027e0: ; 0x020027e0
+thumb_func_start sub_020027e0
+sub_020027e0: ; 0x020027e0
     push {r4, r5, r6, lr}
     add r5, r0, #0
     add r0, r1, #0
-    blx SUB_02070450
+    blx sub_02070450
     add r4, r0, #0
     bne .LAB_020027f2
     mov r0, #0
@@ -22,7 +22,7 @@ FUN_020027e0: ; 0x020027e0
     ldr r0, [r4, #0]
     lsl r0, r0, #8
     lsr r0, r0, #8
-    blx SUB_0207057c
+    blx sub_0207057c
     add r6, r0, #0
     bne .LAB_02002804
     mov r0, #0
@@ -35,7 +35,7 @@ FUN_020027e0: ; 0x020027e0
     add r2, r6, #0
     mov r4, #0
     mov r3, #0
-    blx SUB_020705a4
+    blx sub_020705a4
     sub r1, r4, #1
     cmp r0, r1
     bne .LAB_02002820
@@ -51,7 +51,7 @@ FUN_020027e0: ; 0x020027e0
     ldr r0, [r6, #0x3c]
     add r4, r6, r0
     add r0, r6, #0
-    blx SUB_02086638
+    blx sub_02086638
     ldr r1, [r6, #8]
     ldr r0, [r6, #0x3c]
     sub r1, r1, r0
@@ -66,10 +66,10 @@ FUN_020027e0: ; 0x020027e0
     ldrh r2, [r4, #2]
     ldr r0, [pc, #4]
     asr r3, r2, #0x1f
-    blx SUB_0209800c
+    blx sub_0209800c
     ldrh r2, [r4, #4]
     asr r3, r2, #0x1f
-    blx SUB_0209800c
+    blx sub_0209800c
     str r0, [r5, #0x20]
     mov r0, #1
     pop {r4, r5, r6, pc}
@@ -77,4 +77,4 @@ FUN_020027e0: ; 0x020027e0
     .balign 4, 0
 .L_literal_pool:
     .word 0xD87F8000
-thumb_func_end FUN_020027e0
+thumb_func_end sub_020027e0

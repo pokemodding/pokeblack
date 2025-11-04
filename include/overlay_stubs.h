@@ -7,10 +7,10 @@
 
 #include "types.h"
 
-// FUN_0206ef34 - Overlay function at 0x0206ef34
+// sub_0206ef34 - Overlay function at 0x0206ef34
 //
 // Called with graphics/palette pointer and fade value.
 // Actual implementation in overlay
-void FUN_0206ef34(void* ptr, u32 value);
+void sub_0206ef34(void* ptr, u32 value);
 
 #endif // OVERLAY_STUBS_H

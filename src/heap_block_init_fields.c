@@ -12,12 +12,12 @@ extern u32 DAT_020019f8;  // Points to 0x020AA1B8 - Heap block array
 extern u16 DAT_020019fc;  // Value 0xFFFF - Default heap ID
 
 // External function declarations
-extern void SUB_020708e0(void* param1, void* param2);
+extern void sub_020708e0(void* param1, void* param2);
 
 // - Sets heap ID to 0xFFFF
 // - Calls overlay initialization function
 // - Copies value from offset +0x10 to offsets +0x14 and +0x18
-void FUN_020019c8(void) {
+void sub_020019c8(void) {
     u32* structPtr1 = (u32*)DAT_020019f4;  // 0x020AA1AC
     u32* heapBlockArray = (u32*)DAT_020019f8;  // 0x020AA1B8
     
@@ -39,7 +39,7 @@ void FUN_020019c8(void) {
         // Get value from heapBlock offset +0x10
         void* param2 = (void*)heapBlock[4];  // offset 0x10 = 4th u32
         
-        SUB_020708e0(param1, param2);
+        sub_020708e0(param1, param2);
         
         // Copy value from offset +0x10 to +0x14 and +0x18
         u32 value = heapBlock[4];  // offset +0x10

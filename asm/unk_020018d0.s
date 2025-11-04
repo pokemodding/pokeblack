@@ -2,8 +2,8 @@
 
 .text
 
-thumb_func_start FUN_020018d0
-FUN_020018d0: ; 0x020018d0
+thumb_func_start sub_020018d0
+sub_020018d0: ; 0x020018d0
 	ldr r0, [pc, #32]   ; Load from literal pool (0x020AA1AC)
 	ldr r2, [pc, #36]   ; Load from literal pool (0x020AA1B8)
 	ldr r1, [r0, #4]
@@ -32,4 +32,4 @@ FUN_020018d0: ; 0x020018d0
 	.word 0x020AA1B8    ; DAT_020018f8
 	.word 0x0000FFFF    ; DAT_020018fc
 
-thumb_func_end FUN_020018d0
+thumb_func_end sub_020018d0

@@ -2,8 +2,8 @@
 
 	.text
 
-	thumb_func_start FUN_020019a0
-FUN_020019a0: ; 0x020019a0
+	thumb_func_start sub_020019a0
+sub_020019a0: ; 0x020019a0
 	push {r3, r4, r5, lr}
 	ldr r1, [pc, #28] ; =0x020AA1AC
 	add r5, r0, #0x0
@@ -14,7 +14,7 @@ FUN_020019a0: ; 0x020019a0
 	add r4, r3, r0
 	ldr r0, [r1, #0x8]
 	ldr r0, [r0, #0x0]
-	blx SUB_02070894
+	blx sub_02070894
 	str r0, [r4, #0x18]
 	strh r5, [r4, #0x4]
 	mov r0, #0x1
@@ -24,6 +24,6 @@ DAT_020019c0:
 DAT_020019c4:
 	.word 0x020AA1B8
 
-	thumb_func_end FUN_020019a0
+	thumb_func_end sub_020019a0
 
-	.extern SUB_02070894
+	.extern sub_02070894

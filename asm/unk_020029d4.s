@@ -2,8 +2,8 @@
 
 	.text
 
-	thumb_func_start FUN_020029d4
-FUN_020029d4: ; 0x020029d4
+	thumb_func_start sub_020029d4
+sub_020029d4: ; 0x020029d4
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x1c
 	add r7, r3, #0x0
@@ -14,7 +14,7 @@ FUN_020029d4: ; 0x020029d4
 	add r6, r0, #0x0
 	str r1, [sp, #0x10]
 	blx r3
-	bl FUN_02002768
+	bl sub_02002768
 	str r0, [sp, #0x14]
 	ldr r1, [sp, #0x14]
 	mov r2, #0x34
@@ -25,7 +25,7 @@ FUN_020029d4: ; 0x020029d4
 	cmp r0, #0x1
 	bne LAB_02002a04
 	add r0, r4, #0x0
-	bl FUN_02002948
+	bl sub_02002948
 LAB_02002a04:
 	add r0, r4, #0x0
 	add r0, #0x8
@@ -51,14 +51,14 @@ LAB_02002a04:
 	bne LAB_02002a38
 	ldr r1, [sp, #0x18]
 	add r0, r4, #0x0
-	bl FUN_020027e0
+	bl sub_020027e0
 LAB_02002a38:
 	ldr r0, [sp, #0x20]
 	cmp r0, #0x0
 	beq LAB_02002a46
 	ldr r0, [r4, #0x10]
 	ldr r1, [r4, #0x8]
-	bl FUN_02002be0
+	bl sub_02002be0
 LAB_02002a46:
 	add r0, r4, #0x0
 	add r0, #0x28
@@ -77,9 +77,9 @@ DAT_02002a5c:
 DAT_02002a60:
 	.word 0x02140488
 
-	thumb_func_end FUN_020029d4
+	thumb_func_end sub_020029d4
 
-	.extern FUN_02002768
-	.extern FUN_02002948
-	.extern FUN_020027e0
-	.extern FUN_02002be0
+	.extern sub_02002768
+	.extern sub_02002948
+	.extern sub_020027e0
+	.extern sub_02002be0

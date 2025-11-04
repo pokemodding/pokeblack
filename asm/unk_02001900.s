@@ -1,8 +1,8 @@
 	.text
 	.align 2
-	.global FUN_02001900
+	.global sub_02001900
 	.thumb
-FUN_02001900:
+sub_02001900:
 	; See src/unk_02001900.c for C equivalent
 	; Returns: gHeapManager->field_04
 	;

@@ -9,11 +9,11 @@ extern u32 DAT_02002360;  // Contains address 0x020AA26C
 extern u32 DAT_02002364;  // Contains address 0x020AA9B4
 
 // External function declarations
-extern void FUN_02002368(void);
-extern void SUB_020813c0(u32* r0, u32* r1, u32* r2, u32* r3, u32 stackParam1, u32 stackParam2);
-extern void SUB_02081868(u32* param);
+extern void sub_02002368(void);
+extern void sub_020813c0(u32* r0, u32* r1, u32* r2, u32* r3, u32 stackParam1, u32 stackParam2);
+extern void sub_02081868(u32* param);
 
-void FUN_02002300(u32 param1, u32 param2) {
+void sub_02002300(u32 param1, u32 param2) {
     u32* r1;
     u32* r0;
     u32* r2;
@@ -28,7 +28,7 @@ void FUN_02002300(u32 param1, u32 param2) {
     // Store param1 at r1+0xC
     r1[3] = param1;
     
-    FUN_02002368();
+    sub_02002368();
     
     // Compare r4 with 0
     if (param2 == 0) {
@@ -39,7 +39,7 @@ void FUN_02002300(u32 param1, u32 param2) {
         r1 = (u32*)DAT_02002358;
         r2 = (u32*)DAT_02002360;
         r3 = (u32*)DAT_02002364;
-        SUB_020813c0(r0, r1, r2, r3, local_10, local_c);
+        sub_020813c0(r0, r1, r2, r3, local_10, local_c);
     } else if (param2 == 1) {
         // LAB_02002328
         local_10 = 0x400;  // 1 << 10
@@ -48,12 +48,12 @@ void FUN_02002300(u32 param1, u32 param2) {
         r1 = (u32*)DAT_0200235c;
         r2 = (u32*)DAT_02002360;
         r3 = (u32*)DAT_02002364;
-        SUB_020813c0(r0, r1, r2, r3, local_10, local_c);
+        sub_020813c0(r0, r1, r2, r3, local_10, local_c);
     }
     
     // LAB_0200233e
     r0 = (u32*)DAT_02002354;
-    SUB_02081868(r0);
+    sub_02081868(r0);
     
     r1 = (u32*)DAT_02002350;
     r1[5] = DAT_02002354;

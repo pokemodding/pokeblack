@@ -2,8 +2,8 @@
 
 	.text
 
-	thumb_func_start FUN_020027a4
-FUN_020027a4: ; 0x020027a4
+	thumb_func_start sub_020027a4
+sub_020027a4: ; 0x020027a4
 	ldr r1, [pc, #32] ; =0x00003443
 	mov r3, #0x0
 	str r1, [r0, #0xc]
@@ -27,4 +27,4 @@ DAT_020027c8:
 DAT_020027cc:
 	.word 0x000064E1
 
-	thumb_func_end FUN_020027a4
+	thumb_func_end sub_020027a4

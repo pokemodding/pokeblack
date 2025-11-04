@@ -5,10 +5,10 @@
 	.extern DAT_020019f4
 	.extern DAT_020019f8
 	.extern DAT_020019fc
-	.extern SUB_020708e0
+	.extern sub_020708e0
 
-	thumb_func_start FUN_020019c8
-FUN_020019c8: ; 0x020019c8
+	thumb_func_start sub_020019c8
+sub_020019c8: ; 0x020019c8
 	push {r4, lr}
 	ldr r1, [pc, #40]      ; Load DAT_020019f4
 	ldr r3, [pc, #40]      ; Load DAT_020019f8
@@ -25,7 +25,7 @@ FUN_020019c8: ; 0x020019c8
 	ldr r0, [r1, #8]       ; Load structPtr[2]
 	ldr r1, [r4, #0x10]    ; Load heapBlock[4] (offset 0x10)
 	ldr r0, [r0]           ; Dereference structPtr[2]
-	bl SUB_020708e0        ; Call overlay function
+	bl sub_020708e0        ; Call overlay function
 	ldr r0, [r4, #0x10]    ; Load heapBlock[4] again
 	str r0, [r4, #0x14]    ; Store at heapBlock[5]
 	ldr r0, [r4, #0x10]    ; Load heapBlock[4] again
@@ -42,4 +42,4 @@ _DAT_020019f8:
 _DAT_020019fc:
 	.word DAT_020019fc
 
-	thumb_func_end FUN_020019c8
+	thumb_func_end sub_020019c8

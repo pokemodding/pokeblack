@@ -2,13 +2,13 @@
 
 	.text
 
-	.extern FUN_02001c64
+	.extern sub_02001c64
 
-	thumb_func_start FUN_02001ce0
-FUN_02001ce0: ; 0x02001ce0
+	thumb_func_start sub_02001ce0
+sub_02001ce0: ; 0x02001ce0
 	push {r4, lr}
 	add r4, r0, #0
-	bl FUN_02001c64
+	bl sub_02001c64
 	cmp r0, #0
 	bne LAB_02001cf0
 	mov r0, #1
@@ -27,4 +27,4 @@ LAB_02001cfc:
 	.balign 4, 0
 DAT_02001d04:
 	.word 0x020AA260
-	thumb_func_end FUN_02001ce0
+	thumb_func_end sub_02001ce0

@@ -8,7 +8,7 @@ extern void *DAT_0200191c;  // Pointer value stored in ROM
 //
 // Original address: 0x0200190c
 // Formula: DAT_02001920 + (((s32*)DAT_0200191c)[1] * 28) + 8
-s32 FUN_0200190c(void)
+s32 sub_0200190c(void)
 {
     s32 *ptr = (s32*)DAT_0200191c;
     s32 index = ptr[1];              // Get field at offset +4

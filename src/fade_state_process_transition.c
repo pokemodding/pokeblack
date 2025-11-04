@@ -4,12 +4,12 @@
 extern u32 DAT_02001ff0;  // Points to 0x020AA260 (HeapManagerState)
 
 // External function declarations
-extern u32 FUN_020018d0(void);
-extern void FUN_02001ff4(void);
-extern void FUN_02001d90(u32 param1, u16 param2);
-extern void FUN_02001f90(void);
+extern u32 sub_020018d0(void);
+extern void sub_02001ff4(void);
+extern void sub_02001d90(u32 param1, u16 param2);
+extern void sub_02001f90(void);
 
-void FUN_02001fbc(void) {
+void sub_02001fbc(void) {
     u32* heapManagerState = (u32*)DAT_02001ff0;  // 0x020AA260
     
     // Check if field at +0x1C equals 1
@@ -18,14 +18,14 @@ void FUN_02001fbc(void) {
         return;  // Early exit if not in state 1
     }
     
-    u32 currentValue = FUN_020018d0();
+    u32 currentValue = sub_020018d0();
     
     // Compare with stored value at offset +0x28
     u32 storedValue = heapManagerState[10];  // offset +0x28
     
     if (currentValue == storedValue) {
         // Values match - reset and exit
-        FUN_02001f90();
+        sub_02001f90();
         return;
     }
     
@@ -34,15 +34,15 @@ void FUN_02001fbc(void) {
     
     // Loop while loopFlag is non-zero
     while (loopFlag != 0) {
-        FUN_02001ff4();
+        sub_02001ff4();
         loopFlag = heapManagerState[8];  // Re-read after call
     }
     
-    // Get parameters for FUN_02001d90
+    // Get parameters for sub_02001d90
     u32 param1 = heapManagerState[10];  // offset +0x28
     u16 param2 = *(u16*)((u8*)heapManagerState + 0x26);  // offset +0x26 (halfword)
     
-    FUN_02001d90(param1, param2);
+    sub_02001d90(param1, param2);
     
-    FUN_02001f90();
+    sub_02001f90();
 }

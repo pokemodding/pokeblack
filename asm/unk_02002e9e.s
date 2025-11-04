@@ -1,8 +1,8 @@
 	.text
 	.align 2
-	.global FUN_02002e9e
+	.global sub_02002e9e
 	.thumb
-FUN_02002e9e:
+sub_02002e9e:
 	; See src/unk_02002e9e.c for C equivalent
 	; Returns: 0 (after restoring r4, r5 from stack)
 	;

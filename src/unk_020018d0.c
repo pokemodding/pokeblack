@@ -11,18 +11,18 @@ extern u32 DAT_020018f4;  // Address of word containing 0x020AA1AC
 extern u32 DAT_020018f8;  // Address of word containing 0x020AA1B8
 extern u32 DAT_020018fc;  // Address of word containing 0xFFFF
 
-// FUN_020018d0 - Gets state/mode value from current heap block
+// sub_020018d0 - Gets state/mode value from current heap block
 //
 // Accesses the current heap block (based on index at 0x020AA1AC+4)
 // and returns the u16 value at offset +0x4 within that block.
 // Returns 0 if block is not active or if value equals 0xFFFF.
 //
 // Called by:
-// - FUN_02001fbc (fade state transition handler)
-// - FUN_02001ff4 (fade state machine update)
+// - sub_02001fbc (fade state transition handler)
+// - sub_02001ff4 (fade state machine update)
 //
 // Returns: u16 State/mode value from heap block, or 0 if inactive/sentinel
-u32 FUN_020018d0(void) {
+u32 sub_020018d0(void) {
     u32* ptr1;
     u32* ptr2;
     u32 index;

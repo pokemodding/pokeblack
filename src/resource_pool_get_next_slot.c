@@ -5,9 +5,9 @@ extern u32 DAT_0200279c;  // Points to 0x02140504 (function/data table)
 extern u32 DAT_020027a0;  // Points to 0x02140488 (object array)
 
 // External function declarations
-extern void FUN_02002948(void* objectPtr);
+extern void sub_02002948(void* objectPtr);
 
-// FUN_02002768 - Resource object slot allocator
+// sub_02002768 - Resource object slot allocator
 //
 // Finds and returns the next available object slot index using round-robin allocation.
 // The function table at 0x02140504 contains metadata:
@@ -17,7 +17,7 @@ extern void FUN_02002948(void* objectPtr);
 // If the current slot is in use (state == 1), it cleans it up first.
 //
 // Returns: u16 index of the allocated slot
-u16 FUN_02002768(void) {
+u16 sub_02002768(void) {
     u32* funcTable;
     u32* objArray;
     u16 currentSlot;
@@ -39,7 +39,7 @@ u16 FUN_02002768(void) {
     // Check if current slot is in use (state == 1)
     if (currentObj[0] == 1) {
         // Clean up the object before reusing
-        FUN_02002948((void*)currentObj);
+        sub_02002948((void*)currentObj);
     }
     
     // Get maximum slots from offset +0x22 (halfword)

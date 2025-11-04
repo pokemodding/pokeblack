@@ -1,0 +1,343 @@
+// Auto-generated from symbols.txt
+
+#ifndef GLOBALS_H
+#define GLOBALS_H
+
+#include "types.h"
+
+
+// Main heap management structure
+// Address: 0x020AA1AC
+extern HeapManager* gHeapManager;
+
+// Array of heap blocks
+// Address: 0x020AA1B8
+extern HeapBlock* gHeapBlocks;
+
+// Constants
+
+extern u32 DAT_020000B0;  // 0x020000B0 = 0x1B236929
+
+extern u32 DAT_02000214;  // 0x02000214 = 0xFFE35D53
+
+extern u32 DAT_020002F0;  // 0x020002F0 = 0xF63C164C
+
+extern u32 DAT_02000354;  // 0x02000354 = 0x7C0AA3D9
+
+extern u32 DAT_02000364;  // 0x02000364 = 0xDF098DAA
+
+extern u32 DAT_020003C4;  // 0x020003C4 = 0xF966F6A3
+
+extern u32 DAT_020003D4;  // 0x020003D4 = 0xE9F5A1A2
+
+extern u32 DAT_02000464;  // 0x02000464 = 0xD0EC2436
+
+extern u32 DAT_020004A0;  // 0x020004A0 = 0xCFFA5545
+
+extern u32 DAT_020004DC;  // 0x020004DC = 0x59A94F53
+
+extern u32 DAT_02000578;  // 0x02000578 = 0xAB6430FE
+
+extern u32 DAT_020005D0;  // 0x020005D0 = 0x2858E2DA
+
+extern u32 DAT_020005F0;  // 0x020005F0 = 0x13CE3BBB
+
+extern u32 DAT_0200062C;  // 0x0200062C = 0xC4A234E6
+
+extern u32 DAT_02000650;  // 0x02000650 = 0x7558E62B
+
+extern u32 DAT_02000654;  // 0x02000654 = 0xA483C047
+
+extern u32 DAT_0200071C;  // 0x0200071C = 0x4770DF0D
+
+extern u32 DAT_02000730;  // 0x02000730 = 0x625B65F4
+
+extern u32 DAT_02000750;  // 0x02000750 = 0x634D5A24
+
+extern u32 DAT_0200076C;  // 0x0200076C = 0xA7E1471D
+
+extern u32 DAT_02000780;  // 0x02000780 = 0xF94EC34F
+
+extern u32 DAT_02000788;  // 0x02000788 = 0xE99ACD8D
+
+extern u32 DAT_02000804;  // 0x02000804 = 0xE58CC208
+
+extern u32 DAT_0200080C;  // 0x0200080C = 0xE3A00000
+
+extern u32 DAT_02000824;  // 0x02000824 = 0xE59F218C
+
+extern u32 DAT_02000888;  // 0x02000888 = 0xE4820004
+
+extern u32 DAT_020008D4;  // 0x020008D4 = 0xE12FFF32
+
+extern u32 DAT_02000930;  // 0x02000930 = 0xEB000032
+
+extern u32 DAT_020009A8;  // 0x020009A8 = 0xE12FFF11
+
+extern u32 DAT_02000A84;  // 0x02000A84 = 0xEE010F10
+
+extern u32 DAT_02000C28;  // 0x02000C28 = 0xCA00000B
+
+extern u32 DAT_02000CB0;  // 0x02000CB0 = 0xEB000087
+
+extern u32 DAT_02000D14;  // 0x02000D14 = 0xEE072F35
+
+extern u32 DAT_02000DCC;  // 0x02000DCC = 0xE92D0002
+
+extern u32 DAT_02000F40;  // 0x02000F40 = 0xE1A0B001
+
+extern u32 DAT_02001004;  // 0x02001004 = 0xE1D300B0
+
+// Zero-initialized
+extern u32 DAT_02001104;  // 0x02001104 = 0
+
+extern u32 DAT_02001148;  // 0x02001148 = 0x20018830
+
+extern u32 DAT_02001164;  // 0x02001164 = 0xF0000AF7
+
+extern u32 DAT_02001178;  // 0x02001178 = 0xF000EC0C
+
+extern u32 DAT_0200117C;  // 0x0200117C = 0x1C06F82D
+
+extern u32 DAT_020011A8;  // 0x020011A8 = 0xF0801C20
+
+extern u32 DAT_020011B4;  // 0x020011B4 = 0xEB58F080
+
+extern u32 DAT_020011BC;  // 0x020011BC = 0x43388828
+
+extern u32 DAT_020011C0;  // 0x020011C0 = 0xE7D08028
+
+extern u32 DAT_020011D4;  // 0x020011D4 = 0xFFFF7FFF
+
+extern u32 DAT_020011D8;  // 0x020011D8 = 0xF034B508
+
+extern u32 DAT_020011DC;  // 0x020011DC = 0x2801E86E
+
+extern u32 DAT_020011F0;  // 0x020011F0 = 0xF038BD08
+
+extern u16 DAT_02001200;  // 0x02001200 = 0xBD08
+
+// ... and 4055 more symbols in this category
+
+// I/O Registers
+
+extern u32 DAT_020011CC;  // 0x020011CC = 0x04000208
+
+extern u32 DAT_020013C4;  // 0x020013C4 = 0x04004008
+
+extern u32 DAT_020013D0;  // 0x020013D0 = 0x04000208
+
+extern u32 DAT_0200141C;  // 0x0200141C = 0x04000204
+
+extern u32 DAT_02001CA0;  // 0x02001CA0 = 0x04000210
+
+extern u32 DAT_02004814;  // 0x02004814 = 0x040189F0
+
+extern u32 DAT_02005534;  // 0x02005534 = 0x04241900
+
+extern u32 DAT_02009588;  // 0x02009588 = 0x044C071B
+
+extern u32 DAT_0200AF50;  // 0x0200AF50 = 0x04B1F001
+
+extern u32 DAT_0200B128;  // 0x0200B128 = 0x04F10073
+
+extern u32 DAT_0200B750;  // 0x0200B750 = 0x04D80011
+
+extern u32 DAT_0200CFB4;  // 0x0200CFB4 = 0x041C0564
+
+extern u32 DAT_02010440;  // 0x02010440 = 0x0463F971
+
+extern u32 DAT_020115F8;  // 0x020115F8 = 0x04FCD3F0
+
+extern u32 DAT_02014AA0;  // 0x02014AA0 = 0x04129FF8
+
+extern u32 DAT_02014FA8;  // 0x02014FA8 = 0x04011C0E
+
+extern u32 DAT_02015114;  // 0x02015114 = 0x04201519
+
+extern u32 DAT_0201665C;  // 0x0201665C = 0x04FDA007
+
+extern u32 DAT_02017764;  // 0x02017764 = 0x04F513F9
+
+extern u32 DAT_02017DDC;  // 0x02017DDC = 0x04912A0E
+
+extern u32 DAT_02018B00;  // 0x02018B00 = 0x0410A905
+
+extern u32 DAT_02019E3C;  // 0x02019E3C = 0x04770849
+
+extern u32 DAT_02019F50;  // 0x02019F50 = 0x04272807
+
+extern u32 DAT_02019FB8;  // 0x02019FB8 = 0x04491788
+
+extern u32 DAT_0201A090;  // 0x0201A090 = 0x04300389
+
+extern u32 DAT_0201A920;  // 0x0201A920 = 0x04524806
+
+extern u32 DAT_0201A930;  // 0x0201A930 = 0x045B191B
+
+extern u32 DAT_0201BF24;  // 0x0201BF24 = 0x0430490E
+
+extern u32 DAT_0201CC04;  // 0x0201CC04 = 0x0469A942
+
+extern u32 DAT_0201E200;  // 0x0201E200 = 0x0400C9A1
+
+extern u32 DAT_0201E4E4;  // 0x0201E4E4 = 0x048D0075
+
+extern u32 DAT_0201E54C;  // 0x0201E54C = 0x04850214
+
+extern u32 DAT_0201F28C;  // 0x0201F28C = 0x04981135
+
+extern u32 DAT_0201F4DC;  // 0x0201F4DC = 0x04100F14
+
+extern u32 DAT_0201F850;  // 0x0201F850 = 0x04582001
+
+extern u32 DAT_02021BD4;  // 0x02021BD4 = 0x0499A950
+
+extern u32 DAT_020226A4;  // 0x020226A4 = 0x040D0193
+
+extern u32 DAT_02022AE8;  // 0x02022AE8 = 0x0400106C
+
+extern u32 DAT_02024974;  // 0x02024974 = 0x04E59460
+
+extern u32 DAT_020263A8;  // 0x020263A8 = 0x047D1055
+
+extern u32 DAT_0202C0A8;  // 0x0202C0A8 = 0x04691004
+
+extern u32 DAT_0202D56C;  // 0x0202D56C = 0x040B9441
+
+extern u32 DAT_02033240;  // 0x02033240 = 0x04E50249
+
+extern u32 DAT_020366E8;  // 0x020366E8 = 0x04E59605
+
+extern u32 DAT_0203AC78;  // 0x0203AC78 = 0x0440E040
+
+extern u32 DAT_0203D2D0;  // 0x0203D2D0 = 0x04CE48D1
+
+extern u32 DAT_02040C30;  // 0x02040C30 = 0x04A92F95
+
+extern u32 DAT_02041680;  // 0x02041680 = 0x04E08C0C
+
+extern u32 DAT_02043DDC;  // 0x02043DDC = 0x04E1822A
+
+extern u32 DAT_02044774;  // 0x02044774 = 0x0435C20E
+
+// ... and 18 more symbols in this category
+
+// RAM Pointers
+
+// Function pointer
+extern void (*)(void) DAT_020011C4;  // 0x020011C4 = (void (*)(void))0x02005205
+
+// Function pointer
+extern void (*)(void) DAT_020011C8;  // 0x020011C8 = (void (*)(void))0x0200520D
+
+extern u32 DAT_020011D0;  // 0x020011D0 = 0x020AA354
+
+// Function pointer
+extern void (*)(void) DAT_02001208;  // 0x02001208 = (void (*)(void))0x02005611
+
+extern u32 DAT_020012DC;  // 0x020012DC = 0x020A0480
+
+// Function pointer
+extern void (*)(void) DAT_020012E0;  // 0x020012E0 = (void (*)(void))0x0200FB6D
+
+// Function pointer
+extern void (*)(void) DAT_020012E4;  // 0x020012E4 = (void (*)(void))0x02006C01
+
+// Function pointer
+extern void (*)(void) DAT_020012E8;  // 0x020012E8 = (void (*)(void))0x02006C2D
+
+extern u32 DAT_020013D4;  // 0x020013D4 = 0x020A9E94
+
+extern u32 DAT_020013D8;  // 0x020013D8 = 0x020A9E80
+
+// Function pointer
+extern void (*)(void) DAT_020013DC;  // 0x020013DC = (void (*)(void))0x02005441
+
+extern u32 DAT_020013E0;  // 0x020013E0 = 0x020A9E84
+
+extern u32 DAT_02001418;  // 0x02001418 = 0x020A9E80
+
+extern u32 DAT_02001434;  // 0x02001434 = 0x02061C44
+
+extern u32 DAT_0200143C;  // 0x0200143C = 0x020911A0
+
+extern u32 DAT_02001450;  // 0x02001450 = 0x020A9E80
+
+extern u32 DAT_020015D4;  // 0x020015D4 = 0x020AA194
+
+extern u32 DAT_020015D8;  // 0x020015D8 = 0x0209D8A0
+
+extern u32 DAT_020015DC;  // 0x020015DC = 0x0209D8B0
+
+extern u32 DAT_020015E0;  // 0x020015E0 = 0x020A6C58
+
+// Function pointer
+extern void (*)(void) DAT_020015E4;  // 0x020015E4 = (void (*)(void))0x02005769
+
+extern u32 DAT_020015EC;  // 0x020015EC = 0x020A7004
+
+// Function pointer
+extern void (*)(void) DAT_020015F0;  // 0x020015F0 = (void (*)(void))0x0202F769
+
+// Function pointer
+extern void (*)(void) DAT_020015F4;  // 0x020015F4 = (void (*)(void))0x0202F775
+
+extern u32 DAT_0200161C;  // 0x0200161C = 0x020AA194
+
+extern u32 DAT_02001620;  // 0x02001620 = 0x02030D28
+
+extern u32 DAT_0200163C;  // 0x0200163C = 0x020AA194
+
+extern u32 DAT_02001650;  // 0x02001650 = 0x020AA194
+
+extern u32 DAT_02001668;  // 0x02001668 = 0x020AA194
+
+extern u32 DAT_02001678;  // 0x02001678 = 0x020AA194
+
+extern u32 DAT_0200169C;  // 0x0200169C = 0x020AA194
+
+extern u32 DAT_020016B8;  // 0x020016B8 = 0x020AA194
+
+extern u32 DAT_020016C4;  // 0x020016C4 = 0x020AA194
+
+extern u32 DAT_020016CC;  // 0x020016CC = 0x0203F258
+
+extern u32 DAT_020016E8;  // 0x020016E8 = 0x020AA194
+
+extern u32 DAT_02001724;  // 0x02001724 = 0x020AA194
+
+extern u32 DAT_02001758;  // 0x02001758 = 0x020AA194
+
+extern u32 DAT_02001764;  // 0x02001764 = 0x020A6C58
+
+extern u32 DAT_0200179C;  // 0x0200179C = 0x02072788
+
+extern u32 DAT_020017A8;  // 0x020017A8 = 0x02072788
+
+// Function pointer
+extern void (*)(void) DAT_020017B8;  // 0x020017B8 = (void (*)(void))0x02005795
+
+// Function pointer
+extern void (*)(void) DAT_020017BC;  // 0x020017BC = (void (*)(void))0x020057A1
+
+extern u32 DAT_020017C0;  // 0x020017C0 = 0x0203508C
+
+// Function pointer
+extern void (*)(void) DAT_020017D8;  // 0x020017D8 = (void (*)(void))0x02005795
+
+extern u32 DAT_020017E4;  // 0x020017E4 = 0x020AA1AC
+
+extern u32 DAT_02001818;  // 0x02001818 = 0x020AA1B8
+
+extern u32 DAT_02001820;  // 0x02001820 = 0x020AA1BC
+
+extern u32 DAT_02001824;  // 0x02001824 = 0x020AA1C4
+
+extern u32 DAT_02001828;  // 0x02001828 = 0x020AA1C8
+
+extern u32 DAT_0200182C;  // 0x0200182C = 0x020AA1CC
+
+// ... and 148 more symbols in this category
+
+#endif // GLOBALS_H

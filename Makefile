@@ -57,7 +57,8 @@ MWASFLAGS := $(DEFINES) -proc $(PROC_S) -g -gccinc \
              -i . -i ./$(INCLUDE_DIR)
 
 # Linker Flags
-LDFLAGS := -Map $(BUILD_DIR)/pokeblack.map
+# -z muldefs: Allow multiple definitions (prefer first occurrence, which will be .s files)
+LDFLAGS := -Map $(BUILD_DIR)/pokeblack.map -z muldefs
 
 # Source file discovery (pret-standard approach)
 # Find all C files in src/

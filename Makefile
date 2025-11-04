@@ -22,10 +22,10 @@ TOOLS_DIR := tools
 EXPECTED_SHA1 := 26ad0b9967aa279c4a266ee69f52b9b2332399a5
 
 # CodeWarrior Toolchain (matching original NDS compiler)
-MWCCVER := 2.0/sp2p2
-MWCC := $(TOOLS_DIR)/mwccarm/$(MWCCVER)/mwccarm.exe
-MWAS := $(TOOLS_DIR)/mwccarm/$(MWCCVER)/mwasmarm.exe
-MWLD := $(TOOLS_DIR)/mwccarm/$(MWCCVER)/mwldarm.exe
+MWCCVER := 1.1
+MWCC := $(TOOLS_DIR)/mwccarm/dsi/$(MWCCVER)/mwccarm.exe
+MWAS := $(TOOLS_DIR)/mwccarm/dsi/$(MWCCVER)/mwasmarm.exe
+MWLD := $(TOOLS_DIR)/mwccarm/dsi/$(MWCCVER)/mwldarm.exe
 export LM_LICENSE_FILE := $(TOOLS_DIR)/mwccarm/license.dat
 
 # ARM binutils (for objdump, objcopy, etc.)

@@ -1,0 +1,45 @@
+// Stores heap resource address in heap block field_14
+//
+// Original address: 0x0200197c
+// Simplified version of sub_02001924 - only does first allocation part.
+// Gets the current heap block and stores the result of sub_02070894 at offset +0x14.
+//
+// Assembly asm/unk_0200197c.s
+
+#include "types.h"
+
+typedef struct {
+	u32 field_00;
+	u32 field_04;
+	void **field_08;
+} HeapManager;
+
+typedef struct {
+	u32 field_00;
+	u16 field_04;
+	u16 field_06;
+	u32 field_08;
+	u32 field_0C;
+	u32 field_10;
+	u32 field_14;
+	u32 field_18;
+} HeapBlock;
+
+// External data references (note: uppercase C in assembly)
+extern u32 DAT_02001998;  // 0x020AA1AC
+extern u32 DAT_0200199C;  // 0x020AA1B8
+
+// External function declaration
+extern void* sub_02070894(void* resource);
+
+// Stores heap resource address in current heap block's field_14
+//
+// This is a simplified version of sub_02001924 that only handles
+// the first allocation (field_14) without taking a heapId parameter.
+void sub_0200197c(void) {
+	HeapManager* manager = (HeapManager*)DAT_02001998;
+	HeapBlock* blocks = (HeapBlock*)DAT_0200199C;
+	HeapBlock* heapBlock = (HeapBlock*)((u8*)blocks + (manager->field_04 * sizeof(HeapBlock)));
+
+	heapBlock->field_14 = (u32)sub_02070894(*manager->field_08);
+}

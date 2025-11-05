@@ -9,7 +9,7 @@ sub_020019a0: ; 0x020019a0
 	add r5, r0, #0x0
 	ldr r2, [r1, #0x4]
 	mov r0, #0x1c
-	ldr r3, [pc, #20] ; =0x020AA1B8
+	ldr r3, [pc, #24] ; =0x020AA1B8
 	mul r0, r2
 	add r4, r3, r0
 	ldr r0, [r1, #0x8]

@@ -17,6 +17,7 @@ ASM_DIR := asm
 DATA_DIR := data
 INCLUDE_DIR := include
 TOOLS_DIR := tools
+ASM_INCLUDE_DIR := asm/include
 
 # Expected ROM hash
 EXPECTED_SHA1 := 26ad0b9967aa279c4a266ee69f52b9b2332399a5
@@ -54,7 +55,7 @@ MWCFLAGS := $(DEFINES) $(OPTFLAGS) -sym on -enum int -lang c99 \
 
 # CodeWarrior Assembler Flags
 MWASFLAGS := $(DEFINES) -proc $(PROC_S) -g -gccinc \
-             -i . -i ./$(INCLUDE_DIR)
+             -i . -i ./$(INCLUDE_DIR) -i ./$(ASM_INCLUDE_DIR)
 
 # Linker Flags
 # -z muldefs: Allow multiple definitions (prefer first occurrence, which will be .s files)

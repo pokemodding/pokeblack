@@ -641,3 +641,13 @@ microcode_SwitchCpuClock:
 	.word 0xAAFFFFFD ; bge _loop
 	.word 0xE12FFF1E ; bx lr
 	.word 0x04004004 ; reg_CLK
+
+_start_BuildParams:
+	.word 0 ; reserved
+	.word 0 ; reserved
+	.word 0 ; reserved
+	.word 0 ; reserved
+	.word 0x00000900 ; build target and type
+	.word 1 ; version
+	.word 0xDEC08133 ; SDK_BUILDCODE_BE
+	.word 0x3381C0DE ; SDK_BUILDCODE_LE

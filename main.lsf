@@ -1,0 +1,13 @@
+############################################################
+###       Linker spec file for Pokemon Black/White       ###
+###      Pass this to the SDK's makelcf.exe utility      ###
+###           along with the ARM9-TS template.           ###
+###                        WIP                           ###
+############################################################
+
+Static main
+{
+    Address 0x02000000
+    StackSize 0 2048
+    Object asm/main.o
+}

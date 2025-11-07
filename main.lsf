@@ -10,4 +10,5 @@ Static main
     Address 0x02000000
     StackSize 0 2048
     Object asm/main.o
+    Object asm/unk_020057DC.o
 }

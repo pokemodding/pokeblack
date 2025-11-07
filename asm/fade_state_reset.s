@@ -1,32 +1,32 @@
 .include "asm/macros/function.inc"
 
-.extern sub_0200190c
-.extern sub_0206ef34
-.extern sub_02002368
+.extern sub_0200590C
+.extern sub_02072F34
+.extern sub_02006368
 
 .text
 
-thumb_func_start sub_02001f90
-sub_02001f90: ; 0x02001f90
+thumb_func_start sub_02005F90
+sub_02005F90: ; 0x02005f90
 	push {r3,r4,r5,lr}
-	ldr r5, [pc, #32]  ; =DAT_02001fb4
+	ldr r5, [pc, #32]  ; =DAT_02005FB4
 	mov r4, #0x0
-	ldr r0, [pc, #32]  ; =DAT_02001fb8
+	ldr r0, [pc, #32]  ; =DAT_02005FB8
 	str r4, [r5, #0x1c]
 	strh r0, [r5, #0x26]
 	str r4, [r5, #0x28]
 	strh r4, [r5, #0x24]
-	bl sub_0200190c
+	bl sub_0200590C
 	mov r1, #0x7f
-	blx sub_0206ef34
+	blx sub_02072F34
 	str r4, [r5, #0x20]
-	bl sub_02002368
+	bl sub_02006368
 	pop {r3,r4,r5,pc}
 
 	.balign 4, 0
-DAT_02001fb4:
+DAT_02005FB4:
 	.word 0x020AA260
-DAT_02001fb8:
+DAT_02005FB8:
 	.word 0x0000FFFF
 
-thumb_func_end sub_02001f90
+thumb_func_end sub_02005F90

@@ -1,13 +1,13 @@
 #include "types.h"
 
 // External data references
-extern u32 DAT_0200279c;  // Points to 0x02140504 (function/data table)
-extern u32 DAT_020027a0;  // Points to 0x02140488 (object array)
+extern u32 DAT_0200679C;  // Points to 0x02140504 (function/data table)
+extern u32 DAT_020067A0;  // Points to 0x02140488 (object array)
 
 // External function declarations
-extern void sub_02002948(void* objectPtr);
+extern void sub_02006948(void* objectPtr);
 
-// sub_02002768 - Resource object slot allocator
+// sub_02006768 - Resource object slot allocator
 //
 // Finds and returns the next available object slot index using round-robin allocation.
 // The function table at 0x02140504 contains metadata:
@@ -17,7 +17,7 @@ extern void sub_02002948(void* objectPtr);
 // If the current slot is in use (state == 1), it cleans it up first.
 //
 // Returns: u16 index of the allocated slot
-u16 sub_02002768(void) {
+u16 sub_02006768(void) {
     u32* funcTable;
     u32* objArray;
     u16 currentSlot;
@@ -26,8 +26,8 @@ u16 sub_02002768(void) {
     u32* currentObj;
     u32 offset;
     
-    funcTable = (u32*)DAT_0200279c;  // 0x02140504
-    objArray = (u32*)DAT_020027a0;    // 0x02140488
+    funcTable = (u32*)DAT_0200679C;  // 0x02140504
+    objArray = (u32*)DAT_020067A0;    // 0x02140488
     
     // Get current slot index from offset +0x20 (halfword)
     currentSlot = *(u16*)((u8*)funcTable + 0x20);
@@ -39,7 +39,7 @@ u16 sub_02002768(void) {
     // Check if current slot is in use (state == 1)
     if (currentObj[0] == 1) {
         // Clean up the object before reusing
-        sub_02002948((void*)currentObj);
+        sub_02006948((void*)currentObj);
     }
     
     // Get maximum slots from offset +0x22 (halfword)

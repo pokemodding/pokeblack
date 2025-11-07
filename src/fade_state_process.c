@@ -1,15 +1,15 @@
 #include "types.h"
 
 // External function declarations
-extern void sub_02001fbc(void);
-extern void* sub_0200190c(void);
-extern void sub_0206ee8c(void* heapBlockPtr, u32 param);
+extern void sub_02005FBC(void);
+extern void* sub_0200590C(void);
+extern void sub_0272E8C(void* heapBlockPtr, u32 param);
 
-void sub_02001de4(u32 param) {
+void sub_02005DE4(u32 param) {
     // Handle state transitions and fade updates
-    sub_02001fbc();
+    sub_02005FBC();
     
-    void* heapBlockPtr = sub_0200190c();
+    void* heapBlockPtr = sub_0200590C();
     
-    sub_0206ee8c(heapBlockPtr, param);
+    sub_0272E8C(heapBlockPtr, param);
 }

@@ -2,7 +2,7 @@
  * Linker script for Pokemon Black ARM9 binary
  * 
  * Memory layout discovered from ROM analysis:
- * - ARM9 loads at 0x02000000 (not 0x02004000 as header suggests)
+ * - ARM9 loads at 0x02004000
  * - Total size: 0x6F898 (456,856 bytes)
  * - Entry point: 0x02004800
  * - ROM offset: 0x4000
@@ -15,8 +15,8 @@ ENTRY(_start)
 
 MEMORY
 {
-    /* ARM9 main memory - loads at 0x02000000 */
-    arm9 (rwx) : ORIGIN = 0x02000000, LENGTH = 456K
+    /* ARM9 main memory - loads at 0x02004000 */
+    arm9 (rwx) : ORIGIN = 0x02004000, LENGTH = 456K
     
     /* DTCM (Data Tightly Coupled Memory) */
     dtcm (rw)  : ORIGIN = 0x027E0000, LENGTH = 16K
@@ -30,8 +30,8 @@ MEMORY
 
 SECTIONS
 {
-    /* Code section starts at 0x02000000 */
-    .text 0x02000000 : ALIGN(4)
+    /* Code section starts at 0x02004000 */
+    .text 0x02004000 : ALIGN(4)
     {
         KEEP(*(.init))
         KEEP(*(.text.startup))
@@ -134,7 +134,7 @@ SECTIONS
     __arm9_end = .;
     
     /* Ensure not to overflow ARM9 region */
-    ASSERT(__arm9_end <= 0x0206F898, "ARM9 binary too large! Reduce code/data size.")
+    ASSERT(__arm9_end <= 0x02073898, "ARM9 binary too large! Reduce code/data size.")
     
     /* Debug sections (not loaded into memory) */
     .debug_abbrev   0 : { *(.debug_abbrev) }
@@ -171,4 +171,4 @@ __rodata_end = ADDR(.rodata) + SIZEOF(.rodata);
 __data_lma = LOADADDR(.data);
 
 /* Total binary size */
-__binary_size = __arm9_end - 0x02000000;
+__binary_size = __arm9_end - 0x02004000;

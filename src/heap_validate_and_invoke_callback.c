@@ -1,7 +1,7 @@
 #include "types.h"
 
 // External function declarations
-extern u32 sub_02001c64(void);
+extern u32 sub_02005C64(void);
 
 // Function pointer type for the callback
 typedef u32 (*CallbackFunc)(u32 param);
@@ -14,9 +14,9 @@ typedef struct {
 } CallbackRegistry;
 
 // External data - pointer to callback registry structure
-extern CallbackRegistry* DAT_02001d04;
+extern CallbackRegistry* DAT_02005D04;
 
-// sub_02001ce0 - Callback validation and invocation
+// sub_02005CE0 - Callback validation and invocation
 //
 // 1. Validates system state via sub_02001c64
 // 2. Retrieves a function pointer from a structure
@@ -26,14 +26,14 @@ extern CallbackRegistry* DAT_02001d04;
 // offset +4: function pointer to callback
 //
 // Returns: 1 if system state invalid, 0 if callback is NULL, otherwise callback result
-u32 sub_02001ce0(u32 param_1) {
+u32 sub_02005CE0(u32 param_1) {
     CallbackFunc callback;
     
-    if (sub_02001c64() == 0) {
+    if (sub_02005C64() == 0) {
         return 1;  // System not ready
     }
     
-    callback = DAT_02001d04->callback;
+    callback = DAT_02005D04->callback;
     
     if (callback == NULL) {
         return 0;  // No callback registered

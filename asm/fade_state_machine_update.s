@@ -1,23 +1,23 @@
 .include "asm/macros/function.inc"
 
-.extern sub_0200190c
-.extern sub_020018d0
-.extern sub_02001d14
-.extern sub_02001f90
-.extern sub_0200197c
-.extern sub_020019a0
-.extern sub_02002300
-.extern sub_02002394
-.extern sub_020706b0
-.extern sub_020980a4
-.extern sub_02081a38
-.extern sub_020715a8
-.extern sub_0206ef34
+.extern sub_0200590C
+.extern sub_020058D0
+.extern sub_02005D14
+.extern sub_02005F90
+.extern sub_0200597C
+.extern sub_020059A0
+.extern sub_02006300
+.extern sub_02006394
+.extern sub_020746B0
+.extern sub_0209C0A4
+.extern sub_02085A38
+.extern sub_020755A8
+.extern sub_02072F34
 
 .text
 
 thumb_func_start FadeStateMachine_Update
-FadeStateMachine_Update: ; 0x02001ff4
+FadeStateMachine_Update: ; 0x02004FF4
 	; Target assembly (from ROM):
 	; 02001ff4: b578        push {r3,r4,r5,r6,lr}
 	; 02001ff6: b081        sub sp, #0x4
@@ -166,10 +166,10 @@ FadeStateMachine_Update: ; 0x02001ff4
 
 	push {r3,r4,r5,r6,lr}
 	sub sp, #0x4
-	bl sub_0200190c
+	bl sub_0200590C
 	add r5, r0, #0x0
-	bl sub_020018d0
-	ldr r4, [pc, #272]  ; =DAT_02002114
+	bl sub_020058D0
+	ldr r4, [pc, #272]  ; =DAT_02006114
 	ldr r1, [r4, #0x1c]
 	cmp r1, #0x0
 	bne .L_state_active
@@ -201,17 +201,17 @@ FadeStateMachine_Update: ; 0x02001ff4
 	mov r0, #0x7f
 	mul r0, r1
 	ldr r1, [r4, #0x30]
-	blx sub_020980a4
+	blx sub_0209C0A4
 	add r1, r0, #0x0
 	add r0, r5, #0x0
-	blx sub_0206ef34
+	blx sub_02072F34
 	add sp, #0x4
 	pop {r3,r4,r5,r6,pc}
 
 .L_set_fade_0:
 	add r0, r5, #0x0
 	mov r1, #0x0
-	blx sub_0206ef34
+	blx sub_02072F34
 	b .L_initialize_heap
 
 .L_fade_in:
@@ -223,36 +223,36 @@ FadeStateMachine_Update: ; 0x02001ff4
 	ldrh r2, [r4, #0x24]
 	mov r0, #0x7f
 	mul r0, r2
-	blx sub_020980a4
+	blx sub_0209C0A4
 	add r1, r0, #0x0
 	add r0, r5, #0x0
-	blx sub_0206ef34
+	blx sub_02072F34
 	add sp, #0x4
 	pop {r3,r4,r5,r6,pc}
 
 .L_reset_fade:
-	bl sub_02001f90
+	bl sub_02005F90
 	add sp, #0x4
 	pop {r3,r4,r5,r6,pc}
 
 .L_initialize_heap:
-	bl sub_02001d14
-	ldr r4, [pc, #140]  ; =DAT_02002114
+	bl sub_02005D14
+	ldr r4, [pc, #140]  ; =DAT_02006114
 	ldr r0, [r4, #0x28]
 	cmp r0, #0x0
 	bne .L_setup_fade
-	bl sub_02001f90
+	bl sub_02005F90
 	add sp, #0x4
 	pop {r3,r4,r5,r6,pc}
 
 .L_setup_fade:
 	mov r0, #0x13
 	lsl r0, r0, #0x8
-	blx sub_020706b0
+	blx sub_020746B0
 	ldr r0, [r4, #0x28]
 	mov r5, #0x0
 	mov r1, #0x0
-	bl sub_02002300
+	bl sub_02006300
 	strh r5, [r4, #0x24]
 	mov r0, #0x1
 	add sp, #0x4
@@ -260,13 +260,13 @@ FadeStateMachine_Update: ; 0x02001ff4
 	pop {r3,r4,r5,r6,pc}
 
 .L_state_1:
-	bl sub_02002394
+	bl sub_02006394
 	cmp r0, #0x1
 	bne .L_wait_async_1
-	bl sub_0200197c
+	bl sub_0200597C
 	ldr r0, [r4, #0x28]
 	mov r1, #0x1
-	bl sub_02002300
+	bl sub_02006300
 	mov r0, #0x2
 	add sp, #0x4
 	str r0, [r4, #0x20]
@@ -274,43 +274,43 @@ FadeStateMachine_Update: ; 0x02001ff4
 
 .L_wait_async_1:
 	mov r0, #0x1
-	blx sub_02081a38
+	blx sub_02085A38
 	add sp, #0x4
 	pop {r3,r4,r5,r6,pc}
 
 .L_state_2:
-	bl sub_02002394
+	bl sub_02006394
 	cmp r0, #0x1
 	bne .L_wait_async_2
 	mov r0, #0x0
 	mov r6, #0x0
-	blx sub_020706b0
+	blx sub_020746B0
 	ldr r0, [r4, #0x28]
-	bl sub_020019a0
-	bl sub_0200190c
+	bl sub_020059A0
+	bl sub_0200590C
 	ldr r1, [r4, #0x28]
 	sub r2, r6, #0x1
 	str r1, [sp, #0x0]
 	mov r1, #0x0
 	add r3, r2, #0x0
-	blx sub_020715a8
+	blx sub_020755A8
 	add r0, r5, #0x0
 	mov r1, #0x0
-	blx sub_0206ef34
+	blx sub_02072F34
 	add sp, #0x4
 	str r6, [r4, #0x20]
 	pop {r3,r4,r5,r6,pc}
 
 .L_wait_async_2:
 	mov r0, #0x1
-	blx sub_02081a38
+	blx sub_02085A38
 
 .L_exit:
 	add sp, #0x4
 	pop {r3,r4,r5,r6,pc}
 
 	.balign 4, 0
-DAT_02002114:
+DAT_02006114:
 	.word 0x020AA260
 
 thumb_func_end FadeStateMachine_Update

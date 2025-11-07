@@ -1,19 +1,19 @@
 .include "asm/macros/function.inc"
 
-.extern sub_02001fbc
-.extern sub_0200190c
-.extern sub_0206ee8c
+.extern sub_02005FBC
+.extern sub_0200590C
+.extern sub_02072E8C
 
 .text
 
-thumb_func_start sub_02001de4
-sub_02001de4: ; 0x02001de4
+thumb_func_start sub_02005DE4
+sub_02005DE4: ; 0x02005DE4
 	push {r4,lr}
 	add r4, r0, #0x0
-	bl sub_02001fbc
-	bl sub_0200190c
+	bl sub_02005FBC
+	bl sub_0200590C
 	add r1, r4, #0x0
-	blx sub_0206ee8c
+	blx sub_02072E8C
 	pop {r4,pc}
 
-thumb_func_end sub_02001de4
+thumb_func_end sub_02005DE4

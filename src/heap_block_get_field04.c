@@ -5,10 +5,10 @@ extern u32 DAT_020aa1ac;  // Points to heap index structure
 extern u32 DAT_020aa1b8;  // Points to heap block array (28-byte blocks)
 
 // Function: HeapBlock_GetField04
-// Address: 0x020018d0
+// Address: 0x020058D0
 // Description: Gets the u16 value at offset +0x4 from the current heap block
 //              Returns 0 if block is null or if value is 0xFFFF (sentinel)
-// Called by: FadeState_ProcessTransition (0x02001fbc), FadeStateMachine_Update (0x02001ff4)
+// Called by: FadeState_ProcessTransition (0x02005FBC), FadeStateMachine_Update (0x02005FF4)
 u16 HeapBlock_GetField04(void)
 {
     u32* index_ptr = (u32*)0x020AA1AC;

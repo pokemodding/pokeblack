@@ -2,8 +2,8 @@
 
 	.text
 
-	thumb_func_start sub_0200597c
-sub_0200597c: ; 0x0200597c
+	thumb_func_start sub_0200597C
+sub_0200597C: ; 0x0200597C
 	push {r4, lr}
 	ldr r1, [pc, #24] ; =0x020AA1AC
 	ldr r3, [pc, #24] ; =0x020AA1B8
@@ -22,6 +22,6 @@ DAT_02005998:
 DAT_0200599c:
 	.word 0x020AA1B8
 
-	thumb_func_end sub_0200597c
+	thumb_func_end sub_0200597C
 
 	.extern sub_02074894

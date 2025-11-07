@@ -17,7 +17,7 @@
 .text
 
 thumb_func_start FadeStateMachine_Update
-FadeStateMachine_Update: ; 0x02004FF4
+FadeStateMachine_Update: ; 0x02005FF4
 	; Target assembly (from ROM):
 	; 02001ff4: b578        push {r3,r4,r5,r6,lr}
 	; 02001ff6: b081        sub sp, #0x4

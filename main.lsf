@@ -11,4 +11,13 @@ Static main
     StackSize 0 2048
     Object asm/main.o
     Object asm/unk_020057DC.o
+    Object asm/unk_020058D0.o
+    Object asm/unk_02005900.o
+    Object asm/unk_0200590C.o
+    Object asm/heap_block_setup_both_resources.o
+    Object asm/heap_block_setup_resource14.o
+    Object asm/unk_020059A0.o
+    Object asm/unk_020059C8.o
+    Object asm/unk_02005A00.o
+    Object asm/unk_02005C64.o
 }

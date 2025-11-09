@@ -1,0 +1,13 @@
+.public sub_02005CE0
+.public sub_02072E7C
+.public sub_02072E9C
+.public sub_02072EC8
+.public sub_02072EE0
+.public sub_02072F34
+.public sub_02073018
+.public sub_02073038
+.public sub_02073098
+.public sub_0207430C
+.public sub_02074AC4
+.public sub_02075560
+.public sub_020755A8

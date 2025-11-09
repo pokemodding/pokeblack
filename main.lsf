@@ -31,4 +31,11 @@ Static main
     Object asm/unk_02005DE4.o
     Object asm/unk_02005DF9.o
     Object asm/unk_02005EB4.o
+    Object asm/fade_state_reset.o
+    Object asm/fade_state_process_transition.o
+    Object asm/fade_state_machine_update.o
+    Object asm/unk_02006118.o
+    Object asm/unk_02006300.o
+    Object asm/unk_02006368.o
+    Object asm/unk_02006394.o
 }

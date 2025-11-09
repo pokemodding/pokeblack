@@ -1,5 +1,5 @@
 	.include "asm/macros/function.inc"
-    .include "unk_02005A00.inc"
+	.include "unk_02005A00.inc"
 
 	.text
 

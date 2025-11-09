@@ -1,0 +1,10 @@
+.public sub_02005900
+.public sub_0200590C
+.public sub_02005A00
+.public sub_02005A4C
+.public sub_02005D14
+.public sub_02005FBC
+.public sub_02072F5C
+.public sub_02072FA8
+.public sub_02073058
+.public sub_02073078

@@ -22,4 +22,13 @@ Static main
     Object asm/unk_02005C64.o
     Object asm/unk_02005C8C.o
     Object asm/unk_02005CE0.o
+    Object asm/unk_02005D08.o
+    Object asm/unk_02005D14.o
+    Object asm/unk_02005D28.o
+    Object asm/unk_02005D34.o
+    Object asm/unk_02005D90.o
+    Object asm/unk_02005DA4.o
+    Object asm/unk_02005DE4.o
+    Object asm/unk_02005DF9.o
+    Object asm/unk_02005EB4.o
 }

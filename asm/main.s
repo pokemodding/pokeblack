@@ -1,5 +1,5 @@
 	.include "asm/macros/function.inc"
-    .include "main.inc"
+	.include "main.inc"
 
 	.text
 
@@ -109,7 +109,7 @@ sub_02005204: ; 0x02005204
 	bx r3
 	.balign 4, 0
 _02005208: .word sub_02005610
-    thumb_func_end sub_02005204
+	thumb_func_end sub_02005204
 
 	thumb_func_start sub_0200520C
 sub_0200520C: ; 0x0200520C
@@ -369,13 +369,13 @@ _0200543C: .word sub_020911A0
 
 	thumb_func_start sub_02005440
 sub_02005440: ; 0x02005440
-    push {r3, lr}
-    mov r0, #0
-    blx sub_02005454
-    ldr r0, _02005450 ; =_020A9E80
-    mov r1, #1
-    str r1, [r0]
-    pop {r3, pc}
+	push {r3, lr}
+	mov r0, #0
+	blx sub_02005454
+	ldr r0, _02005450 ; =_020A9E80
+	mov r1, #1
+	str r1, [r0]
+	pop {r3, pc}
 _02005450: .word _020A9E80
 
 	arm_func_start sub_02005454

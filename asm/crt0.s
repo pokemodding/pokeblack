@@ -302,7 +302,7 @@ _02004BD4:
 	mov r1, #0
 	ldr r2, [ip], #4
 	bl INITi_Fill32
-    ldmfd sp!, {r1, r2}
+	ldmfd sp!, {r1, r2}
 	mov r3, #0x1000000
 	cmp r2, r3
 	movge r3, #0x2000000

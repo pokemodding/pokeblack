@@ -18,7 +18,7 @@ extern void sub_020059A0(u32 param);
 extern void sub_020755A8(void* param1, u32 param2, u32 param3, u32 stackParam);
 extern u32 sub_0209C0A4(u32 value, u32 param);
 
-void sub_02001ff4(void) {
+void sub_02005FF4(void) {
     u32* heapManagerState = (u32*)DAT_02006114;  // 0x020AA260
     
     // Get heap block pointer
@@ -39,11 +39,11 @@ void sub_02001ff4(void) {
         case 0: {  // State 0: Handle value transitions
             if (currentValue == 0) {
                 // Initialize new session
-                sub_02005d14();
+                sub_02005D14();
                 
                 u32 storedValue = heapManagerState[10];  // offset +0x28
                 if (storedValue == 0) {
-                    sub_02005f90();
+                    sub_02005F90();
                     return;
                 }
                 
@@ -64,7 +64,7 @@ void sub_02001ff4(void) {
                 u16 maxCounter = *(u16*)((u8*)heapManagerState + 0x2C);  // offset +0x2C
                 
                 if (counter >= maxCounter) {
-                    sub_02004F90();
+                    sub_02005F90();
                     return;
                 }
                 

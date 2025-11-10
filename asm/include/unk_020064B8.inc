@@ -1,0 +1,17 @@
+.public sub_0200590C
+.public sub_020059C8
+.public sub_020067D0
+.public sub_02006948
+.public sub_02030734
+.public sub_020307B0
+.public sub_02072CC4
+.public sub_02072E7C
+.public sub_02074324
+.public sub_020743EC
+.public sub_02074450
+.public sub_0207466C
+.public sub_02074694
+.public sub_02075560
+.public sub_0208A640
+.public sub_0208A674
+.public sub_0209C0A4

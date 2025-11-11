@@ -40,8 +40,9 @@ tools/*.o
 # Dependencies
 *.a
 
-#Squid's insane diary entries
-PROGRESS.md
+#Squid's Progress Reports
+notes/
+
 
 linker.ld
 *.py

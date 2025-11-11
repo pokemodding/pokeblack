@@ -1,4 +1,5 @@
 #include "types.h"
+#include "heap.h"
 
 // sub_0200590C
 //
@@ -11,15 +12,6 @@
 // 02005916: 1810  adds r0, r2, r0     @ r0 = 0x020AA1B8 + (28 * field_04)
 // 02005918: 3008  adds r0, #8         @ r0 = result + 8
 // 0200591a: 4770  bx lr
-
-typedef struct HeapManager {
-    u32 field_00;
-    u32 field_04;
-} HeapManager;
-
-typedef struct HeapBlock {
-    u8 data[28];
-} HeapBlock;
 
 #define gHeapManager ((HeapManager *)0x020AA1AC)
 #define gHeapBlocks  ((HeapBlock *)0x020AA1B8)

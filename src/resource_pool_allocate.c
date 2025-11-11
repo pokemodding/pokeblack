@@ -1,4 +1,5 @@
 #include "types.h"
+#include "resource.h"
 
 // External data references
 extern u32 DAT_02006A5C;  // Points to 0x02140504 (function pointer table)
@@ -9,26 +10,7 @@ extern u16 sub_02006768(void);
 extern void sub_02006948(void* structPtr);
 extern void sub_020067E0(void* structPtr, u32 param);
 extern void sub_02006BC0(u32 field1, u32 field2);
-
-// Structure appears to be 0x34 (52) bytes
-typedef struct {
-    u32 state;           // +0x00: State flag (1 = in use, needs cleanup)
-    u32 field_04;        // +0x04
-    u32 field_08;        // +0x08
-    u32 field_0C;        // +0x0C
-    u32 field_10;        // +0x10
-    u32 field_14;        // +0x14
-    u32 field_18;        // +0x18
-    u8  field_1C;        // +0x1C
-    u8  field_1D;        // +0x1D
-    u8  pad_1E[2];       // +0x1E-1F (padding)
-    u32 field_20;        // +0x20
-    u32 field_24;        // +0x24
-    u8  field_28;        // +0x28
-    u8  pad_29[3];       // +0x29-2B (padding)
-    u32 field_2C;        // +0x2C
-    u32 field_30;        // +0x30
-} ResourceObject;  // Total: 0x34 (52) bytes
+extern void sub_02006BE0(u32 field1, u32 field2);
 
 u16 sub_020069D4(u32 param1, u32 param2, u32 param3, u32 param4,
                  u32 stack1, u32 stack2, u32 stack3, u32 stack4) {

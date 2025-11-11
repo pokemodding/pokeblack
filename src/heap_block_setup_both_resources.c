@@ -10,23 +10,7 @@
  */
 
 #include "types.h"
-
-typedef struct {
-	u32 field_00;
-	u32 field_04;
-	void **field_08;
-} HeapManager;
-
-typedef struct {
-	u32 field_00;
-	u16 field_04;
-	u16 field_06;
-	u32 field_08;
-	u32 field_0C;
-	u32 field_10;
-	u32 field_14;
-	u32 field_18;
-} HeapBlock;
+#include "heap.h"
 
 // External data references
 extern u32 DAT_02005974;  // 0x020AA1AC

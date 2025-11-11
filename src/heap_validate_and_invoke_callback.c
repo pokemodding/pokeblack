@@ -1,17 +1,8 @@
 #include "types.h"
+#include "resource.h"
 
 // External function declarations
 extern u32 sub_02005C64(void);
-
-// Function pointer type for the callback
-typedef u32 (*CallbackFunc)(u32 param);
-
-// Structure definition for callback registry
-// Located at 0x020AA260
-typedef struct {
-    void* field_0x0;           // Unknown field at offset 0
-    CallbackFunc callback;     // Function pointer at offset +4
-} CallbackRegistry;
 
 // External data - pointer to callback registry structure
 extern CallbackRegistry* DAT_02005D04;

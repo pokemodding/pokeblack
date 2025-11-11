@@ -9,6 +9,7 @@
  */
 
 #include "types.h"
+#include "resource.h"
 
 // External overlay function declarations (implemented in overlay_stubs.c)
 extern void* sub_02074450(u32 param);
@@ -16,28 +17,6 @@ extern void* sub_0207457C(u32 param);
 extern u32 sub_020745A4(u32 p1, void* p2, void* p3, u32 p4);
 extern void sub_0208A638(void* param);
 extern u32 sub_0209C00C(u32 p1, u32 p2, u32 p3, u32 p4);
-
-// Structure definitions (based on usage patterns)
-typedef struct {
-    u32 field_00;
-    void* field_04;
-    u32 field_08;
-    u32 field_0c;
-    void* field_10;
-    // ... more fields
-    u32 field_20;
-} ResourceObject;
-
-typedef struct {
-    u32 flags;  // Lower 24 bits used
-    // ... more fields
-} ResourceHeader;
-
-typedef struct {
-    u32 field_00[15];  // 0x00-0x3B
-    u32 field_3c;      // 0x3C - offset/size field
-    // ... more fields
-} ResourceData;
 
 /**
  * @brief Load and initialize resource
@@ -85,7 +64,7 @@ s32 sub_020067E0(ResourceObject* obj, u32 param) {
     
     // Process/validate resource
     resourceId = header->flags & 0x00FFFFFF;
-    resourcePtr = obj->field_04;
+    resourcePtr = (void*)obj->field_04;
     
     result = sub_020745A4(resourceId, resourcePtr, data, 0);
     
@@ -110,11 +89,11 @@ s32 sub_020067E0(ResourceObject* obj, u32 param) {
     size = resData->field_00[2] - offset;  // field_08 - offset
     
     obj->field_08 = size - 0xC;
-    obj->field_10 = (void*)((u32)dataPtr + 0xC);
+    obj->field_10 = (u32)((u8*)dataPtr + 0xC);
     
     // Get dimensions
     width = *(u16*)((u32)dataPtr + 2);
-    obj->field_0c = width;
+    obj->field_0C = width;
     
     height = *(u16*)((u32)dataPtr + 4);
     

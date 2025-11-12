@@ -1,9 +1,9 @@
-.public sub_020057DC
+.public HeapManager_SetResourceArray
 .public sub_02005834
 .public sub_02005858
 .public sub_02005888
-.public sub_020058D0
-.public sub_0200590C
+.public HeapBlock_GetStateValue
+.public HeapManager_GetCurrentBlockPtr
 .public sub_02005B6C
 .public sub_02005B74
 .public sub_02005C3C

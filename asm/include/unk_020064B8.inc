@@ -1,7 +1,7 @@
-.public sub_0200590C
+.public HeapManager_GetCurrentBlockPtr
 .public sub_020059C8
 .public sub_020067D0
-.public sub_02006948
+.public ResourceObject_Destroy
 .public sub_02030734
 .public sub_020307B0
 .public sub_02072CC4

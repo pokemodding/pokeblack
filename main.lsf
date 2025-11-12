@@ -43,11 +43,15 @@ Static main
     Object asm/unk_020064B8.o
     Object asm/resource_pool_allocate_slot.o
     Object asm/resource_object_reset.o
+    Object asm/unk_020067D0.o
     Object asm/resource_object_load_and_init.o
-    Object asm/unk_02006984.o
+    Object asm/unk_02006868.o
     Object asm/resource_object_destroy.o
+    Object asm/unk_02006984.o
     Object asm/unk_020069D4.o
     Object asm/unk_02006A64.o
+    Object asm/unk_02006A8C.o
     Object asm/buffer_reverse.o
-    Object asm/unk_02006E9E.o
+    Object asm/unk_02006C00.o
+    Object asm/unk_02006E7C.o
 }

@@ -1,10 +1,10 @@
-.public sub_0200590C
+.public HeapManager_GetCurrentBlockPtr
 .public sub_0200597C
 .public sub_020059A0
 .public sub_02005D14
 .public sub_02006300
 .public sub_02006368
-.public sub_02006394
+.public AsyncOperation_IsComplete
 .public sub_020746B0
 .public sub_020755A8
 .public sub_02085A38

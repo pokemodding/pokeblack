@@ -5,13 +5,13 @@
 extern u32 DAT_02006114;  // Points to 0x020AA260 (HeapManagerState) 
 
 // External function declarations
-extern void* sub_0200590C(void);
-extern u32 sub_020058D0(void);
+extern void* HeapManager_GetCurrentBlockPtr(void);
+extern u32 HeapBlock_GetStateValue(void);
 extern void sub_02005D14(void);
 extern void sub_02005F90(void);
 extern void sub_020746B0(u32 value);
 extern void sub_02006300(u32 param1, u32 param2);
-extern u32 sub_02006394(void);
+extern u32 AsyncOperation_IsComplete(void);
 extern void sub_0200597C(void);
 extern void sub_02085A38(u32 value);
 extern void sub_020059A0(u32 param);
@@ -21,9 +21,9 @@ extern u32 sub_0209C0A4(u32 value, u32 param);
 void sub_02005FF4(void) {
     u32* heapManagerState = (u32*)DAT_02006114;  // 0x020AA260
     
-    void* heapBlockPtr = sub_0200590C();
+    void* heapBlockPtr = HeapManager_GetCurrentBlockPtr();
     
-    u32 currentValue = sub_020058D0();
+    u32 currentValue = HeapBlock_GetStateValue();
     
     // Check if system is initialized (field at +0x1C must be non-zero)
     if (heapManagerState[7] == 0) {  // offset +0x1C
@@ -110,7 +110,7 @@ void sub_02005FF4(void) {
         }
         
         case 1: {  // State 1: Check for completion
-            u32 result = sub_02006394();
+            u32 result = AsyncOperation_IsComplete();
             if (result == 1) {
                 sub_0200597C();
                 sub_02006300(heapManagerState[10], 1);  // offset +0x28
@@ -124,12 +124,12 @@ void sub_02005FF4(void) {
         }
         
         case 2: {  // State 2: Cleanup and reset
-            u32 result = sub_02006394();
+            u32 result = AsyncOperation_IsComplete();
             if (result == 1) {
                 sub_020746B0(0);
                 sub_020059A0(heapManagerState[10]);  // offset +0x28
                 
-                void* blockPtr = sub_0200590C();
+                void* blockPtr = HeapManager_GetCurrentBlockPtr();
                 u32 stackParam = heapManagerState[10];  // offset +0x28
                 
                 sub_020755A8(blockPtr, 0, 0xFFFFFFFF, stackParam);  // -1 for r2

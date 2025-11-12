@@ -2,14 +2,14 @@
 
 // External function declarations
 extern void sub_02005FBC(void);
-extern void* sub_0200590C(void);
+extern void* HeapManager_GetCurrentBlockPtr(void);
 extern void sub_0272E8C(void* heapBlockPtr, u32 param);
 
 void sub_02005DE4(u32 param) {
     // Handle state transitions and fade updates
     sub_02005FBC();
     
-    void* heapBlockPtr = sub_0200590C();
+    void* heapBlockPtr = HeapManager_GetCurrentBlockPtr();
     
     sub_0272E8C(heapBlockPtr, param);
 }

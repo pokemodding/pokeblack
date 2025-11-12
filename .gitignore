@@ -2,6 +2,7 @@
 *.nds
 *.elf
 *.bin
+!data/encounters/*.bin
 *.o
 *.d
 *.map
@@ -32,6 +33,7 @@ __pycache__/
 *.pyc
 *.pyo
 .Python
+.py 
 
 # Tools
 tools/*.exe
@@ -43,6 +45,9 @@ tools/*.o
 #Squid's Progress Reports
 notes/
 
+# Extracted overlays
+overlay_*.bin
+overlay_*.asm
 
 linker.ld
 *.py

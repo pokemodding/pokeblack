@@ -38,7 +38,7 @@ _020063F0:
 	str r0, [r4]
 	b _02006440
 _020063F4:
-	bl sub_02006394
+	bl AsyncOperation_IsComplete
 	cmp r0, #1
 	bne _02006406
 	bl sub_0200597C
@@ -48,7 +48,7 @@ _020063F4:
 _02006406:
 	b _0200643A
 _02006408:
-	bl sub_02006394
+	bl AsyncOperation_IsComplete
 	cmp r0, #1
 	bne _0200643A
 	mov r0, #0
@@ -56,7 +56,7 @@ _02006408:
 	blx sub_020746B0
 	add r0, r5, #0
 	bl sub_020059A0
-	bl sub_0200590C
+	bl HeapManager_GetCurrentBlockPtr
 	sub r2, r6, #1
 	str r5, [sp]
 	mov r1, #0

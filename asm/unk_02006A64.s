@@ -4,7 +4,7 @@
 
 	.extern DAT_02006A88
 	.extern sub_02006868
-	.extern sub_02006948
+	.extern ResourceObject_Destroy
 
 	thumb_func_start sub_02006A64
 sub_02006A64: ; 0x02006A64
@@ -19,7 +19,7 @@ sub_02006A64: ; 0x02006A64
 	bne _return_true       ; If valid, return 1
 	; Resource invalid, clean it up
 	add r0, r4, r5         ; r0 = base + offset again
-	bl sub_02006948        ; Call cleanup/destroy function
+	bl ResourceObject_Destroy        ; Call cleanup/destroy function
 	mov r0, #0             ; Return 0 (failure)
 	pop {r3, r4, r5, pc}
 

@@ -1,13 +1,13 @@
 .include "asm/macros/function.inc"
 
-.extern sub_0200590C
-.extern sub_020058D0
+.extern HeapManager_GetCurrentBlockPtr
+.extern HeapBlock_GetStateValue
 .extern sub_02005D14
 .extern sub_02005F90
 .extern sub_0200597C
 .extern sub_020059A0
 .extern sub_02006300
-.extern sub_02006394
+.extern AsyncOperation_IsComplete
 .extern sub_020746B0
 .extern sub_0209C0A4
 .extern sub_02085A38
@@ -166,9 +166,9 @@ FadeStateMachine_Update: ; 0x02005FF4
 
 	push {r3,r4,r5,r6,lr}
 	sub sp, #0x4
-	bl sub_0200590C
+	bl HeapManager_GetCurrentBlockPtr
 	add r5, r0, #0x0
-	bl sub_020058D0
+	bl HeapBlock_GetStateValue
 	ldr r4, [pc, #272]  ; =DAT_02006114
 	ldr r1, [r4, #0x1c]
 	cmp r1, #0x0
@@ -260,7 +260,7 @@ FadeStateMachine_Update: ; 0x02005FF4
 	pop {r3,r4,r5,r6,pc}
 
 .L_state_1:
-	bl sub_02006394
+	bl AsyncOperation_IsComplete
 	cmp r0, #0x1
 	bne .L_wait_async_1
 	bl sub_0200597C
@@ -279,7 +279,7 @@ FadeStateMachine_Update: ; 0x02005FF4
 	pop {r3,r4,r5,r6,pc}
 
 .L_state_2:
-	bl sub_02006394
+	bl AsyncOperation_IsComplete
 	cmp r0, #0x1
 	bne .L_wait_async_2
 	mov r0, #0x0
@@ -287,7 +287,7 @@ FadeStateMachine_Update: ; 0x02005FF4
 	blx sub_020746B0
 	ldr r0, [r4, #0x28]
 	bl sub_020059A0
-	bl sub_0200590C
+	bl HeapManager_GetCurrentBlockPtr
 	ldr r1, [r4, #0x28]
 	sub r2, r6, #0x1
 	str r1, [sp, #0x0]

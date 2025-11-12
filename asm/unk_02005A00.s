@@ -200,7 +200,7 @@ sub_02005B74: ; 0x02005B74
 	ldr r0, [r4, #0x10]
 	blx sub_020754C4
 	ldr r0, _02005BBC ; =0x020AA270
-	bl sub_020057DC
+	bl HeapManager_SetResourceArray
 	cmp r5, #0
 	beq _02005B9C
 	mov r0, #0
@@ -300,18 +300,18 @@ _02005C38: .word sub_02072794
 
 	thumb_func_start sub_02005C3C
 sub_02005C3C: ; 0x02005C3C
-	ldr r3, _02005C40 ; =sub_0200590C
+	ldr r3, _02005C40 ; =HeapManager_GetCurrentBlockPtr
 	bx r3
 	.align 2, 0
-_02005C40: .word sub_0200590C
+_02005C40: .word HeapManager_GetCurrentBlockPtr
 	thumb_func_end sub_02005C3C
 
 	thumb_func_start sub_02005C44
 sub_02005C44: ; 0x02005C44
-	ldr r3, _02005C48 ; =sub_020058D0
+	ldr r3, _02005C48 ; =HeapBlock_GetStateValue
 	bx r3
 	.align 2, 0
-_02005C48: .word sub_020058D0
+_02005C48: .word HeapBlock_GetStateValue
 	thumb_func_end sub_02005C44
 
 	thumb_func_start sub_02005C4C
@@ -321,7 +321,7 @@ sub_02005C4C: ; 0x02005C4C
 	ldr r1, [r0, #0x1c]
 	cmp r1, #0
 	bne _02005C5C
-	bl sub_020058D0
+	bl HeapBlock_GetStateValue
 	pop {r3, pc}
 _02005C5C:
 	ldr r0, [r0, #0x28]

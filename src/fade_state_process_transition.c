@@ -4,9 +4,9 @@
 extern u32 DAT_02005FF0;  // Points to 0x020AA260 (HeapManagerState)
 
 // External function declarations
-extern u32 sub_020058D0(void);
+extern u32 HeapBlock_GetStateValue(void);
 extern void sub_02005FF4(void);
-extern void sub_02005D90(u32 param1, u16 param2);
+extern void FadeState_InitTransition(u32 param1, u16 param2);
 extern void sub_02005F90(void);
 
 void sub_02005FBC(void) {
@@ -18,7 +18,7 @@ void sub_02005FBC(void) {
         return;  // Early exit if not in state 1
     }
     
-    u32 currentValue = sub_020058D0();
+    u32 currentValue = HeapBlock_GetStateValue();
     
     // Compare with stored value at offset +0x28
     u32 storedValue = heapManagerState[10];  // offset +0x28
@@ -38,11 +38,11 @@ void sub_02005FBC(void) {
         loopFlag = heapManagerState[8];  // Re-read after call
     }
     
-    // Get parameters for sub_02005D90
+    // Get parameters for FadeState_InitTransition
     u32 param1 = heapManagerState[10];  // offset +0x28
     u16 param2 = *(u16*)((u8*)heapManagerState + 0x26);  // offset +0x26 (halfword)
     
-    sub_02005D90(param1, param2);
+    FadeState_InitTransition(param1, param2);
     
     sub_02005F90();
 }

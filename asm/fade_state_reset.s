@@ -1,6 +1,6 @@
 .include "asm/macros/function.inc"
 
-.extern sub_0200590C
+.extern HeapManager_GetCurrentBlockPtr
 .extern sub_02072F34
 .extern sub_02006368
 
@@ -16,7 +16,7 @@ sub_02005F90: ; 0x02005f90
 	strh r0, [r5, #0x26]
 	str r4, [r5, #0x28]
 	strh r4, [r5, #0x24]
-	bl sub_0200590C
+	bl HeapManager_GetCurrentBlockPtr
 	mov r1, #0x7f
 	blx sub_02072F34
 	str r4, [r5, #0x20]

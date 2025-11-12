@@ -4,7 +4,7 @@
 //
 // For example: [1,2,3,4,5] becomes [5,4,3,2,1]
 //
-// Assembly implementation in asm/unk_02006BE0.s (MATCHING TARGET)
+// Assembly implementation in asm/buffer_reverse.s (MATCHING TARGET)
 // This C version is provided for readability and rom hacking
 
 #include "types.h"
@@ -17,7 +17,7 @@
 //
 // buffer: Pointer to the buffer to reverse
 // length: Number of bytes in the buffer
-void sub_02006BE0(u8* buffer, u32 length) {
+void Buffer_Reverse(u8* buffer, u32 length) {
     u32 i;
     u32 halfLength = length >> 1;  // Divide by 2
     

@@ -13,7 +13,7 @@ extern s32 sub_02005D34(u32 param_1, s32 param_2, u32 param_3, u32 param_4);
 // Called during fade state transitions to set up a new fade effect.
 // First resets the current fade state, then initializes a new one.
 //
-// Assembly implementation in asm/unk_02005D90.s (MATCHING)
+// Assembly implementation in asm/fade_state_init_transition.s (MATCHING)
 // This C version is provided for readability and rom hacking
 void FadeState_InitTransition(u32 param1, u16 param2) {
     sub_02005F90();

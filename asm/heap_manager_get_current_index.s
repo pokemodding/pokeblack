@@ -3,7 +3,7 @@
 	.global HeapManager_GetCurrentIndex
 	.thumb
 HeapManager_GetCurrentIndex:
-	; See src/unk_02005900.c for C equivalent
+	; See src/heap_manager_get_current_index.c for C equivalent
 	; Returns: gHeapManager->field_04
 	;
 	; Target assembly (from ROM):

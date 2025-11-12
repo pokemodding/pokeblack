@@ -8,9 +8,7 @@ extern u32 DAT_02006A60;  // Points to 0x02140488 (structure array base)
 // External function declarations
 extern u16 ResourcePool_AllocateSlot(void);
 extern void ResourceObject_Destroy(void* structPtr);
-extern void ResourceObject_LoadAndInit(void* structPtr, u32 param);
 extern void sub_02006BC0(u32 field1, u32 field2);
-extern void Buffer_Reverse(u32 field1, u32 field2);
 
 u16 sub_020069D4(u32 param1, u32 param2, u32 param3, u32 param4,
                  u32 stack1, u32 stack2, u32 stack3, u32 stack4) {
@@ -60,7 +58,7 @@ u16 sub_020069D4(u32 param1, u32 param2, u32 param3, u32 param4,
     
     // If stack3 is non-zero, do additional setup
     if (stack3 != 0) {
-        Buffer_Reverse(obj->field_10, obj->field_08);
+        Buffer_Reverse((u8 *)obj->field_10, obj->field_08);
     }
     
     // Store parameters in the object structure

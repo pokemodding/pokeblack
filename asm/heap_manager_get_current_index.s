@@ -2,7 +2,7 @@
 	.align 2
 	.global HeapManager_GetCurrentIndex
 	.thumb
-HeapManager_GetCurrentIndex:
+HeapManager_GetCurrentIndex: ; 0x02005900
 	; See src/heap_manager_get_current_index.c for C equivalent
 	; Returns: gHeapManager->field_04
 	;

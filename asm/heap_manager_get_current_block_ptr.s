@@ -16,4 +16,4 @@ DAT_0200591C:
 	.word 0x020AA1AC
 DAT_02005920:
 	.word 0x020AA1B8
-	thumb_func_end sub_0200590c
+	thumb_func_end HeapManager_GetCurrentBlockPtr

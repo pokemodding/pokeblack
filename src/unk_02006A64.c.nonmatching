@@ -15,7 +15,7 @@ extern void* DAT_02005A88;  // Points to 0x02140488 - resource object array
 
 // External functions
 extern s32 sub_02006868(void* resourceObject);  // Validates resource object
-extern void sub_02006948(void* resourceObject); // Destroys/cleans up resource object
+extern void ResourceObject_Destroy(void* resourceObject); // Destroys/cleans up resource object
 
 #define RESOURCE_OBJECT_SIZE 0x34  // 52 bytes per resource object
 
@@ -43,6 +43,6 @@ s32 sub_02006A64(u32 index) {
     }
     
     // Resource is invalid, clean it up
-    sub_02006948(resourceObject);
+    ResourceObject_Destroy(resourceObject);
     return 0;  // Return failure
 }

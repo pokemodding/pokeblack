@@ -1,5 +1,5 @@
-.public sub_020058D0
-.public sub_0200590C
+.public HeapBlock_GetStateValue
+.public HeapManager_GetCurrentBlockPtr
 .public sub_02005F90
 .public sub_02006368
 .public sub_02072EE0

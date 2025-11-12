@@ -1,5 +1,5 @@
-.public sub_02005900
-.public sub_0200590C
+.public HeapManager_GetCurrentIndex
+.public HeapManager_GetCurrentBlockPtr
 .public sub_02005A00
 .public sub_02005A4C
 .public sub_02005D14

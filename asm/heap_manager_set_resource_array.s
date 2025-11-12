@@ -1,4 +1,5 @@
 	.include "asm/macros/function.inc"
+	.include "heap_manager_set_resource_array.inc"
 
 	.text
 

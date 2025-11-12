@@ -25,9 +25,9 @@
  *
  * This structure represents an allocated resource (graphics, sound, etc.) in the resource pool.
  * Objects cycle between states: free (state=0) and in-use (state=1).
- * The cleanup process (sub_02006948) releases both primary and secondary resources.
+ * The cleanup process (ResourceObject_Destroy) releases both primary and secondary resources.
  *
- * During reset (sub_020067A4):
+ * During reset (ResourceObject_Reset):
  * - field_04 is preserved and copied to field_10
  * - Magic values are written to field_0C (0x00003443) and field_20 (0x000064E1)
  * - field_28 is set to 0x40 (64 decimal)
@@ -109,6 +109,21 @@ typedef struct CallbackRegistry {
     void* field_0x0;           // +0x00: Unknown field (context data?)
     CallbackFunc callback;     // +0x04: Function pointer to callback
 } CallbackRegistry;
+
+// =============================================================================
+// Function Declarations
+// =============================================================================
+
+// Resource Object management
+s32 ResourceObject_LoadAndInit(ResourceObject* obj, u32 param);
+void ResourceObject_Destroy(void* objectPtr);
+void ResourceObject_Reset(void* objPtr);
+
+// Resource Pool management
+u16 ResourcePool_AllocateSlot(void);
+
+// Utility functions
+void Buffer_Reverse(u8* buffer, u32 length);
 
 // =============================================================================
 // Magic Constants

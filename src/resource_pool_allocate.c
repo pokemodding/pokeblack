@@ -6,11 +6,11 @@ extern u32 DAT_02006A5C;  // Points to 0x02140504 (function pointer table)
 extern u32 DAT_02006A60;  // Points to 0x02140488 (structure array base)
 
 // External function declarations
-extern u16 sub_02006768(void);
-extern void sub_02006948(void* structPtr);
-extern void sub_020067E0(void* structPtr, u32 param);
+extern u16 ResourcePool_AllocateSlot(void);
+extern void ResourceObject_Destroy(void* structPtr);
+extern void ResourceObject_LoadAndInit(void* structPtr, u32 param);
 extern void sub_02006BC0(u32 field1, u32 field2);
-extern void sub_02006BE0(u32 field1, u32 field2);
+extern void Buffer_Reverse(u32 field1, u32 field2);
 
 u16 sub_020069D4(u32 param1, u32 param2, u32 param3, u32 param4,
                  u32 stack1, u32 stack2, u32 stack3, u32 stack4) {
@@ -30,7 +30,7 @@ u16 sub_020069D4(u32 param1, u32 param2, u32 param3, u32 param4,
     validateFunc(&stackParamAddr);
     
     // Get object index/ID from allocator
-    objIndex = sub_02006768();
+    objIndex = ResourcePool_AllocateSlot();
     
     // Calculate structure offset: index * 0x34 (52 bytes per object)
     objArray = (ResourceObject*)DAT_02006A60;  // 0x02140488
@@ -39,7 +39,7 @@ u16 sub_020069D4(u32 param1, u32 param2, u32 param3, u32 param4,
     
     // If object is already in use (state == 1), clean it up first
     if (obj->state == 1) {
-        sub_02006948(obj);
+        ResourceObject_Destroy(obj);
     }
     
     // Prepare pointers to various fields for initialization
@@ -55,12 +55,12 @@ u16 sub_020069D4(u32 param1, u32 param2, u32 param3, u32 param4,
     
     // If initialization failed (returned 0), call error handler
     if (initResult == 0) {
-        sub_020067E0(obj, stack2);
+        ResourceObject_LoadAndInit(obj, stack2);
     }
     
     // If stack3 is non-zero, do additional setup
     if (stack3 != 0) {
-        sub_02006BE0(obj->field_10, obj->field_08);
+        Buffer_Reverse(obj->field_10, obj->field_08);
     }
     
     // Store parameters in the object structure

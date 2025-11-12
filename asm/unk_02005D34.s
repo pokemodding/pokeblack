@@ -5,7 +5,7 @@
 	.extern sub_02005CE0
 	.extern sub_02005D14
 	.extern sub_02005924
-	.extern sub_0200590C
+	.extern HeapManager_GetCurrentBlockPtr
 	.extern sub_020755A8
 	.extern sub_02005EB4
 
@@ -31,7 +31,7 @@ LAB_02005D4A:
 	mov r0, #0
 	pop {r3, r4, r5, r6, pc}
 LAB_02005D5E:
-	bl sub_0200590C
+	bl HeapManager_GetCurrentBlockPtr
 	mov r6, #0
 	sub r2, r6, #1
 	mov r1, #0

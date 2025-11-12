@@ -6,7 +6,7 @@ extern u32 DAT_02005FB4;  // Points to 0x020AA260 (HeapManagerState)
 extern u16 DAT_02005FB8;  // Value 0xFFFF
 
 // External function declarations
-extern void* sub_0200590C(void);
+extern void* HeapManager_GetCurrentBlockPtr(void);
 extern void sub_02006368(void);
 
 void sub_02005F90(void) {
@@ -20,7 +20,7 @@ void sub_02005F90(void) {
     *(u16*)((u8*)heapManagerState + 0x24) = 0;  // offset +0x24 (halfword)
     
     // Get heap block pointer and initialize it with value 0x7F
-    void* heapBlockPtr = sub_0200590C();
+    void* heapBlockPtr = HeapManager_GetCurrentBlockPtr();
     sub_02072F34(heapBlockPtr, 0x7F);
     
     // Clear another field

@@ -4,7 +4,7 @@
 extern s32 sub_02005CE0(void);
 extern void sub_02005D14(void);
 extern s32 sub_02005924(u32 param_1);
-extern s32 sub_0200590C(void);
+extern s32 HeapManager_GetCurrentBlockPtr(void);
 extern s32 func_0x020755A8(u32 ptr, u32 param2, u32 param3, u32 param4, u32 param5, u32 param6);
 extern void sub_02005EB4(s32 param);
 
@@ -45,7 +45,7 @@ s32 sub_02005D34(u32 param_1, s32 param_2, u32 param_3, u32 param_4)
     }
     
     // Step 4: Get pointer/address from global state
-    ptr = sub_0200590C();
+    ptr = HeapManager_GetCurrentBlockPtr();
     
     // Step 5: Main operation with 0xFFFFFFFF flags
     result = func_0x020755A8(ptr, 0, 0xffffffff, 0xffffffff, param_1, param_4);

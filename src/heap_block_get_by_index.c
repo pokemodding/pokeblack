@@ -12,7 +12,7 @@ extern void *DAT_0200591C;  // Pointer value stored in ROM
  * @note Original address: 0x0200190c
  * @note Formula: DAT_02001920 + (((s32*)DAT_0200191c)[1] * 28) + 8
  */
-s32 sub_0200590C(void)
+s32 HeapManager_GetCurrentBlockPtr(void)
 {
     s32 *ptr = (s32*)DAT_0200591C;  // Load pointer from data section
     s32 index = ptr[1];              // Get field at offset +4

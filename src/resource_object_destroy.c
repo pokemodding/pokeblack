@@ -4,10 +4,10 @@
 extern void sub_02072BDC(u32 handle);
 extern void sub_02072D20(u32 handle);
 extern void sub_02072A88(u32 handle);
-extern void sub_020067A4(void* objectPtr);
+extern void ResourceObject_Reset(void* objectPtr);
 
 /**
- * sub_02006948 - Resource object cleanup/destructor
+ * ResourceObject_Destroy - Resource object cleanup/destructor
  * 
  * Cleans up a resource object by:
  * 1. Releasing resources associated with field at +0x14
@@ -25,7 +25,7 @@ extern void sub_020067A4(void* objectPtr);
  * 
  * @param objectPtr Pointer to the 52-byte resource object to clean up
  */
-void sub_02006948(void* objectPtr) {
+void ResourceObject_Destroy(void* objectPtr) {
     u32* obj = (u32*)objectPtr;
     
     // Get handle from field at offset +0x14
@@ -53,5 +53,5 @@ void sub_02006948(void* objectPtr) {
     obj[0] = 0;
     
     // Additional cleanup
-    sub_020067A4(objectPtr);
+    ResourceObject_Reset(objectPtr);
 }

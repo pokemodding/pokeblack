@@ -1,7 +1,7 @@
 #include "types.h"
 
 // External function declarations
-extern u32 sub_0200590C(void);      // Returns heap block metadata pointer
+extern u32 HeapManager_GetCurrentBlockPtr(void);      // Returns heap block metadata pointer
 extern void sub_02072E7C(u32 ptr, u32 value);  // Overlay function - likely memset/initialize
 extern void sub_020049C8(void);     // Additional heap initialization
 
@@ -29,7 +29,7 @@ void sub_02005D14(void)
     u32 heapBlockPtr;
     
     // Get pointer to heap block metadata (28-byte structure)
-    heapBlockPtr = sub_0200590C();
+    heapBlockPtr = HeapManager_GetCurrentBlockPtr();
     
     // Initialize/zero the heap block structure
     // sub_02072E7C is in overlay (0x0207xxxx range)

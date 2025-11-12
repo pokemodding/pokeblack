@@ -5,7 +5,7 @@ extern u32 DAT_020067C8;  // = 0x00003443
 extern u32 DAT_020067CC;  // = 0x000064E1
 
 // This function initializes/resets a ResourceObject structure to default values
-// after cleanup. It's called by sub_02006948 as the final step in resource destruction.
+// after cleanup. It's called by ResourceObject_Destroy as the final step in resource destruction.
 //
 // ResourceObject structure (52 bytes = 0x34):
 //   +0x00: state flag
@@ -25,7 +25,7 @@ extern u32 DAT_020067CC;  // = 0x000064E1
 //
 // Returns: void
 //
-void sub_020067A4(void* objPtr) {
+void ResourceObject_Reset(void* objPtr) {
     u32* obj32 = (u32*)objPtr;
     u8* obj8 = (u8*)objPtr;
     

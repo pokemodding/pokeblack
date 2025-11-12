@@ -39,7 +39,7 @@ _020064DE:
 sub_020064F4: ; 0x020064F4
 	push {r4, lr}
 	add r4, r0, #0
-	bl sub_0200590C
+	bl HeapManager_GetCurrentBlockPtr
 	add r1, r4, #0
 	blx sub_02075560
 	pop {r4, pc}
@@ -48,7 +48,7 @@ sub_020064F4: ; 0x020064F4
 	thumb_func_start sub_02006504
 sub_02006504: ; 0x02006504
 	push {r3, lr}
-	bl sub_0200590C
+	bl HeapManager_GetCurrentBlockPtr
 	mov r1, #0
 	blx sub_02072E7C
 	bl sub_020059C8
@@ -164,7 +164,7 @@ _020065E0:
 	cmp r0, #1
 	bne _020065F0
 	add r0, r4, r1
-	bl sub_02006948
+	bl ResourceObject_Destroy
 _020065F0:
 	add r5, r5, #1
 	cmp r5, #3
@@ -207,7 +207,7 @@ _0200662E:
 	cmp r0, #0
 	bne _0200663C
 	add r0, r4, #0
-	bl sub_02006948
+	bl ResourceObject_Destroy
 _0200663C:
 	ldr r0, _02006648 ; =0x02140504
 	add r5, r5, #1

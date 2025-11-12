@@ -14,7 +14,7 @@ sub_020069D4: ; 0x020069D4
 	add r6, r0, #0x0
 	str r1, [sp, #0x10]
 	blx r3
-	bl sub_02006768
+	bl ResourcePool_AllocateSlot
 	str r0, [sp, #0x14]
 	ldr r1, [sp, #0x14]
 	mov r2, #0x34
@@ -25,7 +25,7 @@ sub_020069D4: ; 0x020069D4
 	cmp r0, #0x1
 	bne LAB_02006A04
 	add r0, r4, #0x0
-	bl sub_02006948
+	bl ResourceObject_Destroy
 LAB_02006A04:
 	add r0, r4, #0x0
 	add r0, #0x8
@@ -51,14 +51,14 @@ LAB_02006A04:
 	bne LAB_02006A38
 	ldr r1, [sp, #0x18]
 	add r0, r4, #0x0
-	bl sub_020067E0
+	bl ResourceObject_LoadAndInit
 LAB_02006A38:
 	ldr r0, [sp, #0x20]
 	cmp r0, #0x0
 	beq LAB_02006A46
 	ldr r0, [r4, #0x10]
 	ldr r1, [r4, #0x8]
-	bl sub_02006BE0
+	bl Buffer_Reverse
 LAB_02006A46:
 	add r0, r4, #0x0
 	add r0, #0x28
@@ -79,7 +79,7 @@ DAT_02006A60:
 
 	thumb_func_end sub_020069D4
 
-	.extern sub_02006768
-	.extern sub_02006948
-	.extern sub_020067E0
-	.extern sub_02006BE0
+	.extern ResourcePool_AllocateSlot
+	.extern ResourceObject_Destroy
+	.extern ResourceObject_LoadAndInit
+	.extern Buffer_Reverse

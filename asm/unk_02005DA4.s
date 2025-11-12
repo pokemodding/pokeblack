@@ -25,7 +25,7 @@ sub_02005DAC: ; 0x02005DAC
 	bl sub_02005924
 	cmp r0, #0
 	beq _02005DDE
-	bl sub_0200590C
+	bl HeapManager_GetCurrentBlockPtr
 	mov r1, #6
 	sub r2, r1, #7
 	add r3, r2, #0

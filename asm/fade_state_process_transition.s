@@ -1,7 +1,7 @@
 .include "asm/macros/function.inc"
 
-.extern sub_020058D0
-.extern sub_02005D90
+.extern HeapBlock_GetStateValue
+.extern FadeState_InitTransition
 .extern sub_02005F90
 .extern sub_02005FF4
 
@@ -14,7 +14,7 @@ sub_02005FBC: ; 0x02005FBC
 	ldr r0, [r4, #0x1c]
 	cmp r0, #0x1
 	bne .L_exit
-	bl sub_020058D0
+	bl HeapBlock_GetStateValue
 	ldr r1, [r4, #0x28]
 	cmp r0, r1
 	beq .L_call_reset
@@ -30,7 +30,7 @@ sub_02005FBC: ; 0x02005FBC
 	ldr r1, [pc, #12]  ; =DAT_02005FF0
 	ldr r0, [r1, #0x28]
 	ldrh r1, [r1, #0x26]
-	bl sub_02005D90
+	bl FadeState_InitTransition
 .L_call_reset:
 	bl sub_02005F90
 .L_exit:

@@ -54,4 +54,5 @@ Static main
     Object asm/buffer_reverse.o
     Object asm/unk_02006C00.o
     Object asm/unk_02006E7C.o
+    object asm/unk_02006EA4.o
 }

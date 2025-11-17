@@ -38,12 +38,14 @@ __pycache__/
 # Tools
 tools/*.exe
 tools/*.o
+tools/
 
 # Dependencies
 *.a
 
 #Squid's Progress Reports
 notes/
+
 
 # Extracted overlays
 overlay_*.bin

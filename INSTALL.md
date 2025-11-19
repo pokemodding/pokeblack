@@ -4,7 +4,7 @@ This document explains how to set up the decompilation environment for Pokémon 
 
 ## Windows
 
-Windows is not natively supported. Use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install) instead.
+Windows is not natively supported. Use [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install) if you are using a Windows operating system.
 
 ## Linux
 
@@ -17,11 +17,18 @@ The build system has the following package requirements:
 * binutils-arm-none-eabi
 * python3
 * ndstool (from devkitPro repository)
+* wine (for CodeWarrior mwccarm compiler - Windows executable)
 
 **First, install basic dependencies:**
 
+**For Debian/Ubuntu:**
 ```bash
-sudo apt install build-essential binutils-arm-none-eabi git python3 wget
+sudo apt install build-essential binutils-arm-none-eabi git python3 wget wine
+```
+
+**For openSUSE:**
+```bash
+sudo zypper install gcc make binutils git python3 wget wine
 ```
 
 **Then, install ndstool from devkitPro:**
@@ -47,11 +54,37 @@ ndstool --version
 ### 2. Clone the repository
 
 ```bash
-git clone https://github.com/squiddonaut/pokeblack
+git clone https://github.com/pokemodding/pokeblack
 cd pokeblack
 ```
 
-### 3. Build the ROM
+### 3. Set up CodeWarrior Compiler (mwccarm)
+
+The project requires the Metrowerks CodeWarrior compiler for ARM (propietary software) to produce matching binaries. The PRET community Discord distributes a pre-configured version, as the tool cannot be distributed here on GitHub.
+
+**Get from PRET Discord**
+1. Join the PRET Discord server: https://discord.gg/d5dubZ3
+2. Navigate to the #pokediamond channel
+3. Download the pinned `mwccarm.zip` file
+4. Extract to `tools/mwccarm/` in your repository:
+   ```bash
+   cd tools
+   unzip /path/to/mwccarm.zip
+   cd ..
+   ```
+If you are unable to join the PRET Discord server, join the Pokeblack community Discord server and ask for assistance with mwccarm.
+
+**Verify the compiler is set up:**
+```bash
+# Check if the compiler exists
+ls -la tools/mwccarm/dsi/1.1/mwccarm.exe
+
+# The build system will automatically use it if present
+```
+
+**Note**: The compiler runs through Wine on Linux. The wrapper scripts in the repository handle this automatically.
+
+### 4. Build the ROM
 
 ```bash
 make
@@ -68,18 +101,23 @@ Install [Homebrew](https://brew.sh/) if you haven't already. Then run:
 ```bash
 brew install python3 git devkitpro/devkitpro/devkitARM
 brew install --cask gcc-arm-embedded
+brew install --cask wine-stable
 ```
 
-**Note**: The devkitARM package includes `ndstool` for NDS ROM manipulation.
+**Note**: The devkitARM package includes `ndstool` for NDS ROM manipulation. Wine is required for running the CodeWarrior compiler.
 
 ### 2. Clone the repository
 
 ```bash
-git clone https://github.com/squiddonaut/pokeblack
+git clone https://github.com/pokemodding/pokeblack
 cd pokeblack
 ```
 
-### 3. Build the ROM
+### 3. Set up CodeWarrior Compiler (mwccarm)
+
+Follow the same instructions as the Linux section above to obtain and set up the mwccarm compiler. The PRET Discord version is recommended.
+
+### 4. Build the ROM
 
 ```bash
 make
@@ -245,17 +283,6 @@ ndstool -l baserom.nds
 ndstool -i baserom.nds
 ```
 
-### Extracted Files Explained
-
-After extraction, you'll have:
-- `arm9.bin` - ARM9 binary (main game code) - **This is what you'll analyze**
-- `arm7.bin` - ARM7 binary (sound/wireless)
-- `y9.bin` - ARM9 overlay table
-- `y7.bin` - ARM7 overlay table
-- `data/` - Game data files (graphics, text, etc.)
-- `header.bin` - ROM header
-- `banner.bin` - Icon and title screen
-
 ## Troubleshooting
 
 ### Build fails with "command not found"
@@ -309,6 +336,46 @@ Get-FileHash baserom.nds -Algorithm SHA1
 
 **Note**: This is the NDSi Enhanced version, not the original DS-only version.
 
+### Wine/mwccarm issues
+
+**"mwccarm.exe: cannot execute binary file"**
+
+Make sure Wine is installed and the wrapper script is being used:
+```bash
+# Check Wine installation
+wine --version
+
+# Verify wrapper script exists and is executable
+ls -la tools/mwccarm/dsi/1.1/mwccarm_wrapper.sh
+chmod +x tools/mwccarm/dsi/1.1/mwccarm_wrapper.sh
+```
+
+**"License check failed" or "Feature has expired"**
+
+The PRET version includes a permanent license file. If using the SDK version, make sure libfaketime is installed:
+```bash
+# For Debian/Ubuntu
+sudo apt install libfaketime
+
+# For openSUSE
+sudo zypper install libfaketime
+```
+
+**Wine hangs or freezes during compilation**
+
+Initialize Wine first, then try again:
+```bash
+killall -9 wine wineserver wineboot 2>/dev/null
+wineboot --init
+wineserver -w
+```
+
+**Compilation is very slow**
+
+Wine can be slow on first run. Subsequent compilations should be faster. You can also:
+- Disable Wine debug output (already done in wrapper scripts)
+- Use GCC for testing (non-matching but faster): temporarily move `mwccarm.exe` out of the way
+
 ## Verifying Your Setup
 
 After installation, verify everything is working:
@@ -324,10 +391,21 @@ ndstool --version
 # Check Python
 python3 --version
 
+# Check Wine
+wine --version
+
+# Check CodeWarrior compiler
+ls -la tools/mwccarm/dsi/1.1/mwccarm.exe
+
+# Test compilation (if you've set up overlays)
+cd overlays/overlay_93
+make
+cd ../..
+
 # Verify base ROM (if you have it)
 make verify
 ```
 
 ## Contributing
 
-See contributing which doesnt exist yet BAHHHHHH!!!!!!!!!!! for guidelines on how to contribute to this project.
+See CONTRIBUTING.md for guidelines on how to contribute to this project.

@@ -5,6 +5,10 @@
 .public sub_02004490
 .public sub_02004632
 .public sub_02005438
+.public sub_021368A8
+.public sub_02137BBC
+.public sub_02139808
+.public sub_0213981C
 .public sub_0215536C
 .public sub_02156460
 .public sub_02177020

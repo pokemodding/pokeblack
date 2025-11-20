@@ -376,6 +376,14 @@ Wine can be slow on first run. Subsequent compilations should be faster. You can
 - Disable Wine debug output (already done in wrapper scripts)
 - Use GCC for testing (non-matching but faster): temporarily move `mwccarm.exe` out of the way
 
+### Linker errors about undefined references
+
+**"undefined reference to `sub_XXXXXXXX`" or "undefined reference to `DAT_XXXXXXXX`"**
+
+This is expected for an in-progress decompilation project. The build system uses special linker flags to allow building with missing symbols:
+
+- `--warn-unresolved-symbols`: Converts linker errors about undefined symbols into warnings. Missing functions and data will be reported as warnings instead of stopping the build.
+
 ## Verifying Your Setup
 
 After installation, verify everything is working:

@@ -24,9 +24,9 @@ EXPECTED_SHA1 := 26ad0b9967aa279c4a266ee69f52b9b2332399a5
 
 # CodeWarrior Toolchain (matching original NDS compiler)
 MWCCVER := 1.1
-MWCC := $(TOOLS_DIR)/mwccarm/dsi/$(MWCCVER)/mwccarm.exe
-MWAS := $(TOOLS_DIR)/mwccarm/dsi/$(MWCCVER)/mwasmarm.exe
-MWLD := $(TOOLS_DIR)/mwccarm/dsi/$(MWCCVER)/mwldarm.exe
+MWCC := $(TOOLS_DIR)/mwccarm/dsi/$(MWCCVER)/mwccarm_wrapper.sh
+MWAS := $(TOOLS_DIR)/mwccarm/dsi/$(MWCCVER)/mwasmarm_wrapper.sh
+MWLD := $(TOOLS_DIR)/mwccarm/dsi/$(MWCCVER)/mwldarm_wrapper.sh
 export LM_LICENSE_FILE := $(TOOLS_DIR)/mwccarm/license.dat
 
 # ARM binutils (for objdump, objcopy, etc.)
@@ -59,7 +59,9 @@ MWASFLAGS := $(DEFINES) -proc $(PROC_S) -g -gccinc \
 
 # Linker Flags
 # -z muldefs: Allow multiple definitions (prefer first occurrence, which will be .s files)
-LDFLAGS := -Map $(BUILD_DIR)/pokeblack.map -z muldefs
+# --noinhibit-exec: Create output even with unresolved symbols (for partial decompilation)
+# --warn-unresolved-symbols: Warn about undefined symbols instead of erroring
+LDFLAGS := -Map $(BUILD_DIR)/pokeblack.map -z muldefs --noinhibit-exec --warn-unresolved-symbols
 
 # Source file discovery (pret-standard approach)
 # Find all C files in src/

@@ -32,15 +32,27 @@ else
 endif
 
 # Source files
-C_SOURCES := $(wildcard $(SRC_DIR)/*.c)
+ALL_C_FILES := $(wildcard $(SRC_DIR)/*.c)
+ALL_ASM_FILES := $(wildcard $(ASM_DIR)/*.s)
+
+# Extract base names from C files
+C_BASENAMES := $(patsubst $(SRC_DIR)/%.c,%,$(ALL_C_FILES))
+
+# Prefer .c files from src/, fallback to .s from asm/
+C_SOURCES := $(ALL_C_FILES)
+ASM_SOURCES := $(filter-out $(addprefix $(ASM_DIR)/,$(addsuffix .s,$(C_BASENAMES))),$(ALL_ASM_FILES))
+
 C_OBJECTS := $(C_SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+ASM_OBJECTS := $(ASM_SOURCES:$(ASM_DIR)/%.s=$(OBJ_DIR)/%.o)
+
+ALL_OBJECTS := $(C_OBJECTS) $(ASM_OBJECTS)
 
 # Default target
 .PHONY: all
-all: info $(C_OBJECTS)
+all: info $(ALL_OBJECTS)
 	@echo ""
 	@echo "=== Build Complete ==="
-	@echo "Compiled $(words $(C_OBJECTS)) functions"
+	@echo "Compiled $(words $(C_OBJECTS)) C files, $(words $(ASM_OBJECTS)) assembly files"
 	@echo "Objects in: $(OBJ_DIR)/"
 
 .PHONY: info
@@ -48,7 +60,8 @@ info:
 	@echo "=== Overlay 93 Build ==="
 	@echo "Compiler: $(CC_TYPE)"
 	@echo "CC: $(CC)"
-	@echo "Sources: $(words $(C_SOURCES)) files"
+	@echo "C Sources: $(words $(C_SOURCES)) files"
+	@echo "ASM Sources: $(words $(ASM_SOURCES)) files"
 	@echo ""
 
 # Create build directories
@@ -59,6 +72,11 @@ $(OBJ_DIR):
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@echo "Compiling $<..."
 	$(CC) $(CFLAGS) -c $< -o $@
+
+# Assemble files with CodeWarrior
+$(OBJ_DIR)/%.o: $(ASM_DIR)/%.s | $(OBJ_DIR)
+	@echo "Assembling $<..."
+	$(ROOT)/tools/mwccarm/dsi/1.1/mwasmarm_wrapper.sh $(DEFINES) -proc arm5te -g -gccinc -i . -i $(INCLUDE_DIR) -i $(ROOT)/include -o $@ $<
 
 # Clean build artifacts
 .PHONY: clean

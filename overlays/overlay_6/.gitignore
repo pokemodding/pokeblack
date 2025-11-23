@@ -1,4 +1,4 @@
-# Generated assembly files (extract from overlay_93_full.s using split script)
+# Generated assembly files (extract from overlay_6_full.s using split script)
 asm/*.s
 !asm/.gitkeep
 

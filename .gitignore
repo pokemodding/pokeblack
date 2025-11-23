@@ -38,6 +38,7 @@ __pycache__/
 # Tools
 tools/*.exe
 tools/*.o
+!tools/scripts/
 tools/
 
 # Dependencies

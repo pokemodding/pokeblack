@@ -19,6 +19,10 @@ INCLUDE_DIR := include
 TOOLS_DIR := tools
 ASM_INCLUDE_DIR := asm/include
 
+# ARM7 binaries
+ARM7_ELF := $(BUILD_DIR)/arm7.elf
+ARM7_BIN := $(BUILD_DIR)/arm7.bin
+
 # Expected ROM hash
 EXPECTED_SHA1 := 26ad0b9967aa279c4a266ee69f52b9b2332399a5
 
@@ -94,9 +98,14 @@ DATA_OBJ := $(BUILD_DIR)/$(DATA_DIR)/arm9_data.o
 
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_OBJ)
 
+# ARM7 source files
+ARM7_ASM := asm/arm7_main.s
+ARM7_OBJ := $(BUILD_DIR)/asm/arm7_main.o
+
 # Create build directory
 $(shell mkdir -p $(BUILD_DIR))
 $(shell mkdir -p $(BUILD_DIR)/$(DATA_DIR))
+$(shell mkdir -p $(BUILD_DIR)/asm)
 
 ################
 ### BUILDING ###
@@ -115,12 +124,32 @@ $(ELF): $(OBJS) arm9.ld
 	@echo "..."
 	@echo ""
 
+# Build ARM7 ELF
+$(ARM7_ELF): $(ARM7_OBJ) arm7.ld
+	@echo "Linking ARM7 ELF..."
+	$(PREFIX)ld -T arm7.ld --noinhibit-exec --warn-unresolved-symbols -o $@ $(ARM7_OBJ)
+	@echo "✓ ARM7 link complete"
+
+# Convert ARM7 ELF to binary
+$(ARM7_BIN): $(ARM7_ELF)
+	@echo "Extracting ARM7 binary..."
+	$(OBJCOPY) -O binary $< $@
+	@echo "✓ ARM7 binary: $@"
+	@stat -c "  Size: %s bytes (max 167,812 bytes)" $@
+
+# Assemble ARM7 with GNU assembler
+$(ARM7_OBJ): $(ARM7_ASM)
+	@mkdir -p $(dir $@)
+	@echo "Assembling ARM7..."
+	$(PREFIX)as -mcpu=arm7tdmi -mthumb-interwork -o $@ $<
+
 # Convert ELF to NDS
-$(ROM): $(ELF)
+$(ROM): $(ELF) $(ARM7_BIN)
 	@echo "Converting ELF to NDS binary..."
 	$(OBJCOPY) -O binary $< $(BUILD_DIR)/arm9.bin
 	@echo "Note: Full NDS ROM assembly not yet implemented."
 	@echo "ARM9 binary extracted to $(BUILD_DIR)/arm9.bin"
+	@echo "ARM7 binary available at $(ARM7_BIN)"
 	@touch $(ROM)
 
 # Compile C files with CodeWarrior
@@ -146,6 +175,10 @@ $(BUILD_DIR)/$(DATA_DIR)/arm9_data.o: $(DATA_ASM)
 .PHONY: clean
 clean:
 	rm -rf $(BUILD_DIR) $(ROM) $(ELF)
+
+.PHONY: arm7
+arm7: $(ARM7_BIN)
+	@echo "ARM7 binary built successfully at $(ARM7_BIN)"
 
 .PHONY: verify
 verify: $(ROM)

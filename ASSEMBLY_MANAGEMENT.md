@@ -17,11 +17,22 @@ This project uses a two-tier assembly file system for overlays to keep the repos
 ## First Time Setup
 This tutorial uses Overlay 93 as an example.
 
+### Quick Start (Monolithic Mode)
 ```bash
-# After cloning the repository
+# After cloning, you can build immediately
+make -C overlays/overlay_93
+
+# No setup needed! Uses overlay_93_full.s automatically
+```
+
+### Development Setup (Extracted Mode)
+For faster incremental builds during active development:
+
+```bash
+# Split the monolithic file into individual functions
 tools/scripts/split_overlay_asm.sh 93
 
-# Now you can build
+# Now builds will only recompile changed files
 make -C overlays/overlay_93
 ```
 
@@ -66,18 +77,28 @@ Regenerates overlay_N_full.s from individual .s files
 
 ## Build System
 
-The Makefile automatically handles C vs assembly preference:
+The Makefile supports two build modes that automatically detect which to use:
 
-```makefile
-# Prefer .c files from src/, fallback to .s from asm/
-C_BASENAMES := $(patsubst $(SRC_DIR)/%.c,%,$(ALL_C_FILES))
-ASM_SOURCES := $(filter-out $(addprefix $(ASM_DIR)/,$(addsuffix .s,$(C_BASENAMES))),$(ALL_ASM_FILES))
-```
+### Extracted Mode (Recommended for Development)
+When `asm/` directory exists and contains `.s` files:
+- Uses individual function files from `asm/`
+- Prefers C files from `src/` over corresponding `.s` files
+- Faster builds (only changed files recompile)
+- Better for incremental decompilation
 
 Result:
 - If `src/ov93_021B6818.c` exists → `asm/ov93_021B6818.s` is IGNORED
 - If only `asm/ov93_021B6818.s` exists → it is assembled and used
 - No duplicate symbols, fully automatic
+
+### Monolithic Mode (Simpler Setup)
+When `asm/` directory is empty or doesn't exist:
+- Uses single `overlay_N_full.s` file for ALL assembly
+- Faster initial setup (no need to run `split_overlay_asm.sh`)
+- Slower builds (entire overlay assembly recompiles on changes)
+- Still respects C files from `src/` (C files are linked, assembly functions are omitted)
+
+**The build system automatically detects which mode to use** - no configuration needed!
 
 
 ## Troubleshooting

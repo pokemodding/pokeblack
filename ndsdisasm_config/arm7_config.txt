@@ -1,0 +1,20 @@
+# ARM7 Configuration for ndsdisasm
+# Format: <type> <offset> [name]
+# Types: arm_func, thumb_func, data, pool, jumptable, jtbl_thumb, jtbl_thumb_bx, ascii
+
+# ARM7 Entry Point / Startup
+arm_func 0x02380000 _start
+
+# Early initialization functions (detected from disassembly)
+arm_func 0x0238018C
+arm_func 0x02380278
+arm_func 0x023803DC
+arm_func 0x02380400
+arm_func 0x02380424
+arm_func 0x02380508
+arm_func 0x02380554
+arm_func 0x02380644
+arm_func 0x02380754
+arm_func 0x0238078C
+arm_func 0x023807A4
+arm_func 0x023807B0

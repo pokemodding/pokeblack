@@ -35,15 +35,27 @@ endif
 ALL_C_FILES := $(wildcard $(SRC_DIR)/*.c)
 ALL_ASM_FILES := $(wildcard $(ASM_DIR)/*.s)
 
+# Check if we should use monolithic or extracted assembly
+# Use monolithic if asm/ directory is empty or doesn't exist
+FULL_ASM := overlay_93_full.s
+USE_MONOLITHIC := $(if $(ALL_ASM_FILES),,yes)
+
 # Extract base names from C files
 C_BASENAMES := $(patsubst $(SRC_DIR)/%.c,%,$(ALL_C_FILES))
 
-# Prefer .c files from src/, fallback to .s from asm/
+ifeq ($(USE_MONOLITHIC),yes)
+# Monolithic mode: use overlay_93_full.s for all non-decompiled code
+C_SOURCES := $(ALL_C_FILES)
+ASM_SOURCES := $(if $(wildcard $(FULL_ASM)),$(FULL_ASM),)
+C_OBJECTS := $(C_SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+ASM_OBJECTS := $(if $(ASM_SOURCES),$(OBJ_DIR)/overlay_93_full.o,)
+else
+# Extracted mode: prefer .c files from src/, fallback to individual .s from asm/
 C_SOURCES := $(ALL_C_FILES)
 ASM_SOURCES := $(filter-out $(addprefix $(ASM_DIR)/,$(addsuffix .s,$(C_BASENAMES))),$(ALL_ASM_FILES))
-
 C_OBJECTS := $(C_SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 ASM_OBJECTS := $(ASM_SOURCES:$(ASM_DIR)/%.s=$(OBJ_DIR)/%.o)
+endif
 
 ALL_OBJECTS := $(C_OBJECTS) $(ASM_OBJECTS)
 
@@ -60,8 +72,15 @@ info:
 	@echo "=== Overlay 93 Build ==="
 	@echo "Compiler: $(CC_TYPE)"
 	@echo "CC: $(CC)"
+ifeq ($(USE_MONOLITHIC),yes)
+	@echo "Mode: Monolithic assembly (overlay_93_full.s)"
+	@echo "C Sources: $(words $(C_SOURCES)) files"
+	@echo "ASM Sources: 1 file (overlay_93_full.s)"
+else
+	@echo "Mode: Extracted assembly (asm/*.s)"
 	@echo "C Sources: $(words $(C_SOURCES)) files"
 	@echo "ASM Sources: $(words $(ASM_SOURCES)) files"
+endif
 	@echo ""
 
 # Create build directories
@@ -73,9 +92,14 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@echo "Compiling $<..."
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Assemble files with CodeWarrior
+# Assemble extracted files with CodeWarrior
 $(OBJ_DIR)/%.o: $(ASM_DIR)/%.s | $(OBJ_DIR)
 	@echo "Assembling $<..."
+	$(ROOT)/tools/mwccarm/dsi/1.1/mwasmarm_wrapper.sh $(DEFINES) -proc arm5te -g -gccinc -i . -i $(INCLUDE_DIR) -i $(ROOT)/include -o $@ $<
+
+# Assemble monolithic overlay_93_full.s with CodeWarrior
+$(OBJ_DIR)/overlay_93_full.o: overlay_93_full.s | $(OBJ_DIR)
+	@echo "Assembling monolithic overlay assembly..."
 	$(ROOT)/tools/mwccarm/dsi/1.1/mwasmarm_wrapper.sh $(DEFINES) -proc arm5te -g -gccinc -i . -i $(INCLUDE_DIR) -i $(ROOT)/include -o $@ $<
 
 # Clean build artifacts

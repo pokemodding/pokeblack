@@ -15,6 +15,9 @@ baserom.nds
 build/
 .cache/
 
+# Extracted ROM components (generated from baserom.nds)
+extracted/
+
 # Editor files
 *.swp
 *.swo
@@ -41,13 +44,24 @@ tools/*.o
 !tools/scripts/
 tools/*.py
 tools/local
+tools/ndstool/
+
+# Built tools (can be regenerated)
+ndstool
 
 
 # Dependencies
 *.a
 
+# NitroSDK (proprietary, cannot distribute)
+lib/NitroSDK/
+
 #Squid's Progress Reports
 notes/
+
+# IRBO configuration (too large for git)
+IRBO.yml
+tools/IRBO.yml
 
 
 # Extracted overlays

@@ -19,11 +19,14 @@ The build system has the following package requirements:
 * ndstool (from devkitPro repository)
 * wine (for CodeWarrior mwccarm compiler - Windows executable)
 
-**Important**: After cloning the repository, you must initialize the NitroSDK submodule:
-```bash
-git submodule update --init --recursive
-```
-This downloads the Nintendo DS SDK headers into `lib/NitroSDK/`.
+**Important**: This project requires **TWL-SDK 5.3** (Nintendo DSi SDK) for building.
+
+The SDK is proprietary and cannot be distributed with this repository. You must obtain it separately:
+1. Join the PRET Discord or Pokeblack community Discord
+2. Request TWL-SDK 5.3 (or NitroSDK 5.3)
+3. Extract it to `lib/NitroSDK/TwlSDK/`
+
+The build system expects SDK headers at: `lib/NitroSDK/TwlSDK/include/`
 
 **First, install basic dependencies:**
 

@@ -53,12 +53,12 @@ endif
 OPTFLAGS := -O4,p
 MWCFLAGS := $(DEFINES) $(OPTFLAGS) -sym on -enum int -lang c99 \
             -proc $(PROC) -msgstyle gcc -gccinc \
-            -i ./$(INCLUDE_DIR) -i ./lib/NitroSDK/include -ipa file -interworking \
+            -i ./$(INCLUDE_DIR) -i ./lib/NitroSDK/TwlSDK/include -ipa file -interworking \
             -inline on,noauto -char signed -thumb
 
 # CodeWarrior Assembler Flags
 MWASFLAGS := $(DEFINES) -proc $(PROC_S) -g -gccinc \
-             -i . -i ./$(INCLUDE_DIR) -i ./$(ASM_INCLUDE_DIR) -i ./lib/NitroSDK/include
+             -i . -i ./$(INCLUDE_DIR) -i ./$(ASM_INCLUDE_DIR) -i ./lib/NitroSDK/TwlSDK/include
 
 # Linker Flags
 # -z muldefs: Allow multiple definitions (prefer first occurrence, which will be .s files)

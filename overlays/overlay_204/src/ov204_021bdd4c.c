@@ -1,0 +1,13 @@
+#include "types.h"
+
+//Matching
+
+extern void FUN_021BDF90(void* param);
+extern void FUN_overlay_d_204__021bde10(void* param);
+
+void FUN_overlay_d_204__021bdd4c(void* param) {
+
+    FUN_021BDF90((u8*)param + 4);
+    FUN_overlay_d_204__021bde10(param);
+    
+}

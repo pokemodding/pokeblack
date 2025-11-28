@@ -63,6 +63,9 @@ notes/
 IRBO.yml
 tools/IRBO.yml
 
+# Overlay dumps (generated from IRBO.yml)
+overlay_dumps/
+
 
 # Extracted overlays
 overlay_*.bin
@@ -72,3 +75,4 @@ linker.ld
 *.py
 /tools/mwccarm
 tools/README.md
+asm/unk_02006EA4.s.backup

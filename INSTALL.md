@@ -19,6 +19,12 @@ The build system has the following package requirements:
 * ndstool (from devkitPro repository)
 * wine (for CodeWarrior mwccarm compiler - Windows executable)
 
+**Important**: After cloning the repository, you must initialize the NitroSDK submodule:
+```bash
+git submodule update --init --recursive
+```
+This downloads the Nintendo DS SDK headers into `lib/NitroSDK/`.
+
 **First, install basic dependencies:**
 
 **For Debian/Ubuntu:**
@@ -139,6 +145,47 @@ docker build -t pokeblack .
 
 ```bash
 docker run --rm -v $(pwd):/pokeblack pokeblack
+```
+
+## Building ndstool from Source (For This Project)
+
+If you cannot install ndstool through package managers, you can build it locally in the project:
+
+```bash
+# Clone ndstool source into tools directory
+cd tools
+git clone https://github.com/devkitPro/ndstool.git
+cd ndstool
+
+# Generate configure script
+./autogen.sh
+
+# Configure and build
+./configure
+make
+
+# Copy the binary to project root for easy access
+cp ndstool ../../
+
+# Verify it works
+cd ../..
+./ndstool -i baserom.nds
+```
+
+**Note**: The built `ndstool` binary and `tools/ndstool/` directory are gitignored and don't need to be committed. Anyone cloning the repository can rebuild it using these same instructions.
+
+**Requirements for building ndstool:**
+- build-essential (gcc, g++, make)
+- autotools (autoconf, automake, libtool)
+
+On Debian/Ubuntu:
+```bash
+sudo apt install build-essential autoconf automake libtool
+```
+
+On openSUSE:
+```bash
+sudo zypper install gcc gcc-c++ make autoconf automake libtool
 ```
 
 ## Installing ndstool

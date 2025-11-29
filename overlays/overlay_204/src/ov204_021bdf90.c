@@ -2,8 +2,8 @@
 
 //Matching
 
-extern void FUN_0204A600(void* param);
+extern void FUN_0204A600(void);
 
-void FUN_021BDF90(void* param) {
-    FUN_0204A600(param);
+void FUN_021BDF90(void) {
+    FUN_0204A600();
 }

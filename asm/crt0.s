@@ -587,6 +587,9 @@ _02004F5C:
 
 	.rodata
 
+	.global _start_LtdModuleParams
+	.global _start_ModuleParams
+
 _start_LtdModuleParams:
 	.word 0x02432DA4 ; SDK_LTDAUTOLOAD_LIST
 	.word 0x02432DB4 ; SDK_LTDAUTOLOAD_LIST_END

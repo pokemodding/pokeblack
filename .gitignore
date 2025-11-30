@@ -45,6 +45,10 @@ tools/*.o
 tools/*.py
 tools/local
 tools/ndstool/
+!tools/PLACE_MWCCARM_HERE.md
+!tools/PLACE_NDSTOOL_HERE.md
+!tools/ndstool/README.md
+
 
 # Built tools (can be regenerated)
 ndstool
@@ -76,3 +80,17 @@ linker.ld
 /tools/mwccarm
 tools/README.md
 asm/unk_02006EA4.s.backup
+
+# Build artifacts
+build/
+*.o
+*.elf
+*.sbin
+*.lcf
+
+# Proprietary tools
+tools/ndsdisasm/
+
+# ROM files
+*.nds
+baserom.nds

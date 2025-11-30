@@ -32,7 +32,7 @@ SDK_SPECFILES := $(SDK_ROOT)/include/nitro/specfiles
 # CodeWarrior tools (compiler, assembler, linker)
 MWCCARM := $(TOOLS_DIR)/mwccarm/dsi/1.1/mwccarm_wrapper.sh
 MWASMARM := $(TOOLS_DIR)/mwccarm/dsi/1.1/mwasmarm_wrapper.sh
-MWLDARM := $(TOOLS_DIR)/mwccarm/dsi/1.1/mwldarm_wrapper.sh
+MWLDARM := $(abspath $(TOOLS_DIR)/mwccarm/dsi/1.1/mwldarm_wrapper.sh)
 export LM_LICENSE_FILE := $(TOOLS_DIR)/mwccarm/license.dat
 
 # Nintendo SDK tools (run via Wine)
@@ -72,23 +72,23 @@ MWASFLAGS := $(DEFINES) -proc $(PROC_S) -g -gccinc \
 
 # SOURCE FILES
 
-# C source files (from src/)
+# C source files (from src/) - build .o files in build/ directory
 ALL_C_FILES := $(wildcard $(SRC_DIR)/*.c)
 C_SRCS := $(ALL_C_FILES)
-C_OBJS := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/$(SRC_DIR)/%.o,$(C_SRCS))
+C_OBJS := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(C_SRCS))
 
-# Assembly files (from asm/)
+# Assembly files (from asm/) - build .o files directly in build/ (flattened)
 # Game's startup code
 CRT0_ASM := $(ASM_DIR)/crt0.s
-CRT0_OBJ := $(BUILD_DIR)/$(ASM_DIR)/crt0.o
+CRT0_OBJ := $(BUILD_DIR)/crt0.o
 
 # Remaining assembly
 ASM_REMAINING := $(ASM_DIR)/arm9_remaining.s
-ASM_REMAINING_OBJ := $(BUILD_DIR)/$(ASM_DIR)/arm9_remaining.o
+ASM_REMAINING_OBJ := $(BUILD_DIR)/arm9_remaining.o
 
 # Data section (GNU assembler syntax)
 DATA_ASM := $(DATA_DIR)/arm9_data.s
-DATA_OBJ := $(BUILD_DIR)/$(DATA_DIR)/arm9_data.o
+DATA_OBJ := $(BUILD_DIR)/arm9_data.o
 
 # All main objects
 MAIN_OBJS := $(C_OBJS) $(CRT0_OBJ) $(ASM_REMAINING_OBJ) $(DATA_OBJ)
@@ -101,16 +101,10 @@ OVERLAY_204_OBJ := $(BUILD_DIR)/overlays/overlay_204/overlay_204.o
 
 # Create build directory
 $(shell mkdir -p $(BUILD_DIR))
-$(shell mkdir -p $(BUILD_DIR)/$(SRC_DIR))
-$(shell mkdir -p $(BUILD_DIR)/$(ASM_DIR))
-$(shell mkdir -p $(BUILD_DIR)/$(DATA_DIR))
-$(shell mkdir -p $(BUILD_DIR)/overlays/overlay_93)
-$(shell mkdir -p $(BUILD_DIR)/overlays/overlay_204)
 
 # Step 1: Compile C files with CodeWarrior
-$(BUILD_DIR)/$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@echo "Compiling $<..."
-	@mkdir -p $(dir $@)
 	$(MWCCARM) $(MWCFLAGS) -c -o $@ $<
 
 # Step 2: Assemble files with CodeWarrior
@@ -118,19 +112,16 @@ $(BUILD_DIR)/$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 # Game's crt0 startup code
 $(CRT0_OBJ): $(CRT0_ASM)
 	@echo "Assembling crt0 startup code..."
-	@mkdir -p $(dir $@)
 	$(MWASMARM) $(MWASFLAGS) -o $@ $<
 
 # Main ARM9 remaining assembly
 $(ASM_REMAINING_OBJ): $(ASM_REMAINING)
 	@echo "Assembling ARM9 remaining code..."
-	@mkdir -p $(dir $@)
 	$(MWASMARM) $(MWASFLAGS) -o $@ $<
 
 # Data section (use GNU assembler)
 $(DATA_OBJ): $(DATA_ASM)
 	@echo "Assembling data section..."
-	@mkdir -p $(dir $@)
 	$(PREFIX)as -mcpu=arm946e-s -mthumb-interwork -o $@ $<
 
 # Step 3: Build overlays
@@ -138,13 +129,13 @@ $(DATA_OBJ): $(DATA_ASM)
 # Overlay 93
 $(OVERLAY_93_OBJ): overlays/overlay_93/overlay_93_full.s
 	@echo "Assembling overlay 93..."
-	@mkdir -p $(dir $@)
+	@mkdir -p $(BUILD_DIR)/overlays/overlay_93
 	$(MWASMARM) $(MWASFLAGS) -i overlays/overlay_93 -o $@ $<
 
 # Overlay 204
 $(OVERLAY_204_OBJ): overlays/overlay_204/asm/overlay_204_full.s
 	@echo "Assembling overlay 204..."
-	@mkdir -p $(dir $@)
+	@mkdir -p $(BUILD_DIR)/overlays/overlay_204
 	$(MWASMARM) $(MWASFLAGS) -i overlays/overlay_204 -o $@ $<
 
 # Step 4: Generate linker configuration from LSF
@@ -168,30 +159,33 @@ $(BUILD_DIR)/$(ELF): $(BUILD_DIR)/main.lcf $(MAIN_OBJS)
 	@echo "  Main objects: $(words $(MAIN_OBJS)) files"
 	@echo "  Overlays: SKIPPED (will add later)"
 	@echo ""
+	cd $(BUILD_DIR) && \
 	$(MWLDARM) \
-		-L$(SDK_LIB) \
-		$< \
-		$(SDK_LIB)/libsyscall.a \
-		$(MAIN_OBJS) \
-		$(SDK_LIB)/libos.a \
-		$(SDK_LIB)/libmi.a \
-		$(SDK_LIB)/libmath.a \
-		$(SDK_LIB)/libgx.a \
-		$(SDK_LIB)/libfx.a \
-		$(SDK_LIB)/libsnd.a \
-		$(SDK_LIB)/libfs.a \
-		$(SDK_LIB)/libcard.a \
-		$(SDK_LIB)/libwm.a \
-		$(SDK_LIB)/libpxi.a \
-		$(SDK_LIB)/librtc.a \
-		$(SDK_LIB)/libcp.a \
-		$(SDK_LIB)/libenv.a \
-		$(SDK_LIB)/libnvram.a \
-		$(SDK_LIB)/libmb.a \
-		$(SDK_LIB)/libext.a \
-		-o $@ 2>&1 | tee $(BUILD_DIR)/link.log || true
+		-L$(abspath $(SDK_LIB)) \
+		-search \
+		-l . \
+		main.lcf \
+		$(abspath $(SDK_LIB))/libsyscall.a \
+		$(notdir $(MAIN_OBJS)) \
+		$(abspath $(SDK_LIB))/libos.a \
+		$(abspath $(SDK_LIB))/libmi.a \
+		$(abspath $(SDK_LIB))/libmath.a \
+		$(abspath $(SDK_LIB))/libgx.a \
+		$(abspath $(SDK_LIB))/libfx.a \
+		$(abspath $(SDK_LIB))/libsnd.a \
+		$(abspath $(SDK_LIB))/libfs.a \
+		$(abspath $(SDK_LIB))/libcard.a \
+		$(abspath $(SDK_LIB))/libwm.a \
+		$(abspath $(SDK_LIB))/libpxi.a \
+		$(abspath $(SDK_LIB))/librtc.a \
+		$(abspath $(SDK_LIB))/libcp.a \
+		$(abspath $(SDK_LIB))/libenv.a \
+		$(abspath $(SDK_LIB))/libnvram.a \
+		$(abspath $(SDK_LIB))/libmb.a \
+		$(abspath $(SDK_LIB))/libext.a \
+		-o $(ELF) 2>&1 | tee link.log
 	@echo ""
-	@echo "Link attempted - check $(BUILD_DIR)/link.log for missing symbols"
+	@echo "Link completed - check $(BUILD_DIR)/link.log for details"
 
 # Step 6: Extract binaries from ELF
 

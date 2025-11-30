@@ -18,160 +18,64 @@
 #   - DTCM: 0x027E0000 (16 KB)
 
 # Static Section (Main ARM9 Binary)
-Static $(TARGET_NAME)
+Static main
 {
-	#
-	# Pokemon Black ARM9 loads at 0x02004000
-	#
 	Address		0x02004000
+	StackSize	0 2048
 
-	#
-	# Object files from your decompiled C code
-	# These will be generated from src/*.c files
-	#
-	Object		$(BUILD_DIR)/src/async_operation_is_complete.o
-	Object		$(BUILD_DIR)/src/fade_state_init_transition.o
-	Object		$(BUILD_DIR)/src/fade_state_machine_update.o
-	Object		$(BUILD_DIR)/src/fade_state_process.o
-	Object		$(BUILD_DIR)/src/fade_state_process_transition.o
-	Object		$(BUILD_DIR)/src/fade_state_reset.o
-	Object		$(BUILD_DIR)/src/globals.o
-	Object		$(BUILD_DIR)/src/heap_alloc_dual.o
-	Object		$(BUILD_DIR)/src/heap_block_conditional_setup.o
-	# Object		$(BUILD_DIR)/src/heap_block_get_by_index.o  # DELETED - was duplicate
-	Object		$(BUILD_DIR)/src/heap_block_get_field04.o
-	Object		$(BUILD_DIR)/src/heap_block_get_state_value.o
-	Object		$(BUILD_DIR)/src/heap_block_init_fields.o
-	Object		$(BUILD_DIR)/src/heap_block_initialize.o
-	Object		$(BUILD_DIR)/src/heap_block_setup_both_resources.o
-	Object		$(BUILD_DIR)/src/heap_block_setup_resource14.o
-	Object		$(BUILD_DIR)/src/heap_block_setup_resource18.o
-	Object		$(BUILD_DIR)/src/heap_initialize_with_params.o
-	Object		$(BUILD_DIR)/src/init.o
-	Object		$(BUILD_DIR)/src/heap_manager_get_current_block_ptr.o
-	Object		$(BUILD_DIR)/src/heap_manager_get_current_index.o
-	# Object		$(BUILD_DIR)/src/heap_manager_set_resource_array.o  # TODO: Create
-	Object		$(BUILD_DIR)/src/main.o
-	# Object		$(BUILD_DIR)/src/overlay_get_address.o  # TODO: Create
-	# Object		$(BUILD_DIR)/src/ov_mgr_dummy_load_callback.o  # TODO: Create
-	# Object		$(BUILD_DIR)/src/ov_mgr_execute.o  # TODO: Create
-	# Object		$(BUILD_DIR)/src/ov_mgr_execute_callback_manager.o  # TODO: Create
-	# Object		$(BUILD_DIR)/src/ov_mgr_set_field04_to_1.o  # TODO: Create
-	# Object		$(BUILD_DIR)/src/ov_mgr_unload_current_overlay.o  # TODO: Create
-	Object		$(BUILD_DIR)/src/resource_object_destroy.o
-	# Object		$(BUILD_DIR)/src/resource_object_get_field18_addr.o  # TODO: Create
-	# Object		$(BUILD_DIR)/src/resource_object_is_field10_zero.o  # TODO: Create
-	# Object		$(BUILD_DIR)/src/runtime_get_dynamic_data.o  # TODO: Create
-	# Object		$(BUILD_DIR)/src/runtime_init.o  # TODO: Create
-	Object		$(BUILD_DIR)/src/overlay_stubs.o
-	Object		$(BUILD_DIR)/src/resource_object_load_and_init.o
-	Object		$(BUILD_DIR)/src/resource_object_reset.o
-	Object		$(BUILD_DIR)/src/resource_pool_allocate.o
-	Object		$(BUILD_DIR)/src/resource_pool_allocate_sync.o
-	Object		$(BUILD_DIR)/src/resource_pool_get_next_slot.o
-	Object		$(BUILD_DIR)/src/unk_02006300.o
-	Object		$(BUILD_DIR)/src/unk_02006368.o
-	Object		$(BUILD_DIR)/src/unk_02006448.o
-	Object		$(BUILD_DIR)/src/unk_02006E7C.o
-	Object		$(BUILD_DIR)/src/heap_validate_and_invoke_callback.o
-	Object		$(BUILD_DIR)/src/heap_validate_subsystems.o
-
-	#
-	# Assembly files from asm/ directory
-	# These provide functions not yet decompiled or that need to match exactly
-	#
-	Object		$(BUILD_DIR)/asm/crt0.o           # Game's startup code (_start, TwlStartUp, etc.)
-	Object		$(BUILD_DIR)/asm/arm9_remaining.o  # Remaining assembly functions
-
-	#
-	# Data section (compiled with GNU as, not CodeWarrior)
-	#
-	Object		$(BUILD_DIR)/data/arm9_data.o
-
-	#
-	# Nintendo SDK Libraries
-	# These replace the giant unk_02006EA4.s assembly blob!
-	#
-	# Start with essential libraries - add more as needed:
-	#
-	Library		$(SDK_LIB)/libos.a           # OS functions (interrupts, threads, etc.)
-	Library		$(SDK_LIB)/libmi.a           # Memory/DMA functions
-	Library		$(SDK_LIB)/libmath.a         # Math functions
-	Library		$(SDK_LIB)/libgx.a           # Graphics engine
-	Library		$(SDK_LIB)/libfx.a           # Fixed-point math
-	Library		$(SDK_LIB)/libsnd.a          # Sound
-	Library		$(SDK_LIB)/libfs.a           # File system
-	Library		$(SDK_LIB)/libcard.a         # Game card access
-	Library		$(SDK_LIB)/libwm.a           # Wireless
-	Library		$(SDK_LIB)/libpxi.a          # ARM7/ARM9 communication
-	Library		$(SDK_LIB)/librtc.a          # Real-time clock
-	Library		$(SDK_LIB)/libcp.a           # Coprocessor
-	Library		$(SDK_LIB)/libenv.a          # Environment
-	Library		$(SDK_LIB)/libnvram.a        # NVRAM/save data
-	Library		$(SDK_LIB)/libmb.a           # Multiboot
-	Library		$(SDK_LIB)/libext.a          # Extensions
-
-	#
-	# CodeWarrior Runtime Libraries
-	# Provides C standard library and runtime support
-	#
-	# Library		$(CW_LIBS)
+	# Main objects - paths relative to build directory (where linker runs)
+	Object		crt0.o
+	Object		main.o
+	Object		init.o
+	Object		async_operation_is_complete.o
+	Object		fade_state_init_transition.o
+	Object		fade_state_machine_update.o
+	Object		fade_state_process.o
+	Object		fade_state_process_transition.o
+	Object		fade_state_reset.o
+	Object		globals.o
+	Object		heap_alloc_dual.o
+	Object		heap_block_conditional_setup.o
+	Object		heap_block_get_field04.o
+	Object		heap_block_get_state_value.o
+	Object		heap_block_init_fields.o
+	Object		heap_block_initialize.o
+	Object		heap_block_setup_both_resources.o
+	Object		heap_block_setup_resource14.o
+	Object		heap_block_setup_resource18.o
+	Object		heap_initialize_with_params.o
+	Object		heap_manager_get_current_block_ptr.o
+	Object		heap_manager_get_current_index.o
+	Object		resource_object_destroy.o
+	Object		overlay_stubs.o
+	Object		resource_object_load_and_init.o
+	Object		resource_object_reset.o
+	Object		resource_pool_allocate.o
+	Object		resource_pool_allocate_sync.o
+	Object		resource_pool_get_next_slot.o
+	Object		startup.o
+	Object		unk_02006300.o
+	Object		unk_02006368.o
+	Object		unk_02006448.o
+	Object		unk_02006E7C.o
+	Object		heap_validate_and_invoke_callback.o
+	Object		heap_validate_subsystems.o
+	Object		arm9_remaining.o
+	Object		arm9_data.o
 }
 
-# Autoload Sections (ITCM/DTCM)
-
-#
-# ITCM (Instruction Tightly-Coupled Memory)
-# Fast 32 KB instruction cache at 0x01FF8000
-# Used for performance-critical code
-#
 Autoload ITCM
 {
 	Address		0x01FF8000
 	Object		*     		 (.itcm)
-	Object		$(OBJS_AUTOLOAD) (.text)
-	Object		$(OBJS_AUTOLOAD) (.rodata)
 }
 
-#
-# DTCM (Data Tightly-Coupled Memory)
-# Fast 16 KB data cache at 0x027E0000
-# Used for performance-critical data/variables
-#
 Autoload DTCM
 {
 	Address		0x027E0000
 	Object		*     		 (.dtcm)
-	Object		$(OBJS_AUTOLOAD) (.data)
-	Object		$(OBJS_AUTOLOAD) (.sdata)
-	Object		$(OBJS_AUTOLOAD) (.bss)
-	Object		$(OBJS_AUTOLOAD) (.sbss)
+
+
 }
 
-# Overlays
-#
-# Pokemon Black uses 237 overlays (overlay_0000 to overlay_0236)
-# For now, we define the two you're actively working on.
-# Add more overlay definitions as you decompile them.
-#
-
-#
-# TODO: Re-enable overlays once we have the main ARM9 linking
-#
-# Overlay overlay_0093
-# {
-# 	After		$(TARGET_NAME)
-# 	Object		$(BUILD_DIR)/overlays/overlay_93/overlay_93.o
-# }
-
-# Overlay overlay_0204
-# {
-# 	After		$(TARGET_NAME)
-# 	Object		$(BUILD_DIR)/overlays/overlay_204/overlay_204.o
-# }
-
-#
-# TODO: Add remaining 235 overlays
-# You can generate these programmatically or add as needed
-#
 

@@ -1,0 +1,31 @@
+=== Source File Mapping for Overlay 10 ===
+
+comm_player.c @ 0x02172a18
+delivery_beacon.c @ 0x021727f4
+event_battle.c @ 0x02172b54
+event_field_proclink.c @ 0x02172978
+event_ircbattle.c @ 0x02172700
+event_poke_status.c @ 0x021728cc
+event_shortcut_menu.c @ 0x02172960
+field_g3d_map.c @ 0x02172a40
+fld_btl_inst_tool.c @ 0x02172a2c
+fldmmdl.c @ 0x02172b48
+game_beacon_search.c @ 0x021729bc
+map_matrix.c @ 0x021728ac
+map_replace.c @ 0x021728bc
+move_pokemon.c @ 0x0217293c
+musical_dressup_sys.c @ 0x02172730
+musical_event.c @ 0x02172714
+musical_program.c @ 0x02172768
+musical_stage_sys.c @ 0x02172754
+report_event.c @ 0x02172a50
+scrcmd_musical.c @ 0x02172914
+scrcmd_network.c @ 0x0217294c
+scrcmd_proc.c @ 0x021728f0
+scrcmd_sodateya.c @ 0x02172900
+scrcmd_work.c @ 0x021728e0
+script_sys.c @ 0x02172888
+script_work.c @ 0x0217289c
+symbol_map.c @ 0x021729ec
+trcard_sys.c @ 0x02172b64
+waza_oshie.c @ 0x02172b74

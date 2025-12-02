@@ -1,0 +1,7 @@
+=== Source File Mapping for Overlay 132 ===
+
+mus_comm_func.c @ 0x021fde5c
+PTR_script_command.c @ 0x021fdd00_overlay_d_132__021fbd60
+script_command.c @ 0x021fdd00
+sta_act_button.c @ 0x021fdcd8
+sta_act_script.c @ 0x021fdcec

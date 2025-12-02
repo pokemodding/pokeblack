@@ -1,8 +1,0 @@
-Game: POKEMON B (IRBO)
-
-ARM7 Binary:
-  ROM Offset:   0x002C7E00
-  Load Address: 0x02380000
-  Entry Point:  0x02380000
-  Size:         0x00028F84 (167,812 bytes)
-

@@ -1,3 +1,5 @@
+TODO: Rewrite for new toolchain and new binary comparison tools
+
 # Contributing to Pokémon Black Decompilation
 
 Thank you for your interest in contributing to the Pokémon Black decompilation project! This guide will help you get started.

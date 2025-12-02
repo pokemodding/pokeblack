@@ -61,7 +61,6 @@ Static main
 	Object		heap_validate_and_invoke_callback.o
 	Object		heap_validate_subsystems.o
 	Object		arm9_remaining.o
-	Object		arm9_data.o
 }
 
 Autoload ITCM

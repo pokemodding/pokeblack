@@ -1,5 +1,0 @@
-# Build outputs
-build/
-
-# Extracted assembly (generated locally, not committed)
-asm/

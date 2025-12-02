@@ -59,7 +59,7 @@ MWCC_ABS      = $(TOOLSDIR)/mwccarm/$(MWCCVER)/mwccarm.exe
 MWAS_ABS      = $(TOOLSDIR)/mwccarm/$(MWCCVER)/mwasmarm.exe
 
 # SDK Tools (run via Wine)
-MAKELCF       := $(TOOLSDIR)/bin/makelcf.exe
+MAKELCF       := $(SDK_TOOLS)/makelcf.exe
 MAKEROM       := $(SDK_TOOLS)/makerom.TWL.exe
 
 # Native tools

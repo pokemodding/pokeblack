@@ -14,6 +14,9 @@ else
   endif
 endif
 
+# Detect WSL by checking for Microsoft in kernel name
+IS_WSL := $(shell uname -r | grep -i microsoft)
+
 ifeq ($(OS),Windows_NT)
   EXE := .exe
   WINE :=
@@ -23,7 +26,12 @@ ifeq ($(OS),Windows_NT)
   MKTEMP := mktemp
 else
   EXE :=
-  WINE := wine
+  # WSL can run Windows .exe directly without Wine
+  ifneq ($(IS_WSL),)
+    WINE :=
+  else
+    WINE := wine
+  endif
   UNAME_S := $(shell uname -s)
   ifeq ($(UNAME_S),Darwin)
     GREP := grep -E

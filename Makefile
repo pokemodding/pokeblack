@@ -55,8 +55,20 @@ MWAS          = $(TOOLSREL)/mwccarm/$(MWCCVER)/mwasmarm.exe
 MWLD          = $(TOOLSREL)/mwccarm/$(MWCCVER)/mwldarm.exe
 
 # Absolute paths for use outside BUILD_DIR
-MWCC_ABS      = $(TOOLSDIR)/mwccarm/$(MWCCVER)/mwccarm.exe
-MWAS_ABS      = $(TOOLSDIR)/mwccarm/$(MWCCVER)/mwasmarm.exe
+MWCC_ABS_UNIX = $(TOOLSDIR)/mwccarm/$(MWCCVER)/mwccarm.exe
+MWAS_ABS_UNIX = $(TOOLSDIR)/mwccarm/$(MWCCVER)/mwasmarm.exe
+
+# Default to Unix paths
+MWCC_ABS      = $(MWCC_ABS_UNIX)
+MWAS_ABS      = $(MWAS_ABS_UNIX)
+
+# License file path - convert to Windows format for WSL
+ifneq ($(shell uname -r | grep -i microsoft),)
+  LM_LICENSE_FILE_WIN := $(shell wslpath -w $(TOOLSDIR)/mwccarm/license.dat 2>/dev/null)
+  export LM_LICENSE_FILE := $(LM_LICENSE_FILE_WIN)
+else
+  export LM_LICENSE_FILE := $(TOOLSDIR)/mwccarm/license.dat
+endif
 
 # SDK Tools (run via Wine)
 MAKELCF       := $(SDK_TOOLS)/makelcf.exe
@@ -66,7 +78,6 @@ MAKEROM       := $(SDK_TOOLS)/makerom.TWL.exe
 ASPATCH       := $(TOOLSDIR)/mwasmarm_patcher/mwasmarm_patcher
 ASM_PROCESSOR := $(TOOLSDIR)/asm_processor/compile.sh
 
-export LM_LICENSE_FILE := $(TOOLSDIR)/mwccarm/license.dat
 LM_LICENSE_FILE_REL    := $(TOOLSREL)/mwccarm/license.dat
 
 # COMPILER/ASSEMBLER/LINKER FLAGS (from pokeheartgold)
@@ -89,8 +100,22 @@ MWASFLAGS      = $(DEFINES) -proc $(PROC_S) -g -gccinc \
 MWLDFLAGS      := -proc $(PROC) -sym on -nopic -nopid \
                   -interworking -map closure,unused -symtab sort -m _start -msgstyle gcc
 
-MW_COMPILE     = $(WINE) $(MWCC_ABS) $(MWCFLAGS)
-MW_ASSEMBLE    = $(WINE) $(MWAS_ABS) $(MWASFLAGS)
+# Set up license file environment variable in commands
+ifneq ($(shell uname -r | grep -i microsoft),)
+  # For WSL, we need to invoke through cmd.exe to properly set Windows environment variables
+  MWCC_WIN := $(shell wslpath -w $(MWCC_ABS_UNIX))
+  MWAS_WIN := $(shell wslpath -w $(MWAS_ABS_UNIX))
+  MWLD_ABS_UNIX := $(TOOLSDIR)/mwccarm/$(MWCCVER)/mwldarm.exe
+  MWLD_WIN := $(shell wslpath -w $(MWLD_ABS_UNIX))
+  MW_COMPILE   = cmd.exe /c "set LM_LICENSE_FILE=$(LM_LICENSE_FILE_WIN) && $(MWCC_WIN) $(MWCFLAGS)"
+  MW_ASSEMBLE  = cmd.exe /c "set LM_LICENSE_FILE=$(LM_LICENSE_FILE_WIN) && $(MWAS_WIN) $(MWASFLAGS)"
+  # Linker needs absolute Windows path
+  MW_LINK      = cmd.exe /c "set LM_LICENSE_FILE=$(LM_LICENSE_FILE_WIN) && $(MWLD_WIN) $(MWLDFLAGS) $(LIBS)"
+else
+  MW_COMPILE   = LM_LICENSE_FILE=$(TOOLSDIR)/mwccarm/license.dat $(WINE) $(MWCC_ABS) $(MWCFLAGS)
+  MW_ASSEMBLE  = LM_LICENSE_FILE=$(TOOLSDIR)/mwccarm/license.dat $(WINE) $(MWAS_ABS) $(MWASFLAGS)
+  MW_LINK      = LM_LICENSE_FILE=$(TOOLSDIR)/mwccarm/license.dat $(WINE) $(MWLD) $(MWLDFLAGS) $(LIBS)
+endif
 
 export MWCIncludes := $(SDK_ROOT)/include
 
@@ -154,7 +179,7 @@ all: patch_mwasmarm $(SBIN)
 
 # Patch mwasmarm (fix line ending and incbin bugs)
 patch_mwasmarm:
-	@$(ASPATCH) -q $(MWAS_ABS)
+	@$(ASPATCH) -q $(MWAS_ABS_UNIX)
 
 # Compile C files
 # Override BUILD_C for files with GLOBAL_ASM()
@@ -168,7 +193,7 @@ $(BUILD_DIR)/%.o: %.c
 # Assemble .s files
 $(BUILD_DIR)/%.o: %.s
 	@echo "Assembling $<..."
-	$(WINE) $(MWAS_ABS) $(MWASFLAGS) -o $@ $<
+	$(MW_ASSEMBLE) -o $@ $<
 
 # Generate LCF from LSF
 $(LCF): $(LSF) $(SDK_SPECFILES)/$(LCF_TEMPLATE)
@@ -188,8 +213,7 @@ $(ELF): $(ALL_OBJS) $(LCF) $(RESPONSE)
 	@echo "  Response: $(RESPONSE)"
 	cp $(SDK_LIB)/libsyscall.a $(BUILD_DIR)/
 	cd $(BUILD_DIR) && \
-	LM_LICENSE_FILE=$(LM_LICENSE_FILE_REL) \
-	$(WINE) $(MWLD) $(MWLDFLAGS) $(LIBS) \
+	$(MW_LINK) \
 	-search -l . -l src -l asm \
 	libsyscall.a \
 	-o $(BACK_REL)/$(ELF) \

@@ -1,22 +1,59 @@
-# Build outputs
-*.nds
-*.elf
-*.bin
-!data/encounters/*.bin
-*.o
-*.d
-*.map
-*.lst
-
-# ROM
+# Base ROM (provide your own)
 baserom.nds
-
-# Build directories
-build/
-.cache/
+*.nds
 
 # Extracted ROM components (generated from baserom.nds)
 extracted/
+files/
+overlay_*.bin
+overlay_*.asm
+overlay_dumps/
+
+# Build outputs
+build/
+.cache/
+*.o
+*.d
+*.elf
+*.sbin
+*.lcf
+*.map
+*.lst
+*.a
+linker.ld
+*.bin
+!data/encounters/*.bin
+
+# Reverse-engineering scratch (regenerable dumps and workspaces)
+asm_dumps/
+ghidra_projects/
+IRBO.yml
+tools/IRBO.yml
+asm/unk_02006EA4.s.backup
+
+# Tools (built from source or user-provided, never tracked)
+tools/*.exe
+tools/*.o
+tools/local
+tools/ndstool/
+!tools/ndstool/README.md
+ndstool
+/tools/mwccarm
+tools/mwasmarm_patcher/mwasmarm_patcher
+tools/README.md
+!tools/scripts/
+!tools/PLACE_MWCCARM_HERE.md
+!tools/PLACE_NDSTOOL_HERE.md
+
+# Proprietary SDK (cannot distribute)
+lib/NitroSDK/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.Python
+*.py
 
 # Editor files
 *.swp
@@ -26,72 +63,11 @@ extracted/
 .idea/
 *.sublime-*
 
-# OS files
+# OS / emulator junk
 .DS_Store
 Thumbs.db
 *.log
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
-.Python
-.py 
-
-# Tools
-tools/*.exe
-tools/*.o
-!tools/scripts/
-tools/*.py
-tools/local
-tools/ndstool/
-!tools/PLACE_MWCCARM_HERE.md
-!tools/PLACE_NDSTOOL_HERE.md
-!tools/ndstool/README.md
-
-
-# Built tools (can be regenerated)
-ndstool
-
-
-# Dependencies
-*.a
-
-# NitroSDK (proprietary, cannot distribute)
-lib/NitroSDK/
-
-#Squid's Progress Reports
-notes/
-
-# IRBO configuration (too large for git)
-IRBO.yml
-tools/IRBO.yml
-
-# Overlay dumps (generated from IRBO.yml)
-overlay_dumps/
-
-
-# Extracted overlays
-overlay_*.bin
-overlay_*.asm
-
-linker.ld
-*.py
-/tools/mwccarm
-tools/README.md
-asm/unk_02006EA4.s.backup
-
-# Build artifacts
-build/
-*.o
-*.elf
-*.sbin
-*.lcf
-
-# Proprietary tools
-tools/ndsdisasm/
-
-# ROM files
-*.nds
-baserom.nds
 melonDS_log.txt
+
+# Personal notes
+notes/

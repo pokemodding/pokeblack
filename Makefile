@@ -178,7 +178,10 @@ DUMMY := $(shell mkdir -p $(ALL_BUILDDIRS))
 all: patch_mwasmarm $(SBIN)
 
 # Patch mwasmarm (fix line ending and incbin bugs)
-patch_mwasmarm:
+$(ASPATCH): $(TOOLSDIR)/mwasmarm_patcher/mwasmarm_patcher.c
+	@$(MAKE) -C $(TOOLSDIR)/mwasmarm_patcher
+
+patch_mwasmarm: $(ASPATCH)
 	@$(ASPATCH) -q $(MWAS_ABS_UNIX)
 
 # Compile C files

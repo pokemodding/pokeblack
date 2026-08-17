@@ -22,7 +22,6 @@ build/
 *.a
 linker.ld
 *.bin
-!data/encounters/*.bin
 
 # Reverse-engineering scratch (regenerable dumps and workspaces)
 asm_dumps/

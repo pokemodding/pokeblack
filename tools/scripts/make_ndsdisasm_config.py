@@ -9,7 +9,7 @@ ENTRY_RE = re.compile(r'^\s*(arm_func|thumb_func|data)\s+(0x[0-9a-fA-F]+)\s*(\S*
 BAD_CHARS_RE = re.compile(r'[^A-Za-z0-9_]')
 
 # ghidra marks these data in the name, whatever type it exported them as
-DATA_PREFIXES = ('s_', 'u_', 'DAT_', 'PTR_', 'switchdataD')
+DATA_PREFIXES = ('s_', 'u_', 'DAT_', 'PTR_', 'switchdataD', 'USHORT_')
 
 
 def parse(path):
@@ -55,6 +55,7 @@ def main():
     stats = {'range': 0, 'header': 0, 'align': 0, 'dupe': 0}
 
     for source in [args.export] + args.merge:
+        seen = set()
         for kind, address, name in parse(source):
             if not (load <= address < end):
                 stats['range'] += 1
@@ -65,9 +66,10 @@ def main():
             if not alignment_ok(kind, address):
                 stats['align'] += 1
                 continue
-            if address in entries:
+            if address in seen:
                 stats['dupe'] += 1
                 continue
+            seen.add(address)
             entries[address] = (kind, name or f"sub_{address:08X}")
 
     lines = [

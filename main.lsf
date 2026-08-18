@@ -522,6 +522,11 @@ Overlay OVY_209
 	Address		0x021bc240
 	Object		asm/overlay_209_021BC240.o
 }
+Overlay OVY_21
+{
+	Address		0x02187f00
+	Object		asm/overlay_021_02187F00.o
+}
 Overlay OVY_210
 {
 	Address		0x021bc240
@@ -876,6 +881,11 @@ Overlay OVY_94
 {
 	Address		0x021f6560
 	Object		asm/overlay_094_021F6560.o
+}
+Overlay OVY_95
+{
+	Address		0x06898020
+	Object		asm/overlay_095_06898020.o
 }
 Overlay OVY_96
 {

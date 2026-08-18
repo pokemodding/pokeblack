@@ -126,11 +126,15 @@ def main():
 
     prefix = f"overlay_{index:03d}"
     lsf = os.path.join(workdir, 'objects.lsf')
-    run([sys.executable, os.path.join(SCRIPTS, 'split_dump.py'), converted,
+    fixed = os.path.join(workdir, 'fixed.s')
+    run([sys.executable, os.path.join(SCRIPTS, 'fix_thumb_encoding.py'), converted,
+         '--load', hex(ram), '--binary', raw, '-o', fixed], quiet=not args.verbose)
+
+    run([sys.executable, os.path.join(SCRIPTS, 'split_dump.py'), fixed,
          '--outdir', args.outdir, '--prefix', prefix, '--lines', '10000000', '--lsf', lsf],
         quiet=not args.verbose)
 
-    holes = sum(1 for line in open(converted) if '.byte' in line)
+    holes = sum(1 for line in open(fixed) if '.byte' in line)
     outrel = os.path.relpath(args.outdir, ROOT)
     objects = [os.path.join(outrel, os.path.basename(line.split()[-1]))
                for line in open(lsf) if line.strip()]

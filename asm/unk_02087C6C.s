@@ -1,6 +1,6 @@
 	.include "asm/macros/function.inc"
 
-	.extern FUN_02004632
+	.extern SVC_GetCRC16
 	.extern FUN_02082A60
 	.extern FUN_02082BCC
 	.extern FUN_02082D44
@@ -277,7 +277,7 @@ FUN_02087FBC: ; 0x02087FBC
 	ldr r1, [r4, #8]
 	ldr r0, _02088068 ; =0x0000FFFF
 	mov r2, r5
-	blx FUN_02004632
+	blx SVC_GetCRC16
 	ldr r1, [r4, #8]
 	mov r2, r5
 	strh r0, [r1, #0x10]
@@ -321,7 +321,7 @@ FUN_0208806C: ; 0x0208806C
 	mov r2, r6
 	strh r5, [r1, #0x10]
 	ldr r1, [r4, #8]
-	blx FUN_02004632
+	blx SVC_GetCRC16
 	ldr r1, [r4, #8]
 	strh r0, [r1, #0x10]
 	ldr r0, [r4, #8]

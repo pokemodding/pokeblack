@@ -1,6 +1,6 @@
 	.include "asm/macros/function.inc"
 
-	.extern FUN_0200421A
+	.extern SVC_CpuSet
 	.extern FUN_02004490
 	.extern FUN_02084D98
 	.extern FUN_02084DA4
@@ -48,7 +48,7 @@ FUN_02090F18: ; 0x02090F18
 	ldr r2, _02090F48 ; =0x05000001
 	add r0, sp, #0
 	str r3, [sp]
-	blx FUN_0200421A
+	blx SVC_CpuSet
 	bl FUN_02084EB8
 	ldr r1, _02090F4C ; =0x02153B80
 	strh r0, [r1, #6]

@@ -149,7 +149,6 @@ MAKELCF_FLAGS  := \
 
 DUMMY := $(shell mkdir -p $(ALL_BUILDDIRS))
 
-.SECONDARY:
 .DELETE_ON_ERROR:
 .PHONY: all clean tidy info patch_mwasmarm check-toolchain extract check-baserom compare
 

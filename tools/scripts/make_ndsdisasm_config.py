@@ -5,7 +5,8 @@ import argparse
 import re
 import sys
 
-ENTRY_RE = re.compile(r'^\s*(arm_func|thumb_func)\s+(0x[0-9a-fA-F]+)\s*(\S*)')
+ENTRY_RE = re.compile(r'^\s*(arm_func|thumb_func|data)\s+(0x[0-9a-fA-F]+)\s*(\S*)')
+BAD_CHARS_RE = re.compile(r'[^A-Za-z0-9_]')
 
 
 def parse(path):
@@ -15,11 +16,16 @@ def parse(path):
             match = ENTRY_RE.match(line)
             if match:
                 kind, addr, name = match.groups()
-                out.append((kind, int(addr, 16), name or None))
+                # ghidra names strings s_*, they are data not code
+                if name.startswith('s_'):
+                    kind = 'data'
+                out.append((kind, int(addr, 16), BAD_CHARS_RE.sub('_', name) or None))
     return out
 
 
 def alignment_ok(kind, address):
+    if kind == 'data':
+        return True
     return address % 4 == 0 if kind == 'arm_func' else address % 2 == 0
 
 
@@ -80,17 +86,20 @@ def main():
 
     for address in sorted(entries):
         kind, name = entries[address]
-        lines.append(f"{kind} 0x{address:08x} {name}")
+        lines.append(f"{kind} 0x{address:08x}" if kind == 'data'
+                     else f"{kind} 0x{address:08x} {name}")
 
     with open(args.output, 'w') as handle:
         handle.write("\n".join(lines) + "\n")
 
     arm = sum(1 for kind, _ in entries.values() if kind == 'arm_func')
-    thumb = len(entries) - arm
+    data = sum(1 for kind, _ in entries.values() if kind == 'data')
+    thumb = len(entries) - arm - data
 
     print(f"wrote {len(entries)} entries to {args.output}")
     print(f"  arm:   {arm}")
     print(f"  thumb: {thumb}")
+    print(f"  data:  {data}")
     print(f"dropped: {stats['range']} out of range, {stats['header']} below entry, "
           f"{stats['align']} misaligned, {stats['dupe']} duplicate")
 

@@ -897,3 +897,98 @@ Overlay OVY_99
 	Address		0x021b95a0
 	Object		asm/overlay_099_021B95A0.o
 }
+Overlay OVY_9
+{
+	Address		0x02155160
+	Object		asm/overlay_009_02155160.o
+}
+Overlay OVY_13
+{
+	Address		0x021aeb20
+	Object		asm/overlay_013_021AEB20.o
+}
+Overlay OVY_15
+{
+	Address		0x021797c0
+	Object		asm/overlay_015_021797C0.o
+}
+Overlay OVY_36
+{
+	Address		0x021f36c0
+	Object		asm/overlay_036_021F36C0.o
+}
+Overlay OVY_39
+{
+	Address		0x021f36c0
+	Object		asm/overlay_039_021F36C0.o
+}
+Overlay OVY_41
+{
+	Address		0x021f36c0
+	Object		asm/overlay_041_021F36C0.o
+}
+Overlay OVY_43
+{
+	Address		0x021f36c0
+	Object		asm/overlay_043_021F36C0.o
+}
+Overlay OVY_45
+{
+	Address		0x021f36c0
+	Object		asm/overlay_045_021F36C0.o
+}
+Overlay OVY_65
+{
+	Address		0x021f36c0
+	Object		asm/overlay_065_021F36C0.o
+}
+Overlay OVY_78
+{
+	Address		0x021f5620
+	Object		asm/overlay_078_021F5620.o
+}
+Overlay OVY_114
+{
+	Address		0x021b95a0
+	Object		asm/overlay_114_021B95A0.o
+}
+Overlay OVY_125
+{
+	Address		0x021d6660
+	Object		asm/overlay_125_021D6660.o
+}
+Overlay OVY_132
+{
+	Address		0x021f8480
+	Object		asm/overlay_132_021F8480.o
+}
+Overlay OVY_175
+{
+	Address		0x021d4240
+	Object		asm/overlay_175_021D4240.o
+}
+Overlay OVY_195
+{
+	Address		0x02203fa0
+	Object		asm/overlay_195_02203FA0.o
+}
+Overlay OVY_228
+{
+	Address		0x021dfc20
+	Object		asm/overlay_228_021DFC20.o
+}
+Overlay OVY_107
+{
+	Address		0x021ee740
+	Object		asm/overlay_107_021EE740.o
+}
+Overlay OVY_121
+{
+	Address		0x021d6660
+	Object		asm/overlay_121_021D6660.o
+}
+Overlay OVY_172
+{
+	Address		0x021b6100
+	Object		asm/overlay_172_021B6100.o
+}

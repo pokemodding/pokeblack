@@ -176,3 +176,9 @@ Autoload DTCM
 	Address		0x027E0000
 	Object		*	(.dtcm)
 }
+
+Overlay OVY_2
+{
+	Address		0x021542C0
+	Object		asm/overlay_002_021542C0.o
+}

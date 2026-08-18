@@ -243,10 +243,10 @@ FORCE_ACTIVE_LIST := $(BUILD_DIR)/force_active.txt
 
 
 $(EXTERN_SYMS): $(ASM_SRCS)
-	@python3 $(TOOLSDIR)/scripts/gen_extern_syms.py 'asm/unk_*.s' -o $@
+	@python3 $(TOOLSDIR)/scripts/gen_extern_syms.py 'asm/unk_*.s' 'asm/overlay_*.s' -o $@
 
 $(FORCE_ACTIVE_LIST): $(ASM_SRCS)
-	@python3 $(TOOLSDIR)/scripts/gen_force_active.py 'asm/unk_*.s' -o $@
+	@python3 $(TOOLSDIR)/scripts/gen_force_active.py 'asm/unk_*.s' 'asm/overlay_*.s' -o $@
 
 $(LCF): $(LSF) $(SDK_SPECFILES)/$(LCF_TEMPLATE) $(EXTERN_SYMS) $(FORCE_ACTIVE_LIST)
 	$(WINE) $(MAKELCF) $(MAKELCF_FLAGS) $< $(SDK_SPECFILES)/$(LCF_TEMPLATE) $@

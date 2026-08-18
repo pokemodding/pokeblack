@@ -28,9 +28,12 @@ trap cleanup EXIT
 # Strip -g flag from assembler to avoid debug sections in asm_processor temp files
 AS_NO_DEBUG=$(echo "$AS" | sed 's/ -g / /g; s/ -g$//g')
 
+# Strip -sym on from the compiler; asm_processor cannot remap debug relocations.
+CC_NO_DEBUG=$(echo "$CC" | sed 's/ -sym on / /g; s/ -sym on$//g')
+
 # Create a .c file replacing GLOBAL_ASM functions with volatile int writes, and compile.
 "$SCRIPT_DIR/asm_processor.py" "$SRC" --assembler "$AS_NO_DEBUG" --asm-prelude "$ASM_PRELUDE" > "$PADDED_SRC"
-$CC -c "$PADDED_SRC" -o "$PADDED_OBJ"
+env $CC_NO_DEBUG -c "$PADDED_SRC" -o "$PADDED_OBJ"
 
 # Inject the assembly into the padded obj file.
 "$SCRIPT_DIR/asm_processor.py" "$SRC" --post-process "$PADDED_OBJ" --assembler "$AS_NO_DEBUG" --asm-prelude "$ASM_PRELUDE"

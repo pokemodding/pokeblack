@@ -22,6 +22,7 @@ build/
 *.a
 linker.ld
 *.bin
+!*/rom_header_template.sbin
 
 # Reverse-engineering scratch (regenerable dumps and workspaces)
 asm_dumps/
@@ -36,6 +37,7 @@ tools/*.o
 tools/local
 tools/ndstool/
 !tools/ndstool/README.md
+tools/ndsdisasm/
 ndstool
 /tools/mwccarm
 tools/mwasmarm_patcher/mwasmarm_patcher
@@ -52,7 +54,6 @@ __pycache__/
 *.pyc
 *.pyo
 .Python
-*.py
 
 # Editor files
 *.swp

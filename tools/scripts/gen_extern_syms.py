@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
-"""Emit LCF symbol definitions for addresses the ARM9 calls but does not define
-
-The symbol name carries the address (FUN_021DFC20), so the value is read from the name itself
-
-Usage:
-    gen_extern_syms.py asm/unk_*.s -o build/extern_syms.lcf
-"""
+"""emit LCF symbol definitions for addresses the ARM9 calls but does not define"""
 
 import argparse
 import glob
@@ -17,10 +11,7 @@ EXTERN_RE = re.compile(r'^\s*\.extern\s+(\S+)\s*$')
 LABEL_RE = re.compile(r'^(\w+):')
 ADDRESSED_RE = re.compile(r'^(?:FUN_|_)([0-9A-Fa-f]{8})(?:_dup\d+)?$')
 
-# Secure-area syscall stubs
-
-# libsyscall.a defines these with the Thumb type an absolute LCF symbol cannot carry which BLX relocations need
-
+# libsyscall.a types these thumb, an absolute LCF symbol cannot and blx needs it
 PROVIDED_RE = re.compile(r'^SVC_\w+$')
 
 

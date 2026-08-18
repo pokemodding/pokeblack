@@ -40,16 +40,10 @@ FUN_overlay_2__021542c0: ; 0x021542C0
 	lsl r1, r1, #0x10
 	asr r1, r1, #0x10
 	add pc, r1
-_021542DE: ; jump table
-	.hword _021542F0 - _021542DE - 2 ; case 0
-	.hword _02154312 - _021542DE - 2 ; case 1
-	.hword _0215432E - _021542DE - 2 ; case 2
-	.hword _02154340 - _021542DE - 2 ; case 3
-	.hword _02154376 - _021542DE - 2 ; case 4
-	.hword _02154388 - _021542DE - 2 ; case 5
-	.hword _0215438A - _021542DE - 2 ; case 6
-	.hword _021543A8 - _021542DE - 2 ; case 7
-	.hword _021543CC - _021542DE - 2 ; case 8
+	thumb_func_end FUN_overlay_2__021542c0
+_021542DE:
+	.byte 0x10, 0x00
+	.byte 0x32, 0x00, 0x4E, 0x00, 0x60, 0x00, 0x96, 0x00, 0xA8, 0x00, 0xAA, 0x00, 0xC8, 0x00, 0xEC, 0x00
 _021542F0:
 	add r0, r6, #0
 	bl FUN_02012138
@@ -60,7 +54,6 @@ _021542F0:
 	str r0, [r5]
 	mov r0, #6
 	bl FUN_02005E30
-	thumb_func_end FUN_overlay_2__021542c0
 _0215430A:
 	ldr r0, [r4]
 _0215430C:

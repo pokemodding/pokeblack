@@ -440,16 +440,9 @@ LAB_overlay_d_38__021f3b94: ; 0x021F3B94
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end LAB_overlay_d_38__021f3b94
-
-	arm_func_start switchdataD_overlay_d_38__021f3bb4
-switchdataD_overlay_d_38__021f3bb4: ; 0x021F3BB4
-	adceq r0, r0, r6
-	arm_func_end switchdataD_overlay_d_38__021f3bb4
-_021F3BB8:
-	.byte 0x48, 0x01, 0xA2, 0x01
-
-	thumb_func_start FUN_021F3BBC
-FUN_021F3BBC: ; 0x021F3BBC
+_021F3BB4:
+	.byte 0x06, 0x00, 0xA0, 0x00, 0x48, 0x01, 0xA2, 0x01
+_021F3BBC:
 	ldr r0, [sp, #0x1c]
 	bl FUN_021A3074
 	str r0, [sp, #0x28]
@@ -512,7 +505,6 @@ FUN_021F3BBC: ; 0x021F3BBC
 	bl FUN_021BE6B0
 	mov r0, #0
 	str r0, [r4, #0x20]
-	thumb_func_end FUN_021F3BBC
 _021F3C4E:
 	ldr r0, [r5]
 	add r0, r0, #1

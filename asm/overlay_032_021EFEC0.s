@@ -316,11 +316,8 @@ _021EFF96:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_021EFFB6: ; jump table
-	.hword _021EFFBE - _021EFFB6 - 2 ; case 0
-	.hword _021EFFC4 - _021EFFB6 - 2 ; case 1
-	.hword _021EFFCA - _021EFFB6 - 2 ; case 2
-	.hword _021EFFD0 - _021EFFB6 - 2 ; case 3
+_021EFFB6:
+	.byte 0x06, 0x00, 0x0C, 0x00, 0x12, 0x00, 0x18, 0x00
 _021EFFBE:
 	add sp, #8
 	mov r0, #4
@@ -746,11 +743,9 @@ _021F02D2:
 	lsl r2, r2, #0x10
 	asr r2, r2, #0x10
 	add pc, r2
-_021F02DE: ; jump table
-	.hword _021F02E6 - _021F02DE - 2 ; case 0
-	.hword _021F02F2 - _021F02DE - 2 ; case 1
-	.hword _021F0352 - _021F02DE - 2 ; case 2
-	.hword _021F0372 - _021F02DE - 2 ; case 3
+_021F02DE:
+	.byte 0x06, 0x00
+	.byte 0x12, 0x00, 0x72, 0x00, 0x92, 0x00
 _021F02E6:
 	ldr r0, [r4, #0x50]
 	ldr r0, [r0, #0x2c]
@@ -949,18 +944,9 @@ _021F044E:
 	lsl r1, r1, #0x10
 	asr r1, r1, #0x10
 	add pc, r1
-
-	arm_func_start switchdataD_overlay_d_32__021f0460
-switchdataD_overlay_d_32__021f0460: ; 0x021F0460
-	eoreq r0, sl, lr
-	sbceq r0, r4, r6, asr r0
-	adceqs r0, sl, r6, rrx
-	arm_func_end switchdataD_overlay_d_32__021f0460
-_021F046C:
-	.byte 0xD2, 0x00, 0xEA, 0x00
-
-	thumb_func_start FUN_021F0470
-FUN_021F0470: ; 0x021F0470
+_021F0460:
+	.byte 0x0E, 0x00, 0x2A, 0x00, 0x56, 0x00, 0xC4, 0x00, 0x66, 0x00, 0xBA, 0x00, 0xD2, 0x00, 0xEA, 0x00
+_021F0470:
 	mov r1, #2
 	mov r2, #1
 	bl FUN_overlay_d_32__021f05e8
@@ -969,7 +955,6 @@ FUN_021F0470: ; 0x021F0470
 	mov r1, #2
 	add r2, #0xa8
 	bl FUN_overlay_d_32__021f0b10
-	thumb_func_end FUN_021F0470
 _021F0484:
 	ldr r0, [r4, #0x6c]
 	add r0, r0, #1
@@ -1688,8 +1673,8 @@ _021F09A2:
 _021F09B4:
 	lsl r0, r4, #1
 	add r1, r4, r0
-	ldr r0, _021F0A14 ; =0x021F3538
-	ldr r2, _021F0A14 ; =0x021F3538
+	ldr r0, _021F0A14 ; =_021F3538
+	ldr r2, _021F0A14 ; =_021F3538
 	add r0, r0, r1
 	ldrb r1, [r2, r1]
 	lsl r1, r1, #3
@@ -2527,7 +2512,7 @@ FUN_overlay_d_32__021f0f74: ; 0x021F0F74
 	blx FUN_0204A9D0
 	mov r0, #0x20
 	str r0, [sp]
-	ldr r2, _021F0FC4 ; =DAT_overlay_d_32__021f354
+	ldr r2, _021F0FC4 ; =0x021F3541
 	ldrb r3, [r4]
 	ldrb r2, [r2, r6]
 	add r0, r5, #0
@@ -4080,18 +4065,10 @@ _021F1BAC:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-
-	arm_func_start switchdataD_overlay_d_32__021f1bb8
-switchdataD_overlay_d_32__021f1bb8: ; 0x021F1BB8
-	eoreqs r0, r0, ip
-	rsbeq r0, sl, r4, asr #32
-	ldreqh r0, [r4], #2
-	arm_func_end switchdataD_overlay_d_32__021f1bb8
-_021F1BC4:
-	.byte 0xE8, 0x00
-
-	non_word_aligned_thumb_func_start FUN_021F1BC6
-FUN_021F1BC6: ; 0x021F1BC6
+_021F1BB8:
+	.byte 0x0C, 0x00, 0x30, 0x00, 0x44, 0x00, 0x6A, 0x00
+	.byte 0xB2, 0x00, 0xD4, 0x00, 0xE8, 0x00
+_021F1BC6:
 	ldrb r2, [r4, #3]
 	ldr r1, _021F1CEC ; =_021F352C
 	add r0, r5, #0
@@ -4149,7 +4126,6 @@ _021F1C24:
 	cmp r0, #2
 	beq _021F1C66
 	pop {r4, r5, r6, pc}
-	thumb_func_end FUN_021F1BC6
 _021F1C42:
 	add r0, r5, #0
 	mov r1, #6
@@ -4252,18 +4228,10 @@ _021F1D08:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-
-	arm_func_start switchdataD_overlay_d_32__021f1d14
-switchdataD_overlay_d_32__021f1d14: ; 0x021F1D14
-	subeqs r0, r0, lr
-	rsbeqs r0, r4, r4, rrx
-	adceqs r0, r8, sl, lsl #1
-	arm_func_end switchdataD_overlay_d_32__021f1d14
-_021F1D20:
+_021F1D14:
+	.byte 0x0E, 0x00, 0x50, 0x00, 0x64, 0x00, 0x74, 0x00, 0x8A, 0x00, 0xB8, 0x00
 	.byte 0xD4, 0x00, 0xE8, 0x00
-
-	thumb_func_start FUN_021F1D24
-FUN_021F1D24: ; 0x021F1D24
+_021F1D24:
 	ldrh r0, [r4, #0x14]
 	cmp r0, #0
 	beq _021F1D3E
@@ -4272,7 +4240,6 @@ FUN_021F1D24: ; 0x021F1D24
 	cmp r0, #0
 	bne _021F1D34
 	mov r1, #0
-	thumb_func_end FUN_021F1D24
 _021F1D34:
 	add r1, #9
 	lsl r1, r1, #0x18
@@ -5036,15 +5003,9 @@ _021F238E:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_021F23AE: ; jump table
-	.hword _021F23BE - _021F23AE - 2 ; case 0
-	.hword _021F23C6 - _021F23AE - 2 ; case 1
-	.hword _021F23CE - _021F23AE - 2 ; case 2
-	.hword _021F23D6 - _021F23AE - 2 ; case 3
-	.hword _021F23DE - _021F23AE - 2 ; case 4
-	.hword _021F23E6 - _021F23AE - 2 ; case 5
-	.hword _021F23EE - _021F23AE - 2 ; case 6
-	.hword _021F23EE - _021F23AE - 2 ; case 7
+_021F23AE:
+	.byte 0x0E, 0x00
+	.byte 0x16, 0x00, 0x1E, 0x00, 0x26, 0x00, 0x2E, 0x00, 0x36, 0x00, 0x3E, 0x00, 0x3E, 0x00
 _021F23BE:
 	add r0, r4, #0
 	bl FUN_overlay_d_32__021f2674
@@ -7128,36 +7089,15 @@ _021F352C:
 	.byte 0x04, 0x05, 0x06, 0x00
 _021F3530:
 	.byte 0x63, 0x07, 0x63, 0x07, 0x63, 0x07, 0x51, 0x05
-
-	thumb_func_start DAT_overlay_d_32__021f3539
-DAT_overlay_d_32__021f3539: ; 0x021F3538
-	lsl r0, r0, #4
-	thumb_func_end DAT_overlay_d_32__021f3539
-
-	non_word_aligned_thumb_func_start DAT_overlay_d_32__021f353b
-DAT_overlay_d_32__021f353b: ; 0x021F353A
-	lsl r4, r0, #4
-	thumb_func_end DAT_overlay_d_32__021f353b
-
-	thumb_func_start DAT_overlay_d_32__021f353d
-DAT_overlay_d_32__021f353d: ; 0x021F353C
-	lsl r2, r0, #0x10
-	lsl r2, r0, #0xc
-	thumb_func_end DAT_overlay_d_32__021f353d
-
-	thumb_func_start DAT_overlay_d_32__021f354
-DAT_overlay_d_32__021f354: ; 0x021F3540
-	lsl r4, r0, #8
-	lsl r3, r0, #0x18
-	lsl r5, r0, #0x10
-	lsl r5, r0, #8
-	lsl r0, r0, #4
-	lsl r3, r0, #0x18
-	lsl r5, r0, #0x10
-	lsl r7, r0, #0x1c
-	lsl r0, r0, #0
-	lsl r0, r0, #0
-	thumb_func_end DAT_overlay_d_32__021f354
+_021F3538:
+	.byte 0x00, 0x01
+_021F353A:
+	.byte 0x04, 0x01
+_021F353C:
+	.byte 0x02, 0x04, 0x02, 0x03
+_021F3540:
+	.byte 0x04, 0x02, 0x03, 0x06, 0x05, 0x04, 0x05, 0x02, 0x00, 0x01, 0x03, 0x06, 0x05, 0x04, 0x07, 0x07
+	.byte 0x00, 0x00, 0x00, 0x00
 _021F3554:
 	.byte 0x21, 0x00, 0x00, 0x00, 0x23, 0x00, 0x00, 0x00, 0x22, 0x00, 0x00, 0x00
 	.byte 0x24, 0x00, 0x00, 0x00, 0x25, 0x00, 0x00, 0x00, 0x26, 0x00, 0x00, 0x00

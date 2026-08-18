@@ -107,12 +107,9 @@ _021B965E:
 	lsl r1, r1, #0x10
 	asr r1, r1, #0x10
 	add pc, r1
-_021B966A: ; jump table
-	.hword _021B9674 - _021B966A - 2 ; case 0
-	.hword _021B97C6 - _021B966A - 2 ; case 1
-	.hword _021B9818 - _021B966A - 2 ; case 2
-	.hword _021B9856 - _021B966A - 2 ; case 3
-	.hword _021B9882 - _021B966A - 2 ; case 4
+_021B966A:
+	.byte 0x08, 0x00, 0x5A, 0x01, 0xAC, 0x01
+	.byte 0xEA, 0x01, 0x16, 0x02
 _021B9674:
 	ldr r0, [r4]
 	bl FUN_02012934

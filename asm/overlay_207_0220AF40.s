@@ -264,20 +264,16 @@ LAB_overlay_d_207__0220b0c8: ; 0x0220B0C8
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_0220B0DA: ; jump table
-	.hword _0220B0E6 - _0220B0DA - 2 ; case 0
-	.hword _0220B0F8 - _0220B0DA - 2 ; case 1
-	.hword _0220B130 - _0220B0DA - 2 ; case 2
-	.hword _0220B150 - _0220B0DA - 2 ; case 3
-	.hword _0220B18E - _0220B0DA - 2 ; case 4
-	.hword _0220B1C0 - _0220B0DA - 2 ; case 5
+	thumb_func_end LAB_overlay_d_207__0220b0c8
+_0220B0DA:
+	.byte 0x0A, 0x00, 0x1C, 0x00, 0x54, 0x00
+	.byte 0x74, 0x00, 0xB2, 0x00, 0xE4, 0x00
 _0220B0E6:
 	blx FUN_0204E804
 	cmp r0, #0
 	bne _0220B122
 	ldr r0, [r4, #0x20]
 	bl FUN_021BA544
-	thumb_func_end LAB_overlay_d_207__0220b0c8
 _0220B0F4:
 	mov r0, #1
 	b _0220B12C
@@ -404,11 +400,9 @@ LAB_overlay_d_207__0220b1d0: ; 0x0220B1D0
 	lsl r1, r1, #0x10
 	asr r1, r1, #0x10
 	add pc, r1
-_0220B1E2: ; jump table
-	.hword _0220B1EA - _0220B1E2 - 2 ; case 0
-	.hword _0220B1FA - _0220B1E2 - 2 ; case 1
-	.hword _0220B202 - _0220B1E2 - 2 ; case 2
-	.hword _0220B218 - _0220B1E2 - 2 ; case 3
+	thumb_func_end LAB_overlay_d_207__0220b1d0
+_0220B1E2:
+	.byte 0x06, 0x00, 0x16, 0x00, 0x1E, 0x00, 0x34, 0x00
 _0220B1EA:
 	blx FUN_0204E804
 	cmp r0, #0
@@ -442,7 +436,6 @@ _0220B218:
 	cmp r0, #1
 	beq _0220B234
 	b _0220B238
-	thumb_func_end LAB_overlay_d_207__0220b1d0
 _0220B230:
 	str r5, [r6, #0x1c]
 	b _0220B238
@@ -1064,13 +1057,10 @@ FUN_overlay_d_207__0220b72c: ; 0x0220B72C
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_0220B746: ; jump table
-	.hword _0220B8F8 - _0220B746 - 2 ; case 0
-	.hword _0220B752 - _0220B746 - 2 ; case 1
-	.hword _0220B7E2 - _0220B746 - 2 ; case 2
-	.hword _0220B874 - _0220B746 - 2 ; case 3
-	.hword _0220B8EA - _0220B746 - 2 ; case 4
-	.hword _0220B8F6 - _0220B746 - 2 ; case 5
+	thumb_func_end FUN_overlay_d_207__0220b72c
+_0220B746:
+	.byte 0xB0, 0x01, 0x0A, 0x00, 0x9A, 0x00, 0x2C, 0x01, 0xA2, 0x01
+	.byte 0xAE, 0x01
 _0220B752:
 	ldr r0, [r4, #0x34]
 	blx FUN_020310C4
@@ -1083,7 +1073,6 @@ _0220B752:
 	mov r0, #1
 	str r0, [r4, #0x4c]
 	b _0220B8F8
-	thumb_func_end FUN_overlay_d_207__0220b72c
 _0220B76C:
 	cmp r0, #0
 	beq _0220B776
@@ -1409,21 +1398,14 @@ FUN_overlay_d_207__0220b9e0: ; 0x0220B9E0
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end FUN_overlay_d_207__0220b9e0
-
-	arm_func_start switchdataD_overlay_d_207__0220b9f8
-switchdataD_overlay_d_207__0220b9f8: ; 0x0220B9F8
-	andeq r0, r6, r2, lsr #1
-	adceq r0, r2, lr, asr r0
-	arm_func_end switchdataD_overlay_d_207__0220b9f8
-
-	thumb_func_start FUN_0220BA00
-FUN_0220BA00: ; 0x0220BA00
+_0220B9F8:
+	.byte 0xA2, 0x00, 0x06, 0x00, 0x5E, 0x00, 0xA2, 0x00
+_0220BA00:
 	blx FUN_020355C4
 	mov r1, #1
 	cmp r0, #0
 	beq _0220BA0C
 	mov r1, #0
-	thumb_func_end FUN_0220BA00
 _0220BA0C:
 	add r0, r4, #0
 	add r0, #0x50

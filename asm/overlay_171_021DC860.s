@@ -988,18 +988,11 @@ LAB_overlay_d_171__021dd008: ; 0x021DD008
 	lsl r1, r1, #0x10
 	asr r1, r1, #0x10
 	add pc, r1
-_021DD01E: ; jump table
-	.hword _021DD034 - _021DD01E - 2 ; case 0
-	.hword _021DD056 - _021DD01E - 2 ; case 1
-	.hword _021DD076 - _021DD01E - 2 ; case 2
-	.hword _021DD090 - _021DD01E - 2 ; case 3
-	.hword _021DD0AA - _021DD01E - 2 ; case 4
-	.hword _021DD0BE - _021DD01E - 2 ; case 5
-	.hword _021DD0BE - _021DD01E - 2 ; case 6
-	.hword _021DD0BE - _021DD01E - 2 ; case 7
-	.hword _021DD0BE - _021DD01E - 2 ; case 8
-	.hword _021DD0BE - _021DD01E - 2 ; case 9
-	.hword _021DD0BE - _021DD01E - 2 ; case 10
+	thumb_func_end LAB_overlay_d_171__021dd008
+_021DD01E:
+	.byte 0x14, 0x00
+	.byte 0x36, 0x00, 0x56, 0x00, 0x70, 0x00, 0x8A, 0x00, 0x9E, 0x00, 0x9E, 0x00, 0x9E, 0x00, 0x9E, 0x00
+	.byte 0x9E, 0x00, 0x9E, 0x00
 _021DD034:
 	mov r1, #0
 	add r0, r4, #0
@@ -1075,7 +1068,6 @@ _021DD0CE:
 	mov r0, #4
 	pop {r3, r4, r5, pc}
 	nop
-	thumb_func_end LAB_overlay_d_171__021dd008
 _021DD0D4:
 	.byte 0x6C, 0x0B, 0x00, 0x00
 _021DD0D8:
@@ -1234,26 +1226,15 @@ LAB_overlay_d_171__021dd22c: ; 0x021DD22C
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end LAB_overlay_d_171__021dd22c
-
-	arm_func_start switchdataD_overlay_d_171__021dd244
-switchdataD_overlay_d_171__021dd244: ; 0x021DD244
-	subeqs r0, r2, r4, lsl r0
-	addeq r0, ip, r2, lsr r1
-	adceq r0, r0, r2, lsr r1
-	adceq r0, r0, r0, lsr #1
-	adceq r0, r0, r0, lsr #1
-	arm_func_end switchdataD_overlay_d_171__021dd244
-_021DD258:
-	.byte 0xA0, 0x00
-
-	non_word_aligned_thumb_func_start FUN_021DD25A
-FUN_021DD25A: ; 0x021DD25A
+_021DD244:
+	.byte 0x14, 0x00, 0x52, 0x00, 0x32, 0x01, 0x8C, 0x00, 0x32, 0x01, 0xA0, 0x00
+	.byte 0xA0, 0x00, 0xA0, 0x00, 0xA0, 0x00, 0xA0, 0x00, 0xA0, 0x00
+_021DD25A:
 	add r0, r4, #0
 	mov r1, #1
 	bl FUN_overlay_d_171__021dd558
 	cmp r0, #1
 	beq _021DD268
-	thumb_func_end FUN_021DD25A
 _021DD266:
 	b _021DD378
 _021DD268:
@@ -4498,20 +4479,11 @@ _021DEB20:
 	.byte 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 	.byte 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0x00, 0x20, 0x00, 0x10, 0x00
-
-	non_word_aligned_thumb_func_start DAT_overlay_d_171__021deb4f
-DAT_overlay_d_171__021deb4f: ; 0x021DEB4E
-	lsl r0, r4, #0
-	lsl r5, r0, #0x14
-	lsl r5, r0, #0x14
-	thumb_func_end DAT_overlay_d_171__021deb4f
-
-	thumb_func_start DAT_overlay_d_171__021deb55
-DAT_overlay_d_171__021deb55: ; 0x021DEB54
-	lsl r4, r0, #0x10
-	thumb_func_end DAT_overlay_d_171__021deb55
-_021DEB56:
-	.byte 0x00, 0xB4, 0x78, 0x5A, 0x48, 0x3C
+_021DEB4E:
+	.byte 0x20, 0x00
+	.byte 0x05, 0x05, 0x05, 0x05
+_021DEB54:
+	.byte 0x04, 0x04, 0x00, 0xB4, 0x78, 0x5A, 0x48, 0x3C
 _021DEB5C:
 	.byte 0xA5, 0xCE, 0x1D, 0x02
 	.byte 0x39, 0xCF, 0x1D, 0x02, 0xA9, 0xCF, 0x1D, 0x02, 0xD5, 0xCF, 0x1D, 0x02, 0xF5, 0xCF, 0x1D, 0x02

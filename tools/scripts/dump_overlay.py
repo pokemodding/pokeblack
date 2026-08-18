@@ -127,7 +127,7 @@ def main():
     prefix = f"overlay_{index:03d}"
     lsf = os.path.join(workdir, 'objects.lsf')
     run([sys.executable, os.path.join(SCRIPTS, 'split_dump.py'), converted,
-         '--outdir', args.outdir, '--prefix', prefix, '--lines', '9999', '--lsf', lsf],
+         '--outdir', args.outdir, '--prefix', prefix, '--lines', '10000000', '--lsf', lsf],
         quiet=not args.verbose)
 
     holes = sum(1 for line in open(converted) if '.byte' in line)

@@ -52,6 +52,10 @@ CONDITIONS = {
 
 LDM_MODES = {'ia', 'ib', 'da', 'db', 'fd', 'fa', 'ed', 'ea'}
 
+LDST_SUFFIXES = {'', 'b', 'h', 'd', 't', 'bt', 'ht', 'sh', 'sb', 'sht', 'sbt'}
+
+FLAG_SETTABLE = DATAPROC | {'umull', 'umlal', 'smull', 'smlal'}
+
 DIRECTIVE_RENAMES = {
     '.4byte': '.word',
     '.2byte': '.hword',
@@ -199,20 +203,18 @@ def convert_arm(mnemonic, rest, stats):
                 stats['ldm/stm-reorder'] += 1
             return fixed, rest
 
-    if len(mnemonic) == 6 and mnemonic[:3] in DATAPROC \
-            and mnemonic[3] == 's' and mnemonic[4:] in CONDITIONS:
-        stats['s-cond-reorder'] += 1
-        return mnemonic[:3] + mnemonic[4:] + 's', rest
-
-    if len(mnemonic) == 6 and mnemonic[:3] in ('ldr', 'str') \
-            and mnemonic[3] in 'bh' and mnemonic[4:] in CONDITIONS:
-        stats['width-cond-reorder'] += 1
-        return mnemonic[:3] + mnemonic[4:] + mnemonic[3], rest
-
-    if len(mnemonic) == 7 and mnemonic[:3] == 'ldr' \
-            and mnemonic[3:5] in ('sh', 'sb') and mnemonic[5:] in CONDITIONS:
-        stats['width-cond-reorder'] += 1
-        return mnemonic[:3] + mnemonic[5:] + mnemonic[3:5], rest
+    if mnemonic[-2:] in CONDITIONS:
+        cond, stem = mnemonic[-2:], mnemonic[:-2]
+        if stem[:3] in ('ldr', 'str') and stem[3:] in LDST_SUFFIXES:
+            if stem[3:]:
+                stats['width-cond-reorder'] += 1
+            return stem[:3] + cond + stem[3:], rest
+        if stem.endswith('s') and stem[:-1] in FLAG_SETTABLE:
+            stats['s-cond-reorder'] += 1
+            return stem[:-1] + cond + 's', rest
+        if stem in ('ldcl', 'stcl'):
+            stats['cp-cond-reorder'] += 1
+            return stem[:3] + cond + 'l', rest
 
     return mnemonic, rest
 

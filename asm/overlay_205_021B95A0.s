@@ -111,19 +111,10 @@ LAB_overlay_d_205__021b9614: ; 0x021B9614
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end LAB_overlay_d_205__021b9614
-
-	arm_func_start switchdataD_overlay_d_205__021b9620
-switchdataD_overlay_d_205__021b9620: ; 0x021B9620
-	eoreq r0, r4, sl, lsl r0
-	rsbeq r0, sl, lr, asr r0
-	rsceq r0, ip, ip, lsr #1
-	teqeq sl, sl, lsl #2
-	arm_func_end switchdataD_overlay_d_205__021b9620
-_021B9630:
+_021B9620:
+	.byte 0x1A, 0x00, 0x24, 0x00, 0x5E, 0x00, 0x6A, 0x00, 0xAC, 0x00, 0xEC, 0x00, 0x0A, 0x01, 0x3A, 0x01
 	.byte 0xAC, 0x01, 0xBE, 0x01, 0xD8, 0x01, 0xEE, 0x01, 0xFA, 0x01, 0x00, 0x02
-
-	thumb_func_start FUN_021B963C
-FUN_021B963C: ; 0x021B963C
+_021B963C:
 	add r0, r4, #0
 	add r1, r6, #0
 	bl FUN_overlay_d_205__021b9874
@@ -145,7 +136,6 @@ _021B9646:
 	bne _021B9668
 	mov r0, #3
 	b _021B9674
-	thumb_func_end FUN_021B963C
 _021B9668:
 	add r0, r7, #0
 	add r1, r6, #0
@@ -253,17 +243,10 @@ _021B972C:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-
-	arm_func_start switchdataD_overlay_d_205__021b9748
-switchdataD_overlay_d_205__021b9748: ; 0x021B9748
-	rsceq r0, sl, sl, ror #1
-	andeq r0, ip, r6
-	arm_func_end switchdataD_overlay_d_205__021b9748
-
-	thumb_func_start FUN_021B9750
-FUN_021B9750: ; 0x021B9750
+_021B9748:
+	.byte 0xEA, 0x00, 0xEA, 0x00, 0x06, 0x00, 0x0C, 0x00
+_021B9750:
 	mov r0, #1
-	thumb_func_end FUN_021B9750
 _021B9752:
 	str r0, [r4, #0x34]
 	b _021B9816
@@ -810,16 +793,9 @@ LAB_overlay_d_205__021b9bf8: ; 0x021B9BF8
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end LAB_overlay_d_205__021b9bf8
-
-	arm_func_start switchdataD_overlay_d_205__021b9c04
-switchdataD_overlay_d_205__021b9c04: ; 0x021B9C04
-	adceqs r0, r6, sl
-	sbceqs r0, r4, sl, asr #1
-	smlatteq r4, lr, r0, r0
-	arm_func_end switchdataD_overlay_d_205__021b9c04
-
-	thumb_func_start FUN_021B9C10
-FUN_021B9C10: ; 0x021B9C10
+_021B9C04:
+	.byte 0x0A, 0x00, 0xB6, 0x00, 0xCA, 0x00, 0xD4, 0x00, 0xEE, 0x00, 0x04, 0x01
+_021B9C10:
 	ldr r0, _021B9D40 ; =0x000001FF
 	blx FUN_0208068C
 	mov r1, #0x1a
@@ -868,7 +844,6 @@ FUN_021B9C10: ; 0x021B9C10
 	add r0, r4, #0
 	mov r1, #3
 	b _021B9C84
-	thumb_func_end FUN_021B9C10
 _021B9C80:
 	add r0, r4, #0
 	add r1, r7, #0

@@ -236,16 +236,13 @@ FUN_overlay_d_55__021f3b48: ; 0x021F3B48
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_021F3B66: ; jump table
-	.hword _021F3B6E - _021F3B66 - 2 ; case 0
-	.hword _021F3B76 - _021F3B66 - 2 ; case 1
-	.hword _021F3B82 - _021F3B66 - 2 ; case 2
-	.hword _021F3B7E - _021F3B66 - 2 ; case 3
+	thumb_func_end FUN_overlay_d_55__021f3b48
+_021F3B66:
+	.byte 0x06, 0x00, 0x0E, 0x00, 0x1A, 0x00, 0x16, 0x00
 _021F3B6E:
 	mov r0, #0
 	str r0, [sp, #0x10]
 	sub r0, r0, #1
-	thumb_func_end FUN_overlay_d_55__021f3b48
 _021F3B74:
 	b _021F3B8A
 _021F3B76:
@@ -1354,14 +1351,12 @@ FUN_overlay_d_55__021f4388: ; 0x021F4388
 	lsl r5, r5, #0x10
 	asr r5, r5, #0x10
 	add pc, r5
-_021F439E: ; jump table
-	.hword _021F43A6 - _021F439E - 2 ; case 0
-	.hword _021F43AC - _021F439E - 2 ; case 1
-	.hword _021F43B0 - _021F439E - 2 ; case 2
-	.hword _021F43B4 - _021F439E - 2 ; case 3
+	thumb_func_end FUN_overlay_d_55__021f4388
+_021F439E:
+	.byte 0x06, 0x00
+	.byte 0x0C, 0x00, 0x10, 0x00, 0x14, 0x00
 _021F43A6:
 	sub r4, r1, r3
-	thumb_func_end FUN_overlay_d_55__021f4388
 _021F43A8:
 	sub r0, r0, r2
 	b _021F43B8

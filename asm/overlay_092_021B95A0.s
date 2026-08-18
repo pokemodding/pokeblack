@@ -106,18 +106,10 @@ _021B9638:
 	lsl r1, r1, #0x10
 	asr r1, r1, #0x10
 	add pc, r1
-
-	arm_func_start switchdataD_overlay_d_92__021b9644
-switchdataD_overlay_d_92__021b9644: ; 0x021B9644
-	biceq r0, ip, ip
-	subeqs r0, ip, #0xe0000001
-	cmneq lr, #0x20000009
-	arm_func_end switchdataD_overlay_d_92__021b9644
-_021B9650:
+_021B9644:
+	.byte 0x0C, 0x00, 0xCC, 0x01, 0x1E, 0x02, 0x5C, 0x02, 0x92, 0x02, 0x7E, 0x03
 	.byte 0x9C, 0x03
-
-	non_word_aligned_thumb_func_start FUN_021B9652
-FUN_021B9652: ; 0x021B9652
+_021B9652:
 	ldr r0, [r5]
 	bl FUN_02012934
 	add r6, r0, #0
@@ -155,7 +147,6 @@ FUN_021B9652: ; 0x021B9652
 	bne _021B96AE
 	add r0, r6, #0
 	bl FUN_overlay_d_92__021b9aa0
-	thumb_func_end FUN_021B9652
 _021B96AE:
 	ldr r0, [r5, #4]
 	ldrh r1, [r4, #0x3c]

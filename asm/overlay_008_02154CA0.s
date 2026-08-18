@@ -84,25 +84,11 @@ LAB_overlay_d_8__02154d52: ; 0x02154D52
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_02154D66: ; jump table
-	.hword _02154D8A - _02154D66 - 2 ; case 0
-	.hword _02154DB4 - _02154D66 - 2 ; case 1
-	.hword _02154DCA - _02154D66 - 2 ; case 2
-	.hword _02154DD8 - _02154D66 - 2 ; case 3
-	.hword _02154DEA - _02154D66 - 2 ; case 4
-	.hword _02154E34 - _02154D66 - 2 ; case 5
-	.hword _02154E3C - _02154D66 - 2 ; case 6
-	.hword _02154E68 - _02154D66 - 2 ; case 7
-	.hword _02154E7A - _02154D66 - 2 ; case 8
-	.hword _02154E9C - _02154D66 - 2 ; case 9
-	.hword _02154EA4 - _02154D66 - 2 ; case 10
-	.hword _02154EA8 - _02154D66 - 2 ; case 11
-	.hword _02154EB6 - _02154D66 - 2 ; case 12
-	.hword _02154EF2 - _02154D66 - 2 ; case 13
-	.hword _0215500E - _02154D66 - 2 ; case 14
-	.hword _02155016 - _02154D66 - 2 ; case 15
-	.hword _02155078 - _02154D66 - 2 ; case 16
-	.hword _0215508A - _02154D66 - 2 ; case 17
+	thumb_func_end LAB_overlay_d_8__02154d52
+_02154D66:
+	.byte 0x22, 0x00, 0x4C, 0x00, 0x62, 0x00, 0x70, 0x00, 0x82, 0x00
+	.byte 0xCC, 0x00, 0xD4, 0x00, 0x00, 0x01, 0x12, 0x01, 0x34, 0x01, 0x3C, 0x01, 0x40, 0x01, 0x4E, 0x01
+	.byte 0x8A, 0x01, 0xA6, 0x02, 0xAE, 0x02, 0x10, 0x03, 0x22, 0x03
 _02154D8A:
 	ldr r0, [r4, #4]
 	add r0, #0x22
@@ -111,7 +97,6 @@ _02154D8A:
 	bne _02154D98
 	mov r1, #1
 	b _02154D9A
-	thumb_func_end LAB_overlay_d_8__02154d52
 _02154D98:
 	mov r1, #3
 _02154D9A:
@@ -309,20 +294,11 @@ _02154F02:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-
-	arm_func_start switchdataD_overlay_d_8__02154f1c
-switchdataD_overlay_d_8__02154f1c: ; 0x02154F1C
-	andeq r0, ip, r0, lsl r0
-	andeqs r0, r0, r4, lsl r0
-	andeqs r0, r6, ip
-	arm_func_end switchdataD_overlay_d_8__02154f1c
-_02154F28:
-	.byte 0x1C, 0x00
-
-	non_word_aligned_thumb_func_start FUN_02154F2A
-FUN_02154F2A: ; 0x02154F2A
+_02154F1C:
+	.byte 0x10, 0x00, 0x0C, 0x00
+	.byte 0x14, 0x00, 0x10, 0x00, 0x0C, 0x00, 0x16, 0x00, 0x1C, 0x00
+_02154F2A:
 	mov r1, #0
-	thumb_func_end FUN_02154F2A
 _02154F2C:
 	b _02154F36
 _02154F2E:

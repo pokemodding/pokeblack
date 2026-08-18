@@ -227,7 +227,7 @@ FUN_overlay_d_30__021f0058: ; 0x021F0058
 	bl FUN_overlay_d_30__021eff54
 	add r0, r4, #0
 	bl FUN_overlay_d_30__021efecc
-	ldr r1, _021F0074 ; =DAT_overlay_d_30__021f00c5
+	ldr r1, _021F0074 ; =0x021F00C5
 	ldr r2, _021F0078 ; =0x00000149
 	add r0, r4, #0
 	bl FUN_overlay_d_30__021efec4
@@ -270,12 +270,8 @@ FUN_overlay_d_30__021f007c: ; 0x021F007C
 	blx FUN_02043598
 	pop {r3, pc}
 	thumb_func_end FUN_overlay_d_30__021f007c
-
-	thumb_func_start DAT_overlay_d_30__021f00c5
-DAT_overlay_d_30__021f00c5: ; 0x021F00C4
-	bx lr
-	.balign 4, 0
-	thumb_func_end DAT_overlay_d_30__021f00c5
+_021F00C4:
+	.byte 0x70, 0x47, 0x00, 0x00
 
 	thumb_func_start FUN_overlay_d_30__021f00c8
 FUN_overlay_d_30__021f00c8: ; 0x021F00C8

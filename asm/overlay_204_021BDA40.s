@@ -1948,13 +1948,8 @@ FUN_overlay_d_204__021be7a8: ; 0x021BE7AA
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end FUN_overlay_d_204__021be7a8
-
-	thumb_func_start switchdataD_overlay_d_204__021be7c0
-switchdataD_overlay_d_204__021be7c0: ; 0x021BE7C0
-	lsl r6, r0, #0
-	lsl r0, r3, #0
-	lsl r6, r6, #0
-	lsl r4, r2, #1
+_021BE7C0:
+	.byte 0x06, 0x00, 0x18, 0x00, 0x36, 0x00, 0x54, 0x00
 _021BE7C8:
 	ldr r1, [r4, #4]
 	cmp r1, #3
@@ -1962,7 +1957,6 @@ _021BE7C8:
 	mov r1, #0
 	str r1, [r4, #4]
 	b _021BE7F2
-	thumb_func_end switchdataD_overlay_d_204__021be7c0
 _021BE7D4:
 	add r0, r1, #1
 	str r0, [r4, #4]
@@ -2065,14 +2059,8 @@ FUN_overlay_d_204__021be898: ; 0x021BE89A
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end FUN_overlay_d_204__021be898
-
-	thumb_func_start switchdataD_overlay_d_204__021be8b0
-switchdataD_overlay_d_204__021be8b0: ; 0x021BE8B0
-	lsl r0, r1, #0
-	lsl r2, r2, #0
-	lsl r4, r5, #1
-	lsl r6, r2, #2
-	lsl r4, r4, #2
+_021BE8B0:
+	.byte 0x08, 0x00, 0x12, 0x00, 0x6C, 0x00, 0x96, 0x00, 0xA4, 0x00
 _021BE8BA:
 	ldr r0, [r5, #0xc]
 	mov r1, #0
@@ -2093,7 +2081,6 @@ _021BE8C4:
 	bl FUN_overlay_d_204__021bfae8
 	mov r0, #1
 	b _021BE906
-	thumb_func_end switchdataD_overlay_d_204__021be8b0
 _021BE8E6:
 	blx FUN_020362DC
 	mov r1, #0x20
@@ -2189,14 +2176,8 @@ LAB_overlay_d_204__021be994: ; 0x021BE994
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end LAB_overlay_d_204__021be994
-
-	thumb_func_start switchdataD_overlay_d_204__021be9a0
-switchdataD_overlay_d_204__021be9a0: ; 0x021BE9A0
-	lsl r0, r1, #0
-	lsl r4, r5, #0
-	lsl r0, r0, #2
-	lsl r2, r0, #3
-	lsl r4, r0, #4
+_021BE9A0:
+	.byte 0x08, 0x00, 0x2C, 0x00, 0x80, 0x00, 0xC2, 0x00, 0x04, 0x01
 _021BE9AA:
 	mov r6, #2
 	mov r0, #2
@@ -2247,7 +2228,6 @@ _021BE9CE:
 	mov r0, #2
 	mov r1, #0
 	mov r2, #0xa
-	thumb_func_end switchdataD_overlay_d_204__021be9a0
 _021BEA0E:
 	mov r3, #0x40
 _021BEA10:
@@ -2385,14 +2365,9 @@ FUN_overlay_d_204__021beb00: ; 0x021BEB02
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end FUN_overlay_d_204__021beb00
-
-	thumb_func_start switchdataD_overlay_d_204__021beb18
-switchdataD_overlay_d_204__021beb18: ; 0x021BEB18
-	lsl r0, r1, #0
-	lsl r0, r0, #1
-	lsl r0, r5, #1
-	lsl r0, r2, #2
-	lsl r0, r7, #2
+_021BEB18:
+	.byte 0x08, 0x00, 0x40, 0x00, 0x68, 0x00, 0x90, 0x00
+	.byte 0xB8, 0x00
 _021BEB22:
 	mov r5, #0x40
 	str r5, [sp]
@@ -2412,7 +2387,6 @@ _021BEB22:
 	mov r1, #0
 	mov r2, #0
 	mov r3, #0x10
-	thumb_func_end switchdataD_overlay_d_204__021beb18
 _021BEB48:
 	blx FUN_02041300
 	mov r0, #2
@@ -4461,14 +4435,9 @@ FUN_overlay_d_204__021bfae8: ; 0x021BFAE8
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end FUN_overlay_d_204__021bfae8
-
-	non_word_aligned_thumb_func_start switchdataD_overlay_d_204__021bfafe
-switchdataD_overlay_d_204__021bfafe: ; 0x021BFAFE
-	lsl r0, r1, #0
-	lsl r2, r2, #0
-	lsl r0, r3, #0
-	lsl r6, r3, #0
-	lsl r4, r4, #0
+_021BFAFE:
+	.byte 0x08, 0x00
+	.byte 0x12, 0x00, 0x18, 0x00, 0x1E, 0x00, 0x24, 0x00
 _021BFB08:
 	mov r1, #0x3c
 	str r1, [r0, #0x28]
@@ -4493,7 +4462,6 @@ _021BFB24:
 _021BFB28:
 	bx lr
 	.balign 4, 0
-	thumb_func_end switchdataD_overlay_d_204__021bfafe
 
 	thumb_func_start FUN_overlay_d_204__021bfb2c
 FUN_overlay_d_204__021bfb2c: ; 0x021BFB2C
@@ -4509,14 +4477,8 @@ FUN_overlay_d_204__021bfb2c: ; 0x021BFB2C
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end FUN_overlay_d_204__021bfb2c
-
-	non_word_aligned_thumb_func_start switchdataD_overlay_d_204__021bfb42
-switchdataD_overlay_d_204__021bfb42: ; 0x021BFB42
-	lsl r0, r3, #1
-	lsl r0, r1, #0
-	lsl r4, r3, #0
-	lsl r0, r6, #0
-	lsl r4, r0, #1
+_021BFB42:
+	.byte 0x58, 0x00, 0x08, 0x00, 0x1C, 0x00, 0x30, 0x00, 0x44, 0x00
 _021BFB4C:
 	ldr r1, [r4, #0x28]
 	sub r1, r1, #1
@@ -4560,7 +4522,6 @@ _021BFB88:
 _021BFB9C:
 	mov r0, #0
 	pop {r4, pc}
-	thumb_func_end switchdataD_overlay_d_204__021bfb42
 
 	thumb_func_start FUN_overlay_d_204__021bfba0
 FUN_overlay_d_204__021bfba0: ; 0x021BFBA0

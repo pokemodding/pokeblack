@@ -8,6 +8,9 @@ import sys
 ENTRY_RE = re.compile(r'^\s*(arm_func|thumb_func|data)\s+(0x[0-9a-fA-F]+)\s*(\S*)')
 BAD_CHARS_RE = re.compile(r'[^A-Za-z0-9_]')
 
+# ghidra marks these data in the name, whatever type it exported them as
+DATA_PREFIXES = ('s_', 'u_', 'DAT_', 'PTR_', 'switchdataD')
+
 
 def parse(path):
     out = []
@@ -16,8 +19,7 @@ def parse(path):
             match = ENTRY_RE.match(line)
             if match:
                 kind, addr, name = match.groups()
-                # ghidra names strings s_*, they are data not code
-                if name.startswith('s_'):
+                if name.startswith(DATA_PREFIXES):
                     kind = 'data'
                 out.append((kind, int(addr, 16), BAD_CHARS_RE.sub('_', name) or None))
     return out

@@ -540,18 +540,10 @@ FUN_overlay_d_133__021b63bc: ; 0x021B63BC
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end FUN_overlay_d_133__021b63bc
-
-	arm_func_start switchdataD_overlay_d_133__021b63d4
-switchdataD_overlay_d_133__021b63d4: ; 0x021B63D4
-	rsbeq r0, ip, r6, rrx
-	adceqs r0, r4, r2, ror r0
-	arm_func_end switchdataD_overlay_d_133__021b63d4
-_021B63DC:
-	.byte 0x32, 0x01, 0x44, 0x01
+_021B63D4:
+	.byte 0x66, 0x00, 0x6C, 0x00, 0x72, 0x00, 0xB4, 0x00, 0x32, 0x01, 0x44, 0x01
 	.byte 0xA2, 0x00, 0x14, 0x00, 0x1E, 0x00, 0x4E, 0x00, 0xD4, 0x00
-
-	non_word_aligned_thumb_func_start FUN_021B63EA
-FUN_021B63EA: ; 0x021B63EA
+_021B63EA:
 	ldr r0, _021B6708 ; =0x0000054E
 	bl FUN_020061E4
 	mov r0, #8
@@ -568,7 +560,6 @@ _021B63F4:
 	add r0, r4, #0
 	bl FUN_overlay_d_133__021b9818
 	b _021B6412
-	thumb_func_end FUN_021B63EA
 _021B640E:
 	mov r0, #1
 	str r0, [r4, #0xc]
@@ -6446,7 +6437,7 @@ _021B9408:
 FUN_overlay_d_133__021b940c: ; 0x021B940C
 	push {r4, r5, lr}
 	sub sp, #0xc
-	ldr r3, _021B94B4 ; =0x021BA594
+	ldr r3, _021B94B4 ; =_021BA594
 	add r5, r0, #0
 	add r2, sp, #0
 	mov r1, #0xc
@@ -7049,17 +7040,10 @@ FUN_overlay_d_133__021b98a0: ; 0x021B98A0
 	lsl r2, r2, #0x10
 	asr r2, r2, #0x10
 	add pc, r2
-_021B98BA: ; jump table
-	.hword _021B9952 - _021B98BA - 2 ; case 0
-	.hword _021B98CE - _021B98BA - 2 ; case 1
-	.hword _021B98EA - _021B98BA - 2 ; case 2
-	.hword _021B98F2 - _021B98BA - 2 ; case 3
-	.hword _021B990A - _021B98BA - 2 ; case 4
-	.hword _021B990C - _021B98BA - 2 ; case 5
-	.hword _021B992C - _021B98BA - 2 ; case 6
-	.hword _021B992E - _021B98BA - 2 ; case 7
-	.hword _021B9948 - _021B98BA - 2 ; case 8
-	.hword _021B994A - _021B98BA - 2 ; case 9
+	thumb_func_end FUN_overlay_d_133__021b98a0
+_021B98BA:
+	.byte 0x96, 0x00, 0x12, 0x00, 0x2E, 0x00
+	.byte 0x36, 0x00, 0x4E, 0x00, 0x50, 0x00, 0x70, 0x00, 0x72, 0x00, 0x8C, 0x00, 0x8E, 0x00
 _021B98CE:
 	add r1, r1, #1
 	ldrb r3, [r4, r1]
@@ -7068,7 +7052,6 @@ _021B98CE:
 	mul r2, r1
 	lsl r1, r2, #0x10
 	lsr r1, r1, #0x10
-	thumb_func_end FUN_overlay_d_133__021b98a0
 _021B98DC:
 	mov r5, #0xf
 	mul r5, r3
@@ -7657,17 +7640,10 @@ _021B9D6A:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-
-	arm_func_start switchdataD_overlay_d_133__021b9d7c
-switchdataD_overlay_d_133__021b9d7c: ; 0x021B9D7C
-	andeq r0, lr, lr
-	andeqs r0, r6, r2, lsl r0
-	andeqs r0, lr, sl, lsl r0
-	eoreq r0, r2, r2, lsr #32
-	arm_func_end switchdataD_overlay_d_133__021b9d7c
-
-	thumb_func_start FUN_021B9D8C
-FUN_021B9D8C: ; 0x021B9D8C
+_021B9D7C:
+	.byte 0x0E, 0x00, 0x0E, 0x00
+	.byte 0x12, 0x00, 0x16, 0x00, 0x1A, 0x00, 0x1E, 0x00, 0x22, 0x00, 0x22, 0x00
+_021B9D8C:
 	mov r4, #0x10
 	b _021B9DA2
 _021B9D90:
@@ -7712,7 +7688,6 @@ _021B9DA2:
 	bl FUN_0201ED04
 	add sp, #8
 	pop {r4, r5, r6, pc}
-	thumb_func_end FUN_021B9D8C
 _021B9DE4:
 	.byte 0xE0, 0x18, 0x00, 0x00
 
@@ -8677,15 +8652,8 @@ _021BA58C:
 	.byte 0x00, 0x00, 0x00, 0x00
 _021BA590:
 	.byte 0x00, 0x60, 0x04, 0x00
-
-	thumb_func_start DAT_overlay_d_133__021ba595
-DAT_overlay_d_133__021ba595: ; 0x021BA594
-	stmia r0!, {r3, r7}
-	add r0, #0
-	stmia r0!, {r3, r7}
-	thumb_func_end DAT_overlay_d_133__021ba595
-_021BA59A:
-	.byte 0xD8, 0xFF, 0xFF, 0x00, 0x00, 0x00
+_021BA594:
+	.byte 0x88, 0xC0, 0x00, 0x30, 0x88, 0xC0, 0xD8, 0xFF, 0xFF, 0x00, 0x00, 0x00
 _021BA5A0:
 	.byte 0x00, 0x00, 0x00, 0x00
 _021BA5A4:

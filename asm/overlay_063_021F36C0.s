@@ -149,17 +149,9 @@ _021F378A:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_021F3796: ; jump table
-	.hword _021F37AA - _021F3796 - 2 ; case 0
-	.hword _021F39FE - _021F3796 - 2 ; case 1
-	.hword _021F3D6A - _021F3796 - 2 ; case 2
-	.hword _021F3D6A - _021F3796 - 2 ; case 3
-	.hword _021F3ABA - _021F3796 - 2 ; case 4
-	.hword _021F3ACE - _021F3796 - 2 ; case 5
-	.hword _021F3D6A - _021F3796 - 2 ; case 6
-	.hword _021F3D6A - _021F3796 - 2 ; case 7
-	.hword _021F3CFA - _021F3796 - 2 ; case 8
-	.hword _021F3D6A - _021F3796 - 2 ; case 9
+_021F3796:
+	.byte 0x12, 0x00, 0x66, 0x02, 0xD2, 0x05, 0xD2, 0x05, 0x22, 0x03
+	.byte 0x36, 0x03, 0xD2, 0x05, 0xD2, 0x05, 0x62, 0x05, 0xD2, 0x05
 _021F37AA:
 	add r6, sp, #0x24
 	ldr r0, [r4, #0x10]

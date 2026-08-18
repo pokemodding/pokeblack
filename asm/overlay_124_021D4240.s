@@ -160,17 +160,10 @@ FUN_overlay_d_124__021d42a0: ; 0x021D42A0
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end FUN_overlay_d_124__021d42a0
-
-	arm_func_start switchdataD_overlay_d_124__021d42b8
-switchdataD_overlay_d_124__021d42b8: ; 0x021D42B8
-	eoreq r0, r4, r8
-	subeqs r0, r8, r2, lsr r0
-	arm_func_end switchdataD_overlay_d_124__021d42b8
-_021D42C0:
+_021D42B8:
+	.byte 0x08, 0x00, 0x24, 0x00, 0x32, 0x00, 0x58, 0x00
 	.byte 0x66, 0x00
-
-	non_word_aligned_thumb_func_start FUN_021D42C2
-FUN_021D42C2: ; 0x021D42C2
+_021D42C2:
 	mov r0, #6
 	str r0, [sp]
 	mov r5, #1
@@ -189,7 +182,6 @@ _021D42DE:
 	cmp r0, #1
 	bne _021D433A
 	mov r0, #4
-	thumb_func_end FUN_021D42C2
 _021D42E8:
 	str r0, [r4, #0x10]
 	b _021D433A

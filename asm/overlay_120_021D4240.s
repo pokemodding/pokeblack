@@ -443,18 +443,10 @@ FUN_overlay_d_120__021d43bc: ; 0x021D43BC
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end FUN_overlay_d_120__021d43bc
-
-	arm_func_start switchdataD_overlay_d_120__021d43d4
-switchdataD_overlay_d_120__021d43d4: ; 0x021D43D4
-	eoreq r0, r0, sl
-	eoreqs r0, sl, r4, lsr #32
-	subeq r0, r2, lr, lsr r0
-	arm_func_end switchdataD_overlay_d_120__021d43d4
-
-	thumb_func_start FUN_021D43E0
-FUN_021D43E0: ; 0x021D43E0
+_021D43D4:
+	.byte 0x0A, 0x00, 0x20, 0x00, 0x24, 0x00, 0x3A, 0x00, 0x3E, 0x00, 0x42, 0x00
+_021D43E0:
 	sub r0, r5, #1
-	thumb_func_end FUN_021D43E0
 _021D43E2:
 	bl FUN_overlay_d_120__021d439c
 	mov r1, #0x51
@@ -2206,11 +2198,9 @@ _021D55B6:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_021D55CE: ; jump table
-	.hword _021D5608 - _021D55CE - 2 ; case 0
-	.hword _021D55FE - _021D55CE - 2 ; case 1
-	.hword _021D55F4 - _021D55CE - 2 ; case 2
-	.hword _021D55D6 - _021D55CE - 2 ; case 3
+_021D55CE:
+	.byte 0x38, 0x00
+	.byte 0x2E, 0x00, 0x24, 0x00, 0x06, 0x00
 _021D55D6:
 	ldr r0, _021D5734 ; =0x0000054C
 	bl FUN_020061E4
@@ -2978,17 +2968,10 @@ _021D5DB6:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-
-	arm_func_start switchdataD_overlay_d_120__021d5dec
-switchdataD_overlay_d_120__021d5dec: ; 0x021D5DEC
-	andeq r0, r8, lr, lsr r0
-	eoreq r0, lr, r0, lsl r0
-	arm_func_end switchdataD_overlay_d_120__021d5dec
-_021D5DF4:
-	.byte 0x08, 0x00
-
-	non_word_aligned_thumb_func_start FUN_021D5DF6
-FUN_021D5DF6: ; 0x021D5DF6
+_021D5DEC:
+	.byte 0x3E, 0x00, 0x08, 0x00
+	.byte 0x10, 0x00, 0x2E, 0x00, 0x08, 0x00
+_021D5DF6:
 	add r0, r4, #0
 	bl FUN_overlay_d_120__021d5bec
 	b _021D5E2C
@@ -3009,7 +2992,6 @@ _021D5DFE:
 _021D5E1C:
 	bl FUN_0200F7DC
 	b _021D5E2C
-	thumb_func_end FUN_021D5DF6
 _021D5E22:
 	bl FUN_0200FB24
 	cmp r0, #0
@@ -4427,17 +4409,11 @@ FUN_overlay_d_120__021d69f4: ; 0x021D69F4
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_021D6A0E: ; jump table
-	.hword _021D6A5A - _021D6A0E - 2 ; case 0
-	.hword _021D6A5A - _021D6A0E - 2 ; case 1
-	.hword _021D6A4E - _021D6A0E - 2 ; case 2
-	.hword _021D6A4E - _021D6A0E - 2 ; case 3
-	.hword _021D6A4E - _021D6A0E - 2 ; case 4
-	.hword _021D6A32 - _021D6A0E - 2 ; case 5
-	.hword _021D6A4E - _021D6A0E - 2 ; case 6
-	.hword _021D6A4E - _021D6A0E - 2 ; case 7
-	.hword _021D6A4E - _021D6A0E - 2 ; case 8
-	.hword _021D6A22 - _021D6A0E - 2 ; case 9
+	thumb_func_end FUN_overlay_d_120__021d69f4
+_021D6A0E:
+	.byte 0x4A, 0x00
+	.byte 0x4A, 0x00, 0x3E, 0x00, 0x3E, 0x00, 0x3E, 0x00, 0x22, 0x00, 0x3E, 0x00, 0x3E, 0x00, 0x3E, 0x00
+	.byte 0x12, 0x00
 _021D6A22:
 	mov r0, #0x4d
 	lsl r0, r0, #2
@@ -4487,7 +4463,6 @@ _021D6A5A:
 	ldr r0, [r4, r6]
 	mov r1, #1
 	blx FUN_0204B3DC
-	thumb_func_end FUN_overlay_d_120__021d69f4
 _021D6A8A:
 	add sp, #4
 	pop {r3, r4, r5, r6, pc}

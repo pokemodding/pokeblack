@@ -227,13 +227,8 @@ _021BBEA0:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_021BBEB2: ; jump table
-	.hword _021BBEBE - _021BBEB2 - 2 ; case 0
-	.hword _021BBEC8 - _021BBEB2 - 2 ; case 1
-	.hword _021BBED0 - _021BBEB2 - 2 ; case 2
-	.hword _021BBED8 - _021BBEB2 - 2 ; case 3
-	.hword _021BBEE0 - _021BBEB2 - 2 ; case 4
-	.hword _021BBEE8 - _021BBEB2 - 2 ; case 5
+_021BBEB2:
+	.byte 0x0A, 0x00, 0x14, 0x00, 0x1C, 0x00, 0x24, 0x00, 0x2C, 0x00, 0x34, 0x00
 _021BBEBE:
 	add r0, r5, #0
 	bl FUN_overlay_d_216__021bbf28
@@ -2082,15 +2077,9 @@ FUN_overlay_d_216__021bcd08: ; 0x021BCD08
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end FUN_overlay_d_216__021bcd08
-
-	arm_func_start switchdataD_overlay_d_216__021bcd28
-switchdataD_overlay_d_216__021bcd28: ; 0x021BCD28
-	andeqs r0, r2, r6
-	eoreq r0, sl, lr, lsl r0
-	arm_func_end switchdataD_overlay_d_216__021bcd28
-
-	thumb_func_start FUN_021BCD30
-FUN_021BCD30: ; 0x021BCD30
+_021BCD28:
+	.byte 0x06, 0x00, 0x12, 0x00, 0x1E, 0x00, 0x2A, 0x00
+_021BCD30:
 	add r0, r5, #0
 	add r1, r4, #0
 	add r2, r7, #0
@@ -2115,7 +2104,6 @@ _021BCD54:
 	blx FUN_0207E5D0
 _021BCD5E:
 	pop {r3, r4, r5, r6, r7, pc}
-	thumb_func_end FUN_021BCD30
 
 	thumb_func_start FUN_overlay_d_216__021bcd60
 FUN_overlay_d_216__021bcd60: ; 0x021BCD60
@@ -2227,12 +2215,10 @@ FUN_overlay_d_216__021bce04: ; 0x021BCE04
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_021BCE1E: ; jump table
-	.hword _021BCE28 - _021BCE1E - 2 ; case 0
-	.hword _021BCE28 - _021BCE1E - 2 ; case 1
-	.hword _021BCE3A - _021BCE1E - 2 ; case 2
-	.hword _021BCE76 - _021BCE1E - 2 ; case 3
-	.hword _021BCE76 - _021BCE1E - 2 ; case 4
+	thumb_func_end FUN_overlay_d_216__021bce04
+_021BCE1E:
+	.byte 0x08, 0x00
+	.byte 0x08, 0x00, 0x1A, 0x00, 0x56, 0x00, 0x56, 0x00
 _021BCE28:
 	add r0, r5, #0
 	bl FUN_02165DF0
@@ -2262,7 +2248,6 @@ _021BCE58:
 	blo _021BCE68
 	add r0, r1, #0
 	sub r0, #0x6e
-	thumb_func_end FUN_overlay_d_216__021bce04
 _021BCE68:
 	bl FUN_02013E4C
 	add r2, r0, #0
@@ -3362,7 +3347,9 @@ _021BD764:
 	pop {r4, pc}
 _021BD768:
 	.byte 0x10, 0xB5, 0x0C, 0x1C, 0x21, 0x78, 0x03, 0x29
-	.byte 0x29, 0xD8, 0x4A, 0x18, 0x7A, 0x44, 0xD2, 0x88, 0x12, 0x04, 0x12, 0x14, 0x97, 0x44, 0x06, 0x00
+	.byte 0x29, 0xD8, 0x4A, 0x18, 0x7A, 0x44, 0xD2, 0x88, 0x12, 0x04, 0x12, 0x14, 0x97, 0x44
+_021BD77E:
+	.byte 0x06, 0x00
 	.byte 0x18, 0x00, 0x24, 0x00, 0x40, 0x00, 0xA0, 0x68, 0x00, 0x21, 0x22, 0x1D, 0xFF, 0xF7, 0x6C, 0xFF
 	.byte 0x20, 0x78, 0x40, 0x1C, 0x20, 0x70, 0x10, 0xBD, 0x60, 0x68, 0x00, 0x28, 0x19, 0xD1, 0x48, 0x1C
 	.byte 0x20, 0x70, 0x10, 0xBD, 0x20, 0x1C, 0xFF, 0xF7, 0xC9, 0xFF, 0x00, 0x28, 0x11, 0xD1, 0xA0, 0x68
@@ -3577,15 +3564,9 @@ LAB_overlay_d_216__021bd96e: ; 0x021BD96E
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end LAB_overlay_d_216__021bd96e
-
-	arm_func_start switchdataD_overlay_d_216__021bd990
-switchdataD_overlay_d_216__021bd990: ; 0x021BD990
-	eoreq r0, r2, r6
-	adceq r0, sl, ip, ror r0
-	arm_func_end switchdataD_overlay_d_216__021bd990
-
-	thumb_func_start FUN_021BD998
-FUN_021BD998: ; 0x021BD998
+_021BD990:
+	.byte 0x06, 0x00, 0x22, 0x00, 0x7C, 0x00, 0xAA, 0x00
+_021BD998:
 	ldrb r0, [r4, #5]
 	cmp r0, #0
 	beq _021BDA4A
@@ -3671,7 +3652,6 @@ _021BDA3C:
 	str r0, [r1]
 	add r0, r6, #0
 	blx FUN_02031194
-	thumb_func_end FUN_021BD998
 _021BDA4A:
 	add sp, #4
 	pop {r3, r4, r5, r6, pc}
@@ -3875,24 +3855,9 @@ _021BDD92:
 	.byte 0x07, 0x00
 _021BDDA2:
 	.byte 0x00, 0x0F
-
-	thumb_func_start DAT_overlay_d_216__021bdda5
-DAT_overlay_d_216__021bdda5: ; 0x021BDDA4
-	lsl r1, r0, #4
-	lsl r0, r2, #4
-	asr r2, r0, #4
-	lsl r2, r0, #0xc
-	lsl r2, r2, #8
-	asr r4, r0, #0xc
-	lsl r2, r0, #0x14
-	lsl r4, r2, #0
-	lsl r0, r0, #0
-	lsl r0, r0, #0
-	lsl r0, r0, #0
-	lsl r0, r0, #0
-	lsl r0, r0, #0
-	lsl r0, r0, #0
-	thumb_func_end DAT_overlay_d_216__021bdda5
+_021BDDA4:
+	.byte 0x01, 0x01, 0x10, 0x01, 0x02, 0x11, 0x02, 0x03, 0x12, 0x02, 0x04, 0x13
+	.byte 0x02, 0x05, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 _021BDDC0:
 	.byte 0x62, 0x65, 0x61, 0x63, 0x6F, 0x6E, 0x5F, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6C, 0x5F, 0x67, 0x72
 	.byte 0x61, 0x2E, 0x63, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00

@@ -1,6 +1,5 @@
 	.include "asm/macros/function.inc"
 
-	.extern FUN_01E801FC
 	.extern FUN_020056A0
 	.extern FUN_020056EC
 	.extern FUN_020061E4
@@ -1749,17 +1748,10 @@ _021F435C:
 	lsl r1, r1, #0x10
 	asr r1, r1, #0x10
 	add pc, r1
-
-	arm_func_start switchdataD_overlay_d_112__021f4368
-switchdataD_overlay_d_112__021f4368: ; 0x021F4368
-	andeqs r0, r8, lr
-	subeq r0, r4, r6, lsr r0
-	adceqs r0, ip, r4, lsr #1
-	rsceqs r0, sl, ip, ror #1
-	arm_func_end switchdataD_overlay_d_112__021f4368
-
-	thumb_func_start FUN_021F4378
-FUN_021F4378: ; 0x021F4378
+_021F4368:
+	.byte 0x0E, 0x00, 0x18, 0x00, 0x36, 0x00, 0x44, 0x00
+	.byte 0xA4, 0x00, 0xBC, 0x00, 0xEC, 0x00, 0xFA, 0x00
+_021F4378:
 	mov r0, #1
 	str r0, [r4, #4]
 	ldr r0, _021F44DC ; =0x0000062F
@@ -1775,7 +1767,6 @@ _021F4382:
 	mov r1, #3
 	bl FUN_overlay_d_112__021f4794
 	mov r0, #2
-	thumb_func_end FUN_021F4378
 _021F439A:
 	b _021F4462
 _021F439C:
@@ -3214,19 +3205,10 @@ FUN_overlay_d_112__021f5064: ; 0x021F5064
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end FUN_overlay_d_112__021f5064
-
-	arm_func_start switchdataD_overlay_d_112__021f5074
-switchdataD_overlay_d_112__021f5074: ; 0x021F5074
-	andeqs r0, r0, r0, lsl r0
-	eoreq r0, r4, sl, lsl r0
-	eoreqs r0, lr, r4, lsr r0
-	subeq r0, r8, r8, asr #32
-	arm_func_end switchdataD_overlay_d_112__021f5074
-_021F5084:
-	.byte 0x52, 0x00
-
-	non_word_aligned_thumb_func_start FUN_021F5086
-FUN_021F5086: ; 0x021F5086
+_021F5074:
+	.byte 0x10, 0x00, 0x10, 0x00, 0x1A, 0x00, 0x24, 0x00, 0x34, 0x00, 0x3E, 0x00
+	.byte 0x48, 0x00, 0x48, 0x00, 0x52, 0x00
+_021F5086:
 	ldrb r0, [r0, #8]
 	cmp r0, #0
 	bne _021F50CC
@@ -3271,7 +3253,6 @@ _021F50C8:
 _021F50CC:
 	mov r0, #0
 	bx lr
-	thumb_func_end FUN_021F5086
 
 	thumb_func_start LAB_overlay_d_112__021f50d0
 LAB_overlay_d_112__021f50d0: ; 0x021F50D0
@@ -3372,14 +3353,14 @@ _021F51BE:
 	bl FUN_overlay_d_112__021f5330
 _021F51D2:
 	add r4, r4, #1
-
-	arm_func_start FUN_021F51D4
-FUN_021F51D4: ; 0x021F51D4
-	blle FUN_01E801FC
-	arm_func_end FUN_021F51D4
-_021F51D8:
-	.byte 0x68, 0x68, 0x00, 0xF0, 0x33, 0xFA, 0x28, 0x1C
-	.byte 0x3B, 0xF6, 0xE6, 0xEA, 0xF8, 0xBD, 0x00, 0x00
+	cmp r4, #8
+	blt _021F51BE
+	ldr r0, [r5, #4]
+	bl FUN_overlay_d_112__021f5644
+	add r0, r5, #0
+	blx FUN_020307B0
+	pop {r3, r4, r5, r6, r7, pc}
+	.balign 4, 0
 
 	thumb_func_start FUN_overlay_d_112__021f51e8
 FUN_overlay_d_112__021f51e8: ; 0x021F51E8

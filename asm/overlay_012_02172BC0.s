@@ -1148,25 +1148,10 @@ _0217478A:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_02174796: ; jump table
-	.hword _021747BA - _02174796 - 2 ; case 0
-	.hword _021747C8 - _02174796 - 2 ; case 1
-	.hword _021747D2 - _02174796 - 2 ; case 2
-	.hword _021747E0 - _02174796 - 2 ; case 3
-	.hword _021747EE - _02174796 - 2 ; case 4
-	.hword _02174808 - _02174796 - 2 ; case 5
-	.hword _02174844 - _02174796 - 2 ; case 6
-	.hword _02174856 - _02174796 - 2 ; case 7
-	.hword _02174866 - _02174796 - 2 ; case 8
-	.hword _021748F2 - _02174796 - 2 ; case 9
-	.hword _0217490E - _02174796 - 2 ; case 10
-	.hword _02174930 - _02174796 - 2 ; case 11
-	.hword _0217494A - _02174796 - 2 ; case 12
-	.hword _021749B6 - _02174796 - 2 ; case 13
-	.hword _02174A9C - _02174796 - 2 ; case 14
-	.hword _02174AA4 - _02174796 - 2 ; case 15
-	.hword _02174AC6 - _02174796 - 2 ; case 16
-	.hword _02174ACC - _02174796 - 2 ; case 17
+_02174796:
+	.byte 0x22, 0x00, 0x30, 0x00, 0x3A, 0x00, 0x48, 0x00, 0x56, 0x00
+	.byte 0x70, 0x00, 0xAC, 0x00, 0xBE, 0x00, 0xCE, 0x00, 0x5A, 0x01, 0x76, 0x01, 0x98, 0x01, 0xB2, 0x01
+	.byte 0x1E, 0x02, 0x04, 0x03, 0x0C, 0x03, 0x2E, 0x03, 0x34, 0x03
 _021747BA:
 	ldr r0, [sp, #0xc]
 	ldr r1, [sp, #0x14]

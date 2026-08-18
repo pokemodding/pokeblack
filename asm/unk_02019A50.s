@@ -1,0 +1,829 @@
+	.include "asm/macros/function.inc"
+
+	.extern FUN_0200AE54
+	.extern FUN_0200AFD4
+	.extern FUN_02017E1C
+	.extern FUN_02017E40
+	.extern FUN_02017E64
+	.extern FUN_02017e88
+	.extern FUN_02018584
+	.extern FUN_020185C4
+	.extern FUN_020185F0
+	.extern FUN_0201A59C
+	.extern FUN_0201AB28
+	.extern FUN_0201ADA4
+	.extern FUN_0201F448
+	.extern FUN_02045f5c
+	.extern FUN_0209C0A4
+	.extern FUN_0201AE1C
+
+	.text
+
+	thumb_func_start FUN_02019A50
+FUN_02019A50: ; 0x02019A50
+	push {r0, r1, r2, r3}
+	push {r3, r4, r5, r6, r7, lr}
+	add r5, r0, #0
+	mov r4, #0
+	lsr r6, r1, #1
+	beq _02019A72
+	thumb_func_end FUN_02019A50
+
+	thumb_func_start FUN_02019a5c
+FUN_02019a5c: ; 0x02019A5C
+	add r7, sp, #0x20
+_02019A5E:
+	add r0, r7, #0
+	bl FUN_02019A7C
+	lsl r1, r4, #1
+	ldrh r2, [r5, r1]
+	add r4, r4, #1
+	eor r0, r2
+	strh r0, [r5, r1]
+	cmp r4, r6
+	blo _02019A5E
+_02019A72:
+	pop {r3, r4, r5, r6, r7}
+	pop {r3}
+	add sp, #0x10
+	bx r3
+	.balign 4, 0
+	thumb_func_end FUN_02019a5c
+
+	thumb_func_start FUN_02019A7C
+FUN_02019A7C: ; 0x02019A7C
+	ldr r2, [r0]
+	ldr r1, _02019A94 ; =0x41C64E6D
+	add r3, r2, #0
+	mul r3, r1
+	ldr r1, _02019A98 ; =0x00006073
+	add r1, r3, r1
+	str r1, [r0]
+	lsr r0, r1, #0x10
+	lsl r0, r0, #0x10
+	lsr r0, r0, #0x10
+	bx lr
+	nop
+_02019A94: .word 0x41C64E6D
+_02019A98: .word 0x00006073
+	thumb_func_end FUN_02019A7C
+
+	thumb_func_start FUN_02019A9C
+FUN_02019A9C: ; 0x02019A9C
+	push {r3, r4}
+	mov r2, #0
+	mov r3, #0
+	lsr r4, r1, #1
+	beq _02019AB6
+_02019AA6:
+	lsl r1, r3, #1
+	ldrh r1, [r0, r1]
+	add r3, r3, #1
+	add r1, r2, r1
+	lsl r1, r1, #0x10
+	lsr r2, r1, #0x10
+	cmp r3, r4
+	blo _02019AA6
+_02019AB6:
+	add r0, r2, #0
+	pop {r3, r4}
+	bx lr
+	thumb_func_end FUN_02019A9C
+
+	thumb_func_start FUN_02019ABC
+FUN_02019ABC: ; 0x02019ABC
+	push {r4, r5, r6, lr}
+	add r6, r0, #0
+	ldr r1, [r6]
+	mov r2, #0
+	mov r5, #0
+	bl FUN_02019C38
+	add r4, r0, #0
+	ldr r1, [r6]
+	add r0, r6, #0
+	mov r2, #2
+	bl FUN_02019C38
+	add r6, r0, #0
+	ldr r0, _02019AFC ; =0x020A7370
+	ldrh r1, [r4]
+	ldr r4, _02019B00 ; =0x021462F0
+	ldr r0, [r0]
+	add r2, r4, #0
+	mov r3, #0x20
+	blx FUN_02045f5c
+	add r0, r4, #0
+	add r1, r6, #0
+	bl FUN_0201F448
+	cmp r0, #0
+	bne _02019AF6
+	mov r5, #1
+_02019AF6:
+	add r0, r5, #0
+	pop {r4, r5, r6, pc}
+	nop
+_02019AFC: .word 0x020A7370
+_02019B00: .word 0x021462F0
+	thumb_func_end FUN_02019ABC
+
+	thumb_func_start FUN_02019B04
+FUN_02019B04: ; 0x02019B04
+	push {r3, lr}
+	cmp r2, #6
+	blo _02019B0E
+	add r0, r1, #0
+	pop {r3, pc}
+_02019B0E:
+	lsl r3, r0, #2
+	add r3, r0, r3
+	ldr r0, _02019B40 ; =0x0209E324
+	sub r2, r2, #1
+	add r0, r0, r3
+	ldrsb r2, [r2, r0]
+	mov r0, #0
+	mvn r0, r0
+	cmp r2, r0
+	beq _02019B2A
+	cmp r2, #1
+	bne _02019B3C
+	mov r0, #0x6e
+	b _02019B2C
+_02019B2A:
+	mov r0, #0x5a
+_02019B2C:
+	mul r0, r1
+	lsl r0, r0, #0x10
+	lsr r0, r0, #0x10
+	mov r1, #0x64
+	blx FUN_0209C0A4
+	lsl r0, r0, #0x10
+	lsr r1, r0, #0x10
+_02019B3C:
+	add r0, r1, #0
+	pop {r3, pc}
+	.balign 4, 0
+_02019B40: .word 0x0209E324
+	thumb_func_end FUN_02019B04
+_02019B44:
+	.byte 0x82, 0x00, 0x82, 0x18, 0x02, 0x48, 0x49, 0x1E, 0x80, 0x18, 0x08, 0x56
+	.byte 0x70, 0x47, 0xC0, 0x46, 0x24, 0xE3, 0x09, 0x02
+
+	thumb_func_start FUN_02019B58
+FUN_02019B58: ; 0x02019B58
+	push {r3, lr}
+	bl FUN_020185F0
+	bl FUN_02019B64
+	pop {r3, pc}
+	thumb_func_end FUN_02019B58
+
+	thumb_func_start FUN_02019B64
+FUN_02019B64: ; 0x02019B64
+	push {r3, r4, r5, lr}
+	mov r1, #5
+	mov r2, #0
+	add r4, r0, #0
+	bl FUN_02017e88
+	add r1, r0, #0
+	ldr r0, _02019B8C ; =0x020A7370
+	ldr r5, _02019B90 ; =0x021462F0
+	ldr r0, [r0]
+	add r2, r5, #0
+	mov r3, #0x20
+	blx FUN_02045f5c
+	add r0, r4, #0
+	mov r1, #0x74
+	add r2, r5, #0
+	bl FUN_02017E64
+	pop {r3, r4, r5, pc}
+	.balign 4, 0
+_02019B8C: .word 0x020A7370
+_02019B90: .word 0x021462F0
+	thumb_func_end FUN_02019B64
+
+	thumb_func_start FUN_02019B94
+FUN_02019B94: ; 0x02019B94
+	ldr r3, _02019BA0 ; =FUN_02048f4c
+	add r2, r0, #0
+	add r0, r1, #0
+	mov r1, #0x11
+	bx r3
+	nop
+_02019BA0: .word 0x02048F4C ; was FUN_02048f4c
+	thumb_func_end FUN_02019B94
+
+	thumb_func_start FUN_02019BA4
+FUN_02019BA4: ; 0x02019BA4
+	push {r3, r4, r5, lr}
+	ldr r4, _02019BB8 ; =0x02146398
+	add r5, r1, #0
+	add r1, r4, #0
+	bl FUN_02019B94
+	lsl r0, r5, #2
+	ldr r0, [r4, r0]
+	pop {r3, r4, r5, pc}
+	nop
+_02019BB8: .word 0x02146398
+	thumb_func_end FUN_02019BA4
+_02019BBC:
+	.byte 0x1D, 0x49, 0x40, 0x1A
+	.byte 0x0F, 0x28, 0x35, 0xD8, 0x00, 0x18, 0x78, 0x44, 0xC0, 0x88, 0x00, 0x04, 0x00, 0x14, 0x87, 0x44
+	.byte 0x1E, 0x00, 0x22, 0x00, 0x26, 0x00, 0x2A, 0x00, 0x2E, 0x00, 0x32, 0x00, 0x36, 0x00, 0x3A, 0x00
+	.byte 0x3E, 0x00
+
+	non_word_aligned_thumb_func_start FUN_02019be2
+FUN_02019be2: ; 0x02019BE2
+	lsl r2, r0, #1
+	lsl r6, r0, #1
+	lsl r2, r1, #1
+	lsl r6, r1, #1
+	lsl r2, r2, #1
+	lsl r6, r2, #1
+	lsl r2, r3, #1
+	mov r0, #9
+	bx lr
+	thumb_func_end FUN_02019be2
+_02019BF4:
+	.byte 0x0A, 0x20, 0x70, 0x47, 0x0C, 0x20, 0x70, 0x47, 0x0B, 0x20, 0x70, 0x47
+	.byte 0x0E, 0x20, 0x70, 0x47, 0x01, 0x20, 0x70, 0x47, 0x03, 0x20, 0x70, 0x47, 0x04, 0x20, 0x70, 0x47
+	.byte 0x02, 0x20, 0x70, 0x47, 0x0D, 0x20, 0x70, 0x47, 0x06, 0x20, 0x70, 0x47, 0x05, 0x20, 0x70, 0x47
+	.byte 0x07, 0x20, 0x70, 0x47, 0x0F, 0x20, 0x70, 0x47, 0x10, 0x20, 0x70, 0x47, 0x08, 0x20, 0x70, 0x47
+	.byte 0x00, 0x20, 0x70, 0x47, 0x2A, 0x01, 0x00, 0x00
+
+	thumb_func_start FUN_02019C38
+FUN_02019C38: ; 0x02019C38
+	mov r3, #0x3e
+	lsl r3, r3, #0xc
+	and r1, r3
+	lsr r1, r1, #0xd
+	lsl r3, r1, #2
+	ldr r1, _02019C50 ; =0x0209E3A4
+	add r0, #8
+	add r1, r1, r3
+	ldrb r1, [r2, r1]
+	add r0, r0, r1
+	bx lr
+	nop
+_02019C50: .word 0x0209E3A4
+	thumb_func_end FUN_02019C38
+
+	thumb_func_start FUN_02019C54
+FUN_02019C54: ; 0x02019C54
+	push {r3, lr}
+	ldr r2, _02019C74 ; =0x02146270
+	ldrh r3, [r2, #2]
+	cmp r0, r3
+	bne _02019C64
+	ldrh r2, [r2]
+	thumb_func_end FUN_02019C54
+
+	thumb_func_start FUN_02019c60
+FUN_02019c60: ; 0x02019C60
+	cmp r1, r2
+	beq _02019C70
+_02019C64:
+	ldr r2, _02019C74 ; =0x02146270
+	strh r1, [r2]
+	strh r0, [r2, #2]
+	ldr r2, _02019C78 ; =0x02146274
+	bl FUN_0201ADA4
+_02019C70:
+	ldr r0, _02019C78 ; =0x02146274
+	pop {r3, pc}
+	.balign 4, 0
+_02019C74: .word 0x02146270
+_02019C78: .word 0x02146274
+	thumb_func_end FUN_02019c60
+
+	thumb_func_start FUN_02019C7C
+FUN_02019C7C: ; 0x02019C7C
+	push {r3, lr}
+	mov r1, #0x1b
+	bl FUN_0201AE1C
+	cmp r0, #0
+	beq _02019C8C
+	mov r0, #2
+	pop {r3, pc}
+_02019C8C:
+	mov r0, #1
+	pop {r3, pc}
+	thumb_func_end FUN_02019C7C
+
+	thumb_func_start FUN_02019C90
+FUN_02019C90: ; 0x02019C90
+	push {r4, lr}
+	add r4, r2, #0
+	bl FUN_02019C54
+	add r1, r4, #0
+	bl FUN_0201AE1C
+	pop {r4, pc}
+	thumb_func_end FUN_02019C90
+
+	thumb_func_start FUN_02019CA0
+FUN_02019CA0: ; 0x02019CA0
+	push {r4, r5, r6, lr}
+	add r4, r1, #0
+	add r5, r0, #0
+	mov r1, #5
+	mov r2, #0
+	bl FUN_02017E1C
+	add r6, r0, #0
+	add r0, r5, #0
+	mov r1, #0x6f
+	mov r2, #0
+	bl FUN_02017E1C
+	add r1, r0, #0
+	lsl r0, r6, #0x10
+	lsl r1, r1, #0x10
+	lsl r2, r4, #0x10
+	lsr r0, r0, #0x10
+	lsr r1, r1, #0x10
+	lsr r2, r2, #0x10
+	bl FUN_02018584
+	add r2, r0, #0
+	add r0, r5, #0
+	mov r1, #8
+	bl FUN_02017E40
+	add r0, r5, #0
+	bl FUN_020185C4
+	pop {r4, r5, r6, pc}
+	.balign 4, 0
+	thumb_func_end FUN_02019CA0
+_02019CE0:
+	.byte 0x18, 0xB4, 0x04, 0x1C, 0x0B, 0x1C, 0x1B, 0x22, 0x03, 0xCC, 0x03, 0xC3, 0x52, 0x1E, 0xFB, 0xD1
+	.byte 0x20, 0x68, 0x18, 0x60, 0x18, 0xBC, 0x70, 0x47, 0x00, 0x4B, 0x18, 0x47, 0xBD, 0x9B, 0x01, 0x02
+	.byte 0x74, 0x38, 0x03, 0x28, 0x11, 0xD8, 0x00, 0x18, 0x78, 0x44, 0xC0, 0x88, 0x00, 0x04, 0x00, 0x14
+	.byte 0x87, 0x44, 0x06, 0x00, 0x0A, 0x00, 0x0E, 0x00, 0x12, 0x00, 0x01, 0x20, 0x70, 0x47, 0x02, 0x20
+	.byte 0x70, 0x47, 0x03, 0x20, 0x70, 0x47, 0x04, 0x20, 0x70, 0x47, 0x00, 0x20, 0x70, 0x47, 0x00, 0x00
+	.byte 0x10, 0xB5, 0x08, 0x4A, 0x0C, 0x1C, 0x90, 0x42, 0x07, 0xD0, 0x20, 0x22, 0xFF, 0xF7, 0xA8, 0xFF
+	.byte 0x84, 0x42, 0x00, 0xDB, 0x00, 0x24, 0x20, 0x1C, 0x10, 0xBD, 0x02, 0x2C, 0x00, 0xD3, 0x00, 0x24
+	.byte 0x20, 0x1C, 0x10, 0xBD, 0x8A, 0x02, 0x00, 0x00, 0x18, 0xB4, 0x00, 0x29, 0x0D, 0xD0
+
+	non_word_aligned_thumb_func_start FUN_02019d5e
+FUN_02019d5e: ; 0x02019D5E
+	ldr r3, _02019D80 ; =0x0209E280
+	mov r4, #0
+_02019D62:
+	lsl r2, r4, #1
+	ldrh r2, [r3, r2]
+	cmp r0, r2
+	bne _02019D70
+	mov r0, #0
+	pop {r3, r4}
+	bx lr
+_02019D70:
+	add r2, r4, #1
+	lsl r2, r2, #0x10
+	lsr r4, r2, #0x10
+	cmp r4, #4
+	blo _02019D62
+	add r0, r1, #0
+	pop {r3, r4}
+	bx lr
+	.balign 4, 0
+_02019D80: .word 0x0209E280
+	thumb_func_end FUN_02019d5e
+_02019D84:
+	.byte 0x06, 0x4A, 0x00, 0x23, 0x59, 0x00, 0x51, 0x5A, 0x88, 0x42, 0x01, 0xD1
+	.byte 0x01, 0x20, 0x70, 0x47, 0x5B, 0x1C, 0x0C, 0x2B, 0xF6, 0xD3, 0x00, 0x20, 0x70, 0x47, 0xC0, 0x46
+	.byte 0x2C, 0xE4, 0x09, 0x02
+
+	thumb_func_start FUN_02019DA4
+FUN_02019DA4: ; 0x02019DA4
+	push {r3, r4, r5, r6, r7, lr}
+	sub sp, #8
+	add r7, r1, #0
+	thumb_func_end FUN_02019DA4
+
+	non_word_aligned_thumb_func_start FUN_02019daa
+FUN_02019daa: ; 0x02019DAA
+	add r5, r0, #0
+	add r0, r7, #0
+	mov r1, #5
+	mov r2, #0
+	mov r6, #5
+	bl FUN_02017E1C
+	lsl r0, r0, #0x10
+	lsr r0, r0, #0x10
+	str r0, [sp, #4]
+	add r0, r7, #0
+	mov r1, #6
+	mov r2, #0
+	bl FUN_02017E1C
+	lsl r0, r0, #0x10
+	lsr r0, r0, #0x10
+	str r0, [sp]
+	cmp r5, #0
+	bne _02019DD8
+	add sp, #8
+	mov r0, #1
+	pop {r3, r4, r5, r6, r7, pc}
+_02019DD8:
+	add r0, r5, #0
+	mov r1, #4
+	bl FUN_0200AE54
+	add r4, r0, #0
+	add r0, r5, #0
+	add r1, r6, #0
+	bl FUN_0200AE54
+	add r6, r0, #0
+	add r0, r7, #0
+	mov r1, #0x9e
+	mov r2, #0
+	bl FUN_02017E1C
+	cmp r6, #1
+	beq _02019E00
+	cmp r6, #2
+	beq _02019E0A
+	b _02019E14
+_02019E00:
+	cmp r4, r0
+	ble _02019E14
+	add sp, #8
+	mov r0, #2
+	pop {r3, r4, r5, r6, r7, pc}
+_02019E0A:
+	cmp r4, r0
+	bge _02019E14
+	add sp, #8
+	mov r0, #2
+	pop {r3, r4, r5, r6, r7, pc}
+_02019E14:
+	add r0, r7, #0
+	mov r1, #0x4c
+	mov r2, #0
+	mov r4, #0
+	thumb_func_end FUN_02019daa
+
+	thumb_func_start FUN_02019e1c
+FUN_02019e1c: ; 0x02019E1C
+	bl FUN_02017E1C
+	cmp r0, #0
+	beq _02019E2A
+	add sp, #8
+	mov r0, #0x20
+	pop {r3, r4, r5, r6, r7, pc}
+_02019E2A:
+	ldr r2, [sp, #4]
+	add r0, r5, #0
+	mov r1, #9
+	bl FUN_0200AFD4
+	cmp r0, #0
+	beq _02019E3E
+	add sp, #8
+	mov r0, #4
+	pop {r3, r4, r5, r6, r7, pc}
+_02019E3E:
+	ldr r2, [sp]
+	add r0, r5, #0
+	mov r1, #0xa
+	bl FUN_0200AFD4
+	cmp r0, #0
+	beq _02019E4E
+	mov r4, #0x40
+_02019E4E:
+	add r0, r4, #0
+	add sp, #8
+	pop {r3, r4, r5, r6, r7, pc}
+	thumb_func_end FUN_02019e1c
+_02019E54:
+	.byte 0x08, 0xB5, 0x84, 0xB0, 0x00, 0x28, 0x02, 0xD1, 0x04, 0xB0, 0x00, 0x20
+	.byte 0x08, 0xBD, 0x01, 0xAB, 0x00, 0x93, 0x02, 0xAB, 0x00, 0xF0, 0xC8, 0xFB, 0x01, 0x99, 0x00, 0x29
+	.byte 0x02, 0xD1, 0x04, 0xB0, 0x00, 0x20, 0x08, 0xBD, 0x02, 0x20, 0x0A, 0x1C, 0x02, 0x42
+
+	non_word_aligned_thumb_func_start FUN_02019e7e
+FUN_02019e7e: ; 0x02019E7E
+	bne _02019E94
+	mov r2, #4
+	add r3, r1, #0
+	tst r3, r2
+	bne _02019E94
+	mov r3, #0x20
+	tst r3, r1
+	bne _02019E94
+	mov r3, #0x40
+	tst r3, r1
+	beq _02019E9A
+_02019E94:
+	add sp, #0x10
+	mov r0, #5
+	pop {r3, pc}
+_02019E9A:
+	mov r3, #8
+	tst r3, r1
+	bne _02019ED0
+	mov r0, #0x10
+	add r3, r1, #0
+	tst r3, r0
+	beq _02019EAE
+	add sp, #0x10
+	mov r0, #3
+	pop {r3, pc}
+_02019EAE:
+	add r0, #0xf0
+	tst r0, r1
+	beq _02019EBA
+	add sp, #0x10
+	mov r0, #1
+	pop {r3, pc}
+_02019EBA:
+	mov r0, #0x80
+	tst r0, r1
+	beq _02019EC6
+	add sp, #0x10
+	mov r0, #7
+	pop {r3, pc}
+_02019EC6:
+	mov r0, #1
+	tst r0, r1
+	bne _02019ECE
+	mov r2, #0
+_02019ECE:
+	add r0, r2, #0
+_02019ED0:
+	add sp, #0x10
+	pop {r3, pc}
+_02019ED4:
+	.byte 0xF0, 0xB5, 0x8D, 0xB0, 0x00, 0x90, 0x08, 0x1C, 0x01, 0x91, 0x00, 0xF0
+	.byte 0x9B, 0xFD, 0x03, 0x90, 0x06, 0x1C, 0x04, 0xA8, 0x00, 0x21, 0x0C, 0x22, 0x00, 0x25, 0x68, 0xF0
+	.byte 0x6E, 0xEE, 0x03, 0x98, 0x00, 0x28, 0x20, 0xDD
+_02019EF8:
+	ldr r0, [sp, #4]
+	add r1, r5, #0
+	bl FUN_0201AB28
+	mov r1, #5
+	mov r2, #0
+	add r7, r0, #0
+	lsl r4, r5, #1
+	bl FUN_02017E1C
+	add r1, sp, #0x28
+	strh r0, [r1, r4]
+	add r0, r7, #0
+	mov r1, #0x9e
+	mov r2, #0
+	bl FUN_02017E1C
+	add r1, sp, #0x1c
+	strh r0, [r1, r4]
+	ldr r0, [sp]
+	add r1, r7, #0
+	bl FUN_02019DA4
+	cmp r0, #0
+	beq _02019F32
+	mov r1, #0
+	thumb_func_end FUN_02019e7e
+
+	thumb_func_start FUN_02019f2c
+FUN_02019f2c: ; 0x02019F2C
+	add r0, sp, #0x28
+	strh r1, [r0, r4]
+	sub r6, r6, #1
+_02019F32:
+	ldr r0, [sp, #0xc]
+	add r5, r5, #1
+	cmp r5, r0
+	blt _02019EF8
+	ldr r0, [sp]
+	mov r1, #7
+	bl FUN_0200AE54
+	cmp r0, #0
+	bne _02019FA4
+	ldr r0, [sp, #0xc]
+	cmp r0, #1
+	ble _02019FA4
+	mov r0, #0
+	str r0, [sp, #8]
+	ldr r0, [sp, #0xc]
+	sub r0, r0, #1
+	mov ip, r0
+	cmp r0, #0
+	ble _02019FA4
+	add r3, sp, #0x28
+_02019F5C:
+	ldr r0, [sp, #8]
+	add r5, r0, #1
+	ldr r0, [sp, #0xc]
+	cmp r5, r0
+	bge _02019F98
+	ldr r0, [sp, #8]
+	lsl r4, r0, #1
+	add r0, sp, #0x1c
+	ldrh r7, [r0, r4]
+_02019F6E:
+	lsl r2, r5, #1
+	ldrh r1, [r3, r4]
+	ldrh r0, [r3, r2]
+	cmp r1, r0
+	bne _02019F90
+	cmp r1, #0
+	beq _02019F90
+	add r0, sp, #0x1c
+	ldrh r0, [r0, r2]
+	cmp r7, r0
+	bls _02019F8A
+	mov r0, #0
+	strh r0, [r3, r4]
+	b _02019F8E
+_02019F8A:
+	mov r0, #0
+	strh r0, [r3, r2]
+_02019F8E:
+	sub r6, r6, #1
+_02019F90:
+	ldr r0, [sp, #0xc]
+	add r5, r5, #1
+	cmp r5, r0
+	blt _02019F6E
+_02019F98:
+	ldr r0, [sp, #8]
+	add r1, r0, #1
+	mov r0, ip
+	str r1, [sp, #8]
+	cmp r1, r0
+	blt _02019F5C
+_02019FA4:
+	ldr r0, [sp]
+	mov r1, #2
+	bl FUN_0200AE54
+	cmp r6, r0
+	bge _02019FB6
+	add sp, #0x34
+	mov r0, #4
+	pop {r4, r5, r6, r7, pc}
+_02019FB6:
+	ldr r0, [sp]
+	ldr r1, [sp, #4]
+	mov r2, #0
+	mov r4, #0
+	bl FUN_0201A59C
+	cmp r0, #1
+	beq _02019FC8
+	mov r4, #1
+_02019FC8:
+	add r0, r4, #0
+	add sp, #0x34
+	pop {r4, r5, r6, r7, pc}
+	.balign 4, 0
+_02019FD0:
+	.byte 0xF8, 0xB5, 0x84, 0xB0, 0x0F, 0x1C, 0x05, 0x1C, 0x14, 0x1C, 0x38, 0x1C, 0x05, 0x21, 0x00, 0x22
+	.byte 0xFD, 0xF7, 0x1C, 0xFF, 0x00, 0x04, 0x00, 0x0C, 0x01, 0x90, 0x38, 0x1C, 0x06, 0x21, 0x00, 0x22
+	.byte 0xFD, 0xF7, 0x14, 0xFF, 0x00, 0x04, 0x00, 0x0C, 0x01, 0x26, 0x00, 0x90, 0x00, 0x2D, 0x02, 0xD1
+	.byte 0x04, 0xB0, 0x30, 0x1C, 0xF8, 0xBD, 0x28, 0x1C, 0x04, 0x21, 0xF0, 0xF7, 0x23, 0xFF, 0x02, 0x90
+	.byte 0x28, 0x1C, 0x05, 0x21, 0xF0, 0xF7, 0x1E, 0xFF, 0x03, 0x90, 0x38, 0x1C, 0x9E, 0x21, 0x00, 0x22
+	.byte 0xFD, 0xF7, 0xFC, 0xFE, 0x03, 0x99, 0x01, 0x29, 0x02, 0xD0, 0x02, 0x29, 0x04, 0xD0, 0x0B, 0xE0
+	.byte 0x02, 0x99, 0x81, 0x42, 0x08, 0xDD, 0x02, 0xE0, 0x02, 0x99, 0x81, 0x42, 0x04, 0xDA, 0x21, 0x68
+	.byte 0x02, 0x20, 0x08, 0x43, 0x00, 0x26, 0x20, 0x60, 0x01, 0x9A, 0x28, 0x1C, 0x09, 0x21, 0xF0, 0xF7
+	.byte 0xC1, 0xFF, 0x00, 0x28, 0x0C, 0xD0, 0x38, 0x1C, 0x4C, 0x21, 0x00, 0x22, 0x00, 0x27, 0xFD, 0xF7
+	.byte 0xDD, 0xFE, 0x00, 0x28, 0x04, 0xD1, 0x21, 0x68, 0x04, 0x20, 0x08, 0x43, 0x3E, 0x1C, 0x20, 0x60
+	.byte 0x00, 0x9A, 0x28, 0x1C, 0x0A, 0x21, 0xF0, 0xF7, 0xAD, 0xFF, 0x00, 0x28, 0x04, 0xD0, 0x21, 0x68
+	.byte 0x40, 0x20, 0x08, 0x43, 0x00, 0x26, 0x20, 0x60, 0x30, 0x1C, 0x04, 0xB0, 0xF8, 0xBD, 0x00, 0x00
+	.byte 0xF0, 0xB5, 0x8F, 0xB0, 0x00, 0x90, 0x00, 0x20, 0x03, 0x90, 0x00, 0x98, 0x0C, 0xAE, 0x01, 0x91
+	.byte 0x14, 0x1C, 0x00, 0x27, 0x00, 0x28, 0x02, 0xD1, 0x03, 0x98, 0x0F, 0xB0, 0xF0, 0xBD, 0x03, 0x9D
+	.byte 0x00, 0x22, 0x06, 0xA9, 0x09, 0xA8, 0x6B, 0x00, 0x6D, 0x1C, 0xF2, 0x52, 0xCA, 0x52, 0xC2, 0x52
+	.byte 0x06, 0x2D, 0xF8, 0xDB, 0x01, 0x98, 0x00, 0xF0, 0xC3, 0xFC, 0x04, 0x90, 0x00, 0x98, 0x02, 0x21
+	.byte 0xF0, 0xF7, 0xC0, 0xFE, 0x04, 0x99, 0x81, 0x42, 0x04, 0xDA, 0x21, 0x68, 0x01, 0x20, 0x08, 0x43
+	.byte 0x20, 0x60, 0x04, 0x27, 0x01, 0x98, 0x00, 0x26, 0x00, 0xF0, 0x96, 0xFC, 0x00, 0x28, 0x3B, 0xDD
+	.byte 0x01, 0x98, 0x31, 0x1C, 0x00, 0xF0, 0x18, 0xFD, 0x05, 0x1C, 0x00, 0x98, 0x29, 0x1C, 0x22, 0x1C
+	.byte 0xFF, 0xF7, 0x66, 0xFF, 0x00, 0x28, 0x00, 0xD1, 0x05, 0x27, 0x28, 0x1C, 0x4C, 0x21, 0x00, 0x22
+	.byte 0xFD, 0xF7, 0x84, 0xFE, 0x00, 0x28, 0x21, 0xD1, 0x70, 0x00, 0x02, 0x90, 0x28, 0x1C, 0x05, 0x21
+	.byte 0x00, 0x22, 0xFD, 0xF7, 0x7B, 0xFE, 0x02, 0x99, 0x0C, 0xAA, 0x50, 0x52, 0x28, 0x1C, 0x06, 0x21
+	.byte 0x00, 0x22, 0xFD, 0xF7, 0x73, 0xFE, 0x02, 0x99, 0x09, 0xAA, 0x50, 0x52, 0x28, 0x1C, 0x6F, 0x21
+	.byte 0x00, 0x22, 0xFD, 0xF7, 0x6B, 0xFE, 0x02, 0x99, 0x06, 0xAA, 0x50, 0x52, 0x28, 0x1C, 0x9E, 0x21
+	.byte 0x00, 0x22, 0xFD, 0xF7, 0x63, 0xFE, 0x03, 0x99, 0x08, 0x18, 0x03, 0x90, 0x01, 0x98, 0x76, 0x1C
+	.byte 0x00, 0xF0, 0x5A, 0xFC, 0x86, 0x42, 0xC3, 0xDB, 0x00, 0x98, 0x07, 0x21, 0xF0, 0xF7, 0x72, 0xFE
+	.byte 0x00, 0x28, 0x20, 0xD1, 0x04, 0x98, 0x01, 0x28, 0x1D, 0xDD, 0x00, 0x20, 0x05, 0x90, 0x02, 0x22
+	.byte 0x08, 0x21
+_0201A182:
+	ldr r0, [sp, #0x14]
+	add r6, r0, #1
+	cmp r6, #6
+	bge _0201A1AC
+	lsl r3, r0, #1
+	add r0, sp, #0x30
+	ldrh r5, [r0, r3]
+_0201A190:
+	lsl r3, r6, #1
+	add r0, sp, #0x30
+	ldrh r0, [r0, r3]
+	cmp r5, r0
+	bne _0201A1A6
+	cmp r5, #0
+	beq _0201A1A6
+	ldr r0, [r4]
+	add r7, r2, #0
+	orr r0, r1
+	str r0, [r4]
+_0201A1A6:
+	add r6, r6, #1
+	cmp r6, #6
+	blt _0201A190
+_0201A1AC:
+	ldr r0, [sp, #0x14]
+	add r0, r0, #1
+	str r0, [sp, #0x14]
+	thumb_func_end FUN_02019f2c
+
+	non_word_aligned_thumb_func_start FUN_0201a1b2
+FUN_0201a1b2: ; 0x0201A1B2
+	cmp r0, #5
+	blt _0201A182
+	ldr r0, [sp]
+	mov r1, #8
+	bl FUN_0200AE54
+	cmp r0, #0
+	bne _0201A20A
+	ldr r0, [sp, #0x10]
+	cmp r0, #1
+	ble _0201A20A
+	mov r0, #0
+	mov ip, r0
+	add r0, sp, #0x24
+	mov r6, #0x10
+_0201A1D0:
+	mov r1, ip
+	add r2, r1, #1
+	cmp r2, #6
+	bge _0201A200
+	mov r1, ip
+	lsl r5, r1, #1
+	add r3, sp, #0x30
+	ldrh r1, [r0, r5]
+	ldrh r3, [r3, r5]
+_0201A1E2:
+	lsl r5, r2, #1
+	ldrh r5, [r0, r5]
+	cmp r1, r5
+	bne _0201A1FA
+	cmp r3, #0
+	beq _0201A1FA
+	cmp r1, #0
+	beq _0201A1FA
+	ldr r5, [r4]
+	mov r7, #3
+	orr r5, r6
+	str r5, [r4]
+_0201A1FA:
+	add r2, r2, #1
+	cmp r2, #6
+	blt _0201A1E2
+_0201A200:
+	mov r1, ip
+	add r1, r1, #1
+	mov ip, r1
+	cmp r1, #5
+	thumb_func_end FUN_0201a1b2
+
+	thumb_func_start FUN_0201a208
+FUN_0201a208: ; 0x0201A208
+	blt _0201A1D0
+_0201A20A:
+	ldr r0, [sp]
+	mov r1, #0xb
+	bl FUN_0200AE54
+	add r5, r0, #0
+	ldr r0, [sp]
+	mov r1, #0xc
+	bl FUN_0200AE54
+	add r1, r0, #0
+	mov r2, #0
+	cmp r5, #0
+	beq _0201A242
+	ldr r0, [sp, #0x10]
+	cmp r0, #1
+	ble _0201A242
+	add r6, sp, #0x30
+_0201A22C:
+	lsl r0, r2, #1
+	ldrh r3, [r6, r0]
+	cmp r5, r3
+	bne _0201A23C
+	add r3, sp, #0x18
+	ldrh r0, [r3, r0]
+	cmp r1, r0
+	beq _0201A242
+_0201A23C:
+	add r2, r2, #1
+	cmp r2, #6
+	blt _0201A22C
+_0201A242:
+	cmp r2, #6
+	bne _0201A250
+	ldr r1, [r4]
+	mov r0, #0x80
+	orr r0, r1
+	str r0, [r4]
+	mov r7, #7
+_0201A250:
+	cmp r7, #0
+	bne _0201A264
+	ldr r0, [sp]
+	ldr r1, [sp, #4]
+	mov r2, #0
+	bl FUN_0201A59C
+	cmp r0, #0
+	bne _0201A264
+	mov r7, #1
+_0201A264:
+	add r0, r7, #0
+	add sp, #0x3c
+	pop {r4, r5, r6, r7, pc}
+	.balign 4, 0
+	thumb_func_end FUN_0201a208
+

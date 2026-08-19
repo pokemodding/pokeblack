@@ -168,13 +168,25 @@ Static main
 Autoload ITCM
 {
 	Address		0x01FF8000
-	Object		*	(.itcm)
+	Object		asm/arm9/arm9_autoload0_01FF8000.o
 }
 
 Autoload DTCM
 {
-	Address		0x027E0000
-	Object		*	(.dtcm)
+	Address		0x02FE0000
+	Object		asm/arm9/arm9_autoload1_02FE0000.o
+}
+
+Autoload MAINEX
+{
+	Address		0x02400000
+	Object		asm/arm9/arm9_autoload2_02400000.o
+}
+
+Autoload VRAM
+{
+	Address		0x06898000
+	Object		asm/arm9/arm9_autoload3_06898000.o
 }
 
 Overlay OVY_0

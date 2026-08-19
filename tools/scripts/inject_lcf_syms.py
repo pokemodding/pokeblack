@@ -6,6 +6,25 @@ import sys
 
 MARKER = "# injected symbol definitions"
 
+AUTOLOAD_INFO_RE = re.compile(r'\.binary\.AUTOLOAD_INFO:.*?\}', re.S)
+BSS_SIZE_RE = re.compile(r'^([ \t]*)WRITEW SDK_AUTOLOAD\.(\w+)\.BSS_SIZE;', re.M)
+
+def widen_autoload_entries(lcf):
+    """Widen the NTR template's three-word autoload entries to the TWL four."""
+    added = 0
+
+    def scrub(match):
+        nonlocal added
+        text, n = BSS_SIZE_RE.subn(
+            lambda m: f"{m.group(1)}WRITEW ADDR(.{m.group(2)});\n"
+                      f"{m.group(1)}WRITEW SDK_AUTOLOAD.{m.group(2)}.BSS_SIZE;",
+            match.group(0))
+        added += n
+        return text
+
+    return AUTOLOAD_INFO_RE.sub(scrub, lcf), added
+
+
 def main():
     if len(sys.argv) not in (3, 4):
         print(__doc__)
@@ -39,8 +58,11 @@ def main():
         lcf = lcf[:f.start()] + block + lcf[f.end():]
         forced = len(names)
 
+    lcf, widened = widen_autoload_entries(lcf)
+
     open(lcf_path, 'w').write(lcf)
-    print(f"injected {count} symbols, {forced} force-active into {lcf_path}")
+    print(f"injected {count} symbols, {forced} force-active, "
+          f"{widened} autoload entries widened into {lcf_path}")
     return 0
 
 

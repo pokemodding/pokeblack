@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""disassemble one ARM7 region into asm/ and print its arm7.lsf block"""
+"""disassemble one static or autoload region into asm/ and print its lsf block"""
 
 import argparse
 import os
@@ -37,10 +37,11 @@ def autoload_blocks(image, load):
         if not span or span % stride:
             continue
         count = span // stride
-        entries = [struct.unpack_from('<2I', image, list_start - load + stride * i)
+        entries = [struct.unpack_from(f'<{stride // 4}I', image,
+                                      list_start - load + stride * i)
                    for i in range(count)]
-        if sum(size for _, size in entries) == payload:
-            return payload_start, entries
+        if sum(entry[1] for entry in entries) == payload:
+            return payload_start, [(e[0], e[1], e[-1]) for e in entries]
     sys.exit(f"error: {span:#x} bytes of autoload list fit no known entry size")
 
 
@@ -59,11 +60,16 @@ def run(cmd, stdout=None, quiet=True):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('region', help="'static' or an autoload index")
+    parser.add_argument('-p', '--processor', type=int, choices=(7, 9), default=7)
     parser.add_argument('--rom', default=os.path.join(ROOT, 'baserom.nds'))
-    parser.add_argument('--outdir', default=os.path.join(ROOT, 'asm', 'arm7'))
+    parser.add_argument('--outdir')
     parser.add_argument('--workdir')
     parser.add_argument('-v', '--verbose', action='store_true')
     args = parser.parse_args()
+
+    arm7 = args.processor == 7
+    tag = 'arm7' if arm7 else 'arm9'
+    outdir = args.outdir or os.path.join(ROOT, 'asm', tag)
 
     for path, what in ((args.rom, "base ROM"), (NDSDISASM, "ndsdisasm")):
         if not os.path.exists(path):
@@ -71,34 +77,39 @@ def main():
 
     with open(args.rom, 'rb') as rom:
         header = rom.read(0x40)
-        arm7_offset = struct.unpack_from('<I', header, 0x30)[0]
-        arm7_load = struct.unpack_from('<I', header, 0x38)[0]
-        arm7_size = struct.unpack_from('<I', header, 0x3C)[0]
-        rom.seek(arm7_offset)
-        image = rom.read(arm7_size)
+        entry = 0x30 if arm7 else 0x20
+        module_offset = struct.unpack_from('<I', header, entry)[0]
+        module_load = struct.unpack_from('<I', header, entry + 8)[0]
+        module_size = struct.unpack_from('<I', header, entry + 12)[0]
+        rom.seek(module_offset)
+        image = rom.read(module_size)
 
-    workdir = args.workdir or os.path.join(ROOT, 'build', 'black.us', 'arm7', args.region)
+    workdir = args.workdir or os.path.join(ROOT, 'build', 'black.us', tag, args.region)
     os.makedirs(workdir, exist_ok=True)
-    os.makedirs(args.outdir, exist_ok=True)
+    os.makedirs(outdir, exist_ok=True)
 
-    if len(image) != arm7_size:
-        sys.exit(f"error: read {len(image)} bytes of ARM7, header says {arm7_size}")
-    open(os.path.join(workdir, 'arm7.bin'), 'wb').write(image)
+    # the ARM9 is stored BLZ-compressed, so its module params live in the dumped image
+    if not arm7:
+        raw = os.path.join(workdir, 'module.bin')
+        run([NDSDISASM, '-c', os.path.join(CONFIG_DIR, 'arm9_config.cfg'), '-Du', raw,
+             args.rom], stdout=subprocess.DEVNULL, quiet=True)
+        image = open(raw, 'rb').read()
+    elif len(image) != module_size:
+        sys.exit(f"error: read {len(image)} bytes, header says {module_size}")
+    open(os.path.join(workdir, f'{tag}.bin'), 'wb').write(image)
 
-    payload_start, blocks = autoload_blocks(image, arm7_load)
+    payload_start, blocks = autoload_blocks(image, module_load)
 
     if args.region == 'static':
-        load, size, extra = arm7_load, payload_start - arm7_load, []
-        name = 'arm7_static'
+        load, size, extra, bss = module_load, payload_start - module_load, [], 0
+        name = f'{tag}_static'
     else:
         index = int(args.region, 0)
         if index >= len(blocks):
             sys.exit(f"error: autoload {index} of {len(blocks)} does not exist")
-        offset = payload_start - arm7_load + sum(s for _, s in blocks[:index])
-        load, size = blocks[index]
+        load, size, bss = blocks[index]
         extra = ['-a', str(index)]
-        name = f'arm7_autoload{index}'
-        del offset
+        name = f'{tag}_autoload{index}'
 
     config = os.path.join(CONFIG_DIR, f'{name}.cfg')
     if not os.path.exists(config):
@@ -107,7 +118,7 @@ def main():
     filtered = os.path.join(workdir, 'config.cfg')
     cmd = [sys.executable, os.path.join(SCRIPTS, 'make_ndsdisasm_config.py'), config,
            '-o', filtered, '--load', hex(load), '--size', hex(size),
-           '--entry', hex(load), '--title', f"ARM7 {args.region} configuration"]
+           '--entry', hex(load), '--title', f"{tag} {args.region} configuration"]
     seeds = os.path.join(CONFIG_DIR, f'{name}_seeds.cfg')
     if os.path.exists(seeds):
         cmd += ['--merge', seeds]
@@ -116,7 +127,8 @@ def main():
     dump = os.path.join(workdir, 'dump.s')
     raw = os.path.join(workdir, 'region.bin')
     with open(dump, 'w') as handle:
-        run([NDSDISASM, '-c', filtered, '-7'] + extra + ['-d', '-Du', raw, args.rom],
+        run([NDSDISASM, '-c', filtered] + (['-7'] if arm7 else []) + extra
+            + ['-d', '-Du', raw, args.rom],
             stdout=handle, quiet=not args.verbose)
 
     # -Du gives the whole static for the main region, just the payload for an autoload
@@ -143,16 +155,19 @@ def main():
     run(fix, quiet=not args.verbose)
 
     lsf = os.path.join(workdir, 'objects.lsf')
-    run([sys.executable, os.path.join(SCRIPTS, 'split_dump.py'), fixed,
-         '--outdir', args.outdir, '--prefix', name, '--lines', '10000000',
-         '--lsf', lsf], quiet=not args.verbose)
+    split = [sys.executable, os.path.join(SCRIPTS, 'split_dump.py'), fixed,
+             '--outdir', outdir, '--prefix', name, '--lines', '10000000',
+             '--lsf', lsf]
+    if bss:
+        split += ['--bss', hex(bss)]
+    run(split, quiet=not args.verbose)
 
     holes = sum(1 for line in open(fixed) if '.byte' in line)
-    outrel = os.path.relpath(args.outdir, ROOT)
+    outrel = os.path.relpath(outdir, ROOT)
     objects = [os.path.join(outrel, os.path.basename(line.split()[-1]))
                for line in open(lsf) if line.strip()]
 
-    print(f"arm7 {args.region}: load {load:#010x} size {size:#x}, "
+    print(f"{tag} {args.region}: load {load:#010x} size {size:#x}, "
           f"{len(objects)} object(s), {holes} byte lines")
     print()
     if args.region == 'static':

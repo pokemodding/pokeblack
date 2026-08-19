@@ -99,7 +99,7 @@ C_SRCS         := $(filter $(addprefix $(SRC_SUBDIR)/,$(LINKED_C_SRCS)),$(wildca
 
 # arm7_main.s is ARM7, arm9_remaining.s predates the disassembly and redefines its symbols
 ASM_EXCLUDE    := $(ASM_SUBDIR)/arm7_main.s $(ASM_SUBDIR)/arm9_remaining.s
-ASM_SRCS       := $(filter-out $(ASM_EXCLUDE),$(wildcard $(ASM_SUBDIR)/*.s))
+ASM_SRCS       := $(filter-out $(ASM_EXCLUDE),$(wildcard $(ASM_SUBDIR)/*.s) $(wildcard $(ASM_SUBDIR)/arm9/*.s))
 
 GLOBAL_ASM_SRCS != grep -rl 'GLOBAL_ASM(' $(C_SRCS) 2>/dev/null || true
 
@@ -107,7 +107,7 @@ C_OBJS         = $(C_SRCS:%.c=$(BUILD_DIR)/%.o)
 ASM_OBJS       = $(ASM_SRCS:%.s=$(BUILD_DIR)/%.o)
 GLOBAL_ASM_OBJS = $(GLOBAL_ASM_SRCS:%.c=$(BUILD_DIR)/%.o)
 ALL_OBJS       = $(C_OBJS) $(ASM_OBJS)
-ALL_BUILDDIRS  := $(BUILD_DIR)/$(SRC_SUBDIR) $(BUILD_DIR)/$(ASM_SUBDIR)
+ALL_BUILDDIRS  := $(BUILD_DIR)/$(SRC_SUBDIR) $(BUILD_DIR)/$(ASM_SUBDIR) $(BUILD_DIR)/$(ASM_SUBDIR)/arm9
 
 BASEROM        := baserom.nds
 BASEROM_SHA1   := 26ad0b9967aa279c4a266ee69f52b9b2332399a5
@@ -150,7 +150,7 @@ MAKELCF_FLAGS  := \
 DUMMY := $(shell mkdir -p $(ALL_BUILDDIRS))
 
 .DELETE_ON_ERROR:
-.PHONY: all clean tidy info patch_mwasmarm check-toolchain extract check-baserom compare compare-overlays
+.PHONY: all clean tidy info patch_mwasmarm check-toolchain extract check-baserom compare compare-overlays compare-table
 
 all: patch_mwasmarm $(SBIN)
 
@@ -200,6 +200,10 @@ compare-overlays: $(SBIN) $(ORIG_ARM9)
 	@python3 $(TOOLSDIR)/scripts/compare_overlays.py \
 		--table $(ORIG_Y9) --overlays $(ORIG_OVERLAYS) --built $(BUILD_DIR)
 
+compare-table: $(SBIN) $(ORIG_ARM9)
+	@python3 $(TOOLSDIR)/scripts/compare_overlay_table.py \
+		$(BUILD_DIR)/$(ELFNAME)_table.sbin $(ORIG_Y9)
+
 CANARY_SRC  := test/toolchain_canary.c
 CANARY_OBJ  := $(BUILD_DIR)/toolchain_canary.o
 CANARY_TEXT := $(BUILD_DIR)/toolchain_canary.text
@@ -248,10 +252,10 @@ FORCE_ACTIVE_LIST := $(BUILD_DIR)/force_active.txt
 
 
 $(EXTERN_SYMS): $(ASM_SRCS)
-	@python3 $(TOOLSDIR)/scripts/gen_extern_syms.py 'asm/unk_*.s' 'asm/overlay_*.s' -o $@
+	@python3 $(TOOLSDIR)/scripts/gen_extern_syms.py 'asm/unk_*.s' 'asm/overlay_*.s' 'asm/arm9/*.s' -o $@
 
 $(FORCE_ACTIVE_LIST): $(ASM_SRCS)
-	@python3 $(TOOLSDIR)/scripts/gen_force_active.py 'asm/unk_*.s' 'asm/overlay_*.s' -o $@
+	@python3 $(TOOLSDIR)/scripts/gen_force_active.py 'asm/unk_*.s' 'asm/overlay_*.s' 'asm/arm9/*.s' -o $@
 
 $(LCF): $(LSF) $(SDK_SPECFILES)/$(LCF_TEMPLATE) $(EXTERN_SYMS) $(FORCE_ACTIVE_LIST)
 	$(WINE) $(MAKELCF) $(MAKELCF_FLAGS) $< $(SDK_SPECFILES)/$(LCF_TEMPLATE) $@

@@ -41,7 +41,9 @@ def autoload_blocks(image, load):
                                       list_start - load + stride * i)
                    for i in range(count)]
         if sum(entry[1] for entry in entries) == payload:
-            return payload_start, [(e[0], e[1], e[-1]) for e in entries]
+            sinit = 2 if stride == 16 else None
+            return payload_start, [(e[0], e[1], e[-1],
+                                    e[sinit] if sinit else e[0]) for e in entries]
     sys.exit(f"error: {span:#x} bytes of autoload list fit no known entry size")
 
 
@@ -102,12 +104,13 @@ def main():
 
     if args.region == 'static':
         load, size, extra, bss = module_load, payload_start - module_load, [], 0
+        sinit = load + size
         name = f'{tag}_static'
     else:
         index = int(args.region, 0)
         if index >= len(blocks):
             sys.exit(f"error: autoload {index} of {len(blocks)} does not exist")
-        load, size, bss = blocks[index]
+        load, size, bss, sinit = blocks[index]
         extra = ['-a', str(index)]
         name = f'{tag}_autoload{index}'
 
@@ -147,12 +150,30 @@ def main():
          dump, '-o', converted], quiet=not args.verbose)
 
     fixed = os.path.join(workdir, 'fixed.s')
-    fix = [sys.executable, os.path.join(SCRIPTS, 'fix_thumb_encoding.py'), converted,
-           '--load', hex(load), '--binary', region_bin, '-o', fixed]
     if args.region == 'static':
         # the linker writes the sinit terminator that closes the text block
-        fix += ['--limit', hex(load + size - SINIT_TERMINATOR)]
-    run(fix, quiet=not args.verbose)
+        pieces = [('.text', load, load + size - SINIT_TERMINATOR)]
+    else:
+        pieces = [('.text', load, sinit), ('.sinit', sinit, load + size)]
+
+    body = []
+    for section, begin, stop in pieces:
+        if begin >= stop:
+            continue
+        part = os.path.join(workdir, section.strip('.') + '.s')
+        cmd = [sys.executable, os.path.join(SCRIPTS, 'fix_thumb_encoding.py'), converted,
+               '--load', hex(load), '--binary', region_bin, '-o', part]
+        if begin != load:
+            cmd += ['--start', hex(begin)]
+        if stop != load + size:
+            cmd += ['--limit', hex(stop)]
+        run(cmd, quiet=not args.verbose)
+        # the sinit list stays in .text; the label is only so the LCF can locate it
+        if section != '.text':
+            anchor = f"{name}_{load:08X}_sinit"
+            body += ['', f'\t.global {anchor}', f'{anchor}:']
+        body += open(part).read().splitlines()
+    open(fixed, 'w').write("\n".join(body) + "\n")
 
     lsf = os.path.join(workdir, 'objects.lsf')
     split = [sys.executable, os.path.join(SCRIPTS, 'split_dump.py'), fixed,

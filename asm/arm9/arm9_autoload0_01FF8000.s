@@ -6,6 +6,9 @@
 	.text
 
 
+	.global arm9_autoload0_01FF8000_sinit
+arm9_autoload0_01FF8000_sinit:
+
 	arm_func_start FUN_01FF8000
 FUN_01FF8000: ; 0x01FF8000
 	andeq r0, r0, r0

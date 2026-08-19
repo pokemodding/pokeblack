@@ -658,6 +658,8 @@ Overlay OVY_93
 {
 	Address		0x021b6100
 	Object		asm/overlay_093_021B6100.o
+	Object		src/overlay_93_021D7A44.o
+	Object		asm/overlay_093_021D7A6C.o
 }
 Overlay OVY_94
 {

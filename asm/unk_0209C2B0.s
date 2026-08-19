@@ -4,7 +4,10 @@
 	.text
 
 	arm_func_start FUN_0209C2B0
+	; mwccarm emits calls to this as _u32_div_f when C divides. Aliasing it here rather than in the LCF keeps the ARM typing, so callers get blx, not bl.
+	.global _u32_div_f
 FUN_0209C2B0: ; 0x0209C2B0
+_u32_div_f:
 	cmp r1, #0
 	bxeq lr
 	arm_func_end FUN_0209C2B0

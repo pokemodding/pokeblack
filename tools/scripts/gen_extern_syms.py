@@ -14,12 +14,16 @@ ADDRESSED_RE = re.compile(r'^(?:FUN_|_)([0-9A-Fa-f]{8})(?:_dup\d+)?$')
 # libsyscall.a types these thumb, an absolute LCF symbol cannot and blx needs it
 PROVIDED_RE = re.compile(r'^SVC_\w+$')
 
+# a decompiled function is often renamed away from FUN_<address>, so match any identifier used as a function name rather than that prefix. Over-matching is harmless: these are only subtracted from names the assembly declares .extern.
+C_SYMBOL_RE = re.compile(r'\b([A-Za-z_]\w*)\s*\(')
+
 
 def main():
     parser = argparse.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('sources', nargs='+')
+    parser.add_argument('--provided', nargs='*', default=[], help="linked C sources; the symbols they define are resolved by the linker, not by an LCF address")
     parser.add_argument('-o', '--output', required=True)
     args = parser.parse_args()
 
@@ -41,7 +45,13 @@ def main():
             if m:
                 referenced.add(m.group(1))
 
-    undefined = sorted(referenced - defined)
+    # a carved function is referenced by the assembly it left behind but defined in C, so the linker supplies it and no absolute address belongs in the LCF
+    provided = set()
+    for path in args.provided:
+        if os.path.exists(path):
+            provided.update(C_SYMBOL_RE.findall(open(path).read()))
+
+    undefined = sorted(referenced - defined - provided)
     resolvable = []
     unresolvable = []
     for name in undefined:

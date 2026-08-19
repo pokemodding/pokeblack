@@ -113,23 +113,26 @@ def main():
     body_start = len(header)
 
     def with_extern(body):
-        """declare the carved function in a half that still calls it"""
-        pattern = re.compile(r'\b' + re.escape(args.function) + r'\b')
-        if not any(pattern.search(line) for line in body):
-            return header
-        directive = f"\t.extern {args.function}"
-        if directive in header:
-            return header
-        out = list(header)
-        externs = [i for i, line in enumerate(out) if EXTERN_RE.match(line)]
-        if externs:
-            at = next((i for i in externs
-                       if EXTERN_RE.match(out[i]).group(1) > args.function),
-                      externs[-1] + 1)
-        else:
-            at = next(i for i, line in enumerate(out) if line.strip() == '.text')
-            out.insert(at, '')
-        out.insert(at, directive)
+        """declare every symbol this half references but no longer defines. Splitting a large object leaves each half calling into the other, so it is not enough to declare the carved function alone."""
+        defined = set()
+        referenced = set()
+        for line in body:
+            m = LABEL_RE.match(line)
+            if m:
+                defined.add(m.group(1))
+            code = re.split(r'[;@]', line)[0]
+            referenced.update(m.group(1) for m in SYMBOL_RE.finditer(code))
+
+        existing = {m.group(1) for line in header if (m := EXTERN_RE.match(line))}
+        wanted = sorted(existing | (referenced - defined))
+
+        out = [line for line in header if not EXTERN_RE.match(line) and line.strip() != '.text']
+        while out and not out[-1].strip():
+            out.pop()
+        out.append('')
+        out.extend(f"\t.extern {sym}" for sym in wanted)
+        out.append('')
+        out.append('\t.text')
         return out
 
     before_body = trim(lines[body_start:start])

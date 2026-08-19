@@ -23631,7 +23631,7 @@ _021C1EFA:
 	ldr r0, [sp, #0x14]
 	ldr r1, [sp, #0x18]
 	adds r3, r7, #0
-	bl FUN_overlay_d_93__021d7a44
+	bl CalcBaseDamage
 	movs r2, #4
 	ldr r1, [sp, #0x34]
 	lsls r2, r2, #0xa
@@ -32326,7 +32326,7 @@ FUN_overlay_d_93__021c63d0: @ 0x021C63D0
 	movs r0, #0x28
 	adds r1, r5, #0
 	adds r3, r7, #0
-	bl FUN_overlay_d_93__021d7a44
+	bl CalcBaseDamage
 	add r5, sp, #4
 	strh r0, [r5]
 	movs r0, #0x10
@@ -66249,8 +66249,8 @@ _021D7A3A:
 	nop
 _021D7A40: .4byte DAT_overlay_d_93__021f0427
 
-	thumb_func_start FUN_overlay_d_93__021d7a44
-FUN_overlay_d_93__021d7a44: @ 0x021D7A44
+	thumb_func_start CalcBaseDamage
+CalcBaseDamage: @ 0x021D7A44
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0
@@ -66268,7 +66268,7 @@ FUN_overlay_d_93__021d7a44: @ 0x021D7A44
 	blx FUN_0209C2B0
 	adds r0, r0, #2
 	pop {r4, r5, r6, pc}
-	thumb_func_end FUN_overlay_d_93__021d7a44
+	thumb_func_end CalcBaseDamage
 
 	thumb_func_start FUN_overlay_d_93__021d7a6c
 FUN_overlay_d_93__021d7a6c: @ 0x021D7A6C

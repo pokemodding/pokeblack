@@ -184,8 +184,8 @@ $(FORCE_ACTIVE_LIST): $(ASM_SRCS)
 ifeq ($(EXTERN_SYMS),)
 EXTERN_SYMS := $(BUILD_DIR)/extern_syms.lcf
 
-$(EXTERN_SYMS): $(ASM_SRCS)
-	@$(PYTHON) $(SCRIPTS)/gen_extern_syms.py $(SYM_GLOBS) -o $@
+$(EXTERN_SYMS): $(ASM_SRCS) $(C_SRCS)
+	@$(PYTHON) $(SCRIPTS)/gen_extern_syms.py $(SYM_GLOBS) --provided $(C_SRCS) -o $@
 endif
 
 LCF_TEMPLATE_PATH    := $(SDK_SPECFILES)/$(LCF_TEMPLATE)

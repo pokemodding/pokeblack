@@ -19,7 +19,7 @@ UNRELOCATABLE_RE = re.compile(
 
 
 def find_function(name):
-    for path in sorted(glob.glob('asm/unk_*.s')):
+    for path in sorted(glob.glob('asm/unk_*.s') + glob.glob('asm/overlay_*.s')):
         lines = open(path).read().splitlines()
         for i, line in enumerate(lines):
             m = FUNC_START_RE.match(line)
@@ -142,7 +142,9 @@ def main():
         if m:
             after_addr = int(m.group(1), 16)
             break
-    after_name = f"unk_{after_addr:08X}" if after_addr else base + "_b"
+    # keep the lower half in the same family as the file it came out of, so an overlay chunk is not named like ARM9 static code
+    prefix = base.rsplit('_', 1)[0] if base.startswith('overlay_') else "unk"
+    after_name = f"{prefix}_{after_addr:08X}" if after_addr else base + "_b"
 
     print(f"{args.function} at 0x{address:08X} in {path}")
     print(f"  before: {len(before_body)} lines -> asm/{base}.s")

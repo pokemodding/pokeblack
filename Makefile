@@ -109,6 +109,14 @@ GLOBAL_ASM_OBJS = $(GLOBAL_ASM_SRCS:%.c=$(BUILD_DIR)/%.o)
 ALL_OBJS       = $(C_OBJS) $(ASM_OBJS)
 ALL_BUILDDIRS  := $(BUILD_DIR)/$(SRC_SUBDIR) $(BUILD_DIR)/$(ASM_SUBDIR) $(BUILD_DIR)/$(ASM_SUBDIR)/arm9 $(BUILD_DIR)/$(ASM_SUBDIR)/arm7
 
+COMPSTATIC     := $(SDK_TOOLS)/compstatic.exe
+OVL_POLICY     := $(buildname)/overlay_compression.txt
+PACKED_DIR     := $(BUILD_DIR)/packed
+PACKED_ARM9    := $(PACKED_DIR)/arm9.bin
+ROM_SHA1       := $(buildname)/rom.sha1
+BANNER_DIR     := $(buildname)/banner
+BANNER         := $(BUILD_DIR)/banner.bin
+
 ARM7_SUBDIR    := asm/arm7
 ARM7_SRCS      := $(wildcard $(ARM7_SUBDIR)/*.s)
 ARM7_OBJS      := $(ARM7_SRCS:%.s=$(BUILD_DIR)/%.o)
@@ -165,7 +173,7 @@ MAKELCF_FLAGS  := \
 DUMMY := $(shell mkdir -p $(ALL_BUILDDIRS))
 
 .DELETE_ON_ERROR:
-.PHONY: all clean tidy info patch_mwasmarm check-toolchain extract check-baserom compare compare-overlays compare-table arm7 compare-arm7
+.PHONY: all clean tidy info patch_mwasmarm check-toolchain extract check-baserom compare compare-overlays compare-table arm7 compare-arm7 rom compare-rom compare-all
 
 all: patch_mwasmarm $(SBIN)
 
@@ -256,9 +264,35 @@ compare-arm7: $(ARM7_SBIN) $(ORIG_ARM9)
 		exit 1; \
 	fi
 
-compare-table: $(SBIN) $(ORIG_ARM9)
+rom: $(ROM)
+
+$(PACKED_ARM9): $(SBIN) $(OVL_POLICY)
+	@python3 $(TOOLSDIR)/scripts/compress_modules.py --build $(BUILD_DIR) \
+		--compstatic $(COMPSTATIC) --policy $(OVL_POLICY) \
+		--outdir $(PACKED_DIR) --wine "$(WINE)"
+
+$(BANNER): $(BANNER_DIR)/banner.meta $(wildcard $(BANNER_DIR)/*.png)
+	@python3 $(TOOLSDIR)/scripts/banner.py build --dir $(BANNER_DIR) -o $@
+
+$(ROM): $(PACKED_ARM9) $(ARM7_SBIN) $(BANNER) $(ORIG_ARM9)
+	@python3 $(TOOLSDIR)/scripts/make_rom.py --baserom $(BASEROM) --build $(BUILD_DIR) \
+		--overlays $(PACKED_DIR) --arm9 $(PACKED_ARM9) --banner $(BANNER) \
+		--table $(PACKED_DIR)/main_table.sbin -o $@
+
+compare-all: compare compare-overlays compare-arm7 compare-table compare-rom
+	@$(SHA1SUM) --quiet -c $(buildname)/overlays.sha1 \
+		&& echo "overlays match $(buildname)/overlays.sha1"
+	@$(SHA1SUM) --quiet -c $(buildname)/arm7.sha1 \
+		&& echo "arm7 matches $(buildname)/arm7.sha1"
+	@$(SHA1SUM) --quiet -c $(buildname)/files.sha1 \
+		&& echo "data files match $(buildname)/files.sha1"
+
+compare-rom: $(ROM)
+	@$(SHA1SUM) --quiet -c $(ROM_SHA1) && echo "ROM matches $(ROM_SHA1)"
+
+compare-table: $(PACKED_ARM9) $(ORIG_ARM9)
 	@python3 $(TOOLSDIR)/scripts/compare_overlay_table.py \
-		$(BUILD_DIR)/$(ELFNAME)_table.sbin $(ORIG_Y9)
+		$(PACKED_DIR)/main_table.sbin $(ORIG_Y9)
 
 CANARY_SRC  := test/toolchain_canary.c
 CANARY_OBJ  := $(BUILD_DIR)/toolchain_canary.o

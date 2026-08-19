@@ -74,7 +74,7 @@ sudo dnf install gcc gcc-c++ make autoconf automake python3 wine \
                  arm-none-eabi-binutils-cs git unzip
 ```
 
-The Fedora binutils package name is unconfirmed on a live system; if `arm-none-eabi-binutils-cs` is not found, try `arm-none-eabi-binutils`.
+Iff `arm-none-eabi-binutils-cs` is not found, try `arm-none-eabi-binutils`. TODO: check this on a live Fedora system
 
 ## 4. Supply the base ROM
 

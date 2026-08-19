@@ -207,10 +207,9 @@ _021F3856:
 	ldr r0, [sp]
 	bl FUN_overlay_d_50__021f3788
 	pop {r3, r4, r5, r6, r7, pc}
-_021F3888:
-	.byte 0xA4, 0x38, 0x1F, 0x02
-_021F388C:
-	.byte 0xB4, 0x38, 0x1F, 0x02
+	.balign 4, 0
+_021F3888: .word 0x021F38A4
+_021F388C: .word 0x021F38B4
 
 	thumb_func_start FUN_overlay_d_50__021f3890
 FUN_overlay_d_50__021f3890: ; 0x021F3890

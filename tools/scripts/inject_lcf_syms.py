@@ -6,6 +6,23 @@ import sys
 
 MARKER = "# injected symbol definitions"
 
+OVERLAY_SINIT_RE = re.compile(
+    r'SDK_OVERLAY\.\w+\.SINIT_START.*?SDK_OVERLAY\.\w+\.SINIT_END', re.S)
+WRITEW_ZERO_RE = re.compile(r'^[ \t]*WRITEW[ \t]+0;[ \t]*\n', re.M)
+
+
+def strip_overlay_sinit_terminators(lcf):
+    """Drop the sinit terminator from overlay blocks; the static keeps its own."""
+    removed = 0
+
+    def scrub(match):
+        nonlocal removed
+        text, n = WRITEW_ZERO_RE.subn('', match.group(0))
+        removed += n
+        return text
+
+    return OVERLAY_SINIT_RE.sub(scrub, lcf), removed
+
 
 def main():
     if len(sys.argv) not in (3, 4):
@@ -40,8 +57,11 @@ def main():
         lcf = lcf[:f.start()] + block + lcf[f.end():]
         forced = len(names)
 
+    lcf, trimmed = strip_overlay_sinit_terminators(lcf)
+
     open(lcf_path, 'w').write(lcf)
-    print(f"injected {count} symbols, {forced} force-active into {lcf_path}")
+    print(f"injected {count} symbols, {forced} force-active into {lcf_path}, "
+          f"dropped {trimmed} overlay sinit terminators")
     return 0
 
 

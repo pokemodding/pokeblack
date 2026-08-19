@@ -394,8 +394,7 @@ FUN_overlay_d_20__02183c34: ; 0x02183C34
 	pop {r4, r5, r6, pc}
 	nop
 	thumb_func_end FUN_overlay_d_20__02183c34
-_02183C54:
-	.byte 0x91, 0x3B, 0x18, 0x02
+_02183C54: .word 0x02183B91
 
 	thumb_func_start FUN_overlay_d_20__02183c58
 FUN_overlay_d_20__02183c58: ; 0x02183C58
@@ -510,10 +509,8 @@ FUN_overlay_d_20__02183d68: ; 0x02183D68
 	pop {r4, r5, r6, pc}
 	nop
 	thumb_func_end FUN_overlay_d_20__02183d68
-_02183DCC:
-	.byte 0x9D, 0x3C, 0x18, 0x02
-_02183DD0:
-	.byte 0xFF, 0x01, 0x00, 0x00
+_02183DCC: .word 0x02183C9D
+_02183DD0: .word 0x000001FF
 
 	thumb_func_start FUN_overlay_d_20__02183dd4
 FUN_overlay_d_20__02183dd4: ; 0x02183DD4
@@ -537,8 +534,12 @@ LAB_overlay_d_20__02183e04: ; 0x02183E04
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end LAB_overlay_d_20__02183e04
-_02183E10:
-	.byte 0x08, 0x00, 0x9A, 0x00, 0xB8, 0x00, 0xC8, 0x00, 0x18, 0x01
+_02183E10: ; jump table
+	.hword 0x0008 ; case 0
+	.hword 0x009A ; case 1
+	.hword 0x00B8 ; case 2
+	.hword 0x00C8 ; case 3
+	.hword 0x0118 ; case 4
 _02183E1A:
 	add r0, r6, #0
 	bl FUN_02012B38
@@ -677,10 +678,8 @@ _02183F4C:
 	add sp, #0x14
 	pop {r4, r5, r6, r7, pc}
 	nop
-_02183F54:
-	.byte 0x41, 0x40, 0x00, 0x00
-_02183F58:
-	.byte 0x3B, 0x08, 0x00, 0x00
+_02183F54: .word 0x00004041
+_02183F58: .word 0x0000083B
 
 	thumb_func_start FUN_overlay_d_20__02183f5c
 FUN_overlay_d_20__02183f5c: ; 0x02183F5C
@@ -768,12 +767,9 @@ _02183FF0:
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	nop
-_02184030:
-	.byte 0xE5, 0x3D, 0x18, 0x02
-_02184034:
-	.byte 0x66, 0x09, 0x00, 0x00
-_02184038:
-	.byte 0xFF, 0x01, 0x00, 0x00
+_02184030: .word 0x02183DE5
+_02184034: .word 0x00000966
+_02184038: .word 0x000001FF
 
 	thumb_func_start FUN_overlay_d_20__0218403c
 FUN_overlay_d_20__0218403c: ; 0x0218403C
@@ -986,9 +982,14 @@ LAB_overlay_d_20__021841e2: ; 0x021841E2
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end LAB_overlay_d_20__021841e2
-_021841EE:
-	.byte 0x0C, 0x00
-	.byte 0x30, 0x00, 0x5C, 0x00, 0x68, 0x00, 0x40, 0x01, 0x48, 0x01, 0x50, 0x01
+_021841EE: ; jump table
+	.hword 0x000C ; case 0
+	.hword 0x0030 ; case 1
+	.hword 0x005C ; case 2
+	.hword 0x0068 ; case 3
+	.hword 0x0140 ; case 4
+	.hword 0x0148 ; case 5
+	.hword 0x0150 ; case 6
 _021841FC:
 	add r0, r6, #0
 	bl FUN_02012B38
@@ -1146,16 +1147,12 @@ _02184346:
 	mov r0, #0
 	add sp, #0x18
 	pop {r3, r4, r5, r6, r7, pc}
-_0218434C:
-	.byte 0xE6, 0x00, 0x00, 0x00
-_02184350:
-	.byte 0x61, 0x3B, 0x18, 0x02
-_02184354:
-	.byte 0x4D, 0x60, 0x18, 0x02
-_02184358:
-	.byte 0x6D, 0x60, 0x18, 0x02
-_0218435C:
-	.byte 0x8D, 0x60, 0x18, 0x02
+	.balign 4, 0
+_0218434C: .word 0x000000E6
+_02184350: .word 0x02183B61
+_02184354: .word 0x0218604D
+_02184358: .word 0x0218606D
+_0218435C: .word 0x0218608D
 
 	thumb_func_start FUN_overlay_d_20__02184360
 FUN_overlay_d_20__02184360: ; 0x02184360
@@ -1176,8 +1173,9 @@ FUN_overlay_d_20__02184360: ; 0x02184360
 	pop {r4, r5, r6, pc}
 	nop
 	thumb_func_end FUN_overlay_d_20__02184360
-_02184384:
-	.byte 0xC1, 0x41, 0x18, 0x02, 0xF8, 0xB5
+_02184384: .word 0x021841C1
+_02184388:
+	.byte 0xF8, 0xB5
 _0218438A:
 	.byte 0x0C, 0x1C, 0x06, 0x1C, 0x15, 0x1C
 	.byte 0x20, 0x68, 0xAF, 0x68, 0x03, 0x28, 0x39, 0xD8, 0x00, 0x18, 0x78, 0x44, 0xC0, 0x88, 0x00, 0x04
@@ -1357,10 +1355,20 @@ FUN_overlay_d_20__0218466c: ; 0x0218466C
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end FUN_overlay_d_20__0218466c
-_02184698:
-	.byte 0x18, 0x00, 0x88, 0x00, 0x88, 0x00, 0x88, 0x00
-	.byte 0x88, 0x00, 0x88, 0x00, 0x88, 0x00, 0x88, 0x00, 0x22, 0x00, 0x30, 0x00, 0x4A, 0x00, 0x56, 0x00
-	.byte 0x74, 0x00
+_02184698: ; jump table
+	.hword 0x0018 ; case 0
+	.hword 0x0088 ; case 1
+	.hword 0x0088 ; case 2
+	.hword 0x0088 ; case 3
+	.hword 0x0088 ; case 4
+	.hword 0x0088 ; case 5
+	.hword 0x0088 ; case 6
+	.hword 0x0088 ; case 7
+	.hword 0x0022 ; case 8
+	.hword 0x0030 ; case 9
+	.hword 0x004A ; case 10
+	.hword 0x0056 ; case 11
+	.hword 0x0074 ; case 12
 _021846B2:
 	ldr r0, [sp, #0x10]
 	add r1, r6, #0
@@ -1448,9 +1456,13 @@ FUN_overlay_d_20__02184730: ; 0x02184730
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end FUN_overlay_d_20__02184730
-_0218475C:
-	.byte 0x0A, 0x00, 0x22, 0x00
-	.byte 0x32, 0x00, 0x4C, 0x00, 0x56, 0x00, 0x62, 0x00
+_0218475C: ; jump table
+	.hword 0x000A ; case 0
+	.hword 0x0022 ; case 1
+	.hword 0x0032 ; case 2
+	.hword 0x004C ; case 3
+	.hword 0x0056 ; case 4
+	.hword 0x0062 ; case 5
 _02184768:
 	ldr r0, [sp, #4]
 	add r1, r7, #0
@@ -1528,9 +1540,13 @@ FUN_overlay_d_20__021847cc: ; 0x021847CC
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end FUN_overlay_d_20__021847cc
-_021847F8:
-	.byte 0x0A, 0x00, 0x28, 0x00, 0x36, 0x00, 0x58, 0x00
-	.byte 0x62, 0x00, 0x80, 0x00
+_021847F8: ; jump table
+	.hword 0x000A ; case 0
+	.hword 0x0028 ; case 1
+	.hword 0x0036 ; case 2
+	.hword 0x0058 ; case 3
+	.hword 0x0062 ; case 4
+	.hword 0x0080 ; case 5
 _02184804:
 	add r0, r5, #0
 	bl FUN_overlay_d_20__0218403c
@@ -1626,8 +1642,13 @@ FUN_overlay_d_20__02184894: ; 0x02184894
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end FUN_overlay_d_20__02184894
-_021848C0:
-	.byte 0x0A, 0x00, 0x28, 0x00, 0x36, 0x00, 0x58, 0x00, 0x62, 0x00, 0x80, 0x00
+_021848C0: ; jump table
+	.hword 0x000A ; case 0
+	.hword 0x0028 ; case 1
+	.hword 0x0036 ; case 2
+	.hword 0x0058 ; case 3
+	.hword 0x0062 ; case 4
+	.hword 0x0080 ; case 5
 _021848CC:
 	add r0, r5, #0
 	bl FUN_overlay_d_20__0218403c
@@ -1723,9 +1744,13 @@ FUN_overlay_d_20__0218495c: ; 0x0218495C
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end FUN_overlay_d_20__0218495c
-_02184988:
-	.byte 0x0A, 0x00, 0x22, 0x00, 0x30, 0x00, 0x58, 0x00
-	.byte 0x62, 0x00, 0x6E, 0x00
+_02184988: ; jump table
+	.hword 0x000A ; case 0
+	.hword 0x0022 ; case 1
+	.hword 0x0030 ; case 2
+	.hword 0x0058 ; case 3
+	.hword 0x0062 ; case 4
+	.hword 0x006E ; case 5
 _02184994:
 	ldr r0, [sp, #4]
 	add r1, r7, #0
@@ -1811,9 +1836,12 @@ FUN_overlay_d_20__02184a14: ; 0x02184A14
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end FUN_overlay_d_20__02184a14
-_02184A3C:
-	.byte 0x08, 0x00, 0x24, 0x00
-	.byte 0x36, 0x00, 0x40, 0x00, 0x58, 0x00
+_02184A3C: ; jump table
+	.hword 0x0008 ; case 0
+	.hword 0x0024 ; case 1
+	.hword 0x0036 ; case 2
+	.hword 0x0040 ; case 3
+	.hword 0x0058 ; case 4
 _02184A46:
 	add r0, r7, #0
 	add r1, r6, #0
@@ -1888,8 +1916,12 @@ FUN_overlay_d_20__02184ab4: ; 0x02184AB4
 	asr r2, r2, #0x10
 	add pc, r2
 	thumb_func_end FUN_overlay_d_20__02184ab4
-_02184AD4:
-	.byte 0x08, 0x00, 0x1C, 0x00, 0x26, 0x00, 0x4C, 0x00, 0x5E, 0x00
+_02184AD4: ; jump table
+	.hword 0x0008 ; case 0
+	.hword 0x001C ; case 1
+	.hword 0x0026 ; case 2
+	.hword 0x004C ; case 3
+	.hword 0x005E ; case 4
 _02184ADE:
 	bl FUN_02161824
 _02184AE2:
@@ -1948,8 +1980,7 @@ _02184B48:
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
 	nop
-_02184B50:
-	.byte 0x05, 0x45, 0x18, 0x02
+_02184B50: .word 0x02184505
 
 	thumb_func_start FUN_overlay_d_20__02184b54
 FUN_overlay_d_20__02184b54: ; 0x02184B54
@@ -1975,8 +2006,12 @@ FUN_overlay_d_20__02184b54: ; 0x02184B54
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end FUN_overlay_d_20__02184b54
-_02184B80:
-	.byte 0x08, 0x00, 0x20, 0x00, 0x2C, 0x00, 0x50, 0x00, 0x5C, 0x00
+_02184B80: ; jump table
+	.hword 0x0008 ; case 0
+	.hword 0x0020 ; case 1
+	.hword 0x002C ; case 2
+	.hword 0x0050 ; case 3
+	.hword 0x005C ; case 4
 _02184B8A:
 	ldr r0, [sp, #4]
 	add r1, r7, #0
@@ -2050,8 +2085,11 @@ FUN_overlay_d_20__02184bf8: ; 0x02184BF8
 	asr r3, r3, #0x10
 	add pc, r3
 	thumb_func_end FUN_overlay_d_20__02184bf8
-_02184C18:
-	.byte 0x06, 0x00, 0x1C, 0x00, 0x26, 0x00, 0x44, 0x00
+_02184C18: ; jump table
+	.hword 0x0006 ; case 0
+	.hword 0x001C ; case 1
+	.hword 0x0026 ; case 2
+	.hword 0x0044 ; case 3
 _02184C20:
 	mov r3, #0
 	bl FUN_021BFDD0
@@ -2091,12 +2129,9 @@ _02184C64:
 	add sp, #4
 	pop {r3, r4, r5, r6, pc}
 	nop
-_02184C6C:
-	.byte 0x0C, 0x00, 0x00, 0x00
-_02184C70:
-	.byte 0x0B, 0x00, 0x00, 0x00
-_02184C74:
-	.byte 0x3A, 0x08, 0x00, 0x00
+_02184C6C: .word 0x0000000C
+_02184C70: .word 0x0000000B
+_02184C74: .word 0x0000083A
 
 	thumb_func_start FUN_overlay_d_20__02184c78
 FUN_overlay_d_20__02184c78: ; 0x02184C78
@@ -2116,8 +2151,12 @@ FUN_overlay_d_20__02184c78: ; 0x02184C78
 	asr r3, r3, #0x10
 	add pc, r3
 	thumb_func_end FUN_overlay_d_20__02184c78
-_02184C96:
-	.byte 0x08, 0x00, 0x20, 0x00, 0x36, 0x00, 0x3E, 0x00, 0x44, 0x00
+_02184C96: ; jump table
+	.hword 0x0008 ; case 0
+	.hword 0x0020 ; case 1
+	.hword 0x0036 ; case 2
+	.hword 0x003E ; case 3
+	.hword 0x0044 ; case 4
 _02184CA0:
 	add r0, r1, #0
 	add r1, r2, #0
@@ -2153,10 +2192,9 @@ _02184CDC:
 _02184CE0:
 	mov r0, #0
 	pop {r4, r5, r6, pc}
-_02184CE4:
-	.byte 0x0B, 0x00, 0x00, 0x00
-_02184CE8:
-	.byte 0x0C, 0x00, 0x00, 0x00
+	.balign 4, 0
+_02184CE4: .word 0x0000000B
+_02184CE8: .word 0x0000000C
 
 	thumb_func_start FUN_overlay_d_20__02184cec
 FUN_overlay_d_20__02184cec: ; 0x02184CEC
@@ -2234,8 +2272,7 @@ FUN_overlay_d_20__02184d38: ; 0x02184D38
 	pop {r4, r5, r6, r7, pc}
 	nop
 	thumb_func_end FUN_overlay_d_20__02184d38
-_02184D8C:
-	.byte 0x89, 0x43, 0x18, 0x02
+_02184D8C: .word 0x02184389
 
 	thumb_func_start FUN_overlay_d_20__02184d90
 FUN_overlay_d_20__02184d90: ; 0x02184D90
@@ -2276,9 +2313,9 @@ FUN_overlay_d_20__02184d90: ; 0x02184D90
 	ldr r0, [sp, #8]
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
+	.balign 4, 0
 	thumb_func_end FUN_overlay_d_20__02184d90
-_02184DE4:
-	.byte 0x89, 0x43, 0x18, 0x02
+_02184DE4: .word 0x02184389
 
 	thumb_func_start FUN_overlay_d_20__02184de8
 FUN_overlay_d_20__02184de8: ; 0x02184DE8
@@ -2319,9 +2356,10 @@ FUN_overlay_d_20__02184de8: ; 0x02184DE8
 	ldr r0, [sp, #8]
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
+	.balign 4, 0
 	thumb_func_end FUN_overlay_d_20__02184de8
-_02184E3C:
-	.byte 0x05, 0x45, 0x18, 0x02
+_02184E3C: .word 0x02184505
+_02184E40:
 	.byte 0xF8, 0xB5, 0x84, 0xB0, 0x16, 0x1C, 0x02, 0x93, 0x11, 0x4A, 0x07, 0x1C, 0x0A, 0x9D, 0x00, 0x21
 	.byte 0x9C, 0x23, 0x8D, 0xF6, 0x35, 0xFA, 0x03, 0x90, 0x8D, 0xF6, 0x46, 0xFB, 0x39, 0x1C, 0x04, 0x1C
 	.byte 0xFF, 0xF7, 0x44, 0xFF, 0x68, 0x68, 0x01, 0x22, 0x00, 0x90, 0xA8, 0x68, 0x01, 0x90, 0x20, 0x1C
@@ -2527,8 +2565,8 @@ _021853EE:
 	add sp, #8
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
-_0218540C:
-	.byte 0x89, 0x43, 0x18, 0x02
+_0218540C: .word 0x02184389
+_02185410:
 	.byte 0xF8, 0xB5, 0x05, 0x1C, 0x16, 0x1C, 0x1F, 0x1C, 0x8C, 0xF6, 0x6C, 0xFE, 0x0D, 0x4A, 0x28, 0x1C
 	.byte 0x00, 0x21, 0x9C, 0x23, 0x8C, 0xF6, 0x4C, 0xFF, 0x00, 0x90, 0x8D, 0xF6, 0x5D, 0xF8, 0x04, 0x1C
 	.byte 0x29, 0x1C, 0xFF, 0xF7, 0x5B, 0xFC, 0x01, 0x20, 0x21, 0x1C, 0x20, 0x64, 0x30, 0x1C, 0x10, 0x31
@@ -2588,8 +2626,7 @@ FUN_overlay_d_20__021854cc: ; 0x021854CC
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
 	thumb_func_end FUN_overlay_d_20__021854cc
-_02185530:
-	.byte 0x05, 0x45, 0x18, 0x02
+_02185530: .word 0x02184505
 
 	thumb_func_start FUN_overlay_d_20__02185534
 FUN_overlay_d_20__02185534: ; 0x02185534
@@ -2629,8 +2666,9 @@ FUN_overlay_d_20__02185534: ; 0x02185534
 	pop {r4, r5, r6, r7, pc}
 	nop
 	thumb_func_end FUN_overlay_d_20__02185534
-_02185584:
-	.byte 0x85, 0x45, 0x18, 0x02, 0xF8, 0xB5, 0x88, 0xB0, 0x04, 0x1C, 0x02, 0x91
+_02185584: .word 0x02184585
+_02185588:
+	.byte 0xF8, 0xB5, 0x88, 0xB0, 0x04, 0x1C, 0x02, 0x91
 	.byte 0x03, 0xCA, 0x05, 0xAB, 0x03, 0xC3, 0x10, 0x68, 0x18, 0x60, 0x20, 0x1C, 0x8C, 0xF6, 0xAA, 0xFD
 	.byte 0x04, 0x90, 0x20, 0x4A, 0x20, 0x1C, 0x00, 0x21, 0x9C, 0x23, 0x00, 0x25, 0x8C, 0xF6, 0x88, 0xFE
 	.byte 0x03, 0x90, 0x8C, 0xF6, 0x99, 0xFF, 0x06, 0x1C, 0x02, 0x98, 0x8E, 0xF6, 0xCF, 0xFB, 0x01, 0x28
@@ -2742,8 +2780,7 @@ FUN_overlay_d_20__0218571c: ; 0x0218571C
 	pop {r4, r5, r6, pc}
 	nop
 	thumb_func_end FUN_overlay_d_20__0218571c
-_02185754:
-	.byte 0x95, 0x56, 0x18, 0x02
+_02185754: .word 0x02185695
 
 	thumb_func_start FUN_overlay_d_20__02185758
 FUN_overlay_d_20__02185758: ; 0x02185758
@@ -2756,9 +2793,12 @@ FUN_overlay_d_20__02185758: ; 0x02185758
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end FUN_overlay_d_20__02185758
-_02185768:
-	.byte 0x08, 0x00, 0x08, 0x00, 0x12, 0x00, 0x0C, 0x00
-	.byte 0x18, 0x00
+_02185768: ; jump table
+	.hword 0x0008 ; case 0
+	.hword 0x0008 ; case 1
+	.hword 0x0012 ; case 2
+	.hword 0x000C ; case 3
+	.hword 0x0018 ; case 4
 _02185772:
 	mov r0, #0
 	bx lr
@@ -3234,8 +3274,8 @@ _02185B2E:
 	add r1, r5, #0
 	bl FUN_overlay_d_20__02185a34
 	pop {r3, r4, r5, r6, r7, pc}
-_02185B6C:
-	.byte 0x01, 0x80, 0x00, 0x00
+	.balign 4, 0
+_02185B6C: .word 0x00008001
 
 	thumb_func_start FUN_overlay_d_20__02185b70
 FUN_overlay_d_20__02185b70: ; 0x02185B70
@@ -3305,8 +3345,9 @@ _02185BE8:
 	blx FUN_02049238
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
-_02185BF8:
-	.byte 0x01, 0x80, 0x00, 0x00, 0xF8, 0xB5, 0x82, 0xB0
+_02185BF8: .word 0x00008001
+_02185BFC:
+	.byte 0xF8, 0xB5, 0x82, 0xB0
 	.byte 0x15, 0x1C, 0x0E, 0x1C, 0x1F, 0x1C, 0x10, 0x4A, 0x00, 0x21, 0x30, 0x23, 0x00, 0x90, 0x8C, 0xF6
 	.byte 0x57, 0xFB, 0x01, 0x90, 0x8C, 0xF6, 0x68, 0xFC, 0x04, 0x1C, 0x03, 0xCD, 0x22, 0x1C, 0x03, 0xC2
 	.byte 0x03, 0xCD, 0x03, 0xC2, 0x03, 0xCD, 0x03, 0xC2, 0x28, 0x68, 0x10, 0x60, 0x00, 0x98, 0xE0, 0x61
@@ -3513,14 +3554,10 @@ FUN_overlay_d_20__02185f6c: ; 0x02185F6C
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
 	thumb_func_end FUN_overlay_d_20__02185f6c
-_0218600C:
-	.byte 0xA4, 0x7D, 0x18, 0x02
-_02186010:
-	.byte 0xAC, 0x7D, 0x18, 0x02
-_02186014:
-	.byte 0xB4, 0x7D, 0x18, 0x02
-_02186018:
-	.byte 0x8F, 0x05, 0x00, 0x00
+_0218600C: .word 0x02187DA4
+_02186010: .word 0x02187DAC
+_02186014: .word 0x02187DB4
+_02186018: .word 0x0000058F
 
 	thumb_func_start FUN_overlay_d_20__0218601c
 FUN_overlay_d_20__0218601c: ; 0x0218601C
@@ -3719,10 +3756,9 @@ _0218616E:
 	bl FUN_overlay_d_20__02186804
 	add sp, #0x2c
 	pop {r4, r5, r6, r7, pc}
-_021861B4:
-	.byte 0xCE, 0x01, 0x00, 0x00
-_021861B8:
-	.byte 0xFF, 0x7F, 0x00, 0x00
+	.balign 4, 0
+_021861B4: .word 0x000001CE
+_021861B8: .word 0x00007FFF
 
 	thumb_func_start FUN_overlay_d_20__021861bc
 FUN_overlay_d_20__021861bc: ; 0x021861BC
@@ -4077,8 +4113,7 @@ _02186460:
 	add sp, #0x30
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
-_0218646C:
-	.byte 0xFF, 0x7F, 0x00, 0x00
+_0218646C: .word 0x00007FFF
 
 	thumb_func_start FUN_overlay_d_20__02186470
 FUN_overlay_d_20__02186470: ; 0x02186470
@@ -4322,14 +4357,10 @@ _02186646:
 	add sp, #0x44
 	pop {r4, r5, r6, r7, pc}
 	nop
-_02186660:
-	.byte 0xFF, 0x7F, 0x00, 0x00
-_02186664:
-	.byte 0xE3, 0x02, 0x00, 0x00
-_02186668:
-	.byte 0xB4, 0x7E, 0x18, 0x02
-_0218666C:
-	.byte 0xBC, 0x7D, 0x18, 0x02
+_02186660: .word 0x00007FFF
+_02186664: .word 0x000002E3
+_02186668: .word 0x02187EB4
+_0218666C: .word 0x02187DBC
 
 	thumb_func_start FUN_overlay_d_20__02186670
 FUN_overlay_d_20__02186670: ; 0x02186670
@@ -4545,10 +4576,8 @@ FUN_overlay_d_20__021867c4: ; 0x021867C4
 	pop {r3, r4, r5, r6, pc}
 	nop
 	thumb_func_end FUN_overlay_d_20__021867c4
-_021867FC:
-	.byte 0x48, 0x04, 0x00, 0x00
-_02186800:
-	.byte 0xB4, 0x7E, 0x18, 0x02
+_021867FC: .word 0x00000448
+_02186800: .word 0x02187EB4
 
 	thumb_func_start FUN_overlay_d_20__02186804
 FUN_overlay_d_20__02186804: ; 0x02186804
@@ -4587,17 +4616,19 @@ FUN_overlay_d_20__02186830: ; 0x02186830
 	ldr r3, _02186838 ; =FUN_02049250
 	add r1, #0x22
 	bx r3
+	.balign 4, 0
 	thumb_func_end FUN_overlay_d_20__02186830
-_02186838:
-	.byte 0x50, 0x92, 0x04, 0x02
+_02186838: .word 0x02049250
 
 	thumb_func_start FUN_0218683C
 FUN_0218683C: ; 0x0218683C
 	ldr r3, _02186840 ; =FUN_020307B0
 	bx r3
+	.balign 4, 0
 	thumb_func_end FUN_0218683C
-_02186840:
-	.byte 0xB0, 0x07, 0x03, 0x02, 0x49, 0x00, 0x40, 0x18, 0x70, 0x47, 0x00, 0x00
+_02186840: .word 0x020307B0
+_02186844:
+	.byte 0x49, 0x00, 0x40, 0x18, 0x70, 0x47, 0x00, 0x00
 
 	thumb_func_start FUN_overlay_d_20__0218684c
 FUN_overlay_d_20__0218684c: ; 0x0218684C
@@ -4628,8 +4659,7 @@ _02186866:
 	pop {r3, r4}
 	bx lr
 	nop
-_02186874:
-	.byte 0xFF, 0xFF, 0x00, 0x00
+_02186874: .word 0x0000FFFF
 
 	thumb_func_start FUN_overlay_d_20__02186878
 FUN_overlay_d_20__02186878: ; 0x02186878
@@ -4649,8 +4679,7 @@ _0218688C:
 	pop {r3, r4}
 	bx lr
 	nop
-_02186894:
-	.byte 0xFF, 0xFF, 0x00, 0x00
+_02186894: .word 0x0000FFFF
 
 	thumb_func_start FUN_overlay_d_20__02186898
 FUN_overlay_d_20__02186898: ; 0x02186898
@@ -4674,8 +4703,7 @@ _021868AE:
 	mov r0, #0
 	bx lr
 	nop
-_021868B4:
-	.byte 0xFF, 0xFF, 0x00, 0x00
+_021868B4: .word 0x0000FFFF
 
 	thumb_func_start FUN_overlay_d_20__021868b8
 FUN_overlay_d_20__021868b8: ; 0x021868B8
@@ -4790,14 +4818,10 @@ _02186982:
 	add sp, #0x3c
 	pop {r4, r5, r6, r7, pc}
 	nop
-_0218699C:
-	.byte 0xFF, 0x7F, 0x00, 0x00
-_021869A0:
-	.byte 0x61, 0x05, 0x00, 0x00
-_021869A4:
-	.byte 0xB4, 0x7E, 0x18, 0x02
-_021869A8:
-	.byte 0xE0, 0x7D, 0x18, 0x02
+_0218699C: .word 0x00007FFF
+_021869A0: .word 0x00000561
+_021869A4: .word 0x02187EB4
+_021869A8: .word 0x02187DE0
 
 	thumb_func_start FUN_overlay_d_20__021869ac
 FUN_overlay_d_20__021869ac: ; 0x021869AC
@@ -4831,8 +4855,7 @@ FUN_overlay_d_20__021869bc: ; 0x021869BC
 _021869C8:
 	bx lr
 	nop
-_021869CC:
-	.byte 0x10, 0x27, 0x00, 0x00
+_021869CC: .word 0x00002710
 
 	thumb_func_start FUN_overlay_d_20__021869d0
 FUN_overlay_d_20__021869d0: ; 0x021869D0
@@ -5410,10 +5433,19 @@ _02186E0A:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_02186E1A:
-	.byte 0x16, 0x00, 0x1C, 0x00, 0x24, 0x00
-	.byte 0x70, 0x00, 0x2C, 0x00, 0x34, 0x00, 0x3C, 0x00, 0x4E, 0x00, 0x56, 0x00, 0x5E, 0x00, 0x62, 0x00
-	.byte 0x6C, 0x00
+_02186E1A: ; jump table
+	.hword 0x0016 ; case 0
+	.hword 0x001C ; case 1
+	.hword 0x0024 ; case 2
+	.hword 0x0070 ; case 3
+	.hword 0x002C ; case 4
+	.hword 0x0034 ; case 5
+	.hword 0x003C ; case 6
+	.hword 0x004E ; case 7
+	.hword 0x0056 ; case 8
+	.hword 0x005E ; case 9
+	.hword 0x0062 ; case 10
+	.hword 0x006C ; case 11
 _02186E32:
 	ldr r0, [sp]
 	ldr r0, [r0, #0x18]
@@ -5634,8 +5666,7 @@ _02186FF4:
 	add sp, #0x48
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
-_02186FFC:
-	.byte 0xFF, 0xFF, 0x00, 0x00
+_02186FFC: .word 0x0000FFFF
 
 	thumb_func_start FUN_overlay_d_20__02187000
 FUN_overlay_d_20__02187000: ; 0x02187000
@@ -5856,10 +5887,10 @@ _021870F8:
 	add sp, #0x24
 	pop {r4, r5, r6, r7, pc}
 	nop
-_021871F0:
-	.byte 0xF9, 0x71, 0x18, 0x02
-_021871F4:
-	.byte 0xFF, 0x7F, 0x00, 0x00, 0x38, 0xB5
+_021871F0: .word 0x021871F9
+_021871F4: .word 0x00007FFF
+_021871F8:
+	.byte 0x38, 0xB5
 _021871FA:
 	.byte 0x82, 0xB0, 0x14, 0x1C, 0x20, 0x68
 	.byte 0x0D, 0x1C, 0x8A, 0xF6, 0x99, 0xFF, 0xD1, 0xF7, 0x9D, 0xF8, 0x00, 0x28, 0x06, 0xD1, 0x20, 0x1C
@@ -5877,19 +5908,27 @@ LAB_overlay_d_20__0218721c: ; 0x0218721C
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end LAB_overlay_d_20__0218721c
-_0218722E:
-	.byte 0x22, 0x00
-	.byte 0x38, 0x00, 0x5C, 0x00, 0x6A, 0x00, 0x7E, 0x00, 0x84, 0x00, 0xAA, 0x00, 0xB0, 0x00, 0xC2, 0x00
-	.byte 0xC8, 0x00, 0xDE, 0x00, 0x00, 0x01, 0x0E, 0x01, 0x36, 0x01, 0x46, 0x01, 0x92, 0x01, 0x9E, 0x01
-
-	arm_func_start USHORT_overlay_d_20__02187250
-USHORT_overlay_d_20__02187250: ; 0x02187250
-	arm_func_end USHORT_overlay_d_20__02187250
+_0218722E: ; jump table
+	.hword 0x0022 ; case 0
+	.hword 0x0038 ; case 1
+	.hword 0x005C ; case 2
+	.hword 0x006A ; case 3
+	.hword 0x007E ; case 4
+	.hword 0x0084 ; case 5
+	.hword 0x00AA ; case 6
+	.hword 0x00B0 ; case 7
+	.hword 0x00C2 ; case 8
+	.hword 0x00C8 ; case 9
+	.hword 0x00DE ; case 10
+	.hword 0x0100 ; case 11
+	.hword 0x010E ; case 12
+	.hword 0x0136 ; case 13
+	.hword 0x0146 ; case 14
+	.hword 0x0192 ; case 15
+	.hword 0x019E ; case 16
 _02187250:
 	.byte 0xBE, 0x01
-
-	non_word_aligned_thumb_func_start FUN_02187252
-FUN_02187252: ; 0x02187252
+_02187252:
 	ldr r0, [r4, #0x40]
 	bl FUN_021620A0
 	ldr r0, [r4, #0x40]
@@ -5898,7 +5937,6 @@ FUN_02187252: ; 0x02187252
 	mov r2, #0
 	bl FUN_02162048
 	mov r0, #1
-	thumb_func_end FUN_02187252
 _02187266:
 	b _021873E6
 _02187268:
@@ -6164,9 +6202,9 @@ FUN_overlay_d_20__0218741c: ; 0x0218741C
 	strb r7, [r5]
 	add sp, #8
 	pop {r3, r4, r5, r6, r7, pc}
+	.balign 4, 0
 	thumb_func_end FUN_overlay_d_20__0218741c
-_02187488:
-	.byte 0x04, 0x7E, 0x18, 0x02
+_02187488: .word 0x02187E04
 
 	thumb_func_start FUN_overlay_d_20__0218748c
 FUN_overlay_d_20__0218748c: ; 0x0218748C
@@ -6228,8 +6266,7 @@ FUN_overlay_d_20__0218748c: ; 0x0218748C
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
 	thumb_func_end FUN_overlay_d_20__0218748c
-_02187504:
-	.byte 0x04, 0x7E, 0x18, 0x02
+_02187504: .word 0x02187E04
 
 	thumb_func_start FUN_overlay_d_20__02187508
 FUN_overlay_d_20__02187508: ; 0x02187508
@@ -6246,8 +6283,13 @@ FUN_overlay_d_20__02187508: ; 0x02187508
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end FUN_overlay_d_20__02187508
-_02187520:
-	.byte 0x0A, 0x00, 0x22, 0x00, 0x3E, 0x00, 0x4A, 0x00, 0x78, 0x00, 0x80, 0x00
+_02187520: ; jump table
+	.hword 0x000A ; case 0
+	.hword 0x0022 ; case 1
+	.hword 0x003E ; case 2
+	.hword 0x004A ; case 3
+	.hword 0x0078 ; case 4
+	.hword 0x0080 ; case 5
 _0218752C:
 	ldr r0, [r4, #0x10]
 	bl FUN_02191388
@@ -6431,8 +6473,9 @@ _02187678:
 	add sp, #0x34
 	pop {r4, r5, r6, r7, pc}
 	nop
-_02187680:
-	.byte 0xDC, 0x7E, 0x18, 0x02, 0x00, 0x4B, 0x18, 0x47, 0xB0, 0x07, 0x03, 0x02, 0x08, 0xB5, 0x82, 0xB0
+_02187680: .word 0x02187EDC
+_02187684:
+	.byte 0x00, 0x4B, 0x18, 0x47, 0xB0, 0x07, 0x03, 0x02, 0x08, 0xB5, 0x82, 0xB0
 	.byte 0x81, 0x69, 0x00, 0x22, 0x49, 0x1C, 0x43, 0x69, 0xD2, 0x43, 0x81, 0x61, 0x93, 0x42, 0x05, 0xD0
 	.byte 0xC0, 0x68, 0x00, 0x90, 0x00, 0xA8, 0x01, 0x93, 0x00, 0xF0, 0x02, 0xF8, 0x02, 0xB0, 0x08, 0xBD
 	.byte 0x10, 0xB5, 0x04, 0x1C, 0x0A, 0x1C, 0x21, 0x68, 0x63, 0x68, 0x09, 0x04, 0x49, 0x0B, 0x59, 0x18
@@ -6501,9 +6544,9 @@ FUN_overlay_d_20__0218774c: ; 0x0218774C
 	add r0, r7, #0
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
+	.balign 4, 0
 	thumb_func_end FUN_overlay_d_20__0218774c
-_021877A4:
-	.byte 0xE1, 0x76, 0x18, 0x02
+_021877A4: .word 0x021876E1
 
 	thumb_func_start FUN_overlay_d_20__021877a8
 FUN_overlay_d_20__021877a8: ; 0x021877A8
@@ -6548,8 +6591,7 @@ FUN_overlay_d_20__021877a8: ; 0x021877A8
 	pop {r4, r5, r6, r7, pc}
 	nop
 	thumb_func_end FUN_overlay_d_20__021877a8
-_02187804:
-	.byte 0xE1, 0x76, 0x18, 0x02
+_02187804: .word 0x021876E1
 
 	thumb_func_start FUN_overlay_d_20__02187808
 FUN_overlay_d_20__02187808: ; 0x02187808
@@ -6591,8 +6633,7 @@ FUN_overlay_d_20__02187808: ; 0x02187808
 	pop {r4, r5, r6, r7, pc}
 	nop
 	thumb_func_end FUN_overlay_d_20__02187808
-_0218785C:
-	.byte 0xE1, 0x76, 0x18, 0x02
+_0218785C: .word 0x021876E1
 
 	thumb_func_start FUN_overlay_d_20__02187860
 FUN_overlay_d_20__02187860: ; 0x02187860
@@ -6670,13 +6711,11 @@ FUN_overlay_d_20__021878c0: ; 0x021878C0
 	mov r0, #3
 	blx FUN_020414AC
 	pop {r4, pc}
+	.balign 4, 0
 	thumb_func_end FUN_overlay_d_20__021878c0
-_02187908:
-	.byte 0x58, 0x7E, 0x18, 0x02
-_0218790C:
-	.byte 0x28, 0x7E, 0x18, 0x02
-_02187910:
-	.byte 0x38, 0x7E, 0x18, 0x02
+_02187908: .word 0x02187E58
+_0218790C: .word 0x02187E28
+_02187910: .word 0x02187E38
 
 	thumb_func_start FUN_overlay_d_20__02187914
 FUN_overlay_d_20__02187914: ; 0x02187914
@@ -6729,8 +6768,11 @@ FUN_overlay_d_20__0218794c: ; 0x0218794C
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end FUN_overlay_d_20__0218794c
-_02187962:
-	.byte 0x06, 0x00, 0x0E, 0x00, 0x16, 0x00, 0x1E, 0x00
+_02187962: ; jump table
+	.hword 0x0006 ; case 0
+	.hword 0x000E ; case 1
+	.hword 0x0016 ; case 2
+	.hword 0x001E ; case 3
 _0218796A:
 	mov r6, #0
 	mov r4, #1
@@ -6928,14 +6970,11 @@ _02187AF2:
 _02187B24:
 	add sp, #4
 	pop {r3, r4, r5, r6, pc}
-_02187B28:
-	.byte 0x00, 0x00, 0x80, 0x41
-_02187B2C:
-	.byte 0x00, 0x00, 0x80, 0xC1
-_02187B30:
-	.byte 0x50, 0x00, 0x00, 0x04
-_02187B34:
-	.byte 0x6C, 0x10, 0x00, 0x04
+	.balign 4, 0
+_02187B28: .word 0x41800000
+_02187B2C: .word 0xC1800000
+_02187B30: .word 0x04000050
+_02187B34: .word 0x0400106C
 
 	thumb_func_start FUN_overlay_d_20__02187b38
 FUN_overlay_d_20__02187b38: ; 0x02187B38
@@ -6988,12 +7027,10 @@ _02187B76:
 	blx FUN_0207D658
 _02187BAE:
 	pop {r3, r4, r5, pc}
-_02187BB0:
-	.byte 0x00, 0x00, 0x80, 0x41
-_02187BB4:
-	.byte 0x00, 0x00, 0x80, 0xC1
-_02187BB8:
-	.byte 0x50, 0x00, 0x00, 0x04
+	.balign 4, 0
+_02187BB0: .word 0x41800000
+_02187BB4: .word 0xC1800000
+_02187BB8: .word 0x04000050
 
 	thumb_func_start FUN_overlay_d_20__02187bbc
 FUN_overlay_d_20__02187bbc: ; 0x02187BBC
@@ -7009,8 +7046,13 @@ FUN_overlay_d_20__02187bbc: ; 0x02187BBC
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end FUN_overlay_d_20__02187bbc
-_02187BD2:
-	.byte 0x0A, 0x00, 0x0C, 0x00, 0x10, 0x00, 0x1C, 0x00, 0x32, 0x00, 0x46, 0x00
+_02187BD2: ; jump table
+	.hword 0x000A ; case 0
+	.hword 0x000C ; case 1
+	.hword 0x0010 ; case 2
+	.hword 0x001C ; case 3
+	.hword 0x0032 ; case 4
+	.hword 0x0046 ; case 5
 _02187BDE:
 	b _02187C18
 _02187BE0:
@@ -7064,9 +7106,13 @@ FUN_overlay_d_20__02187c20: ; 0x02187C20
 	asr r1, r1, #0x10
 	add pc, r1
 	thumb_func_end FUN_overlay_d_20__02187c20
-_02187C38:
-	.byte 0x0A, 0x00, 0x10, 0x00, 0x22, 0x00, 0x54, 0x00
-	.byte 0x5A, 0x00, 0x86, 0x00
+_02187C38: ; jump table
+	.hword 0x000A ; case 0
+	.hword 0x0010 ; case 1
+	.hword 0x0022 ; case 2
+	.hword 0x0054 ; case 3
+	.hword 0x005A ; case 4
+	.hword 0x0086 ; case 5
 _02187C44:
 	bl FUN_overlay_d_20__02187860
 	b _02187CC0
@@ -7126,8 +7172,8 @@ _02187CC0:
 	mov r0, #0
 	str r0, [r4, #0x18]
 	pop {r3, r4, r5, r6, r7, pc}
-_02187CC8:
-	.byte 0x6C, 0x00, 0x00, 0x04
+	.balign 4, 0
+_02187CC8: .word 0x0400006C
 
 	thumb_func_start FUN_overlay_d_20__02187ccc
 FUN_overlay_d_20__02187ccc: ; 0x02187CCC

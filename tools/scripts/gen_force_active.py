@@ -7,6 +7,7 @@ import re
 import sys
 
 FUNC_START_RE = re.compile(r'^\s*\w*func_start\s+(\S+)\s*$')
+GLOBAL_RE = re.compile(r'^\s*\.global\s+(\S+)\s*$')
 
 
 def main():
@@ -24,12 +25,16 @@ def main():
     names = []
     skipped = []
     for path in paths:
-        first = None
+        first = anchor = None
         for line in open(path):
             m = FUNC_START_RE.match(line)
             if m:
                 first = m.group(1)
                 break
+            m = GLOBAL_RE.match(line)
+            if m and anchor is None:
+                anchor = m.group(1)
+        first = first or anchor
         if first:
             names.append(first)
         else:

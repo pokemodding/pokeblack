@@ -23,13 +23,13 @@ FUN_overlay_36__021f36c0: ; 0x021F36C0
 	asr r0, r0, #0x10
 	add pc, r0
 _021F36DE: ; jump table
-	.hword _021F3700 - _021F36DE - 2 ; case 0
-	.hword _021F36EC - _021F36DE - 2 ; case 1
-	.hword _021F36EE - _021F36DE - 2 ; case 2
-	.hword _021F36F2 - _021F36DE - 2 ; case 3
-	.hword _021F36F4 - _021F36DE - 2 ; case 4
-	.hword _021F36F8 - _021F36DE - 2 ; case 5
-	.hword _021F36FC - _021F36DE - 2 ; case 6
+	.hword 0x0020 ; case 0
+	.hword 0x000C ; case 1
+	.hword 0x000E ; case 2
+	.hword 0x0012 ; case 3
+	.hword 0x0014 ; case 4
+	.hword 0x0018 ; case 5
+	.hword 0x001C ; case 6
 _021F36EC:
 	b _021F36F8
 _021F36EE:
@@ -528,14 +528,11 @@ _021F3A66:
 	mov r0, #1
 	add sp, #0xc
 	pop {r4, r5, r6, r7, pc}
-_021F3A6C:
-	.byte 0x7C, 0x3A, 0x1F, 0x02
-_021F3A70:
-	.byte 0xD4, 0x3A, 0x1F, 0x02
-_021F3A74:
-	.byte 0x82, 0x3A, 0x1F, 0x02
-_021F3A78:
-	.byte 0x90, 0x3A, 0x1F, 0x02
+	.balign 4, 0
+_021F3A6C: .word 0x021F3A7C
+_021F3A70: .word 0x021F3AD4
+_021F3A74: .word 0x021F3A82
+_021F3A78: .word 0x021F3A90
 _021F3A7C:
 	.byte 0x09, 0x0A, 0x0B, 0x0C
 	.byte 0x0D, 0x0E

@@ -5,7 +5,7 @@ import argparse
 import re
 import sys
 
-ENTRY_RE = re.compile(r'^\s*(arm_func|thumb_func|data)\s+(0x[0-9a-fA-F]+)\s*(\S*)')
+ENTRY_RE = re.compile(r'^\s*(arm_func|thumb_func|force_data|data)\s+(0x[0-9a-fA-F]+)\s*(\S*)')
 BAD_CHARS_RE = re.compile(r'[^A-Za-z0-9_]')
 
 # ghidra marks these data in the name, whatever type it exported them as
@@ -26,7 +26,7 @@ def parse(path):
 
 
 def alignment_ok(kind, address):
-    if kind == 'data':
+    if kind in ('data', 'force_data'):
         return True
     return address % 4 == 0 if kind == 'arm_func' else address % 2 == 0
 
@@ -90,14 +90,14 @@ def main():
 
     for address in sorted(entries):
         kind, name = entries[address]
-        lines.append(f"{kind} 0x{address:08x}" if kind == 'data'
+        lines.append(f"{kind} 0x{address:08x}" if kind in ('data', 'force_data')
                      else f"{kind} 0x{address:08x} {name}")
 
     with open(args.output, 'w') as handle:
         handle.write("\n".join(lines) + "\n")
 
     arm = sum(1 for kind, _ in entries.values() if kind == 'arm_func')
-    data = sum(1 for kind, _ in entries.values() if kind == 'data')
+    data = sum(1 for kind, _ in entries.values() if kind in ('data', 'force_data'))
     thumb = len(entries) - arm - data
 
     print(f"wrote {len(entries)} entries to {args.output}")

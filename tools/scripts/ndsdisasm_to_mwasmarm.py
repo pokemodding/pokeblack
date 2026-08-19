@@ -66,6 +66,7 @@ THUMB = 'thumb'
 
 DIRECTIVE_RE = re.compile(r'(^|\s)(\.[a-z0-9_]+)')
 ALIGN_RE = re.compile(r'(^|\s)\.align\s+(\d+)\s*(?:,\s*(\S+))?')
+SP_PAIR_RE = re.compile(r'^(r\d+|sl|fp|ip|lr),\s*sp$')
 SHIFT_RE = re.compile(
     r'^(lsl|lsr|asr|ror)(s?)((?:eq|ne|cs|cc|hs|lo|mi|pl|vs|vc|hi|ls|ge|lt|gt|le)?)'
     r'\s+(\w+),\s*(\w+),\s*(.+)$')
@@ -176,6 +177,13 @@ def convert_arm(mnemonic, rest, stats):
         if fixed != operands:
             stats['psr-alias'] += 1
         return mnemonic, ' ' + fixed
+
+    # capstone drops the repeated register from "add rX, sp, rX"
+    if mnemonic == 'add':
+        pair = SP_PAIR_RE.match(operands)
+        if pair:
+            stats['add-sp triple'] += 1
+            return mnemonic, f' {pair.group(1)}, sp, {pair.group(1)}'
 
     shift = SHIFT_RE.match(f'{mnemonic} {operands}')
     if shift:

@@ -14,6 +14,14 @@ ADDR_LABEL_RE = re.compile(r'^_([0-9A-Fa-f]{8})$')
 ADDR_COMMENT_RE = re.compile(r';\s*0x([0-9A-Fa-f]{8})\s*$')
 REGISTER_RE = re.compile(r'^(r\d+|sl|fp|ip|sp|lr|pc)$')
 SYMBOL_RE = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*$')
+NUMBER_RE = re.compile(r'^[+-]?(0x[0-9A-Fa-f]+|\d+)$')
+HALFWORDS = ('.hword', '.2byte')
+SINGLE_POP_RE = re.compile(r'^sp!,\s*\{\s*(r\d+|sl|fp|ip|sp|lr|pc)\s*\}$')
+LDM_HEAD_RE = re.compile(r'^ldm(eq|ne|cs|cc|hs|lo|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al)?'
+                         r'(?:ia|ib|da|db|fd|fa|ed|ea)?$')
+REG_NUMBERS = {'sl': 10, 'fp': 11, 'ip': 12, 'sp': 13, 'lr': 14, 'pc': 15}
+LDR_POP_MASK = 0x0FFF0FFF
+LDR_POP_FORM = 0x049D0004
 
 ARM_STARTS = ('arm_func_start', 'local_arm_func_start')
 THUMB_STARTS = ('thumb_func_start', 'local_thumb_func_start')
@@ -89,12 +97,20 @@ def defined_labels(lines):
             if match}
 
 
-def rewrite(lines, load, image, stats):
+def split_byte_line(code, keep):
+    head = code.split()[0]
+    values = [part.strip() for part in code[len(head):].split(',') if part.strip()]
+    return f"\t{head} " + ', '.join(values[:keep])
+
+
+def rewrite(lines, load, image, stats, limit=None):
     addr, mode = load, ARM
     local = defined_labels(lines)
     out = []
 
     for number, line in enumerate(lines, 1):
+        if limit is not None and addr >= limit:
+            break
         code, comment = strip_comment(line)
         original = code
         label_match = LABEL_RE.match(code.strip())
@@ -125,12 +141,24 @@ def rewrite(lines, load, image, stats):
             addr = align_up(addr, boundary)
         else:
             width = size_of(code, previous_mode)
+            if limit is not None and head in WIDTHS and addr + width > limit:
+                keep = (limit - addr) // WIDTHS[head]
+                if (limit - addr) % WIDTHS[head]:
+                    raise Drift(f"line {number}: limit {limit:#010x} splits a "
+                                f"{head} value")
+                out.append(split_byte_line(code, keep))
+                addr = limit
+                break
             if previous_mode == THUMB and head == 'blx' and rest in local \
                     and addr % 4 == 2:
                 code = f"blx_unaligned {rest}"
                 stats['blx_unaligned'] += 1
             elif head in ('.word', '.4byte') and image is not None:
                 code = fix_words(head, rest, addr, load, image, stats)
+            elif head in HALFWORDS and image is not None:
+                code = fix_halfwords(head, rest, addr, load, image, stats)
+            elif previous_mode == ARM and image is not None and LDM_HEAD_RE.match(head):
+                code = fix_single_pop(head, code, rest, addr, load, image, stats)
             addr += width
 
         if code == (label_match.group(2).strip() if label_match else original.strip()):
@@ -155,27 +183,64 @@ def fix_words(head, rest, addr, load, image, stats):
     return f"{head} " + ', '.join(fixed)
 
 
+def fix_single_pop(head, code, rest, addr, load, image, stats):
+    """A one-register ldmia off sp is ldr rX, [sp], #4 in the ROM."""
+    single = SINGLE_POP_RE.match(rest.strip())
+    offset = addr - load
+    if not single or not (0 <= offset + 4 <= len(image)):
+        return code
+    word = struct.unpack_from('<I', image, offset)[0]
+    if word & LDR_POP_MASK != LDR_POP_FORM:
+        return code
+    name = single.group(1)
+    number = REG_NUMBERS.get(name, int(name[1:]) if name.startswith('r') else -1)
+    if (word >> 12) & 0xF != number:
+        return code
+    stats['single-register pop'] += 1
+    return f"ldr{LDM_HEAD_RE.match(head).group(1) or ''} {name}, [sp], #4"
+
+
+def fix_halfwords(head, rest, addr, load, image, stats):
+    """Halfword values, since mwasmarm rejects label arithmetic in a .hword."""
+    operands = [part.strip() for part in rest.split(',') if part.strip()]
+    fixed = []
+    for index, operand in enumerate(operands):
+        offset = addr + 2 * index - load
+        if not NUMBER_RE.match(operand) and 0 <= offset + 2 <= len(image):
+            fixed.append(f"0x{struct.unpack_from('<H', image, offset)[0]:04X}")
+            stats['jump-table literal'] += 1
+        else:
+            fixed.append(operand)
+    return f"{head} " + ', '.join(fixed)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('source')
     parser.add_argument('--load', required=True, help="load address, e.g. 0x021aeb20")
     parser.add_argument('--binary', help="the overlay as the ROM holds it")
+    parser.add_argument('--limit', help="stop at this address, e.g. 0x02380644")
     parser.add_argument('-o', '--output')
     args = parser.parse_args()
 
     load = int(args.load, 0)
+    limit = int(args.limit, 0) if args.limit else None
     image = open(args.binary, 'rb').read() if args.binary else None
+    if limit is not None and image is not None:
+        image = image[:limit - load]
     lines = open(args.source).read().splitlines()
 
     stats = Counter()
     try:
-        out, end = rewrite(lines, load, image, stats)
+        out, end = rewrite(lines, load, image, stats, limit)
     except Drift as problem:
         sys.exit(f"error: address tracking lost sync, {problem}")
 
     if image is not None and end - load != len(image):
         sys.exit(f"error: counted {end - load:#x} bytes, overlay is {len(image):#x}")
+    if limit is not None and end != limit:
+        sys.exit(f"error: stopped at {end:#010x}, wanted {limit:#010x}")
 
     for key in sorted(stats):
         print(f"  {key:20s} {stats[key]:>7}", file=sys.stderr)

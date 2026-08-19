@@ -147,6 +147,9 @@ def main():
         for symbol in needed + external:
             out.append(f'\t.extern {symbol}')
         out += ['', '\t.text', '']
+        # without an exported symbol the linker dead-strips the whole object
+        if not any(FUNC_START_RE.match(s) for s in body):
+            out += [f'\t.global {name}', f'{name}:']
         out += body
 
         if not args.dry_run:

@@ -213,12 +213,9 @@ _021F3842:
 	add sp, #0x14
 	pop {r4, r5, r6, r7, pc}
 	nop
-_021F3858:
-	.byte 0x6B, 0x09, 0x00, 0x00
-_021F385C:
-	.byte 0x94, 0x38, 0x1F, 0x02
-_021F3860:
-	.byte 0xA4, 0x38, 0x1F, 0x02
+_021F3858: .word 0x0000096B
+_021F385C: .word 0x021F3894
+_021F3860: .word 0x021F38A4
 
 	thumb_func_start FUN_overlay_d_49__021f3864
 FUN_overlay_d_49__021f3864: ; 0x021F3864

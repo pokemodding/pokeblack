@@ -86,7 +86,7 @@ _021F5318:
 	str r1, [r4, #0x34]
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
-_021F5320: .word FUN_overlay_d_76__021f5334
+_021F5320: .word 0x021F5335
 	thumb_func_end FUN_021F52D8
 _021F5324:
 	.byte 0x08, 0xB5, 0xDA, 0xF7, 0x1B, 0xF9, 0x80, 0x6A, 0x39, 0xF6, 0xAC, 0xF9
@@ -112,9 +112,13 @@ FUN_overlay_d_76__021f5334: ; 0x021F5334
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end FUN_overlay_d_76__021f5334
-_021F535E:
-	.byte 0x0A, 0x00
-	.byte 0x1C, 0x00, 0x38, 0x00, 0x5E, 0x00, 0x08, 0x01, 0x4C, 0x01
+_021F535E: ; jump table
+	.hword 0x000A ; case 0
+	.hword 0x001C ; case 1
+	.hword 0x0038 ; case 2
+	.hword 0x005E ; case 3
+	.hword 0x0108 ; case 4
+	.hword 0x014C ; case 5
 _021F536A:
 	mov r0, #4
 	mov r1, #0

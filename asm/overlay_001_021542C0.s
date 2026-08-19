@@ -1,0 +1,390 @@
+	.include "asm/macros/function.inc"
+
+	.extern FUN_02005C44
+	.extern FUN_02005D90
+	.extern FUN_02005DF8
+	.extern FUN_02005E30
+	.extern FUN_020120B4
+	.extern FUN_020120F0
+	.extern FUN_020120F4
+	.extern FUN_0201210C
+	.extern FUN_02012138
+	.extern FUN_02012374
+	.extern FUN_020144DC
+	.extern FUN_020145CC
+	.extern FUN_02026454
+	.extern FUN_02030734
+	.extern FUN_020307B0
+	.extern FUN_020399A8
+	.extern FUN_02039C68
+	.extern FUN_02039CB4
+	.extern FUN_0203C554
+	.extern FUN_0203CD98
+	.extern FUN_0203D7B0
+	.extern FUN_0203D7BC
+
+	.text
+
+
+	thumb_func_start FUN_overlay_1__021542c0
+FUN_overlay_1__021542c0: ; 0x021542C0
+	push {r3, r4, r5, r6, r7, lr}
+	sub sp, #0x10
+	mov r7, #0x5f
+	add r5, r2, #0
+	lsl r7, r7, #2
+	ldr r6, [r5, r7]
+	str r0, [sp, #4]
+	add r0, r6, #0
+	add r4, r1, #0
+	bl FUN_020120F4
+	str r0, [sp, #8]
+	add r0, r6, #0
+	bl FUN_0201210C
+	str r0, [sp, #0xc]
+	ldr r0, [r4]
+	cmp r0, #0x10
+	bls _021542E8
+	b _0215452E
+_021542E8:
+	add r1, r0, r0
+	add r1, pc
+	ldrh r1, [r1, #6]
+	lsl r1, r1, #0x10
+	asr r1, r1, #0x10
+	add pc, r1
+_021542F4: ; jump table
+	.hword 0x0020 ; case 0
+	.hword 0x0034 ; case 1
+	.hword 0x0054 ; case 2
+	.hword 0x0074 ; case 3
+	.hword 0x008E ; case 4
+	.hword 0x00A2 ; case 5
+	.hword 0x00CC ; case 6
+	.hword 0x00F0 ; case 7
+	.hword 0x0144 ; case 8
+	.hword 0x0168 ; case 9
+	.hword 0x0172 ; case 10
+	.hword 0x01B8 ; case 11
+	.hword 0x01E6 ; case 12
+	.hword 0x01F2 ; case 13
+	.hword 0x01FE ; case 14
+	.hword 0x0230 ; case 15
+	.hword 0x0232 ; case 16
+_02154316:
+	bl FUN_02005C44
+	str r0, [r5]
+	mov r0, #6
+	bl FUN_02005E30
+_02154322:
+	ldr r0, [r4]
+_02154324:
+	add r0, r0, #1
+_02154326:
+	str r0, [r4]
+	b _0215452E
+_0215432A:
+	add r0, r6, #0
+	bl FUN_02012138
+	bl FUN_02026454
+	cmp r0, #0
+	bne _021543F0
+	ldr r1, [sp, #0xc]
+	add r0, r6, #0
+	bl FUN_020144DC
+_02154340:
+	add r1, r0, #0
+	ldr r0, [sp, #4]
+	bl FUN_02012374
+	b _02154322
+_0215434A:
+	add r0, r5, #0
+	mov r3, #0xde
+	add r0, #8
+	lsl r3, r3, #2
+	str r0, [r5, r3]
+	sub r0, r3, #4
+	mov r1, #0x33
+	str r1, [r5, r0]
+	ldr r1, _02154534 ; =0x00000073
+	ldr r2, _02154538 ; =0x021D6338
+	add r0, r6, #0
+	sub r3, #0x10
+_02154362:
+	add r3, r5, r3
+_02154364:
+	bl FUN_020120B4
+	b _02154322
+_0215436A:
+	add r0, r6, #0
+	bl FUN_020120F0
+	cmp r0, #0
+	bne _021543F0
+	mov r0, #0xe1
+	lsl r0, r0, #2
+	ldr r0, [r5, r0]
+	cmp r0, #0
+	bne _02154380
+	b _02154322
+_02154380:
+	mov r0, #0xe
+_02154382:
+	b _02154326
+_02154384:
+	mov r0, #0xcd
+	mov r1, #0
+	lsl r0, r0, #2
+	str r1, [r5, r0]
+	add r7, #8
+	ldr r1, _0215453C ; =0x00000078
+	ldr r2, _02154540 ; =0x021D890C
+	add r0, r6, #0
+	add r3, r5, r7
+_02154396:
+	b _02154364
+_02154398:
+	add r0, r6, #0
+	bl FUN_020120F0
+	cmp r0, #0
+	bne _021543F0
+	mov r0, #0xcd
+	lsl r0, r0, #2
+	ldr r1, [r5, r0]
+	cmp r1, #1
+	bne _021543B0
+	mov r0, #0xc
+	b _02154382
+_021543B0:
+	cmp r1, #0
+	bne _021543BA
+	mov r1, #1
+	add r0, #0x48
+	b _02154400
+_021543BA:
+	mov r1, #0
+	add r0, #0xc
+	str r1, [r5, r0]
+	b _02154322
+_021543C2:
+	mov r3, #0xd3
+	add r7, #8
+	ldr r0, [sp, #8]
+	lsl r3, r3, #2
+	str r0, [r5, r3]
+	add r1, r5, r7
+	add r0, r3, #4
+	str r1, [r5, r0]
+	add r0, r3, #0
+	add r1, r5, #0
+	add r1, #8
+	add r0, #0x10
+	str r1, [r5, r0]
+	add r0, r6, #0
+	ldr r1, _02154544 ; =0x00000077
+	ldr r2, _02154548 ; =0x021E759C
+	sub r3, #0x14
+	b _02154362
+_021543E6:
+	add r0, r6, #0
+	bl FUN_020120F0
+	cmp r0, #0
+	beq _021543F2
+_021543F0:
+	b _0215452E
+_021543F2:
+	blx FUN_0203CD98
+	cmp r0, #0
+	bne _02154406
+	mov r0, #0xdf
+	mov r1, #1
+	lsl r0, r0, #2
+_02154400:
+	str r1, [r5, r0]
+_02154402:
+	mov r0, #2
+	b _02154382
+_02154406:
+	mov r0, #0xd
+	lsl r0, r0, #6
+	ldr r0, [r5, r0]
+	cmp r0, #2
+	bne _02154412
+	b _02154464
+_02154412:
+	cmp r0, #1
+	bne _0215441A
+	mov r0, #0xa
+	b _02154382
+_0215441A:
+	blx FUN_020399A8
+	mov r1, #1
+	mov r2, #0xc
+	blx FUN_02039C68
+	mov r0, #0
+	blx FUN_0203D7B0
+	mov r0, #0
+	blx FUN_0203D7BC
+	mov r0, #0x64
+	str r0, [r5, #4]
+	mov r0, #8
+	b _02154382
+_0215443A:
+	ldr r0, [r5, #4]
+	sub r0, r0, #1
+	str r0, [r5, #4]
+	blx FUN_020399A8
+	mov r1, #1
+	mov r2, #0xc
+	blx FUN_02039CB4
+	cmp r0, #0
+	beq _02154454
+	mov r0, #9
+	str r0, [r4]
+_02154454:
+	ldr r0, [r5, #4]
+	cmp r0, #0
+	bge _0215452E
+	mov r0, #9
+	b _02154382
+_0215445E:
+	mov r0, #1
+	blx FUN_0203C554
+_02154464:
+	mov r0, #4
+	b _02154382
+_02154468:
+	mov r0, #0xcc
+	str r0, [sp]
+	ldr r3, _0215454C ; =0x021546A0
+	mov r0, #4
+	mov r1, #0x14
+	mov r2, #0
+	mov r7, #0
+	blx FUN_02030734
+	add r3, r0, #0
+	mov r0, #0xd3
+	lsl r0, r0, #2
+	ldr r1, [r5, r0]
+	ldr r2, _02154550 ; =0x02208C40
+	str r1, [r3]
+	add r1, r0, #0
+	add r1, #0x60
+	ldr r1, [r5, r1]
+	str r1, [r3, #4]
+	add r1, r0, #0
+	sub r1, #8
+	ldr r1, [r5, r1]
+	strh r1, [r3, #8]
+	sub r1, r0, #4
+	strb r7, [r3, #0xa]
+	ldr r1, [r5, r1]
+	add r0, #0xc
+	strb r1, [r3, #0xb]
+	mov r1, #1
+	str r1, [r3, #0xc]
+	str r7, [r3, #0x10]
+	str r3, [r5, r0]
+	add r0, r6, #0
+	ldr r1, _02154554 ; =0x000000C3
+	b _02154396
+_021544AE:
+	add r0, r6, #0
+	bl FUN_020120F0
+	cmp r0, #0
+	bne _0215452E
+	mov r6, #0xd6
+	lsl r6, r6, #2
+	ldr r0, [r5, r6]
+	blx FUN_020307B0
+	blx FUN_0203CD98
+	cmp r0, #0
+	bne _021544D2
+	mov r0, #1
+	add r6, #0x24
+	str r0, [r5, r6]
+	b _02154402
+_021544D2:
+	mov r0, #1
+	sub r6, #0x18
+	str r0, [r5, r6]
+	mov r0, #6
+	b _02154382
+_021544DC:
+	mov r3, #0x39
+	add r0, r6, #0
+	ldr r1, _02154534 ; =0x00000073
+	ldr r2, _02154558 ; =0x021D654C
+	lsl r3, r3, #4
+	b _02154362
+_021544E8:
+	add r0, r6, #0
+	bl FUN_020120F0
+	cmp r0, #0
+	bne _0215452E
+	b _02154322
+_021544F4:
+	add r0, r7, #0
+	add r0, #0x1c
+	ldr r0, [r5, r0]
+	blx FUN_020307B0
+	add r7, #0x20
+	ldr r0, [r5, r7]
+	blx FUN_020307B0
+	mov r0, #0xeb
+	lsl r0, r0, #2
+	ldr r0, [r5, r0]
+	blx FUN_020307B0
+	ldr r0, [r5]
+	ldr r1, _0215455C ; =0x0000FFFF
+	bl FUN_02005D90
+	mov r0, #0x3c
+	bl FUN_02005DF8
+	add r0, r6, #0
+	bl FUN_020145CC
+	b _02154340
+_02154526:
+	b _02154324
+_02154528:
+	add sp, #0x10
+	mov r0, #1
+	pop {r3, r4, r5, r6, r7, pc}
+_0215452E:
+	mov r0, #0
+	add sp, #0x10
+	pop {r3, r4, r5, r6, r7, pc}
+	.balign 4, 0
+_02154534: .word 0x00000073
+_02154538: .word 0x021D6338
+_0215453C: .word 0x00000078
+_02154540: .word 0x021D890C
+_02154544: .word 0x00000077
+_02154548: .word 0x021E759C
+_0215454C: .word 0x021546A0
+_02154550: .word 0x02208C40
+_02154554: .word 0x000000C3
+_02154558: .word 0x021D654C
+_0215455C: .word 0x0000FFFF
+	thumb_func_end FUN_overlay_1__021542c0
+_02154560:
+	.byte 0xF0, 0xB5, 0x83, 0xB0, 0x0F, 0x1C, 0x04, 0x1C, 0x38, 0x1C, 0x01, 0x93, 0xBD, 0xF6, 0xE4, 0xFD
+	.byte 0xD1, 0xF6, 0x70, 0xFF, 0x00, 0x28, 0x04, 0xD0, 0x38, 0x1C, 0xBD, 0xF6, 0xDD, 0xFD, 0xD1, 0xF6
+	.byte 0x3F, 0xFF, 0x20, 0x1C, 0xBD, 0xF6, 0xB0, 0xFF, 0x5F, 0x26, 0x05, 0x1C, 0xB6, 0x00, 0x3B, 0x24
+	.byte 0x01, 0x98, 0xAF, 0x51, 0x24, 0x01, 0x28, 0x51, 0x04, 0x20, 0xC6, 0xF6, 0xC1, 0xF9, 0x21, 0x1F
+	.byte 0x68, 0x50, 0x08, 0x1C, 0x29, 0x58, 0x20, 0x1C, 0x5C, 0x38, 0x29, 0x50, 0x30, 0x1C, 0x08, 0x30
+	.byte 0x32, 0x1C, 0x28, 0x18, 0x00, 0x21, 0x38, 0x32, 0x2E, 0xF7, 0x08, 0xEB, 0x38, 0x1C, 0xBD, 0xF6
+	.byte 0x99, 0xFD, 0x31, 0x1C, 0x08, 0x31, 0x68, 0x50, 0xB3, 0xF6, 0x4E, 0xFF, 0x01, 0x1C, 0x30, 0x1C
+	.byte 0x59, 0x38, 0x00, 0x90, 0x24, 0x4B, 0x04, 0x20, 0x01, 0x22, 0xDC, 0xF6, 0xAC, 0xE8, 0x31, 0x1C
+	.byte 0x1C, 0x31, 0x68, 0x50, 0xB3, 0xF6, 0x40, 0xFF, 0x01, 0x1C, 0x30, 0x1C, 0x58, 0x38, 0x00, 0x90
+	.byte 0x1D, 0x4B, 0x04, 0x20, 0x01, 0x22, 0xDC, 0xF6, 0x9E, 0xE8, 0x31, 0x1C, 0x20, 0x31, 0x68, 0x50
+	.byte 0x38, 0x1C, 0xBD, 0xF6, 0x77, 0xFD, 0xBE, 0xF6, 0x9D, 0xF9, 0x02, 0x90, 0xB3, 0xF6, 0x2C, 0xFF
+	.byte 0x1C, 0x36, 0x02, 0x1C, 0x02, 0x98, 0xA9, 0x59, 0x2E, 0xF7, 0x94, 0xEB, 0x20, 0x1C, 0x48, 0x38
+	.byte 0x28, 0x18, 0x00, 0x21, 0x28, 0x22, 0x2E, 0xF7, 0xD2, 0xEA, 0x38, 0x1C, 0xBD, 0xF6, 0x62, 0xFD
+	.byte 0x21, 0x1C, 0x48, 0x39, 0x68, 0x50, 0x21, 0x1C, 0x44, 0x39, 0x00, 0x20, 0x68, 0x50, 0x21, 0x1C
+	.byte 0x40, 0x39, 0x01, 0x20, 0x68, 0x50, 0x38, 0x1C, 0xBD, 0xF6, 0x54, 0xFD, 0x21, 0x1C, 0x20, 0x39
+	.byte 0x68, 0x50, 0x21, 0x1C, 0x1C, 0x39, 0x00, 0x20, 0x68, 0x50, 0x18, 0x3C, 0x01, 0x20, 0x28, 0x51
+	.byte 0x28, 0x1C, 0x03, 0xB0, 0xF0, 0xBD, 0xC0, 0x46, 0xA0, 0x46, 0x15, 0x02, 0x70, 0xB5, 0xED, 0x23
+	.byte 0x0C, 0x1C, 0x07, 0x4A, 0x05, 0x1C, 0x00, 0x21, 0x9B, 0x00, 0xBD, 0xF6, 0x21, 0xFE, 0x29, 0x1C
+	.byte 0x22, 0x1C, 0x00, 0x23, 0x06, 0x1C, 0xFF, 0xF7, 0x6B, 0xFF, 0x30, 0x1C, 0x70, 0xBD, 0xC0, 0x46
+	.byte 0xC1, 0x42, 0x15, 0x02, 0x00, 0x4B, 0x18, 0x47, 0x6D, 0x46, 0x15, 0x02, 0x00, 0x00, 0x00, 0x00
+	.byte 0x65, 0x76, 0x65, 0x6E, 0x74, 0x5F, 0x67, 0x74, 0x73, 0x6E, 0x65, 0x67, 0x6F, 0x2E, 0x63, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00

@@ -1,0 +1,147 @@
+Apply to PikalaxALT/gbadisasm branch dism_modules at 2e2cc679aac1235db37e59da6b7204211f73b4ef
+
+diff --git a/disasm.c b/disasm.c
+index 143e738..dd8e100 100755
+--- a/disasm.c
++++ b/disasm.c
+@@ -46,6 +46,7 @@ struct Label
+     bool processed;
+     bool isFunc; // 100% sure it's a function, which cannot be changed to BRANCH_TYPE_B.
+     bool isFromConfig;
++    bool isSticky;
+     char *name;
+ };
+ 
+@@ -58,6 +59,17 @@ static int sJumpTableInsnIdx = 0;
+ const bool gOptionShowAddrComments = false;
+ const int gOptionDataColumnWidth = 16;
+ 
++int disasm_add_sticky_label(uint32_t addr, enum LabelType type, char *name)
++{
++    int index = disasm_add_label(addr, type, name, true);
++    if (index >= 0)
++    {
++        gLabels[index].type = type;
++        gLabels[index].isSticky = true;
++    }
++    return index;
++}
++
+ int disasm_add_label(uint32_t addr, enum LabelType type, char *name, bool is_config)
+ {
+     int i;
+@@ -73,7 +85,8 @@ int disasm_add_label(uint32_t addr, enum LabelType type, char *name, bool is_con
+     {
+         if (gLabels[i].addr == addr)
+         {
+-            gLabels[i].type = type;
++            if (!gLabels[i].isSticky)
++                gLabels[i].type = type;
+             return i;
+         }
+     }
+@@ -99,6 +112,7 @@ int disasm_add_label(uint32_t addr, enum LabelType type, char *name, bool is_con
+     gLabels[i].name = name;
+     gLabels[i].isFunc = false;
+     gLabels[i].isFromConfig = is_config;
++    gLabels[i].isSticky = false;
+ 
+     if((unsigned)(addr - ROM_LOAD_ADDR) > gInputFileBufferSize)
+     {
+@@ -943,6 +957,9 @@ static void print_disassembly(void)
+     enum LabelType last_label = LABEL_DATA;
+     uint32_t endaddr = -1u;
+ 
++    if (gLabelsCount == 0)
++        fatal_error("no labels to disassemble, the config seeded nothing in range");
++
+     qsort(gLabels, gLabelsCount, sizeof(*gLabels), qsort_label_compare);
+     uint32_t addr = gLabels[0].addr, lastAddr = addr;
+ 
+diff --git a/main.c b/main.c
+index 9d70c30..5cc1b83 100755
+--- a/main.c
++++ b/main.c
+@@ -169,6 +169,15 @@ static uint32_t FindUncompressCall(FILE * file, uint32_t entry)
+         offset = insn[count - 1].address + insn[count - 1].size - entry;
+         cs_free(insn, count);
+     } while (offset < 0x800);
++
++    for (uint32_t off = 0x1C; off + 8 <= sizeof(code); off += 4)
++    {
++        if (READ32(&code[off]) == 0xDEC00621 && READ32(&code[off + 4]) == 0x2106C0DE)
++        {
++            CompressedStaticEnd = READ32(&code[off - 0x1C + 20]);
++            return entry + off - 0x1C;
++        }
++    }
+     return 0;
+ }
+ 
+@@ -250,14 +259,30 @@ static void read_input_file(const char *fname)
+         first_autoload = READ32(gInputFileBuffer + start_ModuleParams + 8 - addr);
+         
+         gRomStart = first_autoload - addr + offset;
+-        if ((autoload_end - autoload_start) / 12 <= (uint32_t)AutoloadNum)
++
++        uint32_t list_bytes = autoload_end - autoload_start;
++        uint32_t payload_bytes = autoload_start - first_autoload;
++        uint32_t stride = 0;
++        for (uint32_t candidate = 12; candidate <= 16 && stride == 0; candidate += 4) {
++            if (list_bytes == 0 || list_bytes % candidate != 0)
++                continue;
++            uint32_t sum = 0;
++            for (uint32_t i = 0; i < list_bytes / candidate; i++)
++                sum += READ32(gInputFileBuffer + candidate * i + 4 + autoload_start - addr);
++            if (sum == payload_bytes)
++                stride = candidate;
++        }
++        if (stride == 0)
++            fatal_error("could not determine autoload entry size for ARM%d target", isArm7 ? 7 : 9);
++
++        if (list_bytes / stride <= (uint32_t)AutoloadNum)
+             fatal_error("Argument to -a is out of range for ARM%d target", isArm7 ? 7 : 9);
+         fseek(file, autoload_start - addr + offset, SEEK_SET);
+         for (int i = 0; i < AutoloadNum; i++) {
+-            gRomStart += READ32(gInputFileBuffer + 12 * i + 4 + autoload_start - addr);
++            gRomStart += READ32(gInputFileBuffer + stride * i + 4 + autoload_start - addr);
+         }
+-        gRamStart = READ32(gInputFileBuffer + 12 * AutoloadNum + autoload_start - addr);
+-        gInputFileBufferSize = READ32(gInputFileBuffer + 12 * AutoloadNum + autoload_start + 4 - addr);
++        gRamStart = READ32(gInputFileBuffer + stride * AutoloadNum + autoload_start - addr);
++        gInputFileBufferSize = READ32(gInputFileBuffer + stride * AutoloadNum + autoload_start + 4 - addr);
+ 
+         uint8_t * tmp_buffer = malloc(gInputFileBufferSize);
+         if (tmp_buffer == NULL)
+@@ -397,6 +422,21 @@ static void read_config(const char *fname)
+                 fatal_error("%s: syntax error on line %i", fname, lineNum);
+             }
+         }
++        else if (strcmp(tokens[0], "force_data") == 0)
++        {
++            int addr;
++
++            if (sscanf(tokens[1], "%i", &addr) == 1)
++            {
++                if (strlen(tokens[2]) != 0)
++                    name = strdup(tokens[2]);
++                disasm_add_sticky_label(addr, LABEL_DATA, name);
++            }
++            else
++            {
++                fatal_error("%s: syntax error on line %i", fname, lineNum);
++            }
++        }
+         else if (strcmp(tokens[0], "data") == 0)
+         {
+             int addr;
+diff --git a/ndsdisasm.h b/ndsdisasm.h
+index 3751732..c9ee46a 100755
+--- a/ndsdisasm.h
++++ b/ndsdisasm.h
+@@ -43,4 +43,5 @@ extern bool dataPrefixOverridden;
+ 
+ // disasm.c
+ int disasm_add_label(uint32_t addr, enum LabelType type, char *name, bool is_config);
++int disasm_add_sticky_label(uint32_t addr, enum LabelType type, char *name);
+ void disasm_disassemble(void);

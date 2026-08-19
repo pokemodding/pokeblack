@@ -149,10 +149,9 @@ _0689826E:
 	mov r0, #0
 	add sp, #0x14
 	pop {r4, r5, r6, r7, pc}
-_06898274:
-	.byte 0xC8, 0xD6, 0x89, 0x06
-_06898278:
-	.byte 0xCC, 0xD6, 0x89, 0x06
+	.balign 4, 0
+_06898274: .word 0x0689D6C8
+_06898278: .word 0x0689D6CC
 
 	thumb_func_start FUN_0689827C
 FUN_0689827C: ; 0x0689827C
@@ -164,9 +163,9 @@ FUN_0689827C: ; 0x0689827C
 thunk_EXT_FUN_021d6f0c: ; 0x06898280
 	ldr ip, _06898288 ; =0x021D6F0D
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d6f0c
-_06898288:
-	.byte 0x0D, 0x6F, 0x1D, 0x02
+_06898288: .word 0x021D6F0D
 
 	thumb_func_start FUN_0689828C
 FUN_0689828C: ; 0x0689828C
@@ -188,9 +187,11 @@ FUN_0689829C: ; 0x0689829C
 thunk_EXT_FUN_021d70dc: ; 0x068982A0
 	ldr ip, _068982A8 ; =0x021D70DD
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d70dc
-_068982A8:
-	.byte 0xDD, 0x70, 0x1D, 0x02, 0x08, 0xB5, 0x00, 0xF0
+_068982A8: .word 0x021D70DD
+_068982AC:
+	.byte 0x08, 0xB5, 0x00, 0xF0
 	.byte 0x07, 0xF8, 0x00, 0x28, 0x01, 0xD1, 0x01, 0x20, 0x08, 0xBD, 0x00, 0x20, 0x08, 0xBD, 0x00, 0x00
 
 	thumb_func_start FUN_overlay_95__068982c0
@@ -229,9 +230,9 @@ FUN_068982EC: ; 0x068982EC
 thunk_EXT_FUN_021d732c: ; 0x068982F0
 	ldr ip, _068982F8 ; =0x021D732D
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d732c
-_068982F8:
-	.byte 0x2D, 0x73, 0x1D, 0x02
+_068982F8: .word 0x021D732D
 
 	thumb_func_start FUN_068982FC
 FUN_068982FC: ; 0x068982FC
@@ -243,9 +244,9 @@ FUN_068982FC: ; 0x068982FC
 thunk_EXT_FUN_021d70a8: ; 0x06898300
 	ldr ip, _06898308 ; =0x021D70A9
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d70a8
-_06898308:
-	.byte 0xA9, 0x70, 0x1D, 0x02
+_06898308: .word 0x021D70A9
 
 	thumb_func_start FUN_0689830C
 FUN_0689830C: ; 0x0689830C
@@ -257,9 +258,11 @@ FUN_0689830C: ; 0x0689830C
 thunk_EXT_FUN_021d7360: ; 0x06898310
 	ldr ip, _06898318 ; =0x021D7361
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d7360
-_06898318:
-	.byte 0x61, 0x73, 0x1D, 0x02, 0x01, 0x21, 0x01, 0x60
+_06898318: .word 0x021D7361
+_0689831C:
+	.byte 0x01, 0x21, 0x01, 0x60
 	.byte 0x00, 0x48, 0x70, 0x47
 _06898324:
 	.byte 0x98, 0xD6, 0x89, 0x06, 0xF8, 0xB5, 0x82, 0xB0, 0x00, 0x90, 0x02, 0x20
@@ -706,9 +709,9 @@ FUN_06899D54: ; 0x06899D54
 thunk_EXT_FUN_022033f0: ; 0x06899D58
 	ldr ip, _06899D60 ; =0x022033F1
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_022033f0
-_06899D60:
-	.byte 0xF1, 0x33, 0x20, 0x02
+_06899D60: .word 0x022033F1
 
 	thumb_func_start FUN_overlay_95__06899d64
 FUN_overlay_95__06899d64: ; 0x06899D64
@@ -870,10 +873,9 @@ FUN_overlay_95__06899ed0: ; 0x06899ED0
 	pop {r4, pc}
 	nop
 	thumb_func_end FUN_overlay_95__06899ed0
-_06899EF8:
-	.byte 0x31, 0xA0, 0x89, 0x06
-_06899EFC:
-	.byte 0x6D, 0xA7, 0x89, 0x06
+_06899EF8: .word 0x0689A031
+_06899EFC: .word 0x0689A76D
+_06899F00:
 	.byte 0xC1, 0x66, 0x01, 0x1C, 0x03, 0x67, 0x00, 0x23, 0x98, 0x31, 0x0B, 0x60, 0x01, 0x1C, 0x8B, 0x31
 	.byte 0x0A, 0x70, 0x02, 0x49, 0x02, 0x4A, 0x03, 0x4B, 0x18, 0x47, 0xC0, 0x46, 0x31, 0xA0, 0x89, 0x06
 	.byte 0x4D, 0xA8, 0x89, 0x06, 0x49, 0x9E, 0x89, 0x06
@@ -925,10 +927,8 @@ FUN_overlay_95__06899f64: ; 0x06899F64
 	pop {r4, r5, r6, pc}
 	nop
 	thumb_func_end FUN_overlay_95__06899f64
-_06899F9C:
-	.byte 0xA1, 0xAB, 0x89, 0x06
-_06899FA0:
-	.byte 0x49, 0xAB, 0x89, 0x06
+_06899F9C: .word 0x0689ABA1
+_06899FA0: .word 0x0689AB49
 
 	thumb_func_start FUN_06899FA4
 FUN_06899FA4: ; 0x06899FA4
@@ -1052,8 +1052,11 @@ _0689A130:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_0689A142:
-	.byte 0x06, 0x00, 0x94, 0x00, 0x50, 0x00, 0x94, 0x00
+_0689A142: ; jump table
+	.hword 0x0006 ; case 0
+	.hword 0x0094 ; case 1
+	.hword 0x0050 ; case 2
+	.hword 0x0094 ; case 3
 _0689A14A:
 	ldr r0, [sp]
 	mov r1, #0
@@ -1398,9 +1401,9 @@ FUN_0689A43C: ; 0x0689A43C
 thunk_EXT_FUN_021b8ff4: ; 0x0689A440
 	ldr ip, _0689A448 ; =0x021B8FF5
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b8ff4
-_0689A448:
-	.byte 0xF5, 0x8F, 0x1B, 0x02
+_0689A448: .word 0x021B8FF5
 
 	thumb_func_start FUN_0689A44C
 FUN_0689A44C: ; 0x0689A44C
@@ -1412,9 +1415,9 @@ FUN_0689A44C: ; 0x0689A44C
 thunk_EXT_FUN_021b9000: ; 0x0689A450
 	ldr ip, _0689A458 ; =0x021B9001
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b9000
-_0689A458:
-	.byte 0x01, 0x90, 0x1B, 0x02
+_0689A458: .word 0x021B9001
 
 	thumb_func_start FUN_0689A45C
 FUN_0689A45C: ; 0x0689A45C
@@ -1756,9 +1759,9 @@ FUN_0689A66C: ; 0x0689A66C
 thunk_FUN_02017e1c: ; 0x0689A670
 	ldr ip, _0689A678 ; =0x02017E1D
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_FUN_02017e1c
-_0689A678:
-	.byte 0x1D, 0x7E, 0x01, 0x02
+_0689A678: .word 0x02017E1D
 
 	thumb_func_start FUN_0689A67C
 FUN_0689A67C: ; 0x0689A67C
@@ -1790,9 +1793,9 @@ FUN_0689A69C: ; 0x0689A69C
 thunk_EXT_FUN_021b86b8: ; 0x0689A6A0
 	ldr ip, _0689A6A8 ; =0x021B86B9
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b86b8
-_0689A6A8:
-	.byte 0xB9, 0x86, 0x1B, 0x02
+_0689A6A8: .word 0x021B86B9
 
 	thumb_func_start FUN_0689A6AC
 FUN_0689A6AC: ; 0x0689A6AC
@@ -1814,9 +1817,9 @@ FUN_0689A6BC: ; 0x0689A6BC
 thunk_EXT_FUN_021b904c: ; 0x0689A6C0
 	ldr ip, _0689A6C8 ; =0x021B904D
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b904c
-_0689A6C8:
-	.byte 0x4D, 0x90, 0x1B, 0x02
+_0689A6C8: .word 0x021B904D
 
 	thumb_func_start FUN_0689A6CC
 FUN_0689A6CC: ; 0x0689A6CC
@@ -1848,9 +1851,9 @@ FUN_0689A6EC: ; 0x0689A6EC
 thunk_EXT_FUN_021b9af8: ; 0x0689A6F0
 	ldr ip, _0689A6F8 ; =0x021B9AF9
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b9af8
-_0689A6F8:
-	.byte 0xF9, 0x9A, 0x1B, 0x02
+_0689A6F8: .word 0x021B9AF9
 
 	thumb_func_start FUN_0689A6FC
 FUN_0689A6FC: ; 0x0689A6FC
@@ -1862,9 +1865,9 @@ FUN_0689A6FC: ; 0x0689A6FC
 thunk_EXT_FUN_021b9b94: ; 0x0689A700
 	ldr ip, _0689A708 ; =0x021B9B95
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b9b94
-_0689A708:
-	.byte 0x95, 0x9B, 0x1B, 0x02
+_0689A708: .word 0x021B9B95
 
 	thumb_func_start FUN_0689A70C
 FUN_0689A70C: ; 0x0689A70C
@@ -1906,9 +1909,9 @@ FUN_0689A73C: ; 0x0689A73C
 thunk_EXT_FUN_021d5b7c: ; 0x0689A740
 	ldr ip, _0689A748 ; =0x021D5B7D
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d5b7c
-_0689A748:
-	.byte 0x7D, 0x5B, 0x1D, 0x02
+_0689A748: .word 0x021D5B7D
 
 	thumb_func_start FUN_0689A74C
 FUN_0689A74C: ; 0x0689A74C
@@ -1920,9 +1923,9 @@ FUN_0689A74C: ; 0x0689A74C
 thunk_EXT_FUN_021d3d84: ; 0x0689A750
 	ldr ip, _0689A758 ; =0x021D3D85
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d3d84
-_0689A758:
-	.byte 0x85, 0x3D, 0x1D, 0x02
+_0689A758: .word 0x021D3D85
 
 	thumb_func_start FUN_0689A75C
 FUN_0689A75C: ; 0x0689A75C
@@ -1989,12 +1992,9 @@ _0689A7DA:
 	mov r0, #0
 	pop {r3, r4, r5, pc}
 	nop
-_0689A7E0:
-	.byte 0xD4, 0xD8, 0x89, 0x06
-_0689A7E4:
-	.byte 0x64, 0xDF, 0x89, 0x06
-_0689A7E8:
-	.byte 0x28, 0xD8, 0x89, 0x06
+_0689A7E0: .word 0x0689D8D4
+_0689A7E4: .word 0x0689DF64
+_0689A7E8: .word 0x0689D828
 
 	thumb_func_start FUN_0689A7EC
 FUN_0689A7EC: ; 0x0689A7EC
@@ -2016,9 +2016,9 @@ FUN_0689A7FC: ; 0x0689A7FC
 thunk_EXT_FUN_021d8414: ; 0x0689A800
 	ldr ip, _0689A808 ; =0x021D8415
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d8414
-_0689A808:
-	.byte 0x15, 0x84, 0x1D, 0x02
+_0689A808: .word 0x021D8415
 
 	thumb_func_start FUN_0689A80C
 FUN_0689A80C: ; 0x0689A80C
@@ -2088,9 +2088,9 @@ FUN_0689A868: ; 0x0689A868
 thunk_EXT_FUN_02203040: ; 0x0689A86C
 	ldr ip, _0689A874 ; =0x02203041
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_02203040
-_0689A874:
-	.byte 0x41, 0x30, 0x20, 0x02
+_0689A874: .word 0x02203041
 
 	thumb_func_start FUN_overlay_95__0689a878
 FUN_overlay_95__0689a878: ; 0x0689A878
@@ -2194,9 +2194,9 @@ FUN_0689A928: ; 0x0689A928
 thunk_EXT_FUN_021d6d54: ; 0x0689A92C
 	ldr ip, _0689A934 ; =0x021D6D55
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d6d54
-_0689A934:
-	.byte 0x55, 0x6D, 0x1D, 0x02
+_0689A934: .word 0x021D6D55
 
 	thumb_func_start FUN_0689A938
 FUN_0689A938: ; 0x0689A938
@@ -2208,9 +2208,9 @@ FUN_0689A938: ; 0x0689A938
 thunk_EXT_FUN_021d5528: ; 0x0689A93C
 	ldr ip, _0689A944 ; =0x021D5529
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d5528
-_0689A944:
-	.byte 0x29, 0x55, 0x1D, 0x02
+_0689A944: .word 0x021D5529
 
 	thumb_func_start FUN_0689A948
 FUN_0689A948: ; 0x0689A948
@@ -2366,16 +2366,12 @@ _0689AA44:
 _0689AA60:
 	mov r0, #0
 	pop {r4, r5, r6, pc}
-_0689AA64:
-	.byte 0x80, 0xD8, 0x89, 0x06
-_0689AA68:
-	.byte 0x1C, 0xD9, 0x89, 0x06
-_0689AA6C:
-	.byte 0x28, 0xE1, 0x89, 0x06
-_0689AA70:
-	.byte 0x54, 0xE0, 0x89, 0x06
-_0689AA74:
-	.byte 0xFF, 0x7F, 0xFF, 0xFF
+	.balign 4, 0
+_0689AA64: .word 0x0689D880
+_0689AA68: .word 0x0689D91C
+_0689AA6C: .word 0x0689E128
+_0689AA70: .word 0x0689E054
+_0689AA74: .word 0xFFFF7FFF
 
 	thumb_func_start FUN_0689AA78
 FUN_0689AA78: ; 0x0689AA78
@@ -2464,9 +2460,9 @@ FUN_0689AAE8: ; 0x0689AAE8
 thunk_EXT_FUN_021d5448: ; 0x0689AAEC
 	ldr ip, _0689AAF4 ; =0x021D5449
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d5448
-_0689AAF4:
-	.byte 0x49, 0x54, 0x1D, 0x02
+_0689AAF4: .word 0x021D5449
 
 	thumb_func_start FUN_0689AAF8
 FUN_0689AAF8: ; 0x0689AAF8
@@ -2522,9 +2518,9 @@ FUN_0689AB38: ; 0x0689AB38
 thunk_EXT_FUN_021d8424: ; 0x0689AB3C
 	ldr ip, _0689AB44 ; =0x021D8425
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d8424
-_0689AB44:
-	.byte 0x25, 0x84, 0x1D, 0x02
+_0689AB44: .word 0x021D8425
 
 	thumb_func_start FUN_overlay_95__0689ab48
 FUN_overlay_95__0689ab48: ; 0x0689AB48
@@ -2664,8 +2660,7 @@ _0689AC40:
 	add sp, #8
 	pop {r4, r5, r6, pc}
 	nop
-_0689AC48:
-	.byte 0xFF, 0x7F, 0xFF, 0xFF
+_0689AC48: .word 0xFFFF7FFF
 
 	thumb_func_start FUN_0689AC4C
 FUN_0689AC4C: ; 0x0689AC4C
@@ -2677,9 +2672,9 @@ FUN_0689AC4C: ; 0x0689AC4C
 thunk_EXT_FUN_022030f0: ; 0x0689AC50
 	ldr ip, _0689AC58 ; =0x022030F1
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_022030f0
-_0689AC58:
-	.byte 0xF1, 0x30, 0x20, 0x02
+_0689AC58: .word 0x022030F1
 
 	thumb_func_start FUN_0689AC5C
 FUN_0689AC5C: ; 0x0689AC5C
@@ -2701,9 +2696,9 @@ FUN_0689AC6C: ; 0x0689AC6C
 thunk_EXT_FUN_021d54c0: ; 0x0689AC70
 	ldr ip, _0689AC78 ; =0x021D54C1
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d54c0
-_0689AC78:
-	.byte 0xC1, 0x54, 0x1D, 0x02
+_0689AC78: .word 0x021D54C1
 
 	thumb_func_start FUN_0689AC7C
 FUN_0689AC7C: ; 0x0689AC7C
@@ -2715,9 +2710,9 @@ FUN_0689AC7C: ; 0x0689AC7C
 thunk_EXT_FUN_021d83fc: ; 0x0689AC80
 	ldr ip, _0689AC88 ; =0x021D83FD
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d83fc
-_0689AC88:
-	.byte 0xFD, 0x83, 0x1D, 0x02
+_0689AC88: .word 0x021D83FD
 
 	thumb_func_start FUN_0689AC8C
 FUN_0689AC8C: ; 0x0689AC8C
@@ -2749,9 +2744,9 @@ FUN_0689ACAC: ; 0x0689ACAC
 thunk_EXT_FUN_021d8318: ; 0x0689ACB0
 	ldr ip, _0689ACB8 ; =0x021D8319
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d8318
-_0689ACB8:
-	.byte 0x19, 0x83, 0x1D, 0x02
+_0689ACB8: .word 0x021D8319
 
 	thumb_func_start FUN_0689ACBC
 FUN_0689ACBC: ; 0x0689ACBC
@@ -2763,9 +2758,9 @@ FUN_0689ACBC: ; 0x0689ACBC
 thunk_EXT_FUN_021d8434: ; 0x0689ACC0
 	ldr ip, _0689ACC8 ; =0x021D8435
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d8434
-_0689ACC8:
-	.byte 0x35, 0x84, 0x1D, 0x02
+_0689ACC8: .word 0x021D8435
 
 	thumb_func_start FUN_overlay_95__0689accc
 FUN_overlay_95__0689accc: ; 0x0689ACCC
@@ -2773,9 +2768,9 @@ FUN_overlay_95__0689accc: ; 0x0689ACCC
 	mov r1, #0
 	mov r2, #9
 	bx r3
+	.balign 4, 0
 	thumb_func_end FUN_overlay_95__0689accc
-_0689ACD4:
-	.byte 0xCC, 0x2B, 0x08, 0x02
+_0689ACD4: .word 0x02082BCC
 
 	thumb_func_start FUN_overlay_95__0689acd8
 FUN_overlay_95__0689acd8: ; 0x0689ACD8
@@ -2850,9 +2845,9 @@ FUN_0689AD3C: ; 0x0689AD3C
 thunk_EXT_FUN_021b8778: ; 0x0689AD40
 	ldr ip, _0689AD48 ; =0x021B8779
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b8778
-_0689AD48:
-	.byte 0x79, 0x87, 0x1B, 0x02
+_0689AD48: .word 0x021B8779
 
 	thumb_func_start FUN_overlay_95__0689ad4c
 FUN_overlay_95__0689ad4c: ; 0x0689AD4C
@@ -2925,9 +2920,9 @@ FUN_0689ADBC: ; 0x0689ADBC
 thunk_EXT_FUN_021b9a00: ; 0x0689ADC0
 	ldr ip, _0689ADC8 ; =0x021B9A01
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b9a00
-_0689ADC8:
-	.byte 0x01, 0x9A, 0x1B, 0x02
+_0689ADC8: .word 0x021B9A01
 
 	thumb_func_start FUN_0689ADCC
 FUN_0689ADCC: ; 0x0689ADCC
@@ -2939,9 +2934,9 @@ FUN_0689ADCC: ; 0x0689ADCC
 thunk_EXT_FUN_021b8c5c: ; 0x0689ADD0
 	ldr ip, _0689ADD8 ; =0x021B8C5D
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b8c5c
-_0689ADD8:
-	.byte 0x5D, 0x8C, 0x1B, 0x02
+_0689ADD8: .word 0x021B8C5D
 
 	thumb_func_start FUN_overlay_95__0689addc
 FUN_overlay_95__0689addc: ; 0x0689ADDC
@@ -2983,8 +2978,8 @@ _0689AE18:
 	strb r0, [r4]
 	mov r0, #1
 	pop {r3, r4, r5, pc}
-_0689AE20:
-	.byte 0x2C, 0xD8, 0x89, 0x06
+	.balign 4, 0
+_0689AE20: .word 0x0689D82C
 
 	thumb_func_start FUN_0689AE24
 FUN_0689AE24: ; 0x0689AE24
@@ -2996,9 +2991,9 @@ FUN_0689AE24: ; 0x0689AE24
 thunk_EXT_FUN_021b8ed8: ; 0x0689AE28
 	ldr ip, _0689AE30 ; =0x021B8ED9
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b8ed8
-_0689AE30:
-	.byte 0xD9, 0x8E, 0x1B, 0x02
+_0689AE30: .word 0x021B8ED9
 
 	thumb_func_start FUN_overlay_95__0689ae34
 FUN_overlay_95__0689ae34: ; 0x0689AE34
@@ -3174,9 +3169,9 @@ _0689AF7A:
 	arm_func_start thunk_EXT_FUN_02082a48
 thunk_EXT_FUN_02082a48: ; 0x0689AF90
 	ldr pc, _0689AF94 ; =FUN_02082A48
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_02082a48
-_0689AF94:
-	.byte 0x48, 0x2A, 0x08, 0x02
+_0689AF94: .word 0x02082A48
 
 	thumb_func_start FUN_0689AF98
 FUN_0689AF98: ; 0x0689AF98
@@ -3254,9 +3249,9 @@ FUN_0689AFF8: ; 0x0689AFF8
 thunk_EXT_FUN_021b98ac: ; 0x0689AFFC
 	ldr ip, _0689B004 ; =0x021B98AD
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b98ac
-_0689B004:
-	.byte 0xAD, 0x98, 0x1B, 0x02
+_0689B004: .word 0x021B98AD
 
 	thumb_func_start FUN_0689B008
 FUN_0689B008: ; 0x0689B008
@@ -3301,9 +3296,9 @@ FUN_0689B038: ; 0x0689B038
 thunk_EXT_FUN_021d5444: ; 0x0689B03C
 	ldr ip, _0689B044 ; =0x021D5445
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d5444
-_0689B044:
-	.byte 0x45, 0x54, 0x1D, 0x02
+_0689B044: .word 0x021D5445
 
 	thumb_func_start FUN_0689B048
 FUN_0689B048: ; 0x0689B048
@@ -3315,9 +3310,9 @@ FUN_0689B048: ; 0x0689B048
 thunk_EXT_FUN_021d59b4: ; 0x0689B04C
 	ldr ip, _0689B054 ; =0x021D59B5
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d59b4
-_0689B054:
-	.byte 0xB5, 0x59, 0x1D, 0x02
+_0689B054: .word 0x021D59B5
 
 	thumb_func_start FUN_0689B058
 FUN_0689B058: ; 0x0689B058
@@ -3329,9 +3324,9 @@ FUN_0689B058: ; 0x0689B058
 thunk_EXT_FUN_021d5864: ; 0x0689B05C
 	ldr ip, _0689B064 ; =0x021D5865
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d5864
-_0689B064:
-	.byte 0x65, 0x58, 0x1D, 0x02
+_0689B064: .word 0x021D5865
 
 	thumb_func_start FUN_0689B068
 FUN_0689B068: ; 0x0689B068
@@ -3343,9 +3338,9 @@ FUN_0689B068: ; 0x0689B068
 thunk_FUN_02017f00: ; 0x0689B06C
 	ldr ip, _0689B074 ; =0x02017F01
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_FUN_02017f00
-_0689B074:
-	.byte 0x01, 0x7F, 0x01, 0x02
+_0689B074: .word 0x02017F01
 
 	thumb_func_start FUN_0689B078
 FUN_0689B078: ; 0x0689B078
@@ -3357,9 +3352,9 @@ FUN_0689B078: ; 0x0689B078
 thunk_EXT_FUN_021d62a8: ; 0x0689B07C
 	ldr ip, _0689B084 ; =0x021D62A9
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d62a8
-_0689B084:
-	.byte 0xA9, 0x62, 0x1D, 0x02
+_0689B084: .word 0x021D62A9
 
 	thumb_func_start FUN_0689B088
 FUN_0689B088: ; 0x0689B088
@@ -3522,9 +3517,9 @@ FUN_0689B1A4: ; 0x0689B1A4
 thunk_EXT_FUN_021b99e0: ; 0x0689B1A8
 	ldr ip, _0689B1B0 ; =0x021B99E1
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b99e0
-_0689B1B0:
-	.byte 0xE1, 0x99, 0x1B, 0x02
+_0689B1B0: .word 0x021B99E1
 
 	thumb_func_start FUN_0689B1B4
 FUN_0689B1B4: ; 0x0689B1B4
@@ -3644,10 +3639,10 @@ _0689B2D4:
 	.byte 0xD8, 0xE5, 0x89, 0x06
 _0689B2D8:
 	.byte 0x60, 0xE5, 0x89, 0x06
-_0689B2DC:
-	.byte 0x50, 0xE6, 0x89, 0x06
-_0689B2E0:
-	.byte 0x04, 0xE7, 0x89, 0x06, 0x78, 0x47, 0xC0, 0x46, 0x00, 0xC0, 0x9F, 0xE5, 0x1C, 0xFF, 0x2F, 0xE1
+_0689B2DC: .word 0x0689E650
+_0689B2E0: .word 0x0689E704
+_0689B2E4:
+	.byte 0x78, 0x47, 0xC0, 0x46, 0x00, 0xC0, 0x9F, 0xE5, 0x1C, 0xFF, 0x2F, 0xE1
 _0689B2F0:
 	.byte 0x41, 0x54, 0x1D, 0x02, 0x78, 0x47, 0xC0, 0x46, 0x00, 0xC0, 0x9F, 0xE5, 0x1C, 0xFF, 0x2F, 0xE1
 _0689B300:
@@ -3657,17 +3652,19 @@ _0689B300:
 thunk_EXT_FUN_021b8e70: ; 0x0689B308
 	ldr ip, _0689B310 ; =0x021B8E71
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b8e70
-_0689B310:
-	.byte 0x71, 0x8E, 0x1B, 0x02, 0x78, 0x47, 0xC0, 0x46
+_0689B310: .word 0x021B8E71
+_0689B314:
+	.byte 0x78, 0x47, 0xC0, 0x46
 
 	arm_func_start thunk_EXT_FUN_021b8588
 thunk_EXT_FUN_021b8588: ; 0x0689B318
 	ldr ip, _0689B320 ; =0x021B8589
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b8588
-_0689B320:
-	.byte 0x89, 0x85, 0x1B, 0x02
+_0689B320: .word 0x021B8589
 
 	thumb_func_start FUN_0689B324
 FUN_0689B324: ; 0x0689B324
@@ -3679,9 +3676,9 @@ FUN_0689B324: ; 0x0689B324
 thunk_FUN_0201beb8: ; 0x0689B328
 	ldr ip, _0689B330 ; =0x0201BEB9
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_FUN_0201beb8
-_0689B330:
-	.byte 0xB9, 0xBE, 0x01, 0x02
+_0689B330: .word 0x0201BEB9
 
 	thumb_func_start FUN_0689B334
 FUN_0689B334: ; 0x0689B334
@@ -3693,9 +3690,9 @@ FUN_0689B334: ; 0x0689B334
 thunk_EXT_FUN_02202dc4: ; 0x0689B338
 	ldr ip, _0689B340 ; =0x02202DC5
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_02202dc4
-_0689B340:
-	.byte 0xC5, 0x2D, 0x20, 0x02
+_0689B340: .word 0x02202DC5
 
 	thumb_func_start FUN_0689B344
 FUN_0689B344: ; 0x0689B344
@@ -3707,9 +3704,9 @@ FUN_0689B344: ; 0x0689B344
 thunk_EXT_FUN_021d82d0: ; 0x0689B348
 	ldr ip, _0689B350 ; =0x021D82D1
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d82d0
-_0689B350:
-	.byte 0xD1, 0x82, 0x1D, 0x02
+_0689B350: .word 0x021D82D1
 
 	thumb_func_start FUN_overlay_95__0689b354
 FUN_overlay_95__0689b354: ; 0x0689B354
@@ -3757,9 +3754,21 @@ _0689B3A4:
 	lsl r0, r0, #0x10
 	asr r0, r0, #0x10
 	add pc, r0
-_0689B3B0:
-	.byte 0x1A, 0x00, 0x66, 0x00, 0x7C, 0x00, 0x40, 0x00, 0xA8, 0x00, 0x92, 0x00, 0xCE, 0x00, 0xBE, 0x00
-	.byte 0xFA, 0x00, 0xBE, 0x00, 0xFA, 0x00, 0xE4, 0x00, 0xCE, 0x00, 0x10, 0x01
+_0689B3B0: ; jump table
+	.hword 0x001A ; case 0
+	.hword 0x0066 ; case 1
+	.hword 0x007C ; case 2
+	.hword 0x0040 ; case 3
+	.hword 0x00A8 ; case 4
+	.hword 0x0092 ; case 5
+	.hword 0x00CE ; case 6
+	.hword 0x00BE ; case 7
+	.hword 0x00FA ; case 8
+	.hword 0x00BE ; case 9
+	.hword 0x00FA ; case 10
+	.hword 0x00E4 ; case 11
+	.hword 0x00CE ; case 12
+	.hword 0x0110 ; case 13
 _0689B3CC:
 	mov r2, #2
 	add r1, r4, #0
@@ -3902,9 +3911,9 @@ FUN_0689B4D4: ; 0x0689B4D4
 thunk_FUN_0201bd28: ; 0x0689B4D8
 	ldr ip, _0689B4E0 ; =0x0201BD29
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_FUN_0201bd28
-_0689B4E0:
-	.byte 0x29, 0xBD, 0x01, 0x02
+_0689B4E0: .word 0x0201BD29
 
 	thumb_func_start FUN_0689B4E4
 FUN_0689B4E4: ; 0x0689B4E4
@@ -3926,9 +3935,9 @@ FUN_0689B4F4: ; 0x0689B4F4
 thunk_EXT_FUN_021b8d8c: ; 0x0689B4F8
 	ldr ip, _0689B500 ; =0x021B8D8D
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b8d8c
-_0689B500:
-	.byte 0x8D, 0x8D, 0x1B, 0x02
+_0689B500: .word 0x021B8D8D
 
 	thumb_func_start FUN_0689B504
 FUN_0689B504: ; 0x0689B504
@@ -3940,9 +3949,11 @@ FUN_0689B504: ; 0x0689B504
 thunk_EXT_FUN_021d80a8: ; 0x0689B508
 	ldr ip, _0689B510 ; =0x021D80A9
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d80a8
-_0689B510:
-	.byte 0xA9, 0x80, 0x1D, 0x02, 0xB0, 0x30, 0x00, 0x68, 0x0A, 0x1C, 0x01, 0x4B, 0x05, 0x21, 0x18, 0x47
+_0689B510: .word 0x021D80A9
+_0689B514:
+	.byte 0xB0, 0x30, 0x00, 0x68, 0x0A, 0x1C, 0x01, 0x4B, 0x05, 0x21, 0x18, 0x47
 	.byte 0x0D, 0x27, 0x20, 0x02, 0x38, 0xB5, 0xB0, 0x30, 0x00, 0x68, 0x0D, 0x1C, 0x00, 0x24, 0x00, 0x21
 	.byte 0x00, 0x22, 0x00, 0xF0, 0x09, 0xF8, 0x61, 0x1E, 0x88, 0x42, 0x02, 0xD0, 0x28, 0x70, 0x01, 0x20
 	.byte 0x38, 0xBD, 0x20, 0x1C, 0x38, 0xBD, 0xC0, 0x46, 0x78, 0x47, 0xC0, 0x46, 0x00, 0xC0, 0x9F, 0xE5
@@ -3985,8 +3996,11 @@ FUN_overlay_95__0689b69c: ; 0x0689B69C
 	asr r0, r0, #0x10
 	add pc, r0
 	thumb_func_end FUN_overlay_95__0689b69c
-_0689B6B8:
-	.byte 0x06, 0x00, 0x36, 0x00, 0x50, 0x00, 0x60, 0x00
+_0689B6B8: ; jump table
+	.hword 0x0006 ; case 0
+	.hword 0x0036 ; case 1
+	.hword 0x0050 ; case 2
+	.hword 0x0060 ; case 3
 _0689B6C0:
 	add r0, r4, #0
 	add r0, #0xb0
@@ -4065,9 +4079,9 @@ FUN_0689B740: ; 0x0689B740
 thunk_EXT_FUN_0220270c: ; 0x0689B744
 	ldr ip, _0689B74C ; =0x0220270D
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_0220270c
-_0689B74C:
-	.byte 0x0D, 0x27, 0x20, 0x02
+_0689B74C: .word 0x0220270D
 
 	thumb_func_start FUN_0689B750
 FUN_0689B750: ; 0x0689B750
@@ -4079,9 +4093,9 @@ FUN_0689B750: ; 0x0689B750
 thunk_EXT_FUN_021f81ec: ; 0x0689B754
 	ldr ip, _0689B75C ; =0x021F81ED
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021f81ec
-_0689B75C:
-	.byte 0xED, 0x81, 0x1F, 0x02
+_0689B75C: .word 0x021F81ED
 
 	thumb_func_start FUN_0689B760
 FUN_0689B760: ; 0x0689B760
@@ -4093,9 +4107,9 @@ FUN_0689B760: ; 0x0689B760
 thunk_EXT_FUN_021f8a78: ; 0x0689B764
 	ldr ip, _0689B76C ; =0x021F8A79
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021f8a78
-_0689B76C:
-	.byte 0x79, 0x8A, 0x1F, 0x02
+_0689B76C: .word 0x021F8A79
 
 	thumb_func_start FUN_0689B770
 FUN_0689B770: ; 0x0689B770
@@ -4107,9 +4121,10 @@ FUN_0689B770: ; 0x0689B770
 thunk_EXT_FUN_022033cc: ; 0x0689B774
 	ldr ip, _0689B77C ; =0x022033CD
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_022033cc
-_0689B77C:
-	.byte 0xCD, 0x33, 0x20, 0x02
+_0689B77C: .word 0x022033CD
+_0689B780:
 	.byte 0xB0, 0x30, 0x00, 0x68, 0x0A, 0x1C, 0x01, 0x4B, 0x06, 0x21, 0x18, 0x47, 0x0D, 0x27, 0x20, 0x02
 	.byte 0xB0, 0x30, 0x00, 0x68, 0x01, 0x49, 0x02, 0x4A, 0x02, 0x4B, 0x18, 0x47, 0x34, 0xD9, 0x89, 0x06
 	.byte 0xBC, 0xDE, 0x89, 0x06, 0xC5, 0x2D, 0x20, 0x02, 0x0F, 0xB4, 0x78, 0xB5, 0x81, 0xB0, 0x05, 0x1C
@@ -4440,8 +4455,7 @@ _0689CABC:
 _0689CAD0:
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
-_0689CAD4:
-	.byte 0x00, 0x00, 0x00, 0x00
+_0689CAD4: .word 0x00000000
 
 	thumb_func_start FUN_overlay_95__0689cad8
 FUN_overlay_95__0689cad8: ; 0x0689CAD8
@@ -4464,9 +4478,9 @@ FUN_overlay_95__0689cb3c: ; 0x0689CB3C
 	mov r1, #0
 	mov r2, #0x48
 	bx r3
+	.balign 4, 0
 	thumb_func_end FUN_overlay_95__0689cb3c
-_0689CB44:
-	.byte 0xCC, 0x2B, 0x08, 0x02
+_0689CB44: .word 0x02082BCC
 
 	thumb_func_start FUN_overlay_95__0689cb48
 FUN_overlay_95__0689cb48: ; 0x0689CB48
@@ -4664,8 +4678,8 @@ _0689CDB0:
 	ldr r0, [sp]
 	bl FUN_overlay_95__0689cd38
 	pop {r3, r4, r5, r6, r7, pc}
-_0689CDB8:
-	.byte 0x00, 0x00, 0x00, 0x00
+	.balign 4, 0
+_0689CDB8: .word 0x00000000
 
 	thumb_func_start FUN_0689CDBC
 FUN_0689CDBC: ; 0x0689CDBC
@@ -4832,9 +4846,9 @@ FUN_0689D248: ; 0x0689D248
 thunk_EXT_FUN_021b8640: ; 0x0689D24C
 	ldr ip, _0689D254 ; =0x021B8641
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b8640
-_0689D254:
-	.byte 0x41, 0x86, 0x1B, 0x02
+_0689D254: .word 0x021B8641
 
 	thumb_func_start FUN_overlay_95__0689d258
 FUN_overlay_95__0689d258: ; 0x0689D258
@@ -4896,9 +4910,9 @@ FUN_0689D2B8: ; 0x0689D2B8
 thunk_EXT_FUN_021b8e28: ; 0x0689D2BC
 	ldr ip, _0689D2C4 ; =0x021B8E29
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b8e28
-_0689D2C4:
-	.byte 0x29, 0x8E, 0x1B, 0x02
+_0689D2C4: .word 0x021B8E29
 
 	thumb_func_start FUN_0689D2C8
 FUN_0689D2C8: ; 0x0689D2C8
@@ -4910,9 +4924,9 @@ FUN_0689D2C8: ; 0x0689D2C8
 thunk_EXT_FUN_021b9920: ; 0x0689D2CC
 	ldr ip, _0689D2D4 ; =0x021B9921
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b9920
-_0689D2D4:
-	.byte 0x21, 0x99, 0x1B, 0x02
+_0689D2D4: .word 0x021B9921
 
 	thumb_func_start FUN_0689D2D8
 FUN_0689D2D8: ; 0x0689D2D8
@@ -5071,9 +5085,9 @@ FUN_0689D408: ; 0x0689D408
 thunk_EXT_FUN_021b9ab0: ; 0x0689D40C
 	ldr ip, _0689D414 ; =0x021B9AB1
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b9ab0
-_0689D414:
-	.byte 0xB1, 0x9A, 0x1B, 0x02
+_0689D414: .word 0x021B9AB1
 
 	thumb_func_start FUN_0689D418
 FUN_0689D418: ; 0x0689D418
@@ -5085,9 +5099,9 @@ FUN_0689D418: ; 0x0689D418
 thunk_EXT_FUN_021b9ac8: ; 0x0689D41C
 	ldr ip, _0689D424 ; =0x021B9AC9
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b9ac8
-_0689D424:
-	.byte 0xC9, 0x9A, 0x1B, 0x02
+_0689D424: .word 0x021B9AC9
 
 	thumb_func_start FUN_0689D428
 FUN_0689D428: ; 0x0689D428
@@ -5099,9 +5113,9 @@ FUN_0689D428: ; 0x0689D428
 thunk_EXT_FUN_021d5b68: ; 0x0689D42C
 	ldr ip, _0689D434 ; =0x021D5B69
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d5b68
-_0689D434:
-	.byte 0x69, 0x5B, 0x1D, 0x02
+_0689D434: .word 0x021D5B69
 
 	thumb_func_start FUN_0689D438
 FUN_0689D438: ; 0x0689D438
@@ -5113,9 +5127,9 @@ FUN_0689D438: ; 0x0689D438
 thunk_EXT_FUN_021d5440: ; 0x0689D43C
 	ldr ip, _0689D444 ; =0x021D5441
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d5440
-_0689D444:
-	.byte 0x41, 0x54, 0x1D, 0x02
+_0689D444: .word 0x021D5441
 
 	thumb_func_start FUN_overlay_95__0689d448
 FUN_overlay_95__0689d448: ; 0x0689D448
@@ -5173,9 +5187,9 @@ FUN_0689D4A0: ; 0x0689D4A0
 thunk_EXT_FUN_021b9a24: ; 0x0689D4A4
 	ldr ip, _0689D4AC ; =0x021B9A25
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b9a24
-_0689D4AC:
-	.byte 0x25, 0x9A, 0x1B, 0x02
+_0689D4AC: .word 0x021B9A25
 
 	thumb_func_start FUN_0689D4B0
 FUN_0689D4B0: ; 0x0689D4B0
@@ -5207,9 +5221,9 @@ FUN_0689D4D0: ; 0x0689D4D0
 thunk_EXT_FUN_021b9934: ; 0x0689D4D4
 	ldr ip, _0689D4DC ; =0x021B9935
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b9934
-_0689D4DC:
-	.byte 0x35, 0x99, 0x1B, 0x02
+_0689D4DC: .word 0x021B9935
 
 	thumb_func_start FUN_0689D4E0
 FUN_0689D4E0: ; 0x0689D4E0
@@ -5221,9 +5235,10 @@ FUN_0689D4E0: ; 0x0689D4E0
 thunk_EXT_FUN_021d6dcc: ; 0x0689D4E4
 	ldr ip, _0689D4EC ; =0x021D6DCD
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021d6dcc
-_0689D4EC:
-	.byte 0xCD, 0x6D, 0x1D, 0x02
+_0689D4EC: .word 0x021D6DCD
+_0689D4F0:
 	.byte 0xF8, 0xB5, 0x82, 0xB0, 0x00, 0x92, 0x4A, 0x00, 0x04, 0x1C, 0x8F, 0x18, 0xE2, 0x5D, 0x01, 0xAE
 	.byte 0xE3, 0x19, 0x32, 0x70, 0x5A, 0x78, 0x72, 0x70, 0x9A, 0x78, 0xB2, 0x70, 0x00, 0x9A, 0x55, 0x00
 	.byte 0x52, 0x19, 0x94, 0x46, 0x65, 0x46, 0x65, 0x5D, 0xA2, 0x18, 0xE5, 0x55, 0x55, 0x78, 0x5D, 0x70
@@ -5279,9 +5294,9 @@ FUN_0689D5B8: ; 0x0689D5B8
 thunk_EXT_FUN_021b86a0: ; 0x0689D5BC
 	ldr ip, _0689D5C4 ; =0x021B86A1
 	bx ip
+	.balign 4, 0
 	arm_func_end thunk_EXT_FUN_021b86a0
-_0689D5C4:
-	.byte 0xA1, 0x86, 0x1B, 0x02
+_0689D5C4: .word 0x021B86A1
 
 	thumb_func_start FUN_overlay_95__0689d5c8
 FUN_overlay_95__0689d5c8: ; 0x0689D5C8

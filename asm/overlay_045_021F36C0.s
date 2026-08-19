@@ -202,8 +202,8 @@ _021F3874:
 	mov r3, #0
 	bl FUN_020122C0
 	pop {r4, r5, r6, pc}
-_021F3884:
-	.byte 0xB9, 0x39, 0x1F, 0x02
+	.balign 4, 0
+_021F3884: .word 0x021F39B9
 
 	thumb_func_start FUN_overlay_d_45__021f3888
 FUN_overlay_d_45__021f3888: ; 0x021F3888
@@ -231,8 +231,8 @@ _021F38B0:
 	mov r3, #0
 	bl FUN_020122C0
 	pop {r4, r5, r6, pc}
-_021F38C0:
-	.byte 0x69, 0x3A, 0x1F, 0x02
+	.balign 4, 0
+_021F38C0: .word 0x021F3A69
 
 	thumb_func_start FUN_overlay_d_45__021f38c4
 FUN_overlay_d_45__021f38c4: ; 0x021F38C4
@@ -290,10 +290,9 @@ _021F391C:
 _021F392C:
 	mov r0, #0
 	bx lr
-_021F3930:
-	.byte 0x60, 0x3B, 0x1F, 0x02
-_021F3934:
-	.byte 0x62, 0x3B, 0x1F, 0x02
+	.balign 4, 0
+_021F3930: .word 0x021F3B60
+_021F3934: .word 0x021F3B62
 
 	thumb_func_start FUN_overlay_d_45__021f3938
 FUN_overlay_d_45__021f3938: ; 0x021F3938

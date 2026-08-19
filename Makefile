@@ -150,7 +150,7 @@ MAKELCF_FLAGS  := \
 DUMMY := $(shell mkdir -p $(ALL_BUILDDIRS))
 
 .DELETE_ON_ERROR:
-.PHONY: all clean tidy info patch_mwasmarm check-toolchain extract check-baserom compare
+.PHONY: all clean tidy info patch_mwasmarm check-toolchain extract check-baserom compare compare-overlays
 
 all: patch_mwasmarm $(SBIN)
 
@@ -194,6 +194,11 @@ $(ORIG_ARM9_RAW): $(BASEROM) $(ARM9_CONFIG) | $(NDSTOOL)
 
 compare: $(SBIN) $(ORIG_ARM9_RAW)
 	@python3 $(TOOLSDIR)/scripts/compare_arm9.py $(SBIN) $(ORIG_ARM9_RAW)
+
+# the link writes every OVY_<n>.sbin through the MEMORY block, so $(SBIN) covers them all
+compare-overlays: $(SBIN) $(ORIG_ARM9)
+	@python3 $(TOOLSDIR)/scripts/compare_overlays.py \
+		--table $(ORIG_Y9) --overlays $(ORIG_OVERLAYS) --built $(BUILD_DIR)
 
 CANARY_SRC  := test/toolchain_canary.c
 CANARY_OBJ  := $(BUILD_DIR)/toolchain_canary.o

@@ -13,6 +13,7 @@ SCRIPTS = os.path.join(ROOT, 'tools', 'scripts')
 NDSDISASM = os.path.join(ROOT, 'tools', 'ndsdisasm', 'ndsdisasm')
 CONFIG_DIR = os.path.join(ROOT, 'ndsdisasm_config')
 ENTRY_SIZE = 32
+SINIT_TERMINATOR = 4
 
 
 def read_entry(table_path, index):
@@ -22,10 +23,11 @@ def read_entry(table_path, index):
     if offset + ENTRY_SIZE > len(table):
         sys.exit(f"error: overlay {index} is past the end of {table_path}")
     oid, ram, size, bss = struct.unpack_from('<4I', table, offset)
+    sinit_start, sinit_end = struct.unpack_from('<2I', table, offset + 16)
     packed = struct.unpack_from('<I', table, offset + 28)[0] & 0xFFFFFF
     if oid != index:
         sys.exit(f"error: entry {index} reports id {oid}, table looks wrong")
-    return ram, size, bss, packed
+    return ram, size, bss, packed, sinit_start, sinit_end
 
 
 def first_address(dump_path):
@@ -72,7 +74,7 @@ def main():
     if not os.path.exists(config):
         sys.exit(f"error: no config at {config}, this overlay needs a Ghidra pass first")
 
-    ram, size, bss, packed = read_entry(table, index)
+    ram, size, bss, packed, sinit_start, sinit_end = read_entry(table, index)
     workdir = args.workdir or os.path.join(ROOT, 'build', 'black.us', 'ovl', str(index))
     os.makedirs(workdir, exist_ok=True)
     os.makedirs(args.outdir, exist_ok=True)
@@ -127,12 +129,47 @@ def main():
     prefix = f"overlay_{index:03d}"
     lsf = os.path.join(workdir, 'objects.lsf')
     fixed = os.path.join(workdir, 'fixed.s')
-    run([sys.executable, os.path.join(SCRIPTS, 'fix_thumb_encoding.py'), converted,
-         '--load', hex(ram), '--binary', raw, '-o', fixed], quiet=not args.verbose)
 
-    run([sys.executable, os.path.join(SCRIPTS, 'split_dump.py'), fixed,
-         '--outdir', args.outdir, '--prefix', prefix, '--lines', '10000000', '--lsf', lsf],
-        quiet=not args.verbose)
+    # the linker writes the sinit terminator and pads the text block to 32
+    terminator = sinit_end - SINIT_TERMINATOR
+    text_end = (sinit_end - ram + 31 & ~31) + ram
+    pieces = [('.text', ram, sinit_start), ('.sinit', sinit_start, terminator),
+              ('.data', text_end, ram + size)]
+
+    name = f"{prefix}_{ram:08X}"
+    body = []
+    for section, begin, stop in pieces:
+        if begin >= stop:
+            continue
+        part = os.path.join(workdir, section.strip('.') + '.s')
+        cmd = [sys.executable, os.path.join(SCRIPTS, 'fix_thumb_encoding.py'), converted,
+               '--load', hex(ram), '--binary', raw, '-o', part]
+        if begin != ram:
+            cmd += ['--start', hex(begin)]
+        if stop != ram + size:
+            cmd += ['--limit', hex(stop)]
+        run(cmd, quiet=not args.verbose)
+        if section != '.text':
+            # closure drops a section nothing references
+            anchor = f"{name}{section.replace('.', '_')}"
+            body += ['', f'\t.section {section}, 4',
+                     f'\t.global {anchor}', f'{anchor}:']
+        body += open(part).read().splitlines()
+    open(fixed, 'w').write("\n".join(body) + "\n")
+
+    if any(line.strip() for line in body):
+        split = [sys.executable, os.path.join(SCRIPTS, 'split_dump.py'), fixed,
+                 '--outdir', args.outdir, '--prefix', prefix, '--lines', '10000000',
+                 '--lsf', lsf]
+        if bss:
+            split += ['--bss', hex(bss)]
+        run(split, quiet=not args.verbose)
+    else:
+        stub = [f'\t.include "asm/macros/function.inc"', '', '\t.text']
+        if bss:
+            stub += ['', '\t.section .bss', f'\t.space {bss:#x}']
+        open(os.path.join(args.outdir, name + '.s'), 'w').write("\n".join(stub) + "\n")
+        open(lsf, 'w').write(f"\tObject\t\t{name}.o\n")
 
     holes = sum(1 for line in open(fixed) if '.byte' in line)
     outrel = os.path.relpath(args.outdir, ROOT)

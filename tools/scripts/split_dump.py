@@ -119,6 +119,7 @@ def main():
                         help="approximate lines per file")
     parser.add_argument('--macros', default='asm/macros/function.inc')
     parser.add_argument('--lsf', help="write an LSF object list here")
+    parser.add_argument('--bss', help="size of the .bss section to declare")
     parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args()
 
@@ -151,6 +152,9 @@ def main():
         if not any(FUNC_START_RE.match(s) for s in body):
             out += [f'\t.global {name}', f'{name}:']
         out += body
+        if args.bss and (start, end) == chunks[-1]:
+            out += ['', '\t.section .bss, 4', f'\t.global {name}_bss',
+                    f'{name}_bss:', f'\t.space {args.bss}']
 
         if not args.dry_run:
             with open(path, 'w') as handle:

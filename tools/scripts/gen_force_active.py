@@ -8,6 +8,7 @@ import sys
 
 FUNC_START_RE = re.compile(r'^\s*\w*func_start\s+(\S+)\s*$')
 GLOBAL_RE = re.compile(r'^\s*\.global\s+(\S+)\s*$')
+SECTION_ANCHOR_RE = re.compile(r'^\s*\.global\s+(\S+_(?:data|sinit|bss))\s*$')
 
 
 def main():
@@ -26,11 +27,18 @@ def main():
     skipped = []
     for path in paths:
         first = anchor = None
+        sections = []
         for line in open(path):
+            m = SECTION_ANCHOR_RE.match(line)
+            if m:
+                sections.append(m.group(1))
+                continue
+            if first:
+                continue
             m = FUNC_START_RE.match(line)
             if m:
                 first = m.group(1)
-                break
+                continue
             m = GLOBAL_RE.match(line)
             if m and anchor is None:
                 anchor = m.group(1)
@@ -39,6 +47,7 @@ def main():
             names.append(first)
         else:
             skipped.append(path)
+        names.extend(sections)
 
     with open(args.output, 'w') as handle:
         for name in names:

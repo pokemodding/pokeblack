@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""rewrite the two encodings mwasmarm gets wrong in a converted overlay dump"""
+"""rewrite the encodings mwasmarm gets wrong in a converted ndsdisasm dump"""
 
 import argparse
 import re
@@ -103,7 +103,13 @@ def split_byte_line(code, keep):
     return f"\t{head} " + ', '.join(values[:keep])
 
 
-def rewrite(lines, load, image, stats, limit=None):
+def keep_after(code, drop):
+    head = code.split()[0]
+    values = [part.strip() for part in code[len(head):].split(',') if part.strip()]
+    return f"\t{head} " + ', '.join(values[drop:])
+
+
+def rewrite(lines, load, image, stats, limit=None, start=None):
     addr, mode = load, ARM
     local = defined_labels(lines)
     out = []
@@ -111,6 +117,7 @@ def rewrite(lines, load, image, stats, limit=None):
     for number, line in enumerate(lines, 1):
         if limit is not None and addr >= limit:
             break
+        pending = start is not None and addr < start
         code, comment = strip_comment(line)
         original = code
         label_match = LABEL_RE.match(code.strip())
@@ -141,6 +148,18 @@ def rewrite(lines, load, image, stats, limit=None):
             addr = align_up(addr, boundary)
         else:
             width = size_of(code, previous_mode)
+            if pending and head in WIDTHS and addr + width > start:
+                drop = (start - addr) // WIDTHS[head]
+                if (start - addr) % WIDTHS[head]:
+                    raise Drift(f"line {number}: start {start:#010x} splits a "
+                                f"{head} value")
+                code = keep_after(code, drop)
+                addr += width
+                out.append(code)
+                continue
+            if pending:
+                addr += width
+                continue
             if limit is not None and head in WIDTHS and addr + width > limit:
                 keep = (limit - addr) // WIDTHS[head]
                 if (limit - addr) % WIDTHS[head]:
@@ -161,6 +180,8 @@ def rewrite(lines, load, image, stats, limit=None):
                 code = fix_single_pop(head, code, rest, addr, load, image, stats)
             addr += width
 
+        if pending:
+            continue
         if code == (label_match.group(2).strip() if label_match else original.strip()):
             out.append(line)
             continue
@@ -201,7 +222,7 @@ def fix_single_pop(head, code, rest, addr, load, image, stats):
 
 
 def fix_halfwords(head, rest, addr, load, image, stats):
-    """Halfword values, since mwasmarm rejects label arithmetic in a .hword."""
+    """Halfwords as literals, since mwasmarm rejects label arithmetic in one."""
     operands = [part.strip() for part in rest.split(',') if part.strip()]
     fixed = []
     for index, operand in enumerate(operands):
@@ -219,13 +240,15 @@ def main():
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('source')
     parser.add_argument('--load', required=True, help="load address, e.g. 0x021aeb20")
-    parser.add_argument('--binary', help="the overlay as the ROM holds it")
+    parser.add_argument('--binary', help="the module as the ROM holds it")
     parser.add_argument('--limit', help="stop at this address, e.g. 0x02380644")
+    parser.add_argument('--start', help="skip everything below this address")
     parser.add_argument('-o', '--output')
     args = parser.parse_args()
 
     load = int(args.load, 0)
     limit = int(args.limit, 0) if args.limit else None
+    begin = int(args.start, 0) if args.start else None
     image = open(args.binary, 'rb').read() if args.binary else None
     if limit is not None and image is not None:
         image = image[:limit - load]
@@ -233,12 +256,12 @@ def main():
 
     stats = Counter()
     try:
-        out, end = rewrite(lines, load, image, stats, limit)
+        out, end = rewrite(lines, load, image, stats, limit, begin)
     except Drift as problem:
         sys.exit(f"error: address tracking lost sync, {problem}")
 
     if image is not None and end - load != len(image):
-        sys.exit(f"error: counted {end - load:#x} bytes, overlay is {len(image):#x}")
+        sys.exit(f"error: counted {end - load:#x} bytes, module is {len(image):#x}")
     if limit is not None and end != limit:
         sys.exit(f"error: stopped at {end:#010x}, wanted {limit:#010x}")
 

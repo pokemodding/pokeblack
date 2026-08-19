@@ -48,6 +48,7 @@ def main():
     parser.add_argument('--build', default='build/black.us')
     parser.add_argument('--overlays', help="directory of overlays in their ROM storage form")
     parser.add_argument('--arm9', help="the compressed ARM9")
+    parser.add_argument('--arm7', help="the ARM7, default the one in --build")
     parser.add_argument('--table', help="overlay table, default the one in --build")
     parser.add_argument('--banner')
     parser.add_argument('--list-order', action='store_true',
@@ -94,7 +95,8 @@ def main():
         start, size = place(blob)
         fat.append((start, start + size))
 
-    place(open(os.path.join(args.build, 'arm7.sbin'), 'rb').read()[:u(0x3C)], u(0x30))
+    arm7 = args.arm7 or os.path.join(args.build, 'arm7.sbin')
+    place(open(arm7, 'rb').read()[:u(0x3C)], u(0x30))
     place(fnt, u(0x40))
     fat_at = u(0x48)
     place(b'\0' * (total * 8), fat_at)

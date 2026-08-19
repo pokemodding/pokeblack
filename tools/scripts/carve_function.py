@@ -8,6 +8,7 @@ import re
 import sys
 
 FUNC_START_RE = re.compile(r'^\s*(\w*func_start)\s+(\S+)\s*$')
+EXTERN_RE = re.compile(r'^\s*\.extern\s+(\S+)\s*$')
 FUNC_END_RE = re.compile(r'^\s*\w*func_end\s+(\S+)\s*$')
 ADDR_RE = re.compile(r'^\w+: [;@] 0x([0-9A-Fa-f]{8})')
 LABEL_RE = re.compile(r'^(\w+):')
@@ -111,6 +112,26 @@ def main():
             break
     body_start = len(header)
 
+    def with_extern(body):
+        """declare the carved function in a half that still calls it"""
+        pattern = re.compile(r'\b' + re.escape(args.function) + r'\b')
+        if not any(pattern.search(line) for line in body):
+            return header
+        directive = f"\t.extern {args.function}"
+        if directive in header:
+            return header
+        out = list(header)
+        externs = [i for i, line in enumerate(out) if EXTERN_RE.match(line)]
+        if externs:
+            at = next((i for i in externs
+                       if EXTERN_RE.match(out[i]).group(1) > args.function),
+                      externs[-1] + 1)
+        else:
+            at = next(i for i, line in enumerate(out) if line.strip() == '.text')
+            out.insert(at, '')
+        out.insert(at, directive)
+        return out
+
     before_body = trim(lines[body_start:start])
     after_body = trim(after)
 
@@ -131,9 +152,10 @@ def main():
     if args.dry_run:
         return 0
 
-    open(path, 'w').write("\n".join(header + before_body) + "\n")
+    open(path, 'w').write(
+        "\n".join(with_extern(before_body) + before_body) + "\n")
     open(f"asm/{after_name}.s", 'w').write(
-        "\n".join(header + after_body) + "\n")
+        "\n".join(with_extern(after_body) + after_body) + "\n")
 
     lsf = open(args.lsf).read().splitlines()
     marker = f"\tObject\t\tasm/{base}.o"

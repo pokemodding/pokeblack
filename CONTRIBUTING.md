@@ -1,425 +1,63 @@
-TODO: Rewrite for new toolchain and new binary comparison tools
+# Contributing to pokeblack
 
-# Contributing to Pokémon Black Decompilation
+## Submitting changes
 
-Thank you for your interest in contributing to the Pokémon Black decompilation project! This guide will help you get started.
+To contribute to this repo, fork it to your account, make changes in your fork, then make a pull request back to the main repo.
 
-## Table of Contents
+Any change must keep the ROM matching, such that the ROM built with `make` is the same as the original Pokémon Black ROM. If the build ends with `ROM matches black.us/rom.sha1`, the built ROM is matching. If it fails with `sha1sum: WARNING: 1 computed checksum did NOT match`, or fails to build at all, the ROM is not matching and you will need to fix your changes before submitting them.
 
-- [Getting Started](#getting-started)
-- [How to Contribute](#how-to-contribute)
-- [Decompilation Workflow](#decompilation-workflow)
-- [Code Style Guidelines](#code-style-guidelines)
-- [Naming Conventions](#naming-conventions)
-- [Testing Your Changes](#testing-your-changes)
-- [Submitting Changes](#submitting-changes)
-- [Communication](#communication)
+Hash checking is on by default. Do not switch it off with `COMPARE=0` in order to get a clean build.
 
-## Getting Started
+## What can I help out with?
 
-Before contributing, make sure you have:
+The ROM is fully reproduced from the assembly in this repo, but nearly all of that assembly is still raw disassembly under placeholder names. The work from here is turning it into something readable:
 
-1. Read and followed the [INSTALL.md](INSTALL.md) setup guide
-2. Set up the CodeWarrior compiler (mwccarm) for matching builds
-3. Successfully compiled the project
-4. Familiarized yourself with the project structure
+- Decompiling functions from `asm/` into C in `src/`. 29,034 functions are dumped, so there is no shortage.
+- Naming symbols. `ndsdisasm_config/arm9_config.cfg` for example still calls 1,279 of its 1,309 functions `FUN_<address>`.
+- Separating data from code in the dumps. `tools/scripts/find_holes.py` reports function prologues still sitting inside runs the disassembler treated as data.
 
-## How to Contribute
+Read [INSTALL.md](INSTALL.md) first and get a matching build before starting.
 
-There are many ways to contribute:
+## Decompiling a function
 
-### 1. Decompiling Functions
+Pick a function out of one of the files in `asm/` and write the C in `src/`, keeping the original symbol name. Every source file gets a header of the same name declaring what it defines, and includes it at the top: `src/unk_02008574.c` is one function long and includes `include/unk_02008574.h`, which declares that one function. `MWCFLAGS` passes `-W error`, so a function with no prototype in scope will not compile.
 
-The primary goal is to decompile ARM assembly into matching C code. This involves:
-- Identifying functions in assembly
-- Writing C code that compiles to identical machine code
-- Verifying binary matching
-
-### 2. Naming and Documentation
-
-- Naming unknown functions based on their behavior
-- Adding comments explaining complex logic
-- Documenting data structures and their fields
-- Cross-referencing with other Pokémon games
-
-### 3. Data and Assets
-
-- Identifying and documenting data structures
-- Extracting and organizing game assets
-- Creating header files for constants and enums
-
-### 4. Tooling and Infrastructure
-
-- Improving build scripts
-- Creating analysis tools
-- Enhancing the decompilation workflow
-
-## Decompilation Workflow
-
-### Step 1: Choose a Function to Decompile
-
-1. Look for undecompiled functions in the assembly files
-2. Start with simple functions (leaf functions with few instructions)
-3. Check the project's Discord server (particularly our #to-do forum) for coordination
-
-### Step 2: Analyze the Assembly
-
-1. Read the assembly code carefully
-2. Identify:
-   - Function parameters (r0-r3, stack)
-   - Return value (r0)
-   - Local variables
-   - Called functions
-   - Data accesses
-3. Look for similar patterns in already decompiled code
-
-**Example:**
-```asm
-thumb_func_start ov93_021B6832
-ov93_021B6832: @ 0x021B6832
-	movs r0, #0
-	bx lr
-thumb_func_end ov93_021B6832
-```
-
-This is a simple function that returns 0.
-
-### Step 3: Write Matching C Code
-
-Create a C file in the appropriate overlay directory:
+Then carve the assembly out:
 
 ```bash
-# For overlay 93
-touch overlays/overlay_93/src/ov93_021B6832.c
+python3 tools/scripts/carve_function.py FUN_02008574 --object src/unk_02008574.o
 ```
 
-Write the C implementation:
+The linker places whole object files, in the order `main.lsf` lists them, and each file in `asm/` is one object covering one run of addresses. A function in the middle of that run can't just be deleted and rewritten in C, because the C version has to end up at the exact address the original held, with the assembly that surrounded it still sitting on either side. The carving script cuts the file in two at the function's boundaries. The half above the function stays in the original file, the half below becomes a new `asm/unk_<address>.s` named for the first function left in it, and the function itself is dropped. It then edits `main.lsf` to list your C object and that new lower half immediately after the original, so the three objects link back to back and nothing moves. It should refuse carves that cannot work.
 
-```c
-#include "overlay_93.h"
+Run it with `--dry-run` first to see the split it would make, and the line counts either side of it, without writing anything.
 
-u32 ov93_021B6832(void) {
-    return 0;
-}
-```
+It reads `asm/unk_*.s` only, so it handles the ARM9 static and not the overlays.
 
-Add the function declaration to the header:
-
-```c
-// overlays/overlay_93/include/overlay_93.h
-u32 ov93_021B6832(void);
-```
-
-### Step 4: Compile and Compare
+Add the file to `LINKED_C_SRCS` in the Makefile, then build and check it:
 
 ```bash
-cd overlays/overlay_93
-make clean && make
+make && make compare-arm9
 ```
 
-**Compare with original:**
-```bash
-# Extract function bytes from your compiled object
-objcopy -O binary --only-section=.text build/obj/ov93_021B6832.o /tmp/compiled.bin
-hexdump -C /tmp/compiled.bin
+`make compare-arm9` prints `MATCH` when the built ARM9 reproduces the original byte for byte, and names the addresses that differ when it does not.
 
-# Compare with disassembly or ROM
-python3 ../../tools/compare_function.py 0x021B6832 ov93_021B6832
-```
+The tool refuses carves that cannot work. A function has to start on a 4-byte boundary, and no branch or PC-relative load may cross the new object boundary, since those cannot be relocated between objects the way `bl` and `blx` can.
 
-### Step 5: Iterate Until Matching
+`MWCFLAGS` passes `-thumb`. The game is overwhelmingly Thumb, and compiling ARM by default produces four bytes per instruction where the original has two. `src/unk_02008574.c` is a small worked example that matches.
 
-If the output doesn't match:
-1. Adjust compiler flags (optimization, inlining, etc.)
-2. Rewrite the C code (different style, variable ordering, etc.)
-3. Check register allocation
-4. Try different approaches (loops vs. conditionals, etc.)
+## Functions that will not match
 
-**Common Issues:**
-- **Register allocation differs**: Reorder variables or function calls
-- **Different optimization**: Adjust `inline`, `static`, or variable usage
-- **Wrong instruction sequence**: Try different C patterns
+A function that resists matching in C can be supplied as assembly in place with `GLOBAL_ASM`, which keeps it in its original object so the surrounding layout does not shift. Three things to know before you reach for it:
 
-### Step 6: Document Your Work
+- Write Metrowerks mnemonics rather than GNU ones. `lsl`, not `lsls`.
+- A block has to be at least three Thumb instructions.
+- `tools/asm_processor/compile.sh` strips `-sym on` for these compiles, because `asm_processor` cannot remap CodeWarrior's debug relocations.
 
-Add comments explaining:
-- What the function does
-- Parameter meanings
-- Return value purpose
-- Any non-obvious logic
+Prefer a matching C version where one is reachable. `GLOBAL_ASM` keeps the build matching but leaves the function no more readable than it was.
 
-```c
-/**
- * Returns the player's current badge count.
- *
- * @param save Pointer to save data structure
- * @return Number of badges (0-8)
- */
-u32 GetBadgeCount(SaveData* save) {
-    return save->badges;
-}
-```
+## Naming symbols
 
-## Code Style Guidelines
+Anything the disassembler could not identify is named `FUN_<address>` after where it sits in memory. When you work out what one does, rename it both in the assembly and in the matching `ndsdisasm_config/*.cfg` entry, so that a fresh dump agrees with the tree.
 
-### C Code Style
-
-```c
-// Good
-u32 CalculateDamage(Pokemon* attacker, Pokemon* defender, Move* move) {
-    u32 basePower = move->basePower;
-    u32 attack = attacker->stats.attack;
-    u32 defense = defender->stats.defense;
-
-    return (basePower * attack) / defense;
-}
-
-// Bad
-u32 calc(void* a,void* b,void* c){
-u32 x=((Move*)c)->basePower;
-return x*((Pokemon*)a)->stats.attack/((Pokemon*)b)->stats.defense;}
-```
-
-### File Organization
-
-**Source Files (`src/`):**
-```c
-#include "overlay_XX.h"  // Overlay header
-#include "global.h"      // Global definitions
-
-// Static helper functions
-static u32 HelperFunction(void) {
-    // ...
-}
-
-// Public functions
-u32 PublicFunction(void) {
-    return HelperFunction();
-}
-```
-
-**Header Files (`include/`):**
-```c
-#ifndef OVERLAY_XX_H
-#define OVERLAY_XX_H
-
-#include "types.h"
-
-// Type definitions
-typedef struct {
-    u32 field1;
-    u16 field2;
-} StructName;
-
-// Function declarations
-u32 PublicFunction(void);
-
-#endif // OVERLAY_XX_H
-```
-
-## Naming Conventions
-
-### Functions
-
-Until a function's purpose is known, use the address-based naming:
-
-```c
-// Unknown function at address 0x021B6832 in overlay 93
-void ov93_021B6832(void);
-
-// Once identified, rename to descriptive name
-void GetPlayerPosition(void);
-```
-Functions should not be given descriptive names until 95% certain of function.
-
-### Variables and Types
-
-```c
-// Use descriptive names
-u32 pokemonCount;        // Good
-u32 pc;                  // Bad (unless abbreviation is clear)
-
-// Constants in UPPER_CASE
-#define MAX_POKEMON_COUNT 6
-#define SPRITE_SIZE 64
-
-// Enums with prefix
-typedef enum {
-    TYPE_NORMAL,
-    TYPE_FIRE,
-    TYPE_WATER,
-} PokemonType;
-
-// Structs with PascalCase
-typedef struct {
-    u32 species;
-    u32 level;
-} Pokemon;
-```
-
-### Booleans
-
-```c
-// Use TRUE/FALSE or bool32 from SDK
-bool32 isShiny;
-bool32 HasBadge(SaveData* save, u32 badgeId);
-```
-
-## Testing Your Changes
-
-### 1. Build Testing
-
-Ensure your changes compile:
-```bash
-make clean
-make
-```
-
-### 2. Binary Matching
-
-Verify your function produces identical code.
-
-
-### 3. Regression Testing
-
-Make sure you didn't break existing code:
-```bash
-# Rebuild all overlays
-make clean all
-
-# Check for new warnings or errors
-make 2>&1 | grep -i error
-```
-
-## Submitting Changes
-
-### Creating a Pull Request
-
-1. **Fork the repository** on GitHub
-
-2. **Create a feature branch:**
-   ```bash
-   git checkout -b decompile-overlay93-functions
-   ```
-
-3. **Make your changes** following the guidelines above
-
-4. **Commit with clear messages:**
-   ```bash
-   git add overlays/overlay_93/src/ov93_021B6832.c
-   git commit -m "Decompile ov93_021B6832 (returns 0)"
-   ```
-
-5. **Push to your fork:**
-   ```bash
-   git push origin decompile-overlay93-functions
-   ```
-
-6. **Open a Pull Request** on GitHub with:
-   - Clear title describing the change
-   - Description of what was decompiled
-   - Confirmation that it matches (or explain non-matching)
-
-### Commit Message Format
-
-Use clear, descriptive commit messages:
-
-```
-Decompile ov93_021B6832 and ov93_021B9298
-
-- ov93_021B6832: Simple return 0 function
-- ov93_021B9298: Sets bit in context structure at offset 0x473
-
-Both functions match perfectly with CodeWarrior 1.1.
-```
-
-
-### Pull Request Guidelines
-
-- **One logical change per PR** (e.g., decompiling 3-5 related functions)
-- Include binary matching verification
-- Update documentation if needed
-- Respond to review comments promptly
-- Keep PRs focused and reviewable
-
-## Communication
-
-### Where to Get Help
-
-- **GitHub Issues**: For bug reports and feature requests
-- **GitHub Discussions**: For questions and general discussion
-- **Discord**: Real-time chat with other contributors (https://discord.gg/PDDAyjdqNa)
-
-### Asking Good Questions
-
-When stuck:
-1. Describe what you're trying to decompile
-2. Show the assembly code
-3. Show your C attempt
-4. Explain what's not matching
-5. Include compiler output differences
-
-**Example:**
-```
-I'm trying to decompile ov93_021B9298. The assembly shows:
-
-    ldr r2, =0x473
-    movs r1, #0x20
-    ldrb r3, [r0, r2]
-    orrs r1, r3
-    strb r1, [r0, r2]
-
-My C code:
-    u8* ptr = (u8*)context;
-    ptr[0x473] |= 0x20;
-
-But the compiler generates different register usage. Any suggestions?
-```
-
-## Tips for Success
-
-### Start Small
-
-- Begin with simple leaf functions (no function calls)
-- Move to functions that call already-decompiled functions
-- Gradually tackle more complex code
-
-### Learn from Existing Code
-
-Study similar decompilation projects:
-- pokediamond / pokeheartgold (other DS Pokémon games)
-- pokeemerald / pokefirered (GBA Pokémon games)
-
-### Use Tools
-
-- **Ghidra/IDA/ndsdisasm**: For analysis and pseudo-C generation
-- **ndstool**: For ROM inspection
-- **objdump**: For comparing compiled output
-- **Git**: For version control and collaboration
-
-### Be Patient
-
-Matching decompilation is challenging:
-- Some functions take hours or days to match
-- Compiler behavior can be unintuitive
-- Small changes can have big effects
-
-Don't hesitate to ask for help!
-
-## Code Review Process
-
-### What Reviewers Look For
-
-1. **Binary matching**: Does it produce identical code?
-2. **Code quality**: Is it readable and maintainable?
-3. **Naming**: Are functions/variables well-named?
-4. **Documentation**: Are complex parts explained?
-5. **Style**: Does it follow project conventions?
-
----
-
-Thank you for contributing to the Pokémon Black decompilation project!
-
-For more information, see:
-- [INSTALL.md](INSTALL.md) - Setup instructions
-- [README.md](README.md) - Project overview
+Keep renames in commits of their own, separate from decompilation work. They touch a great many files and are much easier to review on their own.

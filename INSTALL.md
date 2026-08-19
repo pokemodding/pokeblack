@@ -103,12 +103,29 @@ Version 2.3.1 builds clean on Arch with no patches. `autogen.sh` needs autoconf 
 
 ```bash
 make check-toolchain   # confirms your compiler produces the expected bytes
-make extract           # unpacks baserom.nds into build/black.us/extracted/
-make                   # builds build/black.us/main.sbin
-make compare           # verifies it against the original ARM9
+make                   # builds build/black.us/pokeblack.us.nds
+make compare           # the same build, with every recorded hash checked
 ```
 
-`make compare` should report `MATCH`, meaning all 681,920 bytes of the decompressed ARM9 are reproduced by assembling and linking this repository. Anything else names the addresses that differ.
+`make` builds the ARM9 from `asm/` and `src/`, the ARM7 from `sub/`, packs both with the overlays and the banner, and writes the ROM. It should end with `ROM matches black.us/rom.sha1`, meaning the `.nds` is byte-identical to the base ROM you supplied.
+
+Hash checking is on by default (`COMPARE=1`); `make COMPARE=0` skips it. `make compare` is the conventional spelling of a checked build.
+
+The narrower targets are there when a single stage is what you care about:
+
+```bash
+make extract           # unpacks baserom.nds into build/black.us/extracted/
+make main              # the ARM9 only, build/black.us/main.sbin
+make sub               # the ARM7 only, sub/build/arm7.sbin
+make compare-arm9      # built ARM9 against the original, byte by byte
+make compare-overlays  # all 237 overlays against the originals
+make compare-arm7      # built ARM7 against the original
+make compare-table     # the overlay table
+make compare-rom       # the packed ROM against black.us/rom.sha1
+make compare-all       # every one of the above, plus the file manifests
+```
+
+`make compare-arm9` should report `MATCH`, meaning all 681,920 bytes of the decompressed ARM9 are reproduced by assembling and linking this repository. Anything else names the addresses that differ.
 
 `make check-toolchain` compiles `test/toolchain_canary.c`, a frozen file nobody edits, and compares its code bytes against a known hash. Because the input never changes it stays valid however much of the game gets decompiled, unlike a hash of `main.sbin`.
 
@@ -118,29 +135,19 @@ One linker warning is expected and is not a setup error:
 mwldarm.exe: warning: Object "NitroMain" not found in file "*"
 ```
 
-The SDK's LCF template looks for `NitroMain`. This project has none — `asm/crt0.s` calls `TwlMain`, which is correct for a DSi-enhanced title. The linker skips the missing entry and output is unaffected.
+The SDK's LCF template looks for `NitroMain`. This project has none because `asm/crt0.s` calls `TwlMain` (due to the ROM being DSi enhanced). The linker just skips the missing entry and output is unaffected.
 
-There is no ROM target yet. `make` stops at the ARM9 image; nothing produces a `.nds`.
+The ARM7 builds out of `sub/`, with its own `Makefile`, `arm7.lsf` and `arm7.sha1`, exactly as `sub/` works in pret/pokeheartgold. `make` descends into it for you; `make -C sub` builds it alone.
+
+`make tidy` removes the build directories; `make clean` also removes the native tools. Both drop `build/black.us/extracted/`, so the next build re-runs `ndstool`.
 
 ## Decompiling a function
 
-Pick a function from a file in `asm/`, write the C in `src/` keeping the original symbol name, then carve the assembly out:
-
-```bash
-python3 tools/scripts/carve_function.py FUN_02008574 --object src/unk_02008574.o
-```
-
-This splits the containing file around the function, deletes it, and lists the C object between the two halves in `main.lsf` so the layout is preserved. Add the file to `LINKED_C_SRCS` in the Makefile, then `make && make compare`. The tool refuses carves that cannot work: a function not starting on a 4-byte boundary, or with branches or PC-relative loads crossing the new object boundary.
-
-`MWCFLAGS` passes `-thumb`. The game is overwhelmingly Thumb, and compiling ARM by default produces four bytes per instruction where the original has two. `src/unk_02008574.c` is a worked example that matches.
-
-A function that will not match in C can be supplied as assembly in place with `GLOBAL_ASM`, which keeps it in its original object so the layout does not shift. Three constraints apply here: write Metrowerks mnemonics rather than GNU (`lsl`, not `lsls`), blocks must be at least three Thumb instructions, and `compile.sh` strips `-sym on` for these compiles because `asm_processor` cannot remap CodeWarrior's debug relocations.
+Once the build matches, see [CONTRIBUTING.md](CONTRIBUTING.md) for how to carve a function out of `asm/` and replace it with C.
 
 ## Platform notes
 
-Under WSL the build detects Microsoft kernels and invokes the `.exe` files through `cmd.exe`, skipping Wine and converting paths with `wslpath`. That path exists in `platform.mk` but is unverified.
-
-macOS additionally needs `grealpath` and `gsed` from GNU coreutils, which the Makefile already expects. Neither Windows nor macOS is documented further.
+`platform.mk` is yoinked verbatim from other DS pret repositories. Under WSL1 it runs the `.exe` files directly instead of through Wine and converts paths with `wslpath`; under WSL2 it uses Wine as on any other Linux. TODO: Has not been tested
 
 If you use a custom `WINEPREFIX`, note that the wrapper scripts in `tools/mwccarm/dsi/1.1/` hardcode `$HOME/.wine` while the root Makefile invokes `wine` directly and inherits the environment. The two will disagree.
 

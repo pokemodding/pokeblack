@@ -3,6 +3,6 @@
 
 #include "types.h"
 
-u32 FUN_overlay_d_93__021d7ad4(s32 affinity);
+u32 GetTypeEffectivenessClass(s32 affinity);
 
 #endif

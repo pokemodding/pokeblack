@@ -321,8 +321,8 @@
 	.extern FUN_overlay_d_93__021d5364
 	.extern FUN_overlay_d_93__021d539c
 	.extern FUN_overlay_d_93__021d53c0
-	.extern FUN_overlay_d_93__021d7a6c
-	.extern FUN_overlay_d_93__021d7ad4
+	.extern ApplyTypeEffectiveness
+	.extern GetTypeEffectivenessClass
 	.extern FUN_overlay_d_93__021d7af0
 	.extern FUN_overlay_d_93__021d7b10
 	.extern FUN_overlay_d_93__021d7b2c

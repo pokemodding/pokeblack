@@ -444,8 +444,8 @@
 	.extern FUN_overlay_d_93__021d794c
 	.extern FUN_overlay_d_93__021d799c
 	.extern FUN_overlay_d_93__021d79e8
-	.extern FUN_overlay_d_93__021d7a6c
-	.extern FUN_overlay_d_93__021d7ad4
+	.extern ApplyTypeEffectiveness
+	.extern GetTypeEffectivenessClass
 	.extern FUN_overlay_d_93__021d7af0
 	.extern FUN_overlay_d_93__021d7b10
 	.extern FUN_overlay_d_93__021d7b2c
@@ -24334,7 +24334,7 @@ _021C1FA2:
 _021C1FBA:
 	ldr r1, [sp, #0x30]
 	add r0, r7, #0
-	bl FUN_overlay_d_93__021d7a6c
+	bl ApplyTypeEffectiveness
 	add r4, r0, #0
 	ldr r0, [sp, #0x10]
 	cmp r0, #1
@@ -27002,7 +27002,7 @@ _021C350E:
 	add r1, sp, #0x40
 	strh r0, [r1]
 	ldr r0, [sp, #0x2c]
-	bl FUN_overlay_d_93__021d7ad4
+	bl GetTypeEffectivenessClass
 	str r0, [sp, #0x20]
 	mov r0, #0
 	str r0, [sp, #0x1c]
@@ -56473,7 +56473,7 @@ _021D2944:
 	bl FUN_overlay_d_93__021b8d8c
 	add r7, r0, #0
 	ldr r0, [r6, #4]
-	bl FUN_overlay_d_93__021d7ad4
+	bl GetTypeEffectivenessClass
 	ldr r1, [r6, #8]
 	add r3, r0, #0
 	lsl r1, r1, #0x10

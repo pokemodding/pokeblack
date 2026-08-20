@@ -429,11 +429,12 @@
 	.extern FUN_overlay_d_93__021d775c
 	.extern FUN_overlay_d_93__021d78ac
 	.extern FUN_overlay_d_93__021d799c
-	.extern FUN_overlay_d_93__021e8940
-	.extern FUN_overlay_d_93__021e899c
-	.extern FUN_overlay_d_93__021e89c0
-	.extern FUN_overlay_d_93__021e89f8
-	.extern FUN_overlay_d_93__021e8a28
+	.extern FUN_overlay_d_93__021d7af0
+	.extern FUN_overlay_d_93__021d7b10
+	.extern FUN_overlay_d_93__021d7b60
+	.extern FUN_overlay_d_93__021d7b74
+	.extern FUN_overlay_d_93__021d7d18
+	.extern FUN_overlay_d_93__021d7dc0
 	.extern thunk_FUN_overlay_d_93__021b6994
 	.extern thunk_FUN_overlay_d_93__021b8cfc
 	.extern thunk_FUN_overlay_d_93__021b8d08
@@ -442,3 +443,34 @@
 	.extern thunk_FUN_overlay_d_93__021d4cec
 
 	.text
+	thumb_func_start FUN_overlay_d_93__021d7f00
+FUN_overlay_d_93__021d7f00: ; 0x021D7F00
+	cmp r0, #3
+	bhi _021D7F28
+	add r0, r0, r0
+	add r0, pc
+	ldrh r0, [r0, #6]
+	lsl r0, r0, #0x10
+	asr r0, r0, #0x10
+	add pc, r0
+	thumb_func_end FUN_overlay_d_93__021d7f00
+_021D7F10: ; jump table
+	.hword 0x0006 ; case 0
+	.hword 0x000A ; case 1
+	.hword 0x000E ; case 2
+	.hword 0x0012 ; case 3
+_021D7F18:
+	mov r0, #1
+	bx lr
+_021D7F1C:
+	mov r0, #2
+	bx lr
+_021D7F20:
+	mov r0, #3
+	bx lr
+_021D7F24:
+	mov r0, #1
+	bx lr
+_021D7F28:
+	mov r0, #1
+	bx lr

@@ -442,3 +442,36 @@
 	.extern thunk_FUN_overlay_d_93__021d4cec
 
 	.text
+	thumb_func_start FUN_overlay_d_93__021d7a9c
+FUN_overlay_d_93__021d7a9c: ; 0x021D7A9C
+	push {r4, r5}
+	lsl r4, r0, #4
+	ldr r5, _021D7AD0 ; =_021F047C
+	add r0, r0, r4
+	mov r3, #0
+	mov r2, #0
+	add r0, r5, r0
+	thumb_func_end FUN_overlay_d_93__021d7a9c
+_021D7AAA:
+	ldrb r4, [r0, r3]
+	cmp r4, #0
+	beq _021D7AB4
+	cmp r4, #2
+	bne _021D7ABE
+_021D7AB4:
+	add r4, r2, #0
+	add r2, r2, #1
+	lsl r2, r2, #0x18
+	lsr r2, r2, #0x18
+	strb r3, [r1, r4]
+_021D7ABE:
+	add r3, r3, #1
+	lsl r3, r3, #0x18
+	lsr r3, r3, #0x18
+	cmp r3, #0x11
+	blo _021D7AAA
+	add r0, r2, #0
+	pop {r4, r5}
+	bx lr
+	nop
+_021D7AD0: .word 0x021F047C

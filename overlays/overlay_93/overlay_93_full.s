@@ -23694,7 +23694,7 @@ _021C1FA2:
 _021C1FBA:
 	ldr r1, [sp, #0x30]
 	adds r0, r7, #0
-	bl FUN_overlay_d_93__021d7a6c
+	bl ApplyTypeEffectiveness
 	adds r4, r0, #0
 	ldr r0, [sp, #0x10]
 	cmp r0, #1
@@ -26362,7 +26362,7 @@ _021C350E:
 	add r1, sp, #0x40
 	strh r0, [r1]
 	ldr r0, [sp, #0x2c]
-	bl FUN_overlay_d_93__021d7ad4
+	bl GetTypeEffectivenessClass
 	str r0, [sp, #0x20]
 	movs r0, #0
 	str r0, [sp, #0x1c]
@@ -56154,7 +56154,7 @@ _021D2944:
 	bl FUN_overlay_d_93__021b8d8c
 	adds r7, r0, #0
 	ldr r0, [r6, #4]
-	bl FUN_overlay_d_93__021d7ad4
+	bl GetTypeEffectivenessClass
 	ldr r1, [r6, #8]
 	adds r3, r0, #0
 	lsls r1, r1, #0x10
@@ -66270,8 +66270,8 @@ CalcBaseDamage: @ 0x021D7A44
 	pop {r4, r5, r6, pc}
 	thumb_func_end CalcBaseDamage
 
-	thumb_func_start FUN_overlay_d_93__021d7a6c
-FUN_overlay_d_93__021d7a6c: @ 0x021D7A6C
+	thumb_func_start ApplyTypeEffectiveness
+ApplyTypeEffectiveness: @ 0x021D7A6C
 	cmp r1, #5
 	bhi _021D7A9A
 	adds r1, r1, r1
@@ -66280,7 +66280,7 @@ FUN_overlay_d_93__021d7a6c: @ 0x021D7A6C
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	add pc, r1
-	thumb_func_end FUN_overlay_d_93__021d7a6c
+	thumb_func_end ApplyTypeEffectiveness
 _021D7A7C: @ jump table
 	.2byte _021D7A88 - _021D7A7C - 2 @ case 0
 	.2byte _021D7A8C - _021D7A7C - 2 @ case 1
@@ -66340,13 +66340,13 @@ _021D7ABE:
 	nop
 _021D7AD0: .4byte DAT_overlay_d_93__021f047d
 
-	thumb_func_start FUN_overlay_d_93__021d7ad4
-FUN_overlay_d_93__021d7ad4: @ 0x021D7AD4
+	thumb_func_start GetTypeEffectivenessClass
+GetTypeEffectivenessClass: @ 0x021D7AD4
 	cmp r0, #3
 	ble _021D7ADC
 	movs r0, #2
 	bx lr
-	thumb_func_end FUN_overlay_d_93__021d7ad4
+	thumb_func_end GetTypeEffectivenessClass
 _021D7ADC:
 	bne _021D7AE2
 	movs r0, #1

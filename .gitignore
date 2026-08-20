@@ -73,3 +73,6 @@ notes/
 
 # m2ctx output
 ctx.c
+
+# objdiff
+/tools/objdiff

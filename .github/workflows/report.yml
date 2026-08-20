@@ -1,0 +1,50 @@
+name: report
+
+# progress report for decomp.dev; needs no baserom, only the compare targets read it
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  report:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install wine and binutils
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo mkdir -pm755 /etc/apt/keyrings
+          sudo wget -qO /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+          sudo wget -qNP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/jammy/winehq-jammy.sources
+          sudo apt-get update -qq
+          sudo apt-get install -y --install-recommends winehq-stable binutils-arm-none-eabi
+
+      - name: Fetch toolchain
+        env:
+          GH_TOKEN: ${{ secrets.TOOLCHAIN_TOKEN }}
+        run: |
+          git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/squiddonaut/mwccarm.git" /tmp/toolchain
+          cp -r /tmp/toolchain/tools/mwccarm tools/
+          mkdir -p lib
+          cp -r /tmp/toolchain/lib/NitroSDK lib/
+
+      - name: Fetch objdiff
+        run: |
+          mkdir -p tools/objdiff
+          curl -sL -o tools/objdiff/objdiff-cli \
+            https://github.com/encounter/objdiff/releases/download/v3.8.0/objdiff-cli-linux-x86_64
+          chmod +x tools/objdiff/objdiff-cli
+
+      - name: Build and report
+        run: |
+          export WINEDEBUG=-all
+          make tools
+          make patch_mwasmarm
+          make report
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: report
+          path: build/black.us/report.json

@@ -64,7 +64,7 @@ BANNER         := $(BUILD_DIR)/banner.bin
 MAKEFLAGS += --no-print-directory
 
 .PHONY: sub info check-toolchain extract check-baserom compare \
-        compare-overlays compare-table compare-arm7 compare-rom compare-all
+        compare-overlays compare-table compare-arm7 compare-rom compare-all report
 
 all:
 	$(MAKE) tools
@@ -163,6 +163,14 @@ compare-arm7: sub $(ORIG_ARM9)
 		cmp -l $(SUB_SBIN) $(ORIG_ARM7) | wc -l | xargs echo "  differing bytes:"; \
 		exit 1; \
 	fi
+
+OBJDIFF := $(TOOLSDIR)/objdiff/objdiff-cli
+
+# decompilation progress for decomp.dev
+report: $(SBIN)
+	@$(PYTHON) $(SCRIPTS)/gen_objdiff_project.py --build $(BUILD_DIR)
+	@$(OBJDIFF) report generate -p $(BUILD_DIR) -o $(BUILD_DIR)/report.json
+	@echo "report: $(BUILD_DIR)/report.json"
 
 compare-rom: $(ROM)
 	@$(SHA1SUM) --quiet -c $(ROM_SHA1) && echo "ROM matches $(ROM_SHA1)"

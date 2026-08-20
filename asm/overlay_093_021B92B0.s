@@ -427,13 +427,13 @@
 	.extern FUN_overlay_d_93__021d5778
 	.extern FUN_overlay_d_93__021d57fc
 	.extern FUN_overlay_d_93__021d5814
-	.extern FUN_overlay_d_93__021d5844
-	.extern FUN_overlay_d_93__021d5848
-	.extern FUN_overlay_d_93__021d5854
-	.extern FUN_overlay_d_93__021d5864
+	.extern BattleMon_GetPokemon
+	.extern BattleMon_SetIllusionMon
+	.extern BattleMon_ClearIllusionMon
+	.extern BattleMon_GetVisibleMon
 	.extern FUN_overlay_d_93__021d58a8
 	.extern FUN_overlay_d_93__021d5970
-	.extern FUN_overlay_d_93__021d59b4
+	.extern BattleMon_Get
 	.extern FUN_overlay_d_93__021d5ad8
 	.extern FUN_overlay_d_93__021d5b40
 	.extern FUN_overlay_d_93__021d5b44
@@ -797,10 +797,10 @@ FUN_overlay_d_93__021b92d4: ; 0x021B92D4
 	bl FUN_overlay_d_93__021b9940
 	add r4, r0, #0
 	add r0, r6, #0
-	bl FUN_overlay_d_93__021d5844
+	bl BattleMon_GetPokemon
 	add r6, r0, #0
 	add r0, r4, #0
-	bl FUN_overlay_d_93__021d5844
+	bl BattleMon_GetPokemon
 	str r0, [sp, #4]
 	add r0, r5, #0
 	bl FUN_overlay_d_93__021b8714
@@ -871,7 +871,7 @@ FUN_overlay_d_93__021b937c: ; 0x021B937C
 	bl thunk_FUN_overlay_d_93__021b8d08
 	add r5, r0, #0
 	ldr r0, [sp]
-	bl FUN_overlay_d_93__021d5864
+	bl BattleMon_GetVisibleMon
 	add r6, r0, #0
 	add r0, r4, #0
 	add r1, r5, #0
@@ -888,7 +888,7 @@ _021B93B6:
 	lsr r1, r1, #0x18
 	bl FUN_overlay_d_93__021b9c00
 	str r0, [sp, #4]
-	bl FUN_overlay_d_93__021d5844
+	bl BattleMon_GetPokemon
 	cmp r0, r6
 	bne _021B93D0
 	ldr r0, [sp, #4]
@@ -1059,7 +1059,7 @@ _021B94F2:
 	add r0, #0x84
 	ldr r0, [r0]
 	mov r1, #0x11
-	bl FUN_overlay_d_93__021d59b4
+	bl BattleMon_Get
 	cmp r0, #0x95
 	bne _021B951C
 	ldr r0, [sp, #0x20]
@@ -1070,7 +1070,7 @@ _021B94F2:
 	add r0, r7, r0
 	add r0, #0x84
 	ldr r0, [r0]
-	bl FUN_overlay_d_93__021d5848
+	bl BattleMon_SetIllusionMon
 _021B951C:
 	add r0, r5, #1
 	lsl r0, r0, #0x18
@@ -1104,7 +1104,7 @@ _021B9542:
 	bne _021B9602
 	ldr r0, [sp, #0x18]
 	mov r1, #0x11
-	bl FUN_overlay_d_93__021d59b4
+	bl BattleMon_Get
 	cmp r0, #0x95
 	bne _021B9602
 	mov r1, #0
@@ -1165,7 +1165,7 @@ _021B95BE:
 	bne _021B95F4
 	ldr r0, [sp, #0x18]
 	mov r1, #0xf
-	bl FUN_overlay_d_93__021d59b4
+	bl BattleMon_Get
 	add r2, r0, #0
 	ldr r1, _021B9630 ; =0x00000468
 	ldr r0, [sp, #4]
@@ -1185,7 +1185,7 @@ _021B95F4:
 	lsl r2, r2, #6
 	ldr r0, [sp, #0x18]
 	ldr r1, [r1, r2]
-	bl FUN_overlay_d_93__021d5848
+	bl BattleMon_SetIllusionMon
 _021B9602:
 	ldr r0, [sp, #0xc]
 	add r0, r0, #1
@@ -1317,7 +1317,7 @@ _021B96E4:
 	add r5, r0, #0
 	bl FUN_overlay_d_93__021d6b84
 	add r0, r5, #0
-	bl FUN_overlay_d_93__021d5844
+	bl BattleMon_GetPokemon
 	add r1, r0, #0
 	mov r0, #0xae
 	ldr r2, [sp]
@@ -1329,7 +1329,7 @@ _021B96E4:
 	cmp r0, #0
 	beq _021B9744
 	add r0, r5, #0
-	bl FUN_overlay_d_93__021d5864
+	bl BattleMon_GetVisibleMon
 	add r7, r0, #0
 	mov r5, #0
 	cmp r4, #0
@@ -1339,7 +1339,7 @@ _021B9724:
 	add r0, r6, #0
 	lsr r1, r1, #0x18
 	bl FUN_overlay_d_93__021b9bf0
-	bl FUN_overlay_d_93__021d5844
+	bl BattleMon_GetPokemon
 	cmp r7, r0
 	bne _021B973E
 	ldr r0, [sp, #8]
@@ -1386,7 +1386,7 @@ _021B9762:
 	bl FUN_0201AB28
 	add r1, r0, #0
 	ldr r0, [sp, #0x10]
-	bl FUN_overlay_d_93__021d5848
+	bl BattleMon_SetIllusionMon
 _021B9794:
 	add r5, r5, #1
 	cmp r5, r4
@@ -1446,7 +1446,7 @@ _021B97EA:
 	mov r1, #1
 	bl FUN_overlay_d_93__021d6b84
 	ldr r0, [sp, #0x10]
-	bl FUN_overlay_d_93__021d5844
+	bl BattleMon_GetPokemon
 	add r1, r0, #0
 	mov r0, #0xae
 	ldr r2, [sp]

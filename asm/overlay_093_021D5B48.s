@@ -325,7 +325,7 @@
 	.extern FUN_overlay_d_93__021d5750
 	.extern FUN_overlay_d_93__021d58a8
 	.extern FUN_overlay_d_93__021d5970
-	.extern FUN_overlay_d_93__021d59b4
+	.extern BattleMon_Get
 	.extern FUN_overlay_d_93__021d7af0
 	.extern FUN_overlay_d_93__021d7b10
 	.extern FUN_overlay_d_93__021d7b2c
@@ -537,11 +537,11 @@ FUN_overlay_d_93__021d5b48: ; 0x021D5B48
 	push {r3, r4, r5, lr}
 	add r5, r0, #0
 	mov r1, #0xd
-	bl FUN_overlay_d_93__021d59b4
+	bl BattleMon_Get
 	add r4, r0, #0
 	add r0, r5, #0
 	mov r1, #0xe
-	bl FUN_overlay_d_93__021d59b4
+	bl BattleMon_Get
 	cmp r4, r0
 	bne _021D5B64
 	mov r0, #1
@@ -555,7 +555,7 @@ _021D5B64:
 FUN_overlay_d_93__021d5b68: ; 0x021D5B68
 	push {r3, lr}
 	mov r1, #0xd
-	bl FUN_overlay_d_93__021d59b4
+	bl BattleMon_Get
 	cmp r0, #0
 	bne _021D5B78
 	mov r0, #1

@@ -3,6 +3,6 @@
 
 #include "types.h"
 
-void* FUN_overlay_d_93__021d5844(void* context);
+void* BattleMon_GetPokemon(void* context);
 
 #endif

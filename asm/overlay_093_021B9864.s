@@ -236,7 +236,6 @@
 	.extern FUN_02082A7C
 	.extern FUN_02082A90
 	.extern FUN_02082BCC
-	.extern MI_CpuCopy8
 	.extern FUN_02085CBC
 	.extern FUN_0209AC04
 	.extern FUN_0209AF34
@@ -423,13 +422,13 @@
 	.extern FUN_overlay_d_93__021d5778
 	.extern FUN_overlay_d_93__021d57fc
 	.extern FUN_overlay_d_93__021d5814
-	.extern FUN_overlay_d_93__021d5844
-	.extern FUN_overlay_d_93__021d5848
-	.extern FUN_overlay_d_93__021d5854
-	.extern FUN_overlay_d_93__021d5864
+	.extern BattleMon_GetPokemon
+	.extern BattleMon_SetIllusionMon
+	.extern BattleMon_ClearIllusionMon
+	.extern BattleMon_GetVisibleMon
 	.extern FUN_overlay_d_93__021d58a8
 	.extern FUN_overlay_d_93__021d5970
-	.extern FUN_overlay_d_93__021d59b4
+	.extern BattleMon_Get
 	.extern FUN_overlay_d_93__021d5ad8
 	.extern FUN_overlay_d_93__021d5b40
 	.extern FUN_overlay_d_93__021d5b44
@@ -741,6 +740,7 @@
 	.extern FUN_overlay_d_93__021efc1c
 	.extern FUN_overlay_d_93__021efce4
 	.extern GetTypeEffectivenessClass
+	.extern MI_CpuCopy8
 	.extern thunk_FUN_overlay_d_93__021b8d08
 	.extern thunk_FUN_overlay_d_93__021bb9d8
 	.extern thunk_FUN_overlay_d_93__021d4a6c
@@ -843,29 +843,3 @@ _021B9902:
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
 _021B9908: .word 0x00000428
-
-	thumb_func_start FUN_overlay_d_93__021b990c
-FUN_overlay_d_93__021b990c: ; 0x021B990C
-	add r3, r0, #4
-	mov r0, #0x1c
-	mul r0, r1
-	add r0, r3, r0
-	ldr r3, _021B991C ; =FUN_overlay_d_93__021b9bf0
-	add r1, r2, #0
-	bx r3
-	nop
-	thumb_func_end FUN_overlay_d_93__021b990c
-_021B991C: .word 0x021B9BF1
-
-	thumb_func_start FUN_overlay_d_93__021b9920
-FUN_overlay_d_93__021b9920: ; 0x021B9920
-	add r3, r0, #4
-	mov r0, #0x1c
-	mul r0, r1
-	add r0, r3, r0
-	ldr r3, _021B9930 ; =FUN_overlay_d_93__021b9c00
-	add r1, r2, #0
-	bx r3
-	nop
-	thumb_func_end FUN_overlay_d_93__021b9920
-_021B9930: .word 0x021B9C01

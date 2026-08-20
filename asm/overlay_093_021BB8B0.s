@@ -378,9 +378,9 @@
 	.extern FUN_overlay_d_93__021b9bc4
 	.extern FUN_overlay_d_93__021b9bf0
 	.extern FUN_overlay_d_93__021b9c00
-	.extern FUN_overlay_d_93__021b9c10
+	.extern BattleParty_SwapSlots
 	.extern FUN_overlay_d_93__021b9c50
-	.extern FUN_overlay_d_93__021b9c98
+	.extern BattleParty_GetMonIndex
 	.extern FUN_overlay_d_93__021b9ce8
 	.extern FUN_overlay_d_93__021b9d10
 	.extern FUN_overlay_d_93__021b9f84
@@ -435,13 +435,13 @@
 	.extern FUN_overlay_d_93__021d5778
 	.extern FUN_overlay_d_93__021d57fc
 	.extern FUN_overlay_d_93__021d5814
-	.extern FUN_overlay_d_93__021d5844
-	.extern FUN_overlay_d_93__021d5848
-	.extern FUN_overlay_d_93__021d5854
-	.extern FUN_overlay_d_93__021d5864
+	.extern BattleMon_GetPokemon
+	.extern BattleMon_SetIllusionMon
+	.extern BattleMon_ClearIllusionMon
+	.extern BattleMon_GetVisibleMon
 	.extern FUN_overlay_d_93__021d58a8
 	.extern FUN_overlay_d_93__021d5970
-	.extern FUN_overlay_d_93__021d59b4
+	.extern BattleMon_Get
 	.extern FUN_overlay_d_93__021d5ad8
 	.extern FUN_overlay_d_93__021d5b40
 	.extern FUN_overlay_d_93__021d5b44
@@ -776,7 +776,7 @@ FUN_overlay_d_93__021bb8bc: ; 0x021BB8BC
 	push {r4, lr}
 	add r4, r0, #0
 	add r0, r1, #0
-	bl FUN_overlay_d_93__021d5844
+	bl BattleMon_GetPokemon
 	add r2, r4, #0
 	add r2, #0xac
 	ldr r2, [r2]
@@ -793,7 +793,7 @@ FUN_overlay_d_93__021bb8dc: ; 0x021BB8DC
 	push {r4, lr}
 	add r4, r0, #0
 	add r0, r1, #0
-	bl FUN_overlay_d_93__021d5844
+	bl BattleMon_GetPokemon
 	mov r1, #5
 	mov r2, #0
 	bl FUN_02017E1C

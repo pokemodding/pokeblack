@@ -234,7 +234,6 @@
 	.extern FUN_02082A7C
 	.extern FUN_02082A90
 	.extern FUN_02082BCC
-	.extern MI_CpuCopy8
 	.extern FUN_02085CBC
 	.extern FUN_0209AC04
 	.extern FUN_0209AF34
@@ -392,10 +391,10 @@
 	.extern FUN_overlay_d_93__021d5778
 	.extern FUN_overlay_d_93__021d57fc
 	.extern FUN_overlay_d_93__021d5814
-	.extern FUN_overlay_d_93__021d5844
-	.extern FUN_overlay_d_93__021d5864
+	.extern BattleMon_GetPokemon
+	.extern BattleMon_GetVisibleMon
 	.extern FUN_overlay_d_93__021d58a8
-	.extern FUN_overlay_d_93__021d59b4
+	.extern BattleMon_Get
 	.extern FUN_overlay_d_93__021d5b40
 	.extern FUN_overlay_d_93__021d5b48
 	.extern FUN_overlay_d_93__021d5b68
@@ -438,6 +437,7 @@
 	.extern FUN_overlay_d_93__021d805c
 	.extern FUN_overlay_d_93__021d84f8
 	.extern FUN_overlay_d_93__021d85b0
+	.extern MI_CpuCopy8
 	.extern thunk_FUN_overlay_d_93__021b6994
 	.extern thunk_FUN_overlay_d_93__021b8cfc
 	.extern thunk_FUN_overlay_d_93__021b8d08
@@ -476,117 +476,3 @@ FUN_overlay_d_93__021d8414: ; 0x021D8414
 _021D8424:
 	.byte 0x02, 0x68, 0x0F, 0x21, 0x8A, 0x43, 0x05, 0x21, 0x11, 0x43, 0x01, 0x60
 	.byte 0x70, 0x47, 0x00, 0x00
-
-	thumb_func_start FUN_overlay_d_93__021d8434
-FUN_overlay_d_93__021d8434: ; 0x021D8434
-	ldr r2, [r0]
-	mov r1, #0xf
-	bic r2, r1
-	mov r1, #0xf
-	and r1, r2
-	str r1, [r0]
-	bx lr
-	.balign 4, 0
-	thumb_func_end FUN_overlay_d_93__021d8434
-
-	thumb_func_start FUN_overlay_d_93__021d8444
-FUN_overlay_d_93__021d8444: ; 0x021D8444
-	ldr r2, [r0]
-	mov r1, #0xf
-	bic r2, r1
-	mov r1, #7
-	orr r1, r2
-	str r1, [r0]
-	bx lr
-	.balign 4, 0
-	thumb_func_end FUN_overlay_d_93__021d8444
-
-	thumb_func_start FUN_overlay_d_93__021d8454
-FUN_overlay_d_93__021d8454: ; 0x021D8454
-	ldr r0, [r0]
-	lsl r0, r0, #0x1c
-	lsr r0, r0, #0x1c
-	bx lr
-	thumb_func_end FUN_overlay_d_93__021d8454
-
-	thumb_func_start FUN_overlay_d_93__021d845c
-FUN_overlay_d_93__021d845c: ; 0x021D845C
-	ldr r2, [r0]
-	mov r1, #0xf
-	bic r2, r1
-	mov r1, #8
-	orr r2, r1
-	mov r1, #0xf
-	and r1, r2
-	str r1, [r0]
-	bx lr
-	.balign 4, 0
-	thumb_func_end FUN_overlay_d_93__021d845c
-
-	thumb_func_start FUN_overlay_d_93__021d8470
-FUN_overlay_d_93__021d8470: ; 0x021D8470
-	ldr r2, [r0]
-	mov r1, #0xf
-	bic r2, r1
-	mov r1, #9
-	orr r2, r1
-	mov r1, #0xf
-	and r1, r2
-	str r1, [r0]
-	bx lr
-	.balign 4, 0
-	thumb_func_end FUN_overlay_d_93__021d8470
-
-	thumb_func_start FUN_overlay_d_93__021d8484
-FUN_overlay_d_93__021d8484: ; 0x021D8484
-	push {r3, r4, r5, r6, r7, lr}
-	sub sp, #0x10
-	mov r1, #0x10
-	add r6, r0, #0
-	bl FUN_overlay_d_93__021d59b4
-	lsl r0, r0, #0x10
-	ldr r1, _021D84E8 ; =_021F0E74
-	lsr r4, r0, #0x10
-	mov r2, #0
-	thumb_func_end FUN_overlay_d_93__021d8484
-_021D8498:
-	lsl r5, r2, #3
-	ldr r0, [r1, r5]
-	cmp r4, r0
-	bne _021D84DC
-	add r0, r6, #0
-	bl FUN_overlay_d_93__021d85b0
-	add r7, r0, #0
-	add r0, r6, #0
-	bl FUN_overlay_d_93__021d5440
-	ldr r1, _021D84EC ; =_021F0E78
-	add r6, r0, #0
-	ldr r1, [r1, r5]
-	add r0, sp, #0xc
-	blx r1
-	add r5, r0, #0
-	add r0, sp, #0xc
-	bl FUN_overlay_d_93__021d84f8
-	str r6, [sp]
-	str r5, [sp, #4]
-	add r2, r0, #0
-	ldr r0, [sp, #0xc]
-	add r1, r4, #0
-	lsl r0, r0, #0x10
-	lsr r0, r0, #0x10
-	str r0, [sp, #8]
-	mov r0, #4
-	add r3, r7, #0
-	bl FUN_overlay_d_93__021d6f0c
-	add sp, #0x10
-	pop {r3, r4, r5, r6, r7, pc}
-_021D84DC:
-	add r2, r2, #1
-	cmp r2, #0x9e
-	blo _021D8498
-	mov r0, #0
-	add sp, #0x10
-	pop {r3, r4, r5, r6, r7, pc}
-	.balign 4, 0
-_021D84E8: .word 0x021F0E74
-_021D84EC: .word 0x021F0E78

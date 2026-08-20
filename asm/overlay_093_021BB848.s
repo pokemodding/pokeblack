@@ -236,7 +236,6 @@
 	.extern FUN_02082A7C
 	.extern FUN_02082A90
 	.extern FUN_02082BCC
-	.extern MI_CpuCopy8
 	.extern FUN_02085CBC
 	.extern FUN_0209AC04
 	.extern FUN_0209AF34
@@ -378,9 +377,9 @@
 	.extern FUN_overlay_d_93__021b9bc4
 	.extern FUN_overlay_d_93__021b9bf0
 	.extern FUN_overlay_d_93__021b9c00
-	.extern FUN_overlay_d_93__021b9c10
+	.extern BattleParty_SwapSlots
 	.extern FUN_overlay_d_93__021b9c50
-	.extern FUN_overlay_d_93__021b9c98
+	.extern BattleParty_GetMonIndex
 	.extern FUN_overlay_d_93__021b9ce8
 	.extern FUN_overlay_d_93__021b9d10
 	.extern FUN_overlay_d_93__021b9f84
@@ -434,13 +433,13 @@
 	.extern FUN_overlay_d_93__021d5778
 	.extern FUN_overlay_d_93__021d57fc
 	.extern FUN_overlay_d_93__021d5814
-	.extern FUN_overlay_d_93__021d5844
-	.extern FUN_overlay_d_93__021d5848
-	.extern FUN_overlay_d_93__021d5854
-	.extern FUN_overlay_d_93__021d5864
+	.extern BattleMon_GetPokemon
+	.extern BattleMon_SetIllusionMon
+	.extern BattleMon_ClearIllusionMon
+	.extern BattleMon_GetVisibleMon
 	.extern FUN_overlay_d_93__021d58a8
 	.extern FUN_overlay_d_93__021d5970
-	.extern FUN_overlay_d_93__021d59b4
+	.extern BattleMon_Get
 	.extern FUN_overlay_d_93__021d5ad8
 	.extern FUN_overlay_d_93__021d5b40
 	.extern FUN_overlay_d_93__021d5b44
@@ -752,6 +751,7 @@
 	.extern FUN_overlay_d_93__021efc1c
 	.extern FUN_overlay_d_93__021efce4
 	.extern GetTypeEffectivenessClass
+	.extern MI_CpuCopy8
 	.extern thunk_FUN_overlay_d_93__021b6994
 	.extern thunk_FUN_overlay_d_93__021b8cfc
 	.extern thunk_FUN_overlay_d_93__021b8d08
@@ -772,55 +772,3 @@ FUN_overlay_d_93__021bb848: ; 0x021BB848
 	strb r4, [r5, #9]
 	pop {r3, r4, r5, pc}
 	thumb_func_end FUN_overlay_d_93__021bb848
-
-	thumb_func_start FUN_overlay_d_93__021bb85c
-FUN_overlay_d_93__021bb85c: ; 0x021BB85C
-	cmp r1, #4
-	bhs _021BB872
-	mov r2, #0xc
-	mul r2, r1
-	add r1, r0, r2
-	ldrb r1, [r1, #0x1f]
-	cmp r1, #0xff
-	beq _021BB872
-	add r0, #0x14
-	add r0, r0, r2
-	bx lr
-	thumb_func_end FUN_overlay_d_93__021bb85c
-_021BB872:
-	mov r0, #0
-	bx lr
-	.balign 4, 0
-
-	thumb_func_start FUN_overlay_d_93__021bb878
-FUN_overlay_d_93__021bb878: ; 0x021BB878
-	mov r2, #0xc
-	mul r2, r1
-	add r1, r0, r2
-	ldrb r1, [r1, #0x1f]
-	cmp r1, #0xff
-	beq _021BB88A
-	add r0, #0x14
-	add r0, r0, r2
-	bx lr
-	thumb_func_end FUN_overlay_d_93__021bb878
-_021BB88A:
-	mov r0, #0
-	bx lr
-	.balign 4, 0
-
-	thumb_func_start FUN_overlay_d_93__021bb890
-FUN_overlay_d_93__021bb890: ; 0x021BB890
-	push {r3, lr}
-	cmp r1, #4
-	bhs _021BB8A4
-	mov r2, #0xc
-	add r0, #0x14
-	mul r2, r1
-	add r0, r0, r2
-	bl FUN_overlay_d_93__021bb830
-	pop {r3, pc}
-	thumb_func_end FUN_overlay_d_93__021bb890
-_021BB8A4:
-	mov r0, #0
-	pop {r3, pc}

@@ -178,8 +178,8 @@ clean-tools:
 # addresses the module calls but does not contain, defined for the linker because the assembler cannot turn an absolute address into a PC-relative branch
 FORCE_ACTIVE_LIST := $(BUILD_DIR)/force_active.txt
 
-$(FORCE_ACTIVE_LIST): $(ASM_SRCS)
-	@$(PYTHON) $(SCRIPTS)/gen_force_active.py $(SYM_GLOBS) -o $@
+$(FORCE_ACTIVE_LIST): $(ASM_SRCS) $(C_SRCS)
+	@$(PYTHON) $(SCRIPTS)/gen_force_active.py $(SYM_GLOBS) --provided $(C_SRCS) -o $@
 
 ifeq ($(EXTERN_SYMS),)
 EXTERN_SYMS := $(BUILD_DIR)/extern_syms.lcf

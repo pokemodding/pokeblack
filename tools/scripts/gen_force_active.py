@@ -3,6 +3,7 @@
 
 import argparse
 import glob
+import os
 import re
 import sys
 
@@ -10,12 +11,16 @@ FUNC_START_RE = re.compile(r'^\s*\w*func_start\s+(\S+)\s*$')
 GLOBAL_RE = re.compile(r'^\s*\.global\s+(\S+)\s*$')
 SECTION_ANCHOR_RE = re.compile(r'^\s*\.global\s+(\S+_(?:data|sinit|bss))\s*$')
 
+# a carved function with no caller left in asm would otherwise be dropped
+C_DEFN_RE = re.compile(r'^[A-Za-z_][\w \t\*]*?\b([A-Za-z_]\w*)\s*\([^;]*\)\s*\{', re.M)
+
 
 def main():
     parser = argparse.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('sources', nargs='+')
+    parser.add_argument('--provided', nargs='*', default=[], help="linked C sources; the functions they define are forced active too")
     parser.add_argument('-o', '--output', required=True)
     args = parser.parse_args()
 
@@ -48,6 +53,10 @@ def main():
         else:
             skipped.append(path)
         names.extend(sections)
+
+    for path in args.provided:
+        if os.path.exists(path):
+            names.extend(C_DEFN_RE.findall(open(path).read()))
 
     with open(args.output, 'w') as handle:
         for name in names:

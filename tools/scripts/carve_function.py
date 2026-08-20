@@ -9,7 +9,6 @@ import sys
 
 FUNC_START_RE = re.compile(r'^\s*(\w*func_start)\s+(\S+)\s*$')
 EXTERN_RE = re.compile(r'^\s*\.extern\s+(\S+)\s*$')
-FUNC_END_RE = re.compile(r'^\s*\w*func_end\s+(\S+)\s*$')
 ADDR_RE = re.compile(r'^\w+: [;@] 0x([0-9A-Fa-f]{8})')
 LABEL_RE = re.compile(r'^(\w+):')
 SYMBOL_RE = re.compile(r'\b(\w*(?:FUN_|_)[0-9A-Fa-f]{8}\w*)\b')
@@ -19,15 +18,16 @@ UNRELOCATABLE_RE = re.compile(
 
 
 def find_function(name):
+    """find the file and line range a function owns"""
+    # func_end sits at the first local label in half the dump, so bound on the next func_start
     for path in sorted(glob.glob('asm/unk_*.s') + glob.glob('asm/overlay_*.s')):
         lines = open(path).read().splitlines()
-        for i, line in enumerate(lines):
-            m = FUNC_START_RE.match(line)
-            if m and m.group(2) == name:
-                j = i
-                while j < len(lines) and not FUNC_END_RE.match(lines[j]):
-                    j += 1
-                return path, lines, i, j + 1
+        starts = [i for i, line in enumerate(lines) if FUNC_START_RE.match(line)]
+        for k, i in enumerate(starts):
+            if FUNC_START_RE.match(lines[i]).group(2) != name:
+                continue
+            end = starts[k + 1] if k + 1 < len(starts) else len(lines)
+            return path, lines, i, end
     return None, None, None, None
 
 
@@ -113,7 +113,7 @@ def main():
     body_start = len(header)
 
     def with_extern(body):
-        """declare every symbol this half references but no longer defines. Splitting a large object leaves each half calling into the other, so it is not enough to declare the carved function alone."""
+        """declare every symbol this half references but no longer defines"""
         defined = set()
         referenced = set()
         for line in body:
@@ -145,7 +145,7 @@ def main():
         if m:
             after_addr = int(m.group(1), 16)
             break
-    # keep the lower half in the same family as the file it came out of, so an overlay chunk is not named like ARM9 static code
+    # name the lower half after the file it came out of
     prefix = base.rsplit('_', 1)[0] if base.startswith('overlay_') else "unk"
     after_name = f"{prefix}_{after_addr:08X}" if after_addr else base + "_b"
 

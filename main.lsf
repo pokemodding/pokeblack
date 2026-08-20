@@ -662,6 +662,14 @@ Overlay OVY_93
 	Object		asm/overlay_093_021D5444.o
 	Object		src/overlay_93_021D7A44.o
 	Object		asm/overlay_093_021D7A6C.o
+	Object		src/overlay_93_021D7A6C.o
+	Object		asm/overlay_093_021D7A9C.o
+	Object		src/overlay_93_021D7AD4.o
+	Object		asm/overlay_093_021D7AF0.o
+	Object		src/overlay_93_021D7EF0.o
+	Object		asm/overlay_093_021D7F00.o
+	Object		src/overlay_93_021D7F2C.o
+	Object		asm/overlay_093_021D7F38.o
 }
 Overlay OVY_94
 {

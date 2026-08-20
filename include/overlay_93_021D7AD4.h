@@ -3,6 +3,6 @@
 
 #include "types.h"
 
-u32 GetTypeEffectivenessClass(s32 affinity);
+u32 GetTypeEffectivenessClass(s32 effectiveness);
 
 #endif

@@ -3,6 +3,6 @@
 
 #include "types.h"
 
-u32 ApplyTypeEffectiveness(u32 damage, u32 affinity);
+u32 ApplyTypeEffectiveness(u32 damage, u32 effectiveness);
 
 #endif

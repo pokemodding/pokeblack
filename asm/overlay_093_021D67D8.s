@@ -258,9 +258,6 @@
 	.extern FUN_02187F00
 	.extern FUN_02188080
 	.extern FUN_021880BC
-	.extern FUN_021D4800
-	.extern FUN_021D4D5C
-	.extern FUN_021D53B8
 	.extern FUN_021E979C
 	.extern FUN_021EE600
 	.extern FUN_021EEAE0
@@ -313,214 +310,27 @@
 	.extern FUN_021F8B28
 	.extern FUN_0220C834
 	.extern FUN_0220F3E8
-	.extern FUN_overlay_d_93__021b6818
-	.extern FUN_overlay_d_93__021b68d8
-	.extern FUN_overlay_d_93__021b6994
-	.extern FUN_overlay_d_93__021b8588
-	.extern FUN_overlay_d_93__021b86b8
-	.extern FUN_overlay_d_93__021b86c8
-	.extern FUN_overlay_d_93__021babec
-	.extern FUN_overlay_d_93__021bb724
-	.extern FUN_overlay_d_93__021bb798
-	.extern FUN_overlay_d_93__021bb7fc
-	.extern FUN_overlay_d_93__021bb828
-	.extern FUN_overlay_d_93__021bb840
-	.extern FUN_overlay_d_93__021bb848
-	.extern FUN_overlay_d_93__021bb8bc
-	.extern FUN_overlay_d_93__021bb964
-	.extern FUN_overlay_d_93__021bb968
-	.extern FUN_overlay_d_93__021bbb48
-	.extern FUN_overlay_d_93__021bc550
-	.extern FUN_overlay_d_93__021c7cbc
-	.extern FUN_overlay_d_93__021c7cc8
-	.extern FUN_overlay_d_93__021c7cd4
-	.extern FUN_overlay_d_93__021c7cdc
-	.extern FUN_overlay_d_93__021c7ce8
-	.extern FUN_overlay_d_93__021c8138
-	.extern FUN_overlay_d_93__021c8140
-	.extern FUN_overlay_d_93__021cd6ec
-	.extern FUN_overlay_d_93__021cd6f0
-	.extern FUN_overlay_d_93__021cd8e0
-	.extern FUN_overlay_d_93__021cd914
-	.extern FUN_overlay_d_93__021cd924
-	.extern FUN_overlay_d_93__021cd938
-	.extern FUN_overlay_d_93__021cd95c
-	.extern FUN_overlay_d_93__021cd960
-	.extern FUN_overlay_d_93__021cd978
-	.extern FUN_overlay_d_93__021cd97c
-	.extern FUN_overlay_d_93__021cd984
-	.extern FUN_overlay_d_93__021cd9b0
-	.extern FUN_overlay_d_93__021cd9f4
-	.extern FUN_overlay_d_93__021cdd94
-	.extern FUN_overlay_d_93__021cdda0
-	.extern FUN_overlay_d_93__021cddcc
-	.extern FUN_overlay_d_93__021d4150
-	.extern FUN_overlay_d_93__021d4230
-	.extern FUN_overlay_d_93__021d4254
-	.extern FUN_overlay_d_93__021d4270
-	.extern FUN_overlay_d_93__021d4294
-	.extern FUN_overlay_d_93__021d4348
-	.extern FUN_overlay_d_93__021d4360
-	.extern FUN_overlay_d_93__021d4378
-	.extern FUN_overlay_d_93__021d43b8
-	.extern FUN_overlay_d_93__021d440c
-	.extern FUN_overlay_d_93__021d4438
-	.extern FUN_overlay_d_93__021d44cc
-	.extern FUN_overlay_d_93__021d4500
-	.extern FUN_overlay_d_93__021d450c
-	.extern FUN_overlay_d_93__021d45fc
-	.extern FUN_overlay_d_93__021d4648
-	.extern FUN_overlay_d_93__021d4674
-	.extern FUN_overlay_d_93__021d4680
-	.extern FUN_overlay_d_93__021d4784
-	.extern FUN_overlay_d_93__021d47a4
-	.extern FUN_overlay_d_93__021d4808
-	.extern FUN_overlay_d_93__021d4898
-	.extern FUN_overlay_d_93__021d48cc
-	.extern FUN_overlay_d_93__021d4908
-	.extern FUN_overlay_d_93__021d49b0
-	.extern FUN_overlay_d_93__021d49cc
-	.extern FUN_overlay_d_93__021d49e0
-	.extern FUN_overlay_d_93__021d4af4
-	.extern FUN_overlay_d_93__021d4b18
-	.extern FUN_overlay_d_93__021d4d24
-	.extern FUN_overlay_d_93__021d4d64
-	.extern FUN_overlay_d_93__021d4d84
-	.extern FUN_overlay_d_93__021d5440
-	.extern FUN_overlay_d_93__021d5444
-	.extern FUN_overlay_d_93__021d5448
-	.extern FUN_overlay_d_93__021d54b4
-	.extern FUN_overlay_d_93__021d54c0
-	.extern FUN_overlay_d_93__021d54f4
-	.extern FUN_overlay_d_93__021d5584
-	.extern FUN_overlay_d_93__021d55a0
-	.extern FUN_overlay_d_93__021d55d8
-	.extern FUN_overlay_d_93__021d5608
-	.extern FUN_overlay_d_93__021d5640
-	.extern FUN_overlay_d_93__021d5674
-	.extern FUN_overlay_d_93__021d56a0
-	.extern FUN_overlay_d_93__021d56cc
-	.extern FUN_overlay_d_93__021d5734
+	.extern FUN_overlay_d_93__021c7cf4
+	.extern FUN_overlay_d_93__021d4efc
+	.extern FUN_overlay_d_93__021d4f84
+	.extern FUN_overlay_d_93__021d505c
+	.extern FUN_overlay_d_93__021d50b4
+	.extern FUN_overlay_d_93__021d5150
+	.extern FUN_overlay_d_93__021d51dc
+	.extern FUN_overlay_d_93__021d52b4
+	.extern FUN_overlay_d_93__021d533c
+	.extern FUN_overlay_d_93__021d5364
+	.extern FUN_overlay_d_93__021d539c
+	.extern FUN_overlay_d_93__021d53c0
 	.extern FUN_overlay_d_93__021d5750
-	.extern FUN_overlay_d_93__021d5778
-	.extern FUN_overlay_d_93__021d57fc
-	.extern FUN_overlay_d_93__021d5814
-	.extern FUN_overlay_d_93__021d5844
-	.extern FUN_overlay_d_93__021d5848
-	.extern FUN_overlay_d_93__021d5854
-	.extern FUN_overlay_d_93__021d5864
 	.extern FUN_overlay_d_93__021d58a8
 	.extern FUN_overlay_d_93__021d5970
 	.extern FUN_overlay_d_93__021d59b4
-	.extern FUN_overlay_d_93__021d5ad8
-	.extern FUN_overlay_d_93__021d5b40
-	.extern FUN_overlay_d_93__021d5b44
-	.extern FUN_overlay_d_93__021d5b48
-	.extern FUN_overlay_d_93__021d5b68
-	.extern FUN_overlay_d_93__021d5b7c
 	.extern FUN_overlay_d_93__021d5bb0
 	.extern FUN_overlay_d_93__021d5bdc
-	.extern FUN_overlay_d_93__021d5c08
-	.extern FUN_overlay_d_93__021d5c30
-	.extern FUN_overlay_d_93__021d5c44
-	.extern FUN_overlay_d_93__021d5d14
-	.extern FUN_overlay_d_93__021d5dc0
-	.extern FUN_overlay_d_93__021d5e38
-	.extern FUN_overlay_d_93__021d5ea8
-	.extern FUN_overlay_d_93__021d5efc
-	.extern FUN_overlay_d_93__021d5f08
-	.extern FUN_overlay_d_93__021d5f14
-	.extern FUN_overlay_d_93__021d5f38
-	.extern FUN_overlay_d_93__021d5f90
-	.extern FUN_overlay_d_93__021d5fa4
-	.extern FUN_overlay_d_93__021d5fb8
-	.extern FUN_overlay_d_93__021d5fc0
 	.extern FUN_overlay_d_93__021d5fe4
-	.extern FUN_overlay_d_93__021d6008
-	.extern FUN_overlay_d_93__021d6034
-	.extern FUN_overlay_d_93__021d6064
-	.extern FUN_overlay_d_93__021d6130
-	.extern FUN_overlay_d_93__021d61a8
-	.extern FUN_overlay_d_93__021d61f0
-	.extern FUN_overlay_d_93__021d6238
-	.extern FUN_overlay_d_93__021d6264
 	.extern FUN_overlay_d_93__021d62a8
 	.extern FUN_overlay_d_93__021d62c4
-	.extern FUN_overlay_d_93__021d62d8
-	.extern FUN_overlay_d_93__021d6314
-	.extern FUN_overlay_d_93__021d631c
-	.extern FUN_overlay_d_93__021d63b8
-	.extern FUN_overlay_d_93__021d63ec
-	.extern FUN_overlay_d_93__021d6408
-	.extern FUN_overlay_d_93__021d6440
-	.extern FUN_overlay_d_93__021d646c
-	.extern FUN_overlay_d_93__021d64f0
-	.extern FUN_overlay_d_93__021d6580
-	.extern FUN_overlay_d_93__021d65c8
-	.extern FUN_overlay_d_93__021d66b0
-	.extern FUN_overlay_d_93__021d66d0
-	.extern FUN_overlay_d_93__021d66d8
-	.extern FUN_overlay_d_93__021d6730
-	.extern FUN_overlay_d_93__021d6738
-	.extern FUN_overlay_d_93__021d6744
-	.extern FUN_overlay_d_93__021d67a8
-	.extern FUN_overlay_d_93__021d67b8
-	.extern FUN_overlay_d_93__021d67c4
-	.extern FUN_overlay_d_93__021d67d0
-	.extern FUN_overlay_d_93__021d67d8
-	.extern FUN_overlay_d_93__021d67e8
-	.extern FUN_overlay_d_93__021d67f4
-	.extern FUN_overlay_d_93__021d6848
-	.extern FUN_overlay_d_93__021d6940
-	.extern FUN_overlay_d_93__021d69a0
-	.extern FUN_overlay_d_93__021d69ac
-	.extern FUN_overlay_d_93__021d69b8
-	.extern FUN_overlay_d_93__021d6b6c
-	.extern FUN_overlay_d_93__021d6b84
-	.extern FUN_overlay_d_93__021d6c24
-	.extern FUN_overlay_d_93__021d6c2c
-	.extern FUN_overlay_d_93__021d6c3c
-	.extern FUN_overlay_d_93__021d6c50
-	.extern FUN_overlay_d_93__021d6d54
-	.extern FUN_overlay_d_93__021d6d5c
-	.extern FUN_overlay_d_93__021d6d70
-	.extern FUN_overlay_d_93__021d6d7c
-	.extern FUN_overlay_d_93__021d6d90
-	.extern FUN_overlay_d_93__021d6d9c
-	.extern FUN_overlay_d_93__021d6dc4
-	.extern FUN_overlay_d_93__021d6e04
-	.extern FUN_overlay_d_93__021d6e0c
-	.extern FUN_overlay_d_93__021d6e24
-	.extern FUN_overlay_d_93__021d6e40
-	.extern FUN_overlay_d_93__021d6e74
-	.extern FUN_overlay_d_93__021d6e88
-	.extern FUN_overlay_d_93__021d6eac
-	.extern FUN_overlay_d_93__021d6ee8
-	.extern FUN_overlay_d_93__021d701c
-	.extern FUN_overlay_d_93__021d70e4
-	.extern FUN_overlay_d_93__021d70f0
-	.extern FUN_overlay_d_93__021d70fc
-	.extern FUN_overlay_d_93__021d7394
-	.extern FUN_overlay_d_93__021d73d4
-	.extern FUN_overlay_d_93__021d74e4
-	.extern FUN_overlay_d_93__021d74f8
-	.extern FUN_overlay_d_93__021d7540
-	.extern FUN_overlay_d_93__021d75a8
-	.extern FUN_overlay_d_93__021d75ec
-	.extern FUN_overlay_d_93__021d7630
-	.extern FUN_overlay_d_93__021d7674
-	.extern FUN_overlay_d_93__021d76bc
-	.extern FUN_overlay_d_93__021d7704
-	.extern FUN_overlay_d_93__021d775c
-	.extern FUN_overlay_d_93__021d7840
-	.extern FUN_overlay_d_93__021d787c
-	.extern FUN_overlay_d_93__021d7894
-	.extern FUN_overlay_d_93__021d78ac
-	.extern FUN_overlay_d_93__021d7908
-	.extern FUN_overlay_d_93__021d7930
-	.extern FUN_overlay_d_93__021d794c
-	.extern FUN_overlay_d_93__021d799c
-	.extern FUN_overlay_d_93__021d79e8
 	.extern FUN_overlay_d_93__021d7af0
 	.extern FUN_overlay_d_93__021d7b10
 	.extern FUN_overlay_d_93__021d7b2c
@@ -723,9 +533,19 @@
 	.extern FUN_overlay_d_93__021efc1c
 	.extern FUN_overlay_d_93__021efce4
 	.extern GetTypeEffectivenessClass
-	.extern thunk_FUN_overlay_d_93__021bb9d8
-	.extern thunk_FUN_overlay_d_93__021d4a6c
 	.extern thunk_FUN_overlay_d_93__021d7040
 	.extern thunk_FUN_overlay_d_93__021e9738
 
 	.text
+	thumb_func_start FUN_overlay_d_93__021d67d8
+FUN_overlay_d_93__021d67d8: ; 0x021D67D8
+	cmp r1, #1
+	bhs _021D67DE
+	mov r1, #1
+	thumb_func_end FUN_overlay_d_93__021d67d8
+_021D67DE:
+	ldr r2, _021D67E4 ; =0x0000013E
+	strh r1, [r0, r2]
+	bx lr
+	.balign 4, 0
+_021D67E4: .word 0x0000013E

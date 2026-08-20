@@ -537,23 +537,3 @@
 	.extern thunk_FUN_overlay_d_93__021e9738
 
 	.text
-	thumb_func_start FUN_overlay_d_93__021d67d0
-FUN_overlay_d_93__021d67d0: ; 0x021D67D0
-	ldrb r0, [r0, #0x1b]
-	lsl r0, r0, #0x18
-	lsr r0, r0, #0x1f
-	bx lr
-	thumb_func_end FUN_overlay_d_93__021d67d0
-
-	thumb_func_start FUN_overlay_d_93__021d67d8
-FUN_overlay_d_93__021d67d8: ; 0x021D67D8
-	cmp r1, #1
-	bhs _021D67DE
-	mov r1, #1
-	thumb_func_end FUN_overlay_d_93__021d67d8
-_021D67DE:
-	ldr r2, _021D67E4 ; =0x0000013E
-	strh r1, [r0, r2]
-	bx lr
-	.balign 4, 0
-_021D67E4: .word 0x0000013E

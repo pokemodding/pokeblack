@@ -317,8 +317,10 @@
 	.extern FUN_overlay_d_93__021b68d8
 	.extern FUN_overlay_d_93__021b6994
 	.extern FUN_overlay_d_93__021b8588
+	.extern FUN_overlay_d_93__021b8670
 	.extern FUN_overlay_d_93__021b86b8
-	.extern FUN_overlay_d_93__021b86c8
+	.extern FUN_overlay_d_93__021b86c0
+	.extern FUN_overlay_d_93__021ba1a8
 	.extern FUN_overlay_d_93__021babec
 	.extern FUN_overlay_d_93__021bb724
 	.extern FUN_overlay_d_93__021bb798
@@ -729,3 +731,18 @@
 	.extern thunk_FUN_overlay_d_93__021e9738
 
 	.text
+	thumb_func_start FUN_overlay_d_93__021b86a0
+FUN_overlay_d_93__021b86a0: ; 0x021B86A0
+	push {r4, lr}
+	add r4, r1, #0
+	bl FUN_overlay_d_93__021b8670
+	lsl r0, r0, #1
+	cmp r4, r0
+	bhs _021B86B2
+	mov r0, #1
+	pop {r4, pc}
+	thumb_func_end FUN_overlay_d_93__021b86a0
+_021B86B2:
+	mov r0, #0
+	pop {r4, pc}
+	.balign 4, 0

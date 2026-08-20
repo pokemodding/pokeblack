@@ -319,6 +319,9 @@
 	.extern FUN_overlay_d_93__021b8588
 	.extern FUN_overlay_d_93__021b86b8
 	.extern FUN_overlay_d_93__021b86c8
+	.extern FUN_overlay_d_93__021b8714
+	.extern FUN_overlay_d_93__021b8bc4
+	.extern FUN_overlay_d_93__021b99f0
 	.extern FUN_overlay_d_93__021babec
 	.extern FUN_overlay_d_93__021bb724
 	.extern FUN_overlay_d_93__021bb798
@@ -729,3 +732,89 @@
 	.extern thunk_FUN_overlay_d_93__021e9738
 
 	.text
+	thumb_func_start FUN_overlay_d_93__021b8c38
+FUN_overlay_d_93__021b8c38: ; 0x021B8C38
+	mov r2, #1
+	tst r0, r2
+	bne _021B8C44
+	lsl r0, r1, #0x19
+	lsr r0, r0, #0x18
+	bx lr
+	thumb_func_end FUN_overlay_d_93__021b8c38
+_021B8C44:
+	lsl r0, r1, #1
+	add r0, r0, #1
+	lsl r0, r0, #0x18
+	lsr r0, r0, #0x18
+	bx lr
+	.balign 4, 0
+
+	thumb_func_start FUN_overlay_d_93__021b8c50
+FUN_overlay_d_93__021b8c50: ; 0x021B8C50
+	ldr r0, [r0]
+	ldr r3, _021B8C58 ; =FUN_overlay_d_93__021b8c20
+	ldr r0, [r0, #4]
+	bx r3
+	.balign 4, 0
+	thumb_func_end FUN_overlay_d_93__021b8c50
+_021B8C58: .word 0x021B8C21
+_021B8C5C:
+	.byte 0x08, 0xB5, 0x03, 0x28
+	.byte 0x09, 0xD8, 0x02, 0x18, 0x7A, 0x44, 0xD2, 0x88, 0x12, 0x04, 0x12, 0x14, 0x97, 0x44, 0x06, 0x00
+	.byte 0x0E, 0x00, 0x20, 0x00, 0x36, 0x00, 0x00, 0x22, 0xFF, 0xF7, 0xD2, 0xFF, 0x08, 0xBD, 0xCA, 0x05
+	.byte 0x13, 0x0E, 0x01, 0x22, 0x5A, 0x40, 0x12, 0x06, 0x12, 0x0E, 0xFF, 0xF7, 0xC9, 0xFF, 0x08, 0xBD
+	.byte 0xCA, 0x05, 0x12, 0x0E, 0x01, 0xD1, 0x02, 0x22, 0x02, 0xE0, 0x02, 0x2A, 0x00, 0xD1, 0x00, 0x22
+	.byte 0xFF, 0xF7, 0xBE, 0xFF, 0x08, 0xBD, 0x00, 0x22, 0xFF, 0xF7, 0xBA, 0xFF, 0x08, 0xBD, 0x00, 0x00
+
+	thumb_func_start FUN_overlay_d_93__021b8cb0
+FUN_overlay_d_93__021b8cb0: ; 0x021B8CB0
+	ldr r0, [r0]
+	ldr r0, [r0, #4]
+	cmp r0, #3
+	bhi _021B8CE4
+	add r0, r0, r0
+	add r0, pc
+	ldrh r0, [r0, #6]
+	lsl r0, r0, #0x10
+	asr r0, r0, #0x10
+	add pc, r0
+	thumb_func_end FUN_overlay_d_93__021b8cb0
+_021B8CC4: ; jump table
+	.hword 0x0006 ; case 0
+	.hword 0x000E ; case 1
+	.hword 0x001A ; case 2
+	.hword 0x000A ; case 3
+_021B8CCC:
+	add r0, r1, #0
+	bx lr
+_021B8CD0:
+	add r0, r1, #0
+	bx lr
+_021B8CD4:
+	add r1, r1, #2
+	mov r0, #3
+	and r0, r1
+	lsl r0, r0, #0x18
+	lsr r0, r0, #0x18
+	bx lr
+_021B8CE0:
+	add r0, r1, #0
+	bx lr
+_021B8CE4:
+	add r0, r1, #0
+	bx lr
+
+	thumb_func_start FUN_overlay_d_93__021b8ce8
+FUN_overlay_d_93__021b8ce8: ; 0x021B8CE8
+	add r3, r1, #0
+	mov r0, #1
+	add r1, r2, #0
+	and r3, r0
+	and r1, r0
+	cmp r3, r1
+	bne _021B8CF8
+	mov r0, #0
+	thumb_func_end FUN_overlay_d_93__021b8ce8
+_021B8CF8:
+	bx lr
+	.balign 4, 0

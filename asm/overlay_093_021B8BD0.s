@@ -319,6 +319,9 @@
 	.extern FUN_overlay_d_93__021b8588
 	.extern FUN_overlay_d_93__021b86b8
 	.extern FUN_overlay_d_93__021b86c8
+	.extern FUN_overlay_d_93__021b8714
+	.extern FUN_overlay_d_93__021b8bc4
+	.extern FUN_overlay_d_93__021b99f0
 	.extern FUN_overlay_d_93__021babec
 	.extern FUN_overlay_d_93__021bb724
 	.extern FUN_overlay_d_93__021bb798
@@ -729,3 +732,52 @@
 	.extern thunk_FUN_overlay_d_93__021e9738
 
 	.text
+	thumb_func_start FUN_overlay_d_93__021b8bd0
+FUN_overlay_d_93__021b8bd0: ; 0x021B8BD0
+	push {r4, lr}
+	add r4, r1, #0
+	ldr r1, _021B8BE8 ; =0x0000046C
+	ldrb r1, [r0, r1]
+	bl FUN_overlay_d_93__021b8bc4
+	cmp r4, r0
+	bne _021B8BE4
+	mov r0, #1
+	pop {r4, pc}
+	thumb_func_end FUN_overlay_d_93__021b8bd0
+_021B8BE4:
+	mov r0, #0
+	pop {r4, pc}
+	.balign 4, 0
+_021B8BE8: .word 0x0000046C
+
+	thumb_func_start FUN_overlay_d_93__021b8bec
+FUN_overlay_d_93__021b8bec: ; 0x021B8BEC
+	push {r4, r5}
+	ldr r4, _021B8C1C ; =0x00000428
+	mov r3, #0
+	thumb_func_end FUN_overlay_d_93__021b8bec
+_021B8BF2:
+	add r5, r0, r3
+	ldrb r5, [r5, r4]
+	cmp r1, r5
+	bne _021B8C0A
+	cmp r2, #0
+	bne _021B8C04
+	add r0, r3, #0
+	pop {r4, r5}
+	bx lr
+_021B8C04:
+	sub r2, r2, #1
+	lsl r2, r2, #0x18
+	lsr r2, r2, #0x18
+_021B8C0A:
+	add r3, r3, #1
+	lsl r3, r3, #0x18
+	lsr r3, r3, #0x18
+	cmp r3, #6
+	blo _021B8BF2
+	mov r0, #6
+	pop {r4, r5}
+	bx lr
+	nop
+_021B8C1C: .word 0x00000428

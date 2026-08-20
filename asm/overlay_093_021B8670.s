@@ -318,7 +318,8 @@
 	.extern FUN_overlay_d_93__021b6994
 	.extern FUN_overlay_d_93__021b8588
 	.extern FUN_overlay_d_93__021b86b8
-	.extern FUN_overlay_d_93__021b86c8
+	.extern FUN_overlay_d_93__021b86c0
+	.extern FUN_overlay_d_93__021ba1a8
 	.extern FUN_overlay_d_93__021babec
 	.extern FUN_overlay_d_93__021bb724
 	.extern FUN_overlay_d_93__021bb798

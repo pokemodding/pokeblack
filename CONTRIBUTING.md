@@ -28,11 +28,11 @@ Then carve the assembly out:
 python3 tools/scripts/carve_function.py FUN_02008574 --object src/unk_02008574.o
 ```
 
-The linker places whole object files, in the order `main.lsf` lists them, and each file in `asm/` is one object covering one run of addresses. A function in the middle of that run can't just be deleted and rewritten in C, because the C version has to end up at the exact address the original held, with the assembly that surrounded it still sitting on either side. The carving script cuts the file in two at the function's boundaries. The half above the function stays in the original file, the half below becomes a new `asm/unk_<address>.s` named for the first function left in it, and the function itself is dropped. It then edits `main.lsf` to list your C object and that new lower half immediately after the original, so the three objects link back to back and nothing moves. It should refuse carves that cannot work.
+The linker places whole object files, in the order `main.lsf` lists them, and each file in `asm/` is one object covering one run of addresses. A function in the middle of that run can't just be deleted and rewritten in C, because the C version has to end up at the exact address the original held, with the assembly that surrounded it still sitting on either side. The carving script cuts the file in two at the function's boundaries. The half above the function stays in the original file, the half below becomes a new `asm/unk_<address>.s`, or `asm/overlay_<nnn>_<address>.s` out of an overlay, named for the first function left in it, and the function itself is dropped. It then edits `main.lsf` to list your C object and that new lower half immediately after the original, so the three objects link back to back and nothing moves. It should refuse carves that cannot work.
 
 Run it with `--dry-run` first to see the split it would make, and the line counts either side of it, without writing anything.
 
-It reads `asm/unk_*.s` only, so it handles the ARM9 static and not the overlays.
+It reads `asm/unk_*.s` and `asm/overlay_*.s`.
 
 Add the file to `LINKED_C_SRCS` in the Makefile, then build and check it:
 

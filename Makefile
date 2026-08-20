@@ -11,7 +11,7 @@ OPTFLAGS       := -O4,p
 include config.mk
 
 ASM_SUBDIR     := asm asm/arm9
-LINKED_C_SRCS  := unk_02008574.c overlay_93_021D7A44.c overlay_93_021D5440.c overlay_93_021D7A6C.c overlay_93_021D7AD4.c overlay_93_021D7EF0.c overlay_93_021D7F2C.c
+LINKED_C_SRCS  := unk_02008574.c overlay_93_021D7A44.c overlay_93_021D5440.c overlay_93_021D7A6C.c overlay_93_021D7AD4.c overlay_93_021D7EF0.c overlay_93_021D7F2C.c overlay_93_021BABEC.c overlay_93_021BB828.c overlay_93_021BB840.c overlay_93_021BBD20.c overlay_93_021BBD80.c overlay_93_021CC95C.c overlay_93_021CD95C.c overlay_93_021D3F48.c overlay_93_021D5B44.c overlay_93_021D5FB8.c 
 SYM_GLOBS      := 'asm/unk_*.s' 'asm/overlay_*.s' 'asm/arm9/*.s'
 LDSEARCH       := -search -l . -l src -l asm
 CRT0_OBJ       := asm/crt0.o

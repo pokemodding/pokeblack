@@ -70,3 +70,6 @@ melonDS_log.txt
 
 # Personal notes
 notes/
+
+# m2ctx output
+ctx.c

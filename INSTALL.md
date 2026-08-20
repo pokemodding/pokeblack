@@ -1,6 +1,6 @@
 This doc details the steps necessary to build the ARM9 of Pokémon Black (EN-US) from the sources contained in this repository.
 
-Verified on Arch Linux. Windows and macOS are untested; see [Platform notes](#platform-notes).
+Verified on Arch Linux. The Windows routes below follow the other DS pret repositories but are untested here; macOS likewise. See [Platform notes](#platform-notes).
 
 ## 0. Clone the repository
 
@@ -19,6 +19,8 @@ cd ..
 You should end up with `tools/mwccarm/dsi/1.1/mwccarm.exe`, its two siblings `mwasmarm.exe` and `mwldarm.exe`, and four DLLs. The DLLs must stay beside the executables or Wine cannot start the compiler. `tools/mwccarm/license.dat` ships at the archive root and the command above already places it correctly; the build exports it as `LM_LICENSE_FILE`.
 
 The archive is the full multi-version drop and also contains `1.2`, `2.0` and eight other `dsi` variants. This project uses `dsi/1.1` only.
+
+Running the executables natively on Windows, they may prompt for `license.dat` and then fail to save the setting. Set a system environment variable `LM_LICENSE_FILE` pointing at the file, or run the executable once from an Administrator prompt. Under Wine the build exports the variable itself, so this does not arise.
 
 `mwasmarm.exe` has two bugs that must be patched before use, and `make` runs the patcher itself. The unpatched hash is `7705de17a1eae1b9f181b242232cea0ebbc376d9` and the patched one is `4424d39d773ba544991ad30b5de11387b0728f81`. If the patcher reports an unknown hash, your drop is not the expected one.
 
@@ -44,9 +46,9 @@ lib/NitroSDK/TwlSDK/
     └── makerom.TWL.exe
 ```
 
-The SDK also ships a `libsyscall.a`. Ignore it — we assemble our own from `lib/syscall/asm/_secure_IRBO.s`, since the secure area is real data here and has to come back byte for byte.
+The SDK also ships a `libsyscall.a`. Ignore it, because we assemble our own from `lib/syscall/asm/_secure_IRBO.s`, since the secure area is real data here and has to come back byte for byte.
 
-One gotcha with that: ours defines `SVC_WaitIntr` and `SVC_WaitVBlankIntr` strong, where the SDK has them weak so a title can override them. Nothing overrides them today, but if you decompile something that should, mark them weak in `_secure_IRBO.s` first or you'll get a duplicate symbol instead of an override.
+Ours defines `SVC_WaitIntr` and `SVC_WaitVBlankIntr` strong, where the SDK has them weak so a title can override them. Nothing overrides them today, but theoretically if you decompile something that should, mark them weak in `_secure_IRBO.s` first or you'll get a duplicate symbol instead of an override.
 
 ## 3. Dependencies
 
@@ -75,6 +77,23 @@ sudo dnf install gcc gcc-c++ make autoconf automake python3 wine \
 ```
 
 Iff `arm-none-eabi-binutils-cs` is not found, try `arm-none-eabi-binutils`. TODO: check this on a live Fedora system
+
+Windows with MSYS2:
+
+MSYS2 sets `OS=Windows_NT`, so `platform.mk` runs the CodeWarrior executables directly and Wine is not involved at all. Install MSYS2 from [msys2.org](https://www.msys2.org/), then from the UCRT64 terminal:
+
+```bash
+pacman -Syu
+pacman -S git make python autoconf automake unzip mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-arm-none-eabi-binutils
+```
+
+`gcc` builds ndstool in step 5, and the arm-none-eabi binutils supply `objcopy` and `ar`. If you already have devkitARM, set `DEVKITARM` instead and `binutils.mk` will take its toolchain.
+
+Windows Subsystem for Linux:
+
+WSL1 also runs the executables directly, converting paths with `wslpath`, so it needs no Wine either. Install the Debian dependencies above but omit `wine` and `wine32`. Check which version you have with `wsl -l -v`; if it reports 2, either switch that distribution with `wsl --set-version <name> 1` or install Wine and treat it as ordinary Linux.
+
+WSL1 has historically been the better choice but it has been facing bugs as of late. Other DS projects report `mwldarm` failing to locate its own executable under WSL2. However, because of WSL1 deprecation issues, we are looking into WSL2 support.
 
 ## 4. Supply the base ROM
 
@@ -137,7 +156,7 @@ mwldarm.exe: warning: Object "NitroMain" not found in file "*"
 
 The SDK's LCF template looks for `NitroMain`. This project has none because `asm/crt0.s` calls `TwlMain` (due to the ROM being DSi enhanced). The linker just skips the missing entry and output is unaffected.
 
-The ARM7 builds out of `sub/`, with its own `Makefile`, `arm7.lsf` and `arm7.sha1`, exactly as `sub/` works in pret/pokeheartgold. `make` descends into it for you; `make -C sub` builds it alone.
+The ARM7 builds out of `sub/`, with its own `Makefile`, `arm7.lsf` and `arm7.sha1`. `make` descends into it for you; `make -C sub` builds it alone.
 
 `make tidy` removes the build directories; `make clean` also removes the native tools. Both drop `build/black.us/extracted/`, so the next build re-runs `ndstool`.
 
@@ -151,4 +170,3 @@ Once the build matches, see [CONTRIBUTING.md](CONTRIBUTING.md) for how to carve 
 
 If you use a custom `WINEPREFIX`, note that the wrapper scripts in `tools/mwccarm/dsi/1.1/` hardcode `$HOME/.wine` while the root Makefile invokes `wine` directly and inherits the environment. The two will disagree.
 
-See [docs/notes.md](docs/notes.md) for how the ROM is laid out and how this toolchain actually behaves.

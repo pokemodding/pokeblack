@@ -18,6 +18,10 @@ The ROM is fully reproduced from the assembly in this repo, but nearly all of th
 
 Read [INSTALL.md](INSTALL.md) first and get a matching build before starting.
 
+## AI Policy
+
+pokeblack does not accept submissions that were visibly written in part or whole by an LLM agent. The only permitted exception is menial repetitive work that does not involve any kind of direct reverse engineering or "prose"/documentation/comments. PRs that contain an AI agent as a coauthor will be automatically rejected. Please visit our Discord for more information on this policy. 
+
 ## Decompiling a function
 
 Pick a function out of one of the files in `asm/` and write the C in `src/`, keeping the original symbol name. Every source file gets a header of the same name declaring what it defines, and includes it at the top: `src/unk_02008574.c` is one function long and includes `include/unk_02008574.h`, which declares that one function. `MWCFLAGS` passes `-W error`, so a function with no prototype in scope will not compile.
@@ -48,16 +52,14 @@ The tool refuses carves that cannot work. A function has to start on a 4-byte bo
 
 ## Functions that will not match
 
-A function that resists matching in C can be supplied as assembly in place with `GLOBAL_ASM`, which keeps it in its original object so the surrounding layout does not shift. Three things to know before you reach for it:
+A function that resists matching in C can be supplied as assembly in place with `GLOBAL_ASM`, which keeps it in its original object so the surrounding layout does not shift. Three things to know before you use it:
 
 - Write Metrowerks mnemonics rather than GNU ones. `lsl`, not `lsls`.
 - A block has to be at least three Thumb instructions.
 - `tools/asm_processor/compile.sh` strips `-sym on` for these compiles, because `asm_processor` cannot remap CodeWarrior's debug relocations.
 
-Prefer a matching C version where one is reachable. `GLOBAL_ASM` keeps the build matching but leaves the function no more readable than it was.
-
 ## Naming symbols
 
-Anything the disassembler could not identify is named `FUN_<address>` after where it sits in memory. When you work out what one does, rename it both in the assembly and in the matching `ndsdisasm_config/*.cfg` entry, so that a fresh dump agrees with the tree.
+Anything the disassembler could not identify is named `FUN_<address>` after where it sits in memory. When you work out what one does, rename it both in the assembly and in the matching `ndsdisasm_config/*.cfg` entry, so that if a dump is regenertaed it agrees with the tree.
 
-Keep renames in commits of their own, separate from decompilation work. They touch a great many files and are much easier to review on their own.
+Preferably keep renames in commits of their own, separate from decompilation work. They touch a great many files and are much easier to review on their own.

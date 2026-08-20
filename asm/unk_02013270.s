@@ -282,7 +282,7 @@ FUN_02013402: ; 0x02013402
 	add r0, r6, #0
 	add r1, #8
 	mov r2, #0x10
-	.hword 0xF06F, 0xEC80 ; blx FUN_02082D44
+	.hword 0xF06F, 0xEC80 ; blx MI_CpuCopy8
 	ldr r0, _02013474 ; =0x00000468
 	mov r1, #1
 	strh r0, [r5, #0x18]

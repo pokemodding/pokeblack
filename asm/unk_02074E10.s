@@ -14,7 +14,7 @@
 	.extern FUN_0207482C
 	.extern FUN_02075698
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_020862D4
 	.extern FUN_0208A46C
 	.extern FUN_0208A48C
@@ -298,7 +298,7 @@ _02075158:
 	add r0, r5, #0x3c
 	mov r2, r6
 	add r1, r0, r1, lsl #2
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	mov r2, r6
 	add r0, r5, #0x3c
 	mov r1, #0

@@ -265,7 +265,7 @@
 	.extern FUN_02082A48
 	.extern FUN_02082A90
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_0209C0A4
 	.extern FUN_0209C2B0
 	.extern FUN_0209C494
@@ -31777,7 +31777,7 @@ FUN_overlay_d_170__021edab0: ; 0x021EDAB0
 	ldr r0, [r0, #0x14]
 	add r1, r1, r4
 	add r2, r7, #0
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	ldr r0, [sp, #4]
 	blx FUN_020307B0
 	add r0, r5, #0

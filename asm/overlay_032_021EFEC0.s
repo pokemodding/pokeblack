@@ -151,7 +151,7 @@
 	.extern FUN_0207D63C
 	.extern FUN_02082A7C
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_02086284
 	.extern FUN_0209BDBC
 	.extern FUN_0209C0A4
@@ -1437,7 +1437,7 @@ _021F07E4:
 	ldrb r2, [r2]
 	add r0, #0x8e
 	add r1, #0x8d
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	add r0, r5, #0
 	add r0, #0x8c
 	ldrb r0, [r0]

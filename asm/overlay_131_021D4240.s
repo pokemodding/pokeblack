@@ -249,7 +249,7 @@
 	.extern FUN_0207DCF8
 	.extern FUN_02082A60
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_020862F0
 	.extern FUN_0209BDBC
 	.extern FUN_0209BE04
@@ -10182,7 +10182,7 @@ _021D922C:
 	mov r2, #0x66
 	add r0, r7, #0
 	lsl r2, r2, #4
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	ldr r1, [sp, #8]
 	ldr r0, [r6, #0x50]
 	ldrb r1, [r1, #5]

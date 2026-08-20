@@ -3,7 +3,7 @@
 	.extern SVC_GetCRC16
 	.extern FUN_02082A60
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_02084A84
 	.extern FUN_020857B0
 	.extern FUN_02085D3C
@@ -23,12 +23,12 @@
 FUN_02087C6C: ; 0x02087C6C
 	mov r1, r0
 	ldr r0, _02087C80 ; =0x02FFFCF4
-	ldr ip, _02087C84 ; =FUN_02082D44
+	ldr ip, _02087C84 ; =MI_CpuCopy8
 	mov r2, #6
 	bx ip
 	.balign 4, 0
 _02087C80: .word 0x02FFFCF4
-_02087C84: .word 0x02082D44 ; was FUN_02082D44
+_02087C84: .word 0x02082D44 ; was MI_CpuCopy8
 	arm_func_end FUN_02087C6C
 
 	arm_func_start FUN_02087C88
@@ -283,7 +283,7 @@ FUN_02087FBC: ; 0x02087FBC
 	strh r0, [r1, #0x10]
 	ldr r0, [r4, #8]
 	mov r1, #0x2000000
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	ldr r0, [r4, #8]
 	mov r1, r6
 	mov r2, r5
@@ -313,7 +313,7 @@ FUN_0208806C: ; 0x0208806C
 	mov r6, #0x300
 	mov r2, r6
 	mov r0, #0x2000000
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	ldr r1, [r4, #8]
 	mov r5, #0
 	ldrh r7, [r1, #0x10]

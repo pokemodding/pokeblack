@@ -20,7 +20,7 @@
 	.extern FUN_02059E38
 	.extern FUN_0205A1B0
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_020853C0
 	.extern FUN_020855BC
 	.extern FUN_02085868
@@ -509,7 +509,7 @@ _021D71C8: .word 0x00000CFE
 
 	thumb_func_start FUN_overlay_d_125__021d71cc
 FUN_overlay_d_125__021d71cc: ; 0x021D71CC
-	ldr r3, _021D71D4 ; =FUN_02082D44
+	ldr r3, _021D71D4 ; =MI_CpuCopy8
 	lsl r2, r2, #1
 	bx r3
 	nop
@@ -2368,7 +2368,7 @@ FUN_overlay_d_125__021d8c14: ; 0x021D8C14
 	ldr r0, [r2]
 	mov r2, #0x830
 	mov r4, r1
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	cmp r5, #0
 	ldmeqia sp!, {r3, r4, r5, pc}
 	mov r0, r5

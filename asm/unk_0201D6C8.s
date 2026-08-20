@@ -7,7 +7,7 @@
 	.extern FUN_020493D4
 	.extern FUN_0204944C
 	.extern FUN_020494F4
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_0201DADC
 
 	.text
@@ -91,7 +91,7 @@ _0201D74E:
 FUN_0201d752: ; 0x0201D752
 	add r1, r5, r1
 	mov r2, #4
-	.hword 0xF065, 0xEAF6 ; blx FUN_02082D44
+	.hword 0xF065, 0xEAF6 ; blx MI_CpuCopy8
 	add sp, #8
 	pop {r3, r4, r5, r6, r7, pc}
 _0201D75E:
@@ -127,7 +127,7 @@ _0201D78A:
 	add r0, r7, #0
 	add r1, r1, r4
 	add r2, r5, #0
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	add r0, r4, r5
 	lsl r0, r0, #0x10
 	lsr r4, r0, #0x10

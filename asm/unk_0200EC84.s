@@ -1,6 +1,6 @@
 	.include "asm/macros/function.inc"
 
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_0216E2E8
 
 	.text
@@ -264,13 +264,13 @@ FUN_0200EED8: ; 0x0200EED8
 	str r0, [r4, #0x2c]
 	add r0, r5, #0
 	add r0, #0x94
-	.hword 0xF073, 0xEEF0 ; blx FUN_02082D44
+	.hword 0xF073, 0xEEF0 ; blx MI_CpuCopy8
 	add r5, #0xa4
 	add r4, #0x40
 	add r0, r5, #0
 	add r1, r4, #0
 	mov r2, #0x10
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
 	thumb_func_end FUN_0200EED8
@@ -369,13 +369,13 @@ FUN_0200f00c: ; 0x0200F00C
 	add r1, r5, #0
 	add r0, #0x30
 	add r1, #0x94
-	.hword 0xF073, 0xEE94 ; blx FUN_02082D44
+	.hword 0xF073, 0xEE94 ; blx MI_CpuCopy8
 	add r0, r4, #0
 	add r1, r5, #0
 	add r0, #0x40
 	add r1, #0xa4
 	mov r2, #0x10
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	add r2, sp, #0
 	add r0, r5, #0
 	add r0, #0x88

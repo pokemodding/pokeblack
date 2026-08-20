@@ -50,7 +50,7 @@
 	.extern FUN_0203CD98
 	.extern FUN_0203D798
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_02087BCC
 	.extern FUN_02157170
 	.extern FUN_02167ED8
@@ -94,7 +94,7 @@ _02212580:
 	add r0, r6, #0
 	add r1, r4, #4
 	mov r2, #0x14
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	str r5, [r4, #0x20]
 	ldr r0, [r4, #4]
 	cmp r0, #0
@@ -169,7 +169,7 @@ _0221263A:
 	add r2, r0, #0
 	add r0, r4, #0
 	add r1, r5, #0
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	b _0221267C
 _02212654:
 	ldr r0, [r4, #4]
@@ -183,7 +183,7 @@ _02212654:
 	add r2, r0, #0
 	add r0, r4, #0
 	add r1, r5, #0
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	add r0, r4, #0
 	blx FUN_020307B0
 _0221267C:

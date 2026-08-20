@@ -20418,7 +20418,7 @@ FUN_overlay_d_217__021c2d88: ; 0x021C2D88
 	ldr r0, [r2, #0xc]
 	ldr r1, [r2, #8]
 	ldrb r2, [r2, #0x10]
-	ldr r3, _021C2D98 ; =FUN_02082D44
+	ldr r3, _021C2D98 ; =MI_CpuCopy8
 	lsl r2, r2, #1
 	bx r3
 	nop

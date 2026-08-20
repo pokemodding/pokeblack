@@ -200,7 +200,7 @@
 	.extern FUN_0207E780
 	.extern FUN_02081BE4
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_020862F0
 	.extern FUN_0209C2B0
 
@@ -380,17 +380,17 @@ FUN_overlay_d_70__021b621c: ; 0x021B621C
 	add r0, r4, r6
 	add r1, sp, #0
 	mov r2, #4
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	add r5, #0x20
 	lsl r7, r7, #2
 	add r0, r5, r7
 	add r1, r4, r6
 	mov r2, #4
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	add r0, sp, #0
 	add r1, r5, r7
 	mov r2, #4
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	pop {r3, r4, r5, r6, r7, pc}
 	thumb_func_end FUN_overlay_d_70__021b621c
 

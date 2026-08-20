@@ -5,7 +5,7 @@
 	.extern FUN_0202130C
 	.extern FUN_02030734
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 
 	.text
 
@@ -114,14 +114,14 @@ _02008016:
 	add r1, r5, r1
 _02008020:
 	mov r2, #4
-	.hword 0xF07A, 0xEE90 ; blx FUN_02082D44
+	.hword 0xF07A, 0xEE90 ; blx MI_CpuCopy8
 	sub r4, r4, #1
 	bpl _02008008
 _0200802A:
 	add r0, sp, #0
 	add r1, r5, #0
 	mov r2, #4
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 _02008034:
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -405,11 +405,11 @@ _02008310: .word 0x020A70A0
 
 	thumb_func_start FUN_02008314
 FUN_02008314: ; 0x02008314
-	ldr r3, _0200831C ; =FUN_02082D44
+	ldr r3, _0200831C ; =MI_CpuCopy8
 	mov r2, #4
 	bx r3
 	nop
-_0200831C: .word 0x02082D44 ; was FUN_02082D44
+_0200831C: .word 0x02082D44 ; was MI_CpuCopy8
 	thumb_func_end FUN_02008314
 
 	thumb_func_start FUN_02008320

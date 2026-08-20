@@ -10,7 +10,7 @@
 	.extern FUN_0205F504
 	.extern FUN_0205F558
 	.extern FUN_0205F5AC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_02085D3C
 	.extern FUN_020870D0
 	.extern FUN_0209C00C
@@ -469,7 +469,7 @@ FUN_0205F3B0: ; 0x0205F3B0
 	ldr r0, _0205F4F8 ; =0x020A16A0
 	mov r1, r5
 	mov r2, #0x58
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	ldr r1, [r4]
 	add r0, r6, #0x1000
 	str r1, [r5, #4]

@@ -3,7 +3,7 @@
 	.extern FUN_02034a5c
 	.extern FUN_02034ac4
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_0235B750
 
 	.text
@@ -141,11 +141,11 @@ _020097EC: .word 0x020A7198
 	thumb_func_start FUN_020097F0
 FUN_020097F0: ; 0x020097F0
 	ldr r2, _020097F8 ; =0x000007C4
-	ldr r3, _020097FC ; =FUN_02082D44
+	ldr r3, _020097FC ; =MI_CpuCopy8
 	bx r3
 	nop
 _020097F8: .word 0x000007C4
-_020097FC: .word 0x02082D44 ; was FUN_02082D44
+_020097FC: .word 0x02082D44 ; was MI_CpuCopy8
 	thumb_func_end FUN_020097F0
 
 	thumb_func_start FUN_02009800
@@ -401,7 +401,7 @@ _02009A8C:
 	add r0, r6, r0
 	add r1, r6, r1
 	mov r2, #0x30
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	mov r0, #0xc
 	mov r1, #0xc
 	mul r0, r7
@@ -409,7 +409,7 @@ _02009A8C:
 	add r0, r4, r0
 	add r1, r4, r1
 	mov r2, #0xc
-	.hword 0xF079, 0xE94A ; blx FUN_02082D44
+	.hword 0xF079, 0xE94A ; blx MI_CpuCopy8
 	add r5, r5, #1
 	cmp r5, #0x1f
 	blt _02009A8C
@@ -449,7 +449,7 @@ FUN_02009af0: ; 0x02009AF0
 	add r0, r4, r0
 	add r1, r4, r1
 	mov r2, #0x30
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	mov r1, #0xc
 	add r0, r7, #0
 	mul r0, r1
@@ -463,7 +463,7 @@ FUN_02009b0e: ; 0x02009B0E
 	add r0, r5, r0
 	add r1, r5, r1
 	mov r2, #0xc
-	.hword 0xF079, 0xE914 ; blx FUN_02082D44
+	.hword 0xF079, 0xE914 ; blx MI_CpuCopy8
 	ldr r0, [sp]
 	mov r1, #0
 	add r0, r4, r0

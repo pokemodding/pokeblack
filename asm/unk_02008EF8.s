@@ -35,11 +35,11 @@ FUN_02008f34: ; 0x02008F34
 
 	thumb_func_start FUN_02008F3C
 FUN_02008F3C: ; 0x02008F3C
-	ldr r3, _02008F44 ; =FUN_02082D44
+	ldr r3, _02008F44 ; =MI_CpuCopy8
 	mov r2, #0x38
 	bx r3
 	nop
-_02008F44: .word 0x02082D44 ; was FUN_02082D44
+_02008F44: .word 0x02082D44 ; was MI_CpuCopy8
 	thumb_func_end FUN_02008F3C
 
 	thumb_func_start FUN_02008f48

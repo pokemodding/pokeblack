@@ -1,6 +1,6 @@
 	.include "asm/macros/function.inc"
 
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_02085D3C
 	.extern FUN_02087C6C
 	.extern FUN_02087DC4
@@ -408,7 +408,7 @@ _0208F780:
 	str ip, [sp, #4]
 	strh r5, [sp, #8]
 	strh r3, [sp, #0xa]
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	ldrh ip, [r4, #0x10]
 	ldrh r5, [r4, #0x34]
 	ldrh r3, [r4, #0x12]
@@ -418,7 +418,7 @@ _0208F780:
 	strh ip, [sp, #0x12]
 	strh r5, [sp, #0x36]
 	strh r3, [sp, #0x14]
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	add r0, sp, #0
 	mov r1, #0x3c
 	bl FUN_0208E44C

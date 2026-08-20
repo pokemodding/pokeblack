@@ -13,7 +13,7 @@
 	.extern FUN_020766D8
 	.extern FUN_020774C0
 	.extern FUN_02077518
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_02084EB8
 	.extern FUN_02084F10
 	.extern FUN_02085D3C
@@ -337,7 +337,7 @@ _02076EF4:
 	mov r1, sl
 	mov r2, r7
 	add r0, r0, r3
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 _02076F24:
 	add sl, sl, r7
 	add sb, sb, r7

@@ -8,7 +8,7 @@
 	.extern FUN_02082AC0
 	.extern FUN_02082B0C
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_020870D0
 	.extern FUN_02087170
 	.extern FUN_02087988
@@ -2393,7 +2393,7 @@ _021B107C:
 	sub r1, r0, r2
 	add r0, sb, #0xc
 	str r1, [sp]
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	ldr r0, [r5, #0x34]
 	sub r1, r8, #0xc
 	strb r0, [r4, #0x11]

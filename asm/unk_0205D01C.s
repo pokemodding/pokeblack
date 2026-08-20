@@ -12,7 +12,7 @@
 	.extern FUN_0205D848
 	.extern FUN_0205D8D4
 	.extern FUN_02082A7C
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_02085D3C
 	.extern FUN_020949F4
 	.extern FUN_021656A0
@@ -388,7 +388,7 @@ FUN_0205D470: ; 0x0205D470
 	ldr r0, _0205D4D4 ; =0x020A1620
 	mov r2, r5
 	add r1, r4, #4
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	add r0, r6, #1
 	strb r5, [r4, #3]
 	mov r1, #0x14
@@ -420,7 +420,7 @@ FUN_0205D4D8: ; 0x0205D4D8
 	ldr r0, _0205D580 ; =0x020A80A4
 	mov r2, r7
 	add r1, r5, #4
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	add r0, r4, #1
 	strb r7, [r5, #3]
 	mov r1, #0x12
@@ -438,7 +438,7 @@ _0205D538:
 	ldr r0, _0205D584 ; =0x020A1628
 	mov r2, r6
 	add r1, r5, #4
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	add r0, r4, #1
 	strb r6, [r5, #3]
 	mov r1, #0x16

@@ -9,7 +9,7 @@
 	.extern FUN_0205EA44
 	.extern FUN_0205EB20
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_020870D0
 	.extern FUN_020949F4
 	.extern FUN_0215ED60
@@ -524,7 +524,7 @@ _0205B84C:
 _0205B85C:
 	strb r3, [r4]
 _0205B860:
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	b _0205B978
 _0205B868:
 	add r0, r0, #0x100
@@ -557,7 +557,7 @@ _0205B8B4:
 	add r1, r4, #2
 	strb ip, [r4]
 	strb r2, [r4, #1]
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	mov r0, #0
 	strb r0, [r4, #0x22]
 	b _0205B978

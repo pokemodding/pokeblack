@@ -1,7 +1,7 @@
 	.include "asm/macros/function.inc"
 
 	.extern FUN_02007248
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_0200E27C
 	.extern FUN_02167358
 	.extern FUN_0216736C
@@ -150,7 +150,7 @@ FUN_0200E124: ; 0x0200E124
 	add r0, r5, r0
 	add r1, r5, r1
 	lsl r2, r2, #2
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 _0200E14C:
 	sub r0, r6, #1
 	lsl r2, r0, #2

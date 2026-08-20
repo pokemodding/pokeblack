@@ -22,7 +22,7 @@
 	.extern FUN_0205D01C
 	.extern FUN_0207E24C
 	.extern FUN_02082A48
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_02178098
 
 	.text
@@ -283,7 +283,7 @@ FUN_0201045c: ; 0x0201045C
 	add r3, r6, #0
 	mul r3, r2
 	add r1, r1, r3
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	ldr r2, [r5]
 	add r0, r4, #6
 	ldrh r0, [r2, r0]

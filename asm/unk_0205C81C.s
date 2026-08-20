@@ -381,13 +381,13 @@ _0205CCFC:
 	subne r2, r3, #0x30
 	moveq r2, #0xff
 	str r2, [r1, #4]
-	ldr ip, _0205CD20 ; =FUN_02082D44
+	ldr ip, _0205CD20 ; =MI_CpuCopy8
 	add r0, r0, #1
 	add r1, r1, #0xc
 	mov r2, #9
 	bx ip
 	.balign 4, 0
-_0205CD20: .word 0x02082D44 ; was FUN_02082D44
+_0205CD20: .word 0x02082D44 ; was MI_CpuCopy8
 	arm_func_end FUN_0205CCE4
 _0205CD24:
 	.byte 0xF8, 0x41, 0x2D, 0xE9, 0x0C, 0xD0, 0x4D, 0xE2, 0x00, 0x80, 0xA0, 0xE3

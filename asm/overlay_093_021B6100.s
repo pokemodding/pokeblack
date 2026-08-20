@@ -236,7 +236,7 @@
 	.extern FUN_02082A7C
 	.extern FUN_02082A90
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_02085CBC
 	.extern FUN_0209AC04
 	.extern FUN_0209AF34
@@ -3423,7 +3423,7 @@ _021B7C40:
 	add r2, r0, #0
 	ldr r1, [r6, r1]
 	add r0, r7, #0
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 _021B7C88:
 	lsl r1, r5, #0x18
 	add r0, r4, #0

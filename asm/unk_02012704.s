@@ -28,7 +28,7 @@
 	.extern FUN_0202889C
 	.extern FUN_0202E794
 	.extern FUN_020307b0
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_02159BBC
 	.extern FUN_0215E334
 	.extern FUN_02161D64
@@ -169,7 +169,7 @@ _020127E0:
 FUN_0201280c: ; 0x0201280C
 	add r1, r5, r4
 	sub r2, #0x2c
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	add r0, r5, r4
 	bl FUN_02161D64
 	pop {r3, r4, r5, pc}

@@ -213,7 +213,7 @@
 	.extern FUN_0207D63C
 	.extern FUN_02082AC0
 	.extern FUN_02082B0C
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_0209C0A4
 
 	.text
@@ -3314,7 +3314,7 @@ _021C58DA:
 	add r1, r0, #0
 	add r0, r6, #0
 	add r2, r7, #0
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	add r4, r4, #1
 	cmp r4, #0xa
 	bls _021C58DA

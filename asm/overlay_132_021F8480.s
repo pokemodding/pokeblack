@@ -148,7 +148,7 @@
 	.extern FUN_0207E5D0
 	.extern FUN_0207E804
 	.extern FUN_02082A60
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_020862F0
 	.extern FUN_02087C6C
 	.extern FUN_0209BBB0
@@ -8400,7 +8400,7 @@ _021FD160:
 	add r1, r4, #0
 	mov r2, #4
 	add r6, r4, #4
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	bl FUN_02008468
 	add r2, r0, #0
 	mov r0, #0x4e
@@ -8408,7 +8408,7 @@ _021FD160:
 	sub r0, #8
 	ldr r0, [r5, r0]
 	add r1, r6, #0
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	bl FUN_020173E8
 	add r2, r0, #0
 	mov r0, #0x4e
@@ -8416,7 +8416,7 @@ _021FD160:
 	sub r0, r0, #4
 	ldr r0, [r5, r0]
 	add r1, r6, r7
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	blx FUN_020399A8
 	add r6, r0, #0
 	bl FUN_02008468
@@ -8485,7 +8485,7 @@ _021FD234:
 	ldr r0, [r0]
 	add r1, r1, r6
 	add r2, r3, r2
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	add r0, r4, #1
 	lsl r0, r0, #0x18
 	lsr r4, r0, #0x18
@@ -8548,7 +8548,7 @@ _021FD2BE:
 	ldr r1, [r1]
 	add r0, r0, r7
 	add r2, r3, r2
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	add r0, r5, #0
 	add r0, #0x84
 	ldr r0, [r0]
@@ -8625,13 +8625,13 @@ _021FD366:
 	add r0, r4, #0
 	add r1, r6, #0
 	mov r2, #0x7c
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	bl FUN_020173EC
 	add r2, r0, #0
 	add r6, #0x7c
 	ldr r0, [r4, #4]
 	add r1, r6, #0
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	blx FUN_020399A8
 	add r4, r0, #0
 	bl FUN_020173EC
@@ -8687,7 +8687,7 @@ _021FD408:
 	ldr r0, [r0, #0x7c]
 	add r2, #0x7c
 	add r1, r6, r7
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	add r0, r4, #1
 	lsl r0, r0, #0x18
 	lsr r4, r0, #0x18
@@ -8744,7 +8744,7 @@ _021FD476:
 	ldr r1, [r5, #0x7c]
 	add r2, #0x7c
 	add r0, r7, r0
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	ldr r1, [r5, #0x7c]
 	add r0, r1, #0
 	add r0, #0x7c

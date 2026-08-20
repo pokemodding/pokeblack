@@ -73,7 +73,7 @@
 	.extern FUN_0204B6F4
 	.extern FUN_0207D658
 	.extern FUN_02082A7C
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_02173940
 	.extern FUN_021BBC2C
 
@@ -450,7 +450,7 @@ FUN_overlay_d_31__021f0250: ; 0x021F0250
 	ldr r1, [sp, #0xc]
 	add r0, #0xc
 	lsl r2, r2, #6
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	add r0, r7, #0
 	blx FUN_020307B0
 	mov r0, #0xa0
@@ -558,7 +558,7 @@ FUN_overlay_d_31__021f0378: ; 0x021F0378
 	lsl r1, r7, #6
 	add r1, r4, r1
 	mov r2, #0xc0
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	ldr r0, [sp, #0x10]
 	blx FUN_020307B0
 	lsl r2, r7, #6
@@ -970,7 +970,7 @@ _021F07D0:
 	mov r2, #7
 	add r1, r0, r1
 	lsl r2, r2, #6
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	mov r2, #7
 	str r2, [sp]
 	lsl r0, r5, #0x18
@@ -1251,7 +1251,7 @@ FUN_overlay_d_31__021f0a04: ; 0x021F0A04
 	add r0, r3, r0
 	add r1, r3, r1
 	add r2, #0xe0
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	mov r0, #6
 	blx FUN_02041B6C
 	lsl r0, r6, #2
@@ -1771,7 +1771,7 @@ _021F0E1A:
 	add r0, #0x1a
 	add r1, r7, r1
 	mov r2, #6
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 _021F0E3C:
 	add r0, r6, #0
 	add r1, r5, #0

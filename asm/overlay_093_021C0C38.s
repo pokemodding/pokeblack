@@ -236,7 +236,7 @@
 	.extern FUN_02082A7C
 	.extern FUN_02082A90
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_02085CBC
 	.extern FUN_0209AC04
 	.extern FUN_0209AF34
@@ -1506,16 +1506,3 @@ _021C1178:
 	.byte 0x00, 0xC0, 0x9F, 0xE5, 0x1C, 0xFF, 0x2F, 0xE1
 _021C1180:
 	.byte 0xC9, 0xD5, 0x89, 0x06
-
-	thumb_func_start FUN_overlay_d_93__021c1184
-FUN_overlay_d_93__021c1184: ; 0x021C1184
-	ldrb r0, [r0, #1]
-	cmp r0, #0
-	bne _021C118E
-	mov r0, #1
-	bx lr
-	thumb_func_end FUN_overlay_d_93__021c1184
-_021C118E:
-	mov r0, #0
-	bx lr
-	.balign 4, 0

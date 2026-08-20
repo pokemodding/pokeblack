@@ -114,11 +114,11 @@ FUN_0200863C: ; 0x0200863C
 	add r2, r0, #0
 	add r0, r1, #0
 	add r1, r2, #0
-	ldr r3, _02008648 ; =FUN_02082D44
+	ldr r3, _02008648 ; =MI_CpuCopy8
 	mov r2, #8
 	bx r3
 	.balign 4, 0
-_02008648: .word 0x02082D44 ; was FUN_02082D44
+_02008648: .word 0x02082D44 ; was MI_CpuCopy8
 	thumb_func_end FUN_0200863C
 
 	thumb_func_start FUN_0200864C

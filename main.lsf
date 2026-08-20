@@ -724,6 +724,8 @@ Overlay OVY_93
 	Object		asm/overlay_093_021B9B98.o
 	Object		src/overlay_93_021B9F70.o
 	Object		asm/overlay_093_021B9F84.o
+	Object		src/overlay_93_021B9FAC.o
+	Object		asm/overlay_093_021B9FBC.o
 	Object		src/overlay_93_021BA020.o
 	Object		asm/overlay_093_021BA02C.o
 	Object		src/overlay_93_021BA08C.o
@@ -732,8 +734,12 @@ Overlay OVY_93
 	Object		asm/overlay_093_021BA1EC.o
 	Object		src/overlay_93_021BABEC.o
 	Object		asm/overlay_093_021BABF4.o
+	Object		src/overlay_93_021BB718.o
+	Object		asm/overlay_093_021BB724.o
 	Object		src/overlay_93_021BB828.o
 	Object		asm/overlay_093_021BB830.o
+	Object		src/overlay_93_021BB830.o
+	Object		asm/overlay_093_021BB830_b.o
 	Object		src/overlay_93_021BB840.o
 	Object		asm/overlay_093_021BB848.o
 	Object		src/overlay_93_021BB8A8.o
@@ -748,6 +754,8 @@ Overlay OVY_93
 	Object		asm/overlay_093_021BBD8C.o
 	Object		src/overlay_93_021C0C34.o
 	Object		asm/overlay_093_021C0C38.o
+	Object		src/overlay_93_021C1184.o
+	Object		asm/overlay_093_021C0C38_b.o
 	Object		src/overlay_93_021C1194.o
 	Object		asm/overlay_093_021C1198.o
 	Object		src/overlay_93_021C7CBC.o
@@ -764,6 +772,8 @@ Overlay OVY_93
 	Object		asm/overlay_093_021C8140.o
 	Object		src/overlay_93_021C8140.o
 	Object		asm/overlay_093_021C814C.o
+	Object		src/overlay_93_021C8828.o
+	Object		asm/overlay_093_021C8838.o
 	Object		src/overlay_93_021CC8B0.o
 	Object		asm/overlay_093_021CC8B8.o
 	Object		src/overlay_93_021CC8B8.o
@@ -876,6 +886,10 @@ Overlay OVY_93
 	Object		asm/overlay_093_021D805C.o
 	Object		src/overlay_93_021D826C.o
 	Object		asm/overlay_093_021D8270.o
+	Object		src/overlay_93_021D8340.o
+	Object		asm/overlay_093_021D8358.o
+	Object		src/overlay_93_021D83E0.o
+	Object		asm/overlay_093_021D83FC.o
 	Object		src/overlay_93_021D84F0.o
 	Object		asm/overlay_093_021D84F8.o
 	Object		src/overlay_93_021E8CFC.o
@@ -900,6 +914,8 @@ Overlay OVY_93
 	Object		asm/overlay_093_021EEA58.o
 	Object		src/overlay_93_021EEAFC.o
 	Object		asm/overlay_093_021EEB00.o
+	Object		src/overlay_93_021EF9A8.o
+	Object		asm/overlay_093_021EF9B0.o
 }
 Overlay OVY_94
 {

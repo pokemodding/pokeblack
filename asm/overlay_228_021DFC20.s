@@ -9,7 +9,7 @@
 	.extern FUN_020334CC
 	.extern FUN_0203F1FC
 	.extern FUN_02082A7C
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 
 	.text
 
@@ -206,7 +206,7 @@ _021DFD74:
 	ldr r0, [sp, #4]
 	ldr r1, [sp, #0x20]
 	lsl r2, r2, #2
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 _021DFD86:
 	ldr r0, [sp, #4]
 	blx FUN_020307B0

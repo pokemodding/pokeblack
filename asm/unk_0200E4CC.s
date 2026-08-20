@@ -11,7 +11,7 @@
 	.extern FUN_020457B0
 	.extern FUN_02045A38
 	.extern FUN_02045A98
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 
 	.text
 
@@ -299,7 +299,7 @@ FUN_0200E938: ; 0x0200E938
 	add r0, r5, r0
 	add r1, r4, #0
 	mov r2, #6
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
 	thumb_func_end FUN_0200E938

@@ -219,7 +219,7 @@
 	.extern FUN_02082AC0
 	.extern FUN_02082B0C
 	.extern FUN_02082BCC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_02082EA4
 	.extern FUN_02084968
 	.extern FUN_02085A38
@@ -2246,7 +2246,7 @@ FUN_overlay_d_172__021b6e88: ; 0x021B6E88
 	add r1, r0, #0
 	add r0, r4, #0
 	mov r2, #8
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	add r0, r5, #0
 	add r1, r5, #4
 	bl FUN_overlay_d_172__021b6ecc
@@ -13787,7 +13787,7 @@ _021BCA3A:
 	ldr r0, [sp, #0x20]
 	mov r2, #0x64
 _021BCA52:
-	blx FUN_02082D44
+	blx MI_CpuCopy8
 	ldr r0, [sp, #0x24]
 	cmp r0, #0
 	bne _021BCA90
@@ -19159,7 +19159,7 @@ _021C018C:
 	add r1, sp, #8
 	mov r2, r4
 	add r0, sl, r5
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	mov r2, r4
 	add r0, sl, r5
 	mov r1, #0
@@ -19178,7 +19178,7 @@ _021C0254:
 	mov r0, fp
 	add r1, sl, r5
 	mov r2, #0x1c
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	cmp r4, #1
 	addne sp, sp, #0x24
 	movne r0, #0
@@ -20954,7 +20954,7 @@ _021C1D40:
 	mov r0, r6
 	add r1, r5, r7
 	mov r2, #0x1c
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	mov r0, #1
 	add sp, sp, #0x1c
 	ldmia sp!, {r4, r5, r6, r7, pc}
@@ -21404,7 +21404,7 @@ _021C23B0:
 	ldr r0, _021C2ABC ; =0x021C84E5
 	mov r1, sl
 	mov r2, r6
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	mov r3, #0
 	mov r2, #0x78
 	ldr r1, [sp, #0x1c]
@@ -21437,7 +21437,7 @@ _021C2418:
 	ldr r0, _021C2AC0 ; =_021C84CE
 	add r1, sl, r2
 	mov r2, #0x17
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	ldr r0, [sp, #0x9c]
 	ldr r2, [sp, #0x40]
 	mov r3, r0, lsr #8
@@ -24146,7 +24146,7 @@ FUN_overlay_d_172__021c4b9c: ; 0x021C4B9C
 	streq r0, [sp, #4]
 	add r0, sp, #4
 	mov r2, #4
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 	mov r1, #0
 	mov r0, r7
 	strb r1, [sp, #0xc]

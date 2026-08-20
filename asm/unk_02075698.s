@@ -21,7 +21,7 @@
 	.extern FUN_020760B4
 	.extern FUN_0207733C
 	.extern FUN_020773DC
-	.extern FUN_02082D44
+	.extern MI_CpuCopy8
 	.extern FUN_020853C0
 	.extern FUN_02085868
 	.extern FUN_02086028
@@ -469,7 +469,7 @@ FUN_02075CAC: ; 0x02075CAC
 	ldr r0, _02075D94 ; =0x02FFFE00
 	mov r2, #0x160
 	sub r1, r0, #0x380
-	bl FUN_02082D44
+	bl MI_CpuCopy8
 _02075CEC:
 	mov r4, #0
 	ldr r0, _02075D98 ; =0x02150840

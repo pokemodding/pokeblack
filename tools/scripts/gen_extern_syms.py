@@ -14,8 +14,12 @@ ADDRESSED_RE = re.compile(r'^(?:FUN_|_)([0-9A-Fa-f]{8})(?:_dup\d+)?$')
 # libsyscall.a types these thumb, an absolute LCF symbol cannot and blx needs it
 PROVIDED_RE = re.compile(r'^SVC_\w+$')
 
-# a decompiled function is often renamed away from FUN_<address>, so match any identifier used as a function name rather than that prefix. Over-matching is harmless: these are only subtracted from names the assembly declares .extern.
+# decompiled functions get renamed off FUN_<addr>, so match any call target
 C_SYMBOL_RE = re.compile(r'\b([A-Za-z_]\w*)\s*\(')
+
+# a GLOBAL_ASM block defines its symbol in the .s it names, not in the C
+GLOBAL_ASM_RE = re.compile(r'GLOBAL_ASM\("([^"]+)"\)')
+GLABEL_RE = re.compile(r'^\s*glabel(?:_arm)?\s+(\S+)')
 
 
 def main():
@@ -45,11 +49,16 @@ def main():
             if m:
                 referenced.add(m.group(1))
 
-    # a carved function is referenced by the assembly it left behind but defined in C, so the linker supplies it and no absolute address belongs in the LCF
+    # carved functions are .extern in asm but defined in C, so the linker supplies them
     provided = set()
     for path in args.provided:
-        if os.path.exists(path):
-            provided.update(C_SYMBOL_RE.findall(open(path).read()))
+        if not os.path.exists(path):
+            continue
+        text = open(path).read()
+        provided.update(C_SYMBOL_RE.findall(text))
+        for asm in GLOBAL_ASM_RE.findall(text):
+            if os.path.exists(asm):
+                provided.update(m.group(1) for line in open(asm) if (m := GLABEL_RE.match(line)))
 
     undefined = sorted(referenced - defined - provided)
     resolvable = []

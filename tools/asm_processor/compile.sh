@@ -31,6 +31,9 @@ AS_NO_DEBUG=$(echo "$AS" | sed 's/ -g / /g; s/ -g$//g')
 # Strip -sym on from the compiler; asm_processor cannot remap debug relocations.
 CC_NO_DEBUG=$(echo "$CC" | sed 's/ -sym on / /g; s/ -sym on$//g')
 
+# padded source is generated and does not satisfy -W error
+CC_NO_DEBUG="$CC_NO_DEBUG -W off"
+
 # Create a .c file replacing GLOBAL_ASM functions with volatile int writes, and compile.
 "$SCRIPT_DIR/asm_processor.py" "$SRC" --assembler "$AS_NO_DEBUG" --asm-prelude "$ASM_PRELUDE" > "$PADDED_SRC"
 env $CC_NO_DEBUG -c "$PADDED_SRC" -o "$PADDED_OBJ"

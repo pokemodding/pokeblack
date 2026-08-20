@@ -574,7 +574,8 @@ class GlobalAsmBlock:
         elif line.startswith('.space'):
             self.add_sized(int(line.split()[1], 0), real_line)
         elif line.startswith('.balign') or line.startswith('.align'):
-            align = int(line.split()[1])
+            # mwasmarm spells the fill byte as ".balign 4, 0"
+            align = int(line.split()[1].rstrip(','), 0)
             if align != 4: 
                 self.fail("only .balign 4 is supported", real_line)
             self.align4()

@@ -392,10 +392,10 @@
 	.extern FUN_overlay_d_93__021d5778
 	.extern FUN_overlay_d_93__021d57fc
 	.extern FUN_overlay_d_93__021d5814
-	.extern FUN_overlay_d_93__021d5844
-	.extern FUN_overlay_d_93__021d5864
+	.extern BattleMon_GetPokemon
+	.extern BattleMon_GetVisibleMon
 	.extern FUN_overlay_d_93__021d58a8
-	.extern FUN_overlay_d_93__021d59b4
+	.extern BattleMon_Get
 	.extern FUN_overlay_d_93__021d5b40
 	.extern FUN_overlay_d_93__021d5b48
 	.extern FUN_overlay_d_93__021d5b68
@@ -472,7 +472,7 @@ FUN_overlay_d_93__021edf7c: ; 0x021EDF7C
 	bl FUN_overlay_d_93__021b98ac
 	mov r1, #0x10
 	add r7, r0, #0
-	bl FUN_overlay_d_93__021d59b4
+	bl BattleMon_Get
 	lsl r0, r0, #0x10
 	lsr r4, r0, #0x10
 	add r0, r7, #0

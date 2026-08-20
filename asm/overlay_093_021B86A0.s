@@ -407,13 +407,13 @@
 	.extern FUN_overlay_d_93__021d5778
 	.extern FUN_overlay_d_93__021d57fc
 	.extern FUN_overlay_d_93__021d5814
-	.extern FUN_overlay_d_93__021d5844
-	.extern FUN_overlay_d_93__021d5848
-	.extern FUN_overlay_d_93__021d5854
-	.extern FUN_overlay_d_93__021d5864
+	.extern BattleMon_GetPokemon
+	.extern BattleMon_SetIllusionMon
+	.extern BattleMon_ClearIllusionMon
+	.extern BattleMon_GetVisibleMon
 	.extern FUN_overlay_d_93__021d58a8
 	.extern FUN_overlay_d_93__021d5970
-	.extern FUN_overlay_d_93__021d59b4
+	.extern BattleMon_Get
 	.extern FUN_overlay_d_93__021d5ad8
 	.extern FUN_overlay_d_93__021d5b40
 	.extern FUN_overlay_d_93__021d5b44

@@ -325,7 +325,7 @@
 	.extern FUN_overlay_d_93__021d5750
 	.extern FUN_overlay_d_93__021d58a8
 	.extern FUN_overlay_d_93__021d5970
-	.extern FUN_overlay_d_93__021d59b4
+	.extern BattleMon_Get
 	.extern FUN_overlay_d_93__021d5bb0
 	.extern FUN_overlay_d_93__021d5bdc
 	.extern FUN_overlay_d_93__021d5fe4

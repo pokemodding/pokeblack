@@ -93,7 +93,7 @@ Windows Subsystem for Linux:
 
 WSL1 also runs the executables directly, converting paths with `wslpath`, so it needs no Wine either. Install the Debian dependencies above but omit `wine` and `wine32`. Check which version you have with `wsl -l -v`; if it reports 2, either switch that distribution with `wsl --set-version <name> 1` or install Wine and treat it as ordinary Linux.
 
-WSL1 has historically been the better choice but it has been facing bugs as of late. Other DS projects report `mwldarm` failing to locate its own executable under WSL2. However, because of WSL1 deprecation issues, we are looking into WSL2 support.
+TO REITERATE: WSL2 with Wine does NOT currently work. mwasmarm.exe crashes on every invocation. Use WSL1 (wsl --set-version <distro> 1) or use MSYS2 on Windows directly.
 
 ## 4. Supply the base ROM
 
@@ -115,6 +115,8 @@ cd /tmp/ndstool && ./autogen.sh && ./configure && make -j"$(nproc)" && cd -
 mkdir -p tools/ndstool
 cp /tmp/ndstool/ndstool tools/ndstool/ndstool
 ```
+
+If you have devkitPro installed, copy C:\devkitPro\tools\bin\ndstool.exe to tools/ndstool/ instead of building from source.
 
 Version 2.3.1 builds clean on Arch with no patches. `autogen.sh` needs autoconf and automake, which Arch's `base-devel` provides but Debian's `build-essential` does not.
 

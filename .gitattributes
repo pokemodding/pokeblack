@@ -18,6 +18,7 @@ Makefile text eol=lf
 *.yml text eol=lf
 
 *.bin binary
+files/** binary
 
 *.h linguist-language=C
 *.inc linguist-language=Assembly

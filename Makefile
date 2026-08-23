@@ -42,7 +42,6 @@ ORIG_Y7        := $(EXTRACT_DIR)/y7.bin
 ORIG_HEADER    := $(EXTRACT_DIR)/header.bin
 ORIG_BANNER    := $(EXTRACT_DIR)/banner.bin
 ORIG_OVERLAYS  := $(EXTRACT_DIR)/overlay
-ORIG_FILES     := $(EXTRACT_DIR)/files
 
 # the stored ARM9 is BLZ-compressed and every address in the disassembly refers to the
 # decompressed layout, so that is what the build is compared against
@@ -56,6 +55,9 @@ ROM            := $(BUILD_DIR)/poke$(buildname).nds
 ROM_SHA1       := $(buildname)/rom.sha1
 OVL_POLICY     := $(buildname)/overlay_compression.txt
 FILE_ORDER     := $(buildname)/files.txt
+HEADER_TEMPLATE := $(buildname)/rom_header_template.sbin
+FNT            := $(buildname)/fnt.bin
+TWL_TAIL       := $(buildname)/twl_tail.bin
 PACKED_DIR     := $(BUILD_DIR)/packed
 PACKED_ARM9    := $(PACKED_DIR)/arm9.bin
 BANNER_DIR     := $(buildname)/banner
@@ -103,7 +105,7 @@ check-baserom:
 extract: check-baserom $(ORIG_ARM9)
 
 $(ORIG_ARM9): $(BASEROM) | $(NDSTOOL)
-	@mkdir -p $(EXTRACT_DIR) $(ORIG_OVERLAYS) $(ORIG_FILES)
+	@mkdir -p $(EXTRACT_DIR) $(ORIG_OVERLAYS)
 	$(NDSTOOL) -x $(BASEROM) \
 		-9 $(ORIG_ARM9) \
 		-7 $(ORIG_ARM7) \
@@ -111,14 +113,13 @@ $(ORIG_ARM9): $(BASEROM) | $(NDSTOOL)
 		-y7 $(ORIG_Y7) \
 		-h $(ORIG_HEADER) \
 		-t $(ORIG_BANNER) \
-		-y $(ORIG_OVERLAYS) \
-		-d $(ORIG_FILES)
+		-y $(ORIG_OVERLAYS)
 
 $(NDSTOOL):
 	@echo "error: $(NDSTOOL) not found. See INSTALL.md step 5."
 	@exit 1
 
-$(ORIG_ARM9_RAW): $(BASEROM) $(ARM9_CONFIG) | $(NDSTOOL)
+$(ORIG_ARM9_RAW): $(BASEROM) $(ARM9_CONFIG)
 	@mkdir -p $(EXTRACT_DIR)
 	@$(NDSDISASM) -c $(ARM9_CONFIG) -Du $@ $(BASEROM) > /dev/null
 
@@ -134,8 +135,9 @@ $(PACKED_ARM9): $(SBIN) $(OVL_POLICY)
 $(BANNER): $(BANNER_DIR)/banner.meta $(wildcard $(BANNER_DIR)/*.png)
 	@$(PYTHON) $(SCRIPTS)/banner.py build --dir $(BANNER_DIR) -o $@
 
-$(ROM): $(PACKED_ARM9) sub $(BANNER) $(ORIG_ARM9)
-	@$(PYTHON) $(SCRIPTS)/make_rom.py --baserom $(BASEROM) --build $(BUILD_DIR) \
+$(ROM): $(PACKED_ARM9) sub $(BANNER)
+	@$(PYTHON) $(SCRIPTS)/make_rom.py --build $(BUILD_DIR) \
+		--header $(HEADER_TEMPLATE) --fnt $(FNT) --twl-tail $(TWL_TAIL) \
 		--overlays $(PACKED_DIR) --arm9 $(PACKED_ARM9) --arm7 $(SUB_SBIN) \
 		--banner $(BANNER) --table $(PACKED_DIR)/main_table.sbin \
 		--files $(FILE_ORDER) -o $@

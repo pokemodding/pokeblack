@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""assemble the ROM from the built modules and the extracted file tree"""
+"""assemble the ROM from the built modules and the committed file tree"""
 
 import argparse
 import os
@@ -44,7 +44,11 @@ def read_fnt(fnt):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--baserom', default='baserom.nds')
+    parser.add_argument('--header', default='black.us/rom_header_template.sbin',
+                        help="first 4KB of the ROM header, the rest is zero padding")
+    parser.add_argument('--fnt', default='black.us/fnt.bin')
+    parser.add_argument('--twl-tail', default='black.us/twl_tail.bin',
+                        help="DSi-enhancement payload and digests past the file tree")
     parser.add_argument('--build', default='build/black.us')
     parser.add_argument('--overlays', help="directory of overlays in their ROM storage form")
     parser.add_argument('--arm9', help="the compressed ARM9")
@@ -55,28 +59,30 @@ def main():
                         help="print the base ROM's file order and exit")
     parser.add_argument('--files', default='black.us/files.txt',
                         help="data files in ROM order, one path per line")
+    parser.add_argument('--data-dir', default='files',
+                        help="committed NitroFS data tree, named by --files")
     parser.add_argument('-o', '--output')
     args = parser.parse_args()
     if not args.list_order and not (args.overlays and args.arm9 and args.banner and args.output):
         parser.error("packing needs --overlays, --arm9, --banner and --output")
 
-    base = open(args.baserom, 'rb').read()
-    u = lambda offset: struct.unpack_from('<I', base, offset)[0]
+    header = open(args.header, 'rb').read()
+    u = lambda offset: struct.unpack_from('<I', header, offset)[0]
 
     if args.list_order:
-        names = read_fnt(base[u(0x40):u(0x40) + u(0x44)])
+        names = read_fnt(open(args.fnt, 'rb').read())
         for index in range(u(0x54) // 32, u(0x4C) // 8):
             print(names[index])
         return 0
 
-    extracted = os.path.join(args.build, 'extracted')
-    fnt = base[u(0x40):u(0x40) + u(0x44)]
+    fnt = open(args.fnt, 'rb').read()
     order = [line.split('#')[0].strip() for line in open(args.files)]
     order = [line for line in order if line]
     overlay_count = u(0x54) // 32
     total = overlay_count + len(order)
 
-    rom = bytearray(base[:HEADER_SIZE])
+    # the header template covers the real fields; the rest of the header region is zero padding
+    rom = bytearray(header) + bytearray(HEADER_SIZE - len(header))
 
     def place(data, at=None):
         start = align(len(rom)) if at is None else at
@@ -103,7 +109,7 @@ def main():
     place(open(args.banner, 'rb').read(), u(0x68))
 
     for index in range(overlay_count, total):
-        blob = open(os.path.join(extracted, 'files', order[index - overlay_count]), 'rb').read()
+        blob = open(os.path.join(args.data_dir, order[index - overlay_count]), 'rb').read()
         start, size = place(blob)
         fat.append((start, start + size))
 
@@ -113,7 +119,7 @@ def main():
     # everything past the file tree is DSi payload and digests, carried over whole
     tail = align(len(rom))
     rom.extend(PAD * (tail - len(rom)))
-    rom.extend(base[tail:])
+    rom.extend(open(args.twl_tail, 'rb').read())
 
     open(args.output, 'wb').write(bytes(rom))
     print(f"wrote {args.output}: {len(rom)} bytes, {total} files")

@@ -2,9 +2,8 @@
 baserom.nds
 *.nds
 
-# Extracted ROM components (generated from baserom.nds)
+# Extracted ROM components
 extracted/
-files/
 overlay_*.bin
 overlay_*.asm
 overlay_dumps/
@@ -22,6 +21,9 @@ build/
 *.a
 *.bin
 !*/rom_header_template.sbin
+!files/**/*.bin
+!*/fnt.bin
+!*/twl_tail.bin
 
 # Reverse-engineering scratch (regenerable dumps and workspaces)
 asm_dumps/

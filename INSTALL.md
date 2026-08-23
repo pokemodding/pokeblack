@@ -95,7 +95,9 @@ WSL1 also runs the executables directly, converting paths with `wslpath`, so it 
 
 WSL1 has historically been the better choice but it has been facing bugs as of late. Other DS projects report `mwldarm` failing to locate its own executable under WSL2. However, because of WSL1 deprecation issues, we are looking into WSL2 support.
 
-## 4. Supply the base ROM
+## 4. Supply the base ROM 
+
+Every byte the ROM build needs from the original cartridge ships committed in this repository (`files/`, `black.us/rom_header_template.sbin`, `black.us/fnt.bin`, `black.us/twl_tail.bin`). A normal `make`/`make compare` never touches a base ROM. Skip this step unless you need `make extract` or the granular `compare-overlays`/`compare-table`/`compare-arm7` targets, which come from a dump.
 
 The project targets Pokémon Black (USA/EUR, NDSi Enhanced), version 1.0, sha1 `26ad0b9967aa279c4a266ee69f52b9b2332399a5`, 268,435,456 bytes. Supply your own dump; it is not distributed and no help obtaining one will be given. Many DS dumps are bad, so check yours against that hash before anything else.
 
@@ -105,9 +107,9 @@ Place it in the repository root as `baserom.nds`. It is gitignored.
 make check-baserom
 ```
 
-## 5. Build ndstool
+## 5. Build ndstool (optional)
 
-`ndstool` unpacks the base ROM. It is GPL-3, so unlike the drops above it can just be built. It is not packaged for Arch, Debian or Fedora, and installing all of devkitPro is unnecessary — the tool needs only a C++ compiler.
+Only needed for the same `make extract`/`compare-*` targets as step 4 above.
 
 ```bash
 git clone --depth 1 https://github.com/devkitPro/ndstool /tmp/ndstool

@@ -657,7 +657,18 @@ Overlay OVY_92
 Overlay OVY_93
 {
 	Address		0x021b6100
-	Object		asm/overlay_093_021B6100.o
+	Object		asm/battle_server.o
+	Object		asm/battle_ungrouped.o
+	Object		asm/battle_client.o
+	Object		asm/battle_net.o
+	Object		asm/battle_pokeparam.o
+	Object		asm/battle_calc.o
+	Object		asm/battle_view_core.o
+	Object		asm/battle_view_scu.o
+	Object		asm/battle_rec.o
+	Object		asm/battle_adapter.o
+	Object		asm/battle_field.o
+	Object		asm/battle_rodata.o
 }
 Overlay OVY_94
 {

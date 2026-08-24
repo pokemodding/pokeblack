@@ -20,7 +20,7 @@ Read [INSTALL.md](INSTALL.md) first and get a matching build before starting.
 
 ## AI Policy
 
-pokeblack does not accept submissions that were visibly written in part or whole by an LLM agent. The only permitted exception is menial repetitive work that does not involve any kind of direct reverse engineering or "prose"/documentation/comments. PRs that contain an AI agent as a coauthor will be automatically rejected. Please visit our Discord for more information on this policy. 
+pokeblack does not accept submissions that were written in part or whole by an LLM agent. The only permitted exception is menial repetitive work that does not involve any kind of direct reverse engineering or "prose"/documentation/comments. PRs that contain an AI agent as a coauthor will be automatically rejected. Please visit our Discord for more information on this policy. 
 
 ## Decompiling a function
 

@@ -496,8 +496,12 @@ class GlobalAsmBlock:
 
 
     def align4(self):
-        while self.fn_section_sizes[self.cur_section] % 2 != 0:
-            self.fn_section_sizes[self.cur_section] += 1
+        pad = -self.fn_section_sizes[self.cur_section] % 4
+        if not pad:
+            return
+        self.fn_section_sizes[self.cur_section] += pad
+        if self.cur_section in ['.text', '.init']:
+            self.fn_ins_inds.append((self.num_lines - 1, pad // 2))
 
     def add_sized(self, size, line):
         if self.cur_section in ['.text', '.init', '.late_rodata']:
@@ -584,8 +588,9 @@ class GlobalAsmBlock:
             self.add_sized(self.count_quoted_size(line, z, real_line, output_enc), real_line)
         elif line.startswith('.byte'):
             self.add_sized(len(line.split(',')), real_line)
-        # Branches are 4 bytes long
-        elif line.startswith('bl') and not line.startswith('bls'):
+        # bl and blx take a wide encoding; blo/blt/ble/bls are ordinary
+        # 2-byte conditional branches that merely start with the same letters
+        elif re.match(r'^blx?(\s|$)', line):
             self.add_sized(4, real_line)
         elif line.startswith('.word'):
             self.add_sized(4, real_line)
@@ -917,7 +922,12 @@ def fixup_objfile(objfile_name, functions, asm_prelude, assembler, output_enc):
         objfile = ElfFile(f.read())
 
     prev_locs = defaultdict(int)
-    to_copy = defaultdict(list) 
+    to_copy = defaultdict(list)
+    # (sectype, n_text, temp_name) -> offset of that block inside the assembled source
+    asm_locs = {}
+    # sectype -> [(src_start, src_end, target_section_index, target_offset)], used to
+    # move each symbol to the section its block was copied into
+    placements = defaultdict(list)
 
     asm = []
     all_late_rodata_dummy_bytes = []
@@ -1030,20 +1040,22 @@ def fixup_objfile(objfile_name, functions, asm_prelude, assembler, output_enc):
             for (pos, count, temp_name, fn_desc, fn_name) in to_copy[sectype + (str(n_text) if sectype == '.text' else '')]:
                 loc1 = asm_objfile.symtab.find_symbol_in_section(temp_name + '_asm_start', source)
                 loc2 = asm_objfile.symtab.find_symbol_in_section(temp_name + '_asm_end', source)
-                assert loc1 == pos, "assembly and C files don't line up for section " + sectype + ", " + fn_desc
-                # Since we are nonmatching whole functions, we don't need to insert the correct
-                # amount of padding into the src file. We don't actually need to insert padding  
-                # at all. We can just plop the asm's text section into the objfile.   
-                # if loc2 - loc1 != count:
-                #     raise Failure("incorrectly computed size for section " + sectype + ", " + fn_desc + ". If using .double, make sure to provide explicit alignment padding.")
+                if loc2 - loc1 != count:
+                    raise Failure("incorrectly computed size for section " + sectype + ", " + fn_desc)
+                # CodeWarrior emits one .text section per function, each starting at 0, while
+                # the assembly for every block lands in a single section end to end. Record
+                # where this block starts in the source so the copy below can shift it.
+                asm_locs[(sectype, n_text, temp_name)] = loc1
             if sectype == '.bss' or sectype == '.sbss2':
                 continue
             target = objfile.find_section(sectype, n_text if sectype == '.text' else 0)
             assert target is not None, "missing target section of type " + sectype
             data = list(target.data)
-            for (pos, count, _, _, _) in to_copy[sectype + (str(n_text) if sectype == '.text' else '')]:
+            for (pos, count, temp_name, _, _) in to_copy[sectype + (str(n_text) if sectype == '.text' else '')]:
                 # mwasmarm 4-aligns text sections, so make sure to copy exactly `count` bytes
-                data[pos:pos + count] = source.data[pos:pos + count]
+                src_off = asm_locs[(sectype, n_text, temp_name)]
+                data[pos:pos + count] = source.data[src_off:src_off + count]
+                placements[sectype].append((src_off, src_off + count, target.index, pos))
                 if sectype == '.text':
                     assert count % 2 == 0
                     assert pos % 2 == 0
@@ -1129,10 +1141,17 @@ def fixup_objfile(objfile_name, functions, asm_prelude, assembler, output_enc):
                     raise Failure("generated assembly .o must only have symbols for .text, .data, .rodata, .sdata, .sdata2, .sbss, ABS and UNDEF, but found " + section_name)
                 if section_name == '.sbss2': #! I'm not sure why this isn't working
                     continue
-                obj_n_text = objfile.text_section_index(temp_name)
-                s.st_shndx = objfile.find_section(section_name, obj_n_text if section_name == '.text' else 0).index
-                if section_name == '.text':
-                    n_text += 1
+                # Place the symbol in whichever target section its block was copied
+                # into, and rebase its value onto that section.
+                for (src_start, src_end, target_index, target_pos) in placements[section_name]:
+                    if src_start <= s.st_value < src_end or \
+                            (s.st_value == src_end and src_start == src_end):
+                        s.st_shndx = target_index
+                        s.st_value = s.st_value - src_start + target_pos
+                        break
+                else:
+                    raise Failure("symbol {} at {:#x} is outside every copied block "
+                                  "of section {}".format(s.name, s.st_value, section_name))
                 # glabel's aren't marked as functions, making objdump output confusing. Fix that.
                 if s.name in all_text_glabels:
                     s.type = STT_FUNC
@@ -1148,6 +1167,13 @@ def fixup_objfile(objfile_name, functions, asm_prelude, assembler, output_enc):
             s.new_index = i
         objfile.symtab.data = b''.join(s.to_bin() for s in new_syms)
         objfile.symtab.sh_info = len(new_local_syms)
+
+        # One assembled source section can feed several target sections, so remap
+        # its symbol indices once here rather than each time it is visited below.
+        for sec in asm_objfile.sections:
+            for reltab in sec.relocated_by:
+                for rel in reltab.relocations:
+                    rel.sym_index = asm_objfile.symtab.symbol_entries[rel.sym_index].new_index
 
         # Move over relocations
         n_text = 0
@@ -1187,11 +1213,20 @@ def fixup_objfile(objfile_name, functions, asm_prelude, assembler, output_enc):
             target_reltab = objfile.find_section('.rel' + sectype, n_text if sectype == '.text' else 0)
             target_reltaba = objfile.find_section('.rela' + sectype, n_text if sectype == '.text' else 0)
             for reltab in source.relocated_by:
-                for rel in reltab.relocations:
-                    rel.sym_index = asm_objfile.symtab.symbol_entries[rel.sym_index].new_index
-                    if sectype == '.rodata' and rel.r_offset in moved_late_rodata:
-                        rel.r_offset = moved_late_rodata[rel.r_offset]
-                new_data = b''.join(rel.to_bin() for rel in reltab.relocations)
+                rels = []
+                for (pos, count, temp_name, _, _) in to_copy[sectype + (str(n_text) if sectype == '.text' else '')]:
+                    src_off = asm_locs[(sectype, n_text, temp_name)]
+                    for rel in reltab.relocations:
+                        if not (src_off <= rel.r_offset < src_off + count):
+                            continue
+                        rel = copy.copy(rel)
+                        rel.r_offset = rel.r_offset - src_off + pos
+                        if sectype == '.rodata' and rel.r_offset in moved_late_rodata:
+                            rel.r_offset = moved_late_rodata[rel.r_offset]
+                        rels.append(rel)
+                if not rels:
+                    continue
+                new_data = b''.join(rel.to_bin() for rel in rels)
                 if reltab.sh_type == SHT_REL:
                     target_reltab = objfile.add_section('.rel' + sectype,
                             sh_type=SHT_REL, sh_flags=0,

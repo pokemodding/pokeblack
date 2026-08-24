@@ -14,6 +14,10 @@ SECTION_ANCHOR_RE = re.compile(r'^\s*\.global\s+(\S+_(?:data|sinit|bss))\s*$')
 # a carved function with no caller left in asm would otherwise be dropped
 C_DEFN_RE = re.compile(r'^[A-Za-z_][\w \t\*]*?\b([A-Za-z_]\w*)\s*\([^;]*\)\s*\{', re.M)
 
+# a GLOBAL_ASM block defines its symbol in the .s it names, not in the C
+GLOBAL_ASM_RE = re.compile(r'GLOBAL_ASM\("([^"]+)"\)')
+GLABEL_RE = re.compile(r'^\s*glabel(?:_arm)?\s+(\S+)')
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -55,8 +59,18 @@ def main():
         names.extend(sections)
 
     for path in args.provided:
-        if os.path.exists(path):
-            names.extend(C_DEFN_RE.findall(open(path).read()))
+        if not os.path.exists(path):
+            continue
+        text = open(path).read()
+        names.extend(C_DEFN_RE.findall(text))
+        # CodeWarrior gives every function its own section, so each GLOBAL_ASM
+        # block needs its own anchor or the linker drops it
+        for asm in GLOBAL_ASM_RE.findall(text):
+            if os.path.exists(asm):
+                for line in open(asm):
+                    m = GLABEL_RE.match(line)
+                    if m:
+                        names.append(m.group(1))
 
     with open(args.output, 'w') as handle:
         for name in names:

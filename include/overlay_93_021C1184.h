@@ -1,8 +1,0 @@
-#ifndef OVERLAY_93_021C1184_H
-#define OVERLAY_93_021C1184_H
-
-#include "types.h"
-
-u32 FUN_overlay_d_93__021c1184(void *ctx);
-
-#endif

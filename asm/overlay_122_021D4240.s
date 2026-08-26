@@ -32,7 +32,7 @@
 	.extern FUN_02028A70
 	.extern FUN_0202E930
 	.extern FUN_020306F0
-	.extern FUN_020307B0
+	.extern Heap_Free
 	.extern FUN_02030EAC
 	.extern FUN_020310C4
 	.extern FUN_02031140
@@ -1017,7 +1017,7 @@ FUN_overlay_d_122__021d48d8: ; 0x021D48D8
 	mov r2, #7
 	bl FUN_overlay_d_122__021d4644
 	ldr r0, [sp, #0x10]
-	blx FUN_020307B0
+	blx Heap_Free
 	str r6, [sp]
 	ldrh r0, [r5, #0xc]
 	mov r1, #4

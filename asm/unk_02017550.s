@@ -20,7 +20,7 @@
 	.extern FUN_020185C4
 	.extern FUN_02019A50
 	.extern FUN_02019C7C
-	.extern FUN_020307b0
+	.extern Heap_Free
 	.extern FUN_0203F0A8
 	.extern FUN_02045f5c
 	.extern FUN_02008F08
@@ -108,7 +108,7 @@ FUN_02017588: ; 0x02017588
 	add r2, r4, #0
 	bl FUN_02017E40
 	add r0, r4, #0
-	blx FUN_020307b0
+	blx Heap_Free
 	add r0, r5, #0
 	bl FUN_020185C4
 	add sp, #0x18

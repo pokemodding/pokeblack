@@ -1,13 +1,13 @@
 	.include "asm/macros/function.inc"
 
-	.extern FUN_02030734
+	.extern Heap_AllocDebug
 	.extern FUN_02034714
 	.extern FUN_02063138
 	.extern FUN_02065AA8
 	.extern FUN_02065B64
 	.extern FUN_02065B74
 	.extern FUN_02066934
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 
 	.text
 
@@ -48,7 +48,7 @@ FUN_0204BD94: ; 0x0204BD94
 	ldr r3, _0204BE24 ; =0x020A7F74
 	mov r0, r5
 	mov r2, r4
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	str r0, [r8, #0x98]
 	str r6, [r8, #0x9c]
 	cmp r6, #0
@@ -421,7 +421,7 @@ FUN_0204C660: ; 0x0204C660
 	mov r0, r4
 	mov r2, #0
 	str ip, [sp]
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	ldr r2, _0204C6E0 ; =0x0204C83C
 	mov r1, r5
 	str r0, [r6]
@@ -456,7 +456,7 @@ FUN_0204C718: ; 0x0204C718
 	mov r2, r4
 	str r6, [sp]
 	mov r1, r1, lsl #4
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	ldr r1, [r5, #8]
 	str r0, [r5, #4]
 	cmp r1, #0
@@ -468,7 +468,7 @@ _0204C758:
 	mov r1, r7
 	mov r2, r6
 	add r0, r0, r4, lsl #4
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	ldr r0, [r5, #8]
 	add r4, r4, #1
 	cmp r4, r0

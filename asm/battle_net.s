@@ -146,8 +146,8 @@
 	.extern FUN_0202E7E4
 	.extern FUN_0203064C
 	.extern FUN_020306F0
-	.extern FUN_02030734
-	.extern FUN_020307B0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern FUN_0203101C
 	.extern FUN_020310C4
 	.extern FUN_02031140
@@ -233,7 +233,7 @@
 	.extern FUN_02082A48
 	.extern FUN_02082A7C
 	.extern FUN_02082A90
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_02082D44
 	.extern FUN_02085CBC
 	.extern FUN_0209AC04
@@ -676,7 +676,7 @@ FUN_overlay_d_93__021d4150: ; 0x021D4150
 	ldr r3, _021D4220 ; =_021F3A98
 	add r0, r7, #0
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	str r0, [r4]
 	str r5, [r0]
 	ldr r0, [r4]
@@ -805,7 +805,7 @@ FUN_overlay_d_93__021d4254: ; 0x021D4254
 	beq _021D4268
 	bl FUN_overlay_d_93__021d4a6c
 	ldr r0, [r4]
-	blx FUN_020307B0
+	blx Heap_Free
 	thumb_func_end FUN_overlay_d_93__021d4254
 _021D4268:
 	pop {r4, pc}
@@ -1153,7 +1153,7 @@ LAB_overlay_d_93__021d456e: ; 0x021D456E
 	add r1, r2, #0
 	lsr r0, r0, #0x10
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	ldr r1, [r4]
 	add r2, r1, r5
 	ldr r1, _021D45B4 ; =0x00003AE4
@@ -1341,7 +1341,7 @@ LAB_overlay_d_93__021d473e: ; 0x021D473E
 	ldr r1, [r4]
 	add r0, #0x10
 	ldr r0, [r1, r0]
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [r4]
 	mov r1, #0
 	add r5, #0x10
@@ -1645,7 +1645,7 @@ FUN_overlay_d_93__021d49e0: ; 0x021D49E0
 	ldr r4, _021D4A00 ; =0x00003B14
 	ldr r0, [r5]
 	ldr r0, [r0, r4]
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [r5]
 	mov r2, #0
 	str r2, [r0, r4]
@@ -1676,7 +1676,7 @@ FUN_overlay_d_93__021d4a0c: ; 0x021D4A0C
 	add r0, r1, #0
 	mov r1, #0x6c
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r5, r0, #0
 	add r0, r4, #0
 	add r1, r5, #0
@@ -1708,7 +1708,7 @@ _021D4A60: .word 0x021F3A98
 
 	thumb_func_start FUN_021D4A64
 FUN_021D4A64: ; 0x021D4A64
-	ldr r3, _021D4A68 ; =FUN_020307B0
+	ldr r3, _021D4A68 ; =Heap_Free
 	bx r3
 	.balign 4, 0
 	thumb_func_end FUN_021D4A64
@@ -1730,7 +1730,7 @@ _021D4A76:
 	ldr r0, [r1, r0]
 	cmp r0, #0
 	beq _021D4A9A
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [r6]
 	mov r1, #0
 	add r2, r0, r5
@@ -1754,7 +1754,7 @@ _021D4AA6:
 	ldr r0, [r0, r7]
 	cmp r0, #0
 	beq _021D4ABE
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [r6]
 	add r1, r0, r4
 	mov r0, #0
@@ -1769,7 +1769,7 @@ _021D4ABE:
 	ldr r0, [r0, r4]
 	cmp r0, #0
 	beq _021D4AE0
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [r5]
 	mov r2, #0
 	str r2, [r0, r4]
@@ -2076,7 +2076,7 @@ FUN_overlay_d_93__021d4d24: ; 0x021D4D24
 	add r0, r1, #0
 	add r1, r4, #4
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	ldr r1, [r0]
 	lsl r1, r1, #0x18
 	lsr r2, r1, #0x18
@@ -2094,3 +2094,9 @@ FUN_overlay_d_93__021d4d24: ; 0x021D4D24
 _021D4D54: .word 0x00000477
 _021D4D58: .word 0x021F3A98
 
+
+	.section .data, 4
+	.global battle_net_data
+battle_net_data:
+_021F3A98:
+	.byte 0x62, 0x74, 0x6C, 0x5F, 0x6E, 0x65, 0x74, 0x2E, 0x63, 0x00, 0x00, 0x00

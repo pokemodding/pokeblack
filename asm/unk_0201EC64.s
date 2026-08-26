@@ -9,8 +9,8 @@
 	.extern FUN_020246C8
 	.extern FUN_0202473C
 	.extern FUN_02024838
-	.extern FUN_02030734
-	.extern FUN_020307b0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern FUN_020457B0
 	.extern FUN_0204581C
 	.extern FUN_02045AFC
@@ -46,7 +46,7 @@ FUN_0201EC74: ; 0x0201EC74
 	mov r2, #0
 	add r3, r5, #0
 	mov r4, #0
-	.hword 0xF011, 0xED52 ; blx FUN_02030734
+	.hword 0xF011, 0xED52 ; blx Heap_AllocDebug
 	add r6, r0, #0
 	beq _0201ECFA
 	str r7, [r6]
@@ -65,7 +65,7 @@ FUN_0201EC74: ; 0x0201EC74
 	mul r1, r7
 	add r2, r4, #0
 	add r3, r5, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	str r0, [r6, #8]
 	cmp r0, #0
 	beq _0201ECFA
@@ -132,7 +132,7 @@ _0201ED18:
 	blo _0201ED18
 _0201ED32:
 	ldr r0, [r5, #8]
-	blx FUN_020307b0
+	blx Heap_Free
 _0201ED38:
 	ldr r0, [r5, #0xc]
 	cmp r0, #0
@@ -142,7 +142,7 @@ _0201ED42:
 	mov r0, #0
 	str r0, [r5]
 	add r0, r5, #0
-	blx FUN_020307b0
+	blx Heap_Free
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 	thumb_func_end FUN_0201ED04
@@ -154,7 +154,7 @@ FUN_0201ED50: ; 0x0201ED50
 	mov r2, #5
 	add r5, r0, #0
 	mov r4, #0
-	.hword 0xF063, 0xEF38 ; blx FUN_02082BCC
+	.hword 0xF063, 0xEF38 ; blx MI_CpuFill8
 	strb r4, [r5, #4]
 	pop {r3, r4, r5, pc}
 	.balign 4, 0

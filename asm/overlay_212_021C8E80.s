@@ -7,8 +7,8 @@
 	.extern FUN_0200D064
 	.extern FUN_0201AF80
 	.extern FUN_0202208C
-	.extern FUN_02030734
-	.extern FUN_020307B0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern FUN_02031330
 	.extern FUN_02031348
 	.extern FUN_02041EE4
@@ -108,7 +108,7 @@ FUN_overlay_d_212__021c8f7c: ; 0x021C8F7C
 	ldr r0, [r4, #0xc]
 	cmp r0, #0
 	beq _021C8F8E
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0
 	str r0, [r4, #0xc]
 	thumb_func_end FUN_overlay_d_212__021c8f7c
@@ -172,7 +172,7 @@ LAB_overlay_d_212__021c9016: ; 0x021C9016
 	thumb_func_end LAB_overlay_d_212__021c9016
 _021C9018:
 	ldr r0, [r0, #0x28]
-	blx FUN_020307B0
+	blx Heap_Free
 	add r0, r4, #0
 	pop {r4, pc}
 	.balign 4, 0
@@ -260,7 +260,7 @@ LAB_overlay_d_212__021c9120: ; 0x021C9120
 	thumb_func_end LAB_overlay_d_212__021c9120
 _021C9126:
 	ldr r0, [r4, #0x28]
-	blx FUN_020307B0
+	blx Heap_Free
 	add r0, r5, #0
 	pop {r3, r4, r5, pc}
 _021C9130:
@@ -312,7 +312,7 @@ LAB_overlay_d_212__021c91b0: ; 0x021C91B0
 	thumb_func_end LAB_overlay_d_212__021c91b0
 _021C91B8:
 	ldr r0, [r5, #0x28]
-	blx FUN_020307B0
+	blx Heap_Free
 	add r0, r4, #0
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -375,7 +375,7 @@ LAB_overlay_d_212__021c9274: ; 0x021C9274
 	thumb_func_end LAB_overlay_d_212__021c9274
 _021C927C:
 	ldr r0, [r5, #0x28]
-	blx FUN_020307B0
+	blx Heap_Free
 	add r0, r4, #0
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
@@ -630,7 +630,7 @@ FUN_overlay_d_212__021c9428: ; 0x021C9428
 	ldr r3, _021C945C ; =_021C99A8
 	mov r1, #0x48
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	str r5, [r0]
 	add r1, r0, #0
 	str r4, [r0, #4]
@@ -714,7 +714,7 @@ FUN_overlay_d_212__021c976c: ; 0x021C976C
 	add r1, r5, #0
 	mov r2, #0
 	mov r4, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	lsr r2, r5, #1
 	thumb_func_end FUN_overlay_d_212__021c976c
 _021C978E:
@@ -756,7 +756,7 @@ _021C97A8:
 	add r0, r7, #0
 	lsl r1, r1, #1
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r7, r0, #0
 	mov r3, #0
 	cmp r6, #0
@@ -784,9 +784,9 @@ _021C9804:
 	blo _021C97EA
 _021C980E:
 	ldr r0, [sp, #8]
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [sp, #0xc]
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [sp, #4]
 	str r7, [r0]
 	add r0, sp, #0x10

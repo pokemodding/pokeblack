@@ -3,8 +3,8 @@
 	.extern FUN_02007d00
 	.extern FUN_02007ef8
 	.extern FUN_0202130C
-	.extern FUN_02030734
-	.extern FUN_02082BCC
+	.extern Heap_AllocDebug
+	.extern MI_CpuFill8
 	.extern MI_CpuCopy8
 
 	.text
@@ -357,7 +357,7 @@ FUN_02008254: ; 0x02008254
 	str r1, [sp]
 	mov r1, #0x2c
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	pop {r3, pc}
 	nop
 _02008268: .word 0x00000342
@@ -393,7 +393,7 @@ FUN_020082EC: ; 0x020082EC
 	lsr r0, r0, #0x10
 	mov r1, #4
 	mov r2, #0
-	.hword 0xF028, 0xEA1A ; blx FUN_02030734
+	.hword 0xF028, 0xEA1A ; blx Heap_AllocDebug
 	add r4, r0, #0
 	bl FUN_02008320
 	add r0, r4, #0
@@ -418,7 +418,7 @@ FUN_02008320: ; 0x02008320
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #4
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	ldrh r1, [r4]
 	mov r0, #0xf
 	bic r1, r0

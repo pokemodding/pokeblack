@@ -3,8 +3,8 @@
 	.extern FUN_020071CC
 	.extern FUN_0200A4B8
 	.extern FUN_0200A50C
-	.extern FUN_02030734
-	.extern FUN_020307B0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern FUN_02033478
 	.extern FUN_020334CC
 	.extern FUN_0203F1FC
@@ -30,7 +30,7 @@ FUN_overlay_228__021dfc20: ; 0x021DFC20
 	mov r2, #1
 	add r3, r6, #0
 	add r5, r0, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	sub r4, #0xc
 	str r0, [sp, #0xc]
 	str r0, [sp, #0x20]
@@ -40,7 +40,7 @@ FUN_overlay_228__021dfc20: ; 0x021DFC20
 	add r1, r4, #0
 	mov r2, #1
 	add r3, r6, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	mov r3, #0
 	str r0, [sp, #0x24]
 	add r5, r3, #0
@@ -209,7 +209,7 @@ _021DFD74:
 	blx MI_CpuCopy8
 _021DFD86:
 	ldr r0, [sp, #4]
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r1, #0
 	ldr r0, [sp, #8]
 	mvn r1, r1
@@ -314,7 +314,7 @@ FUN_overlay_228__021dff18: ; 0x021DFF18
 	add r1, r6, #0
 	mov r2, #0
 	mov r5, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	sub r0, r5, #1
 	add r1, r4, #0
@@ -325,7 +325,7 @@ FUN_overlay_228__021dff18: ; 0x021DFF18
 	add r2, r6, #0
 	blx FUN_02033478
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #4
 	pop {r3, r4, r5, r6, pc}
 	.balign 4, 0

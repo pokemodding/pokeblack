@@ -29,7 +29,7 @@
 	.extern FUN_02012EBC
 	.extern FUN_020144DC
 	.extern FUN_020145CC
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_021BE8D4
 	.extern FUN_021BE92C
 
@@ -115,7 +115,7 @@ _0215434A:
 	mov r1, #0
 	mov r2, #0x44
 	mov r7, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	str r7, [r4, #0x50]
 	add r0, r6, #0
 	ldr r1, _02154630 ; =0x0000007B

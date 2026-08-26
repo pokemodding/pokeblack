@@ -9,7 +9,7 @@
 	.extern FUN_0201D83C
 	.extern FUN_0202208C
 	.extern FUN_0203064C
-	.extern FUN_020307B0
+	.extern Heap_Free
 	.extern FUN_0203159C
 	.extern FUN_02034A5C
 	.extern FUN_0203630C
@@ -81,7 +81,7 @@
 	.extern FUN_0207D534
 	.extern FUN_0207D63C
 	.extern FUN_0207D658
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_0209C2B0
 
 	.text
@@ -105,7 +105,7 @@ FUN_overlay_181__021b95a0: ; 0x021B95A0
 	mov r1, #0
 	add r2, r6, #0
 	add r4, r0, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	str r5, [r4]
 	mov r0, #1
 	pop {r4, r5, r6, pc}
@@ -974,7 +974,7 @@ FUN_overlay_d_181__021b9d20: ; 0x021B9D20
 	mov r0, #0xb5
 	lsl r0, r0, #2
 	ldr r0, [r4, r0]
-	blx FUN_020307B0
+	blx Heap_Free
 	pop {r4, pc}
 	thumb_func_end FUN_overlay_d_181__021b9d20
 

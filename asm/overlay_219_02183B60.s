@@ -58,7 +58,7 @@
 	.extern FUN_02028230
 	.extern FUN_02028590
 	.extern FUN_020286C4
-	.extern FUN_020307B0
+	.extern Heap_Free
 	.extern FUN_0203101C
 	.extern FUN_02035BA4
 	.extern FUN_02035C08
@@ -1377,7 +1377,7 @@ _02184620:
 	blt _021845F8
 _02184628:
 	ldr r0, [sp, #0x18]
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r7, #1
 	bl FUN_02025B38
 	str r0, [sp, #0x10]
@@ -1433,7 +1433,7 @@ _0218466A:
 	blt _0218466A
 _0218469E:
 	ldr r0, [sp, #0x14]
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [sp, #0x10]
 	add r7, r7, #1
 	cmp r7, r0

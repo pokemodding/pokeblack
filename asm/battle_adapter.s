@@ -1,116 +1,11 @@
 	.include "asm/macros/function.inc"
 
-	.extern FUN_020057AC
-	.extern FUN_020057C4
-	.extern FUN_02005CA4
-	.extern FUN_02005D28
-	.extern FUN_02005D90
-	.extern FUN_02005DF8
-	.extern FUN_02005E30
-	.extern FUN_02005E50
-	.extern FUN_02005F38
-	.extern FUN_020061E4
-	.extern FUN_02006210
-	.extern FUN_02006254
-	.extern FUN_02006734
-	.extern FUN_02006740
-	.extern FUN_02007B00
-	.extern FUN_02007B20
-	.extern FUN_02007B44
-	.extern FUN_02007B50
-	.extern FUN_02007C20
-	.extern FUN_02007C70
-	.extern FUN_02007E50
-	.extern FUN_02007F1C
-	.extern FUN_02008374
-	.extern FUN_020083AC
-	.extern FUN_020083C8
-	.extern FUN_02008468
-	.extern FUN_0200846C
-	.extern FUN_02008494
-	.extern FUN_020084D4
-	.extern FUN_02008510
-	.extern FUN_02008550
-	.extern FUN_02008564
-	.extern FUN_02008DAC
-	.extern FUN_02008DF0
-	.extern FUN_0200C274
-	.extern FUN_0200CED4
-	.extern FUN_0200CFA0
-	.extern FUN_0200FB24
-	.extern FUN_02011168
-	.extern FUN_0201119C
-	.extern FUN_020111BC
-	.extern FUN_020113F0
-	.extern FUN_02012EBC
-	.extern FUN_02012F08
-	.extern FUN_02013080
-	.extern FUN_020173F0
-	.extern FUN_02017988
-	.extern FUN_02017D30
-	.extern FUN_02017D70
-	.extern FUN_02017E1C
-	.extern FUN_02017E40
-	.extern FUN_02017F00
-	.extern FUN_02017F90
-	.extern FUN_02017F9C
-	.extern FUN_020181F4
-	.extern FUN_02018480
-	.extern FUN_02018584
-	.extern FUN_020185C4
-	.extern FUN_020189D0
-	.extern FUN_02019C90
-	.extern FUN_0201A918
-	.extern FUN_0201A920
-	.extern FUN_0201A948
-	.extern FUN_0201A98C
-	.extern FUN_0201AA18
-	.extern FUN_0201AB28
-	.extern FUN_0201AC2C
-	.extern FUN_0201B70C
-	.extern FUN_0201B7A0
-	.extern FUN_0201B7B4
-	.extern FUN_0201B818
-	.extern FUN_0201BD28
-	.extern FUN_0201BEB8
-	.extern FUN_0201BF58
-	.extern FUN_0201C020
-	.extern FUN_0201C0BC
-	.extern FUN_0201C158
-	.extern FUN_0201C184
-	.extern FUN_0201C1BC
-	.extern FUN_0201C1C8
-	.extern FUN_0201C1D8
-	.extern FUN_0201C1E8
-	.extern FUN_0201C1F4
-	.extern FUN_0201C284
-	.extern FUN_0201C314
-	.extern FUN_0201C440
-	.extern FUN_0201C4C0
-	.extern FUN_0201C7A4
-	.extern FUN_0201CD10
-	.extern FUN_0201CE0C
-	.extern FUN_0201CE20
-	.extern FUN_0201CE30
-	.extern FUN_0201CE38
-	.extern FUN_0201CE48
-	.extern FUN_0201CE8C
-	.extern FUN_0201CEB8
-	.extern FUN_0201CED4
-	.extern FUN_0201D304
-	.extern FUN_0201D33C
-	.extern FUN_0201D37C
 	.extern FUN_0201D5C4
 	.extern FUN_0201D5CC
 	.extern FUN_0201D5F4
 	.extern FUN_0201D658
 	.extern FUN_0201D670
 	.extern FUN_0201D688
-	.extern FUN_0201D7EC
-	.extern FUN_0201D83C
-	.extern FUN_0201DD60
-	.extern FUN_0201DD68
-	.extern FUN_0201DD78
 	.extern FUN_0201EC64
 	.extern FUN_0201ED04
 	.extern FUN_0201EE0C
@@ -125,186 +20,15 @@
 	.extern FUN_0201F0F8
 	.extern FUN_0201F134
 	.extern FUN_0201F250
-	.extern FUN_0201F41C
-	.extern FUN_0202142C
-	.extern FUN_020215BC
-	.extern FUN_020215EC
-	.extern FUN_0202173C
-	.extern FUN_02021ED8
-	.extern FUN_0202428C
-	.extern FUN_0202435C
-	.extern FUN_02024450
-	.extern FUN_02024570
-	.extern FUN_020271DC
-	.extern FUN_02027268
-	.extern FUN_0202A230
-	.extern FUN_0202A298
-	.extern FUN_0202A310
 	.extern FUN_0202A3CC
-	.extern FUN_0202A3FC
-	.extern FUN_0202E7E0
-	.extern FUN_0202E7E4
-	.extern FUN_0203064C
-	.extern FUN_020306F0
-	.extern FUN_02030734
-	.extern FUN_020307B0
-	.extern FUN_0203101C
-	.extern FUN_020310C4
-	.extern FUN_02031140
-	.extern FUN_02031194
-	.extern FUN_020311B8
-	.extern FUN_02031290
-	.extern FUN_0203159C
-	.extern FUN_020315D4
-	.extern FUN_02034714
-	.extern FUN_02034A5C
-	.extern FUN_02034AC4
-	.extern FUN_02035C38
-	.extern FUN_02035C60
-	.extern FUN_020362DC
-	.extern FUN_0203630C
-	.extern FUN_02039CB4
-	.extern FUN_0203A424
-	.extern FUN_0203D1A4
-	.extern FUN_0203D1B4
-	.extern FUN_0203D29C
-	.extern FUN_0203D3A8
-	.extern FUN_0203D3F8
-	.extern FUN_0203EFC8
-	.extern FUN_0203F0A8
-	.extern FUN_0203F258
-	.extern FUN_0203F8F4
-	.extern FUN_0203F9B4
-	.extern FUN_0203FC28
-	.extern FUN_0203FCA0
-	.extern FUN_020403F4
-	.extern FUN_02040588
-	.extern FUN_02040618
-	.extern FUN_020409B4
-	.extern FUN_02040B1C
-	.extern FUN_02040C14
-	.extern FUN_02041300
-	.extern FUN_020414EC
-	.extern FUN_020433E0
-	.extern FUN_020434DC
-	.extern FUN_02043678
-	.extern FUN_020437AC
-	.extern FUN_020437D4
-	.extern FUN_020437EC
-	.extern FUN_02043B5C
-	.extern FUN_02045088
-	.extern FUN_020450C8
-	.extern FUN_020450F0
-	.extern FUN_020452E8
-	.extern FUN_02045334
-	.extern FUN_02045374
-	.extern FUN_020454E0
-	.extern FUN_02045770
 	.extern FUN_020457B0
 	.extern FUN_02045808
-	.extern FUN_02045874
-	.extern FUN_020458F8
-	.extern FUN_02045A00
 	.extern FUN_02045A90
 	.extern FUN_02045A98
 	.extern FUN_02045B38
 	.extern FUN_02045C04
 	.extern FUN_02045CAC
-	.extern FUN_02045EC0
-	.extern FUN_02046440
-	.extern FUN_02046788
-	.extern FUN_02046BE0
-	.extern FUN_020490F4
-	.extern FUN_02049238
-	.extern FUN_02049658
-	.extern FUN_02049740
-	.extern FUN_0204989C
-	.extern FUN_02049DB4
-	.extern FUN_0204A48C
-	.extern FUN_0204A5AC
-	.extern FUN_0204E720
-	.extern FUN_0207C768
-	.extern FUN_0207C7B4
-	.extern FUN_0207D534
-	.extern FUN_0207D55C
-	.extern FUN_0207D63C
-	.extern FUN_0207DC44
-	.extern FUN_0208068C
-	.extern FUN_02082A48
-	.extern FUN_02082A7C
-	.extern FUN_02082A90
-	.extern FUN_02082BCC
 	.extern FUN_02082D44
-	.extern FUN_02085CBC
-	.extern FUN_0209AC04
-	.extern FUN_0209AF34
-	.extern FUN_0209B2E8
-	.extern FUN_0209B750
-	.extern FUN_0209B790
-	.extern FUN_0209B864
-	.extern FUN_0209BDBC
-	.extern FUN_0209BE04
-	.extern FUN_0209C054
-	.extern FUN_0209C0A4
-	.extern FUN_0209C2B0
-	.extern FUN_0209C494
-	.extern FUN_0209C508
-	.extern FUN_0209C95C
-	.extern FUN_0209CB8C
-	.extern FUN_0209D1E0
-	.extern FUN_021809D8
-	.extern FUN_02187F00
-	.extern FUN_02188080
-	.extern FUN_021880BC
-	.extern FUN_021F745C
-	.extern FUN_021F7544
-	.extern FUN_021F7808
-	.extern FUN_021F78E4
-	.extern FUN_021F7998
-	.extern FUN_021F7A28
-	.extern FUN_021F7B2C
-	.extern FUN_021F7C0C
-	.extern FUN_021F7C2C
-	.extern FUN_021F7CE4
-	.extern FUN_021F7CFC
-	.extern FUN_021F7D80
-	.extern FUN_021F7E38
-	.extern FUN_021F7E74
-	.extern FUN_021F7E84
-	.extern FUN_021F7E94
-	.extern FUN_021F7EA4
-	.extern FUN_021F7EB4
-	.extern FUN_021F7EE8
-	.extern FUN_021F7F04
-	.extern FUN_021F7F1C
-	.extern FUN_021F7F58
-	.extern FUN_021F803C
-	.extern FUN_021F80E4
-	.extern FUN_021F80FC
-	.extern FUN_021F8118
-	.extern FUN_021F8180
-	.extern FUN_021F81D0
-	.extern FUN_021F823C
-	.extern FUN_021F8260
-	.extern FUN_021F827C
-	.extern FUN_021F8414
-	.extern FUN_021F84B4
-	.extern FUN_021F8504
-	.extern FUN_021F8524
-	.extern FUN_021F853C
-	.extern FUN_021F8678
-	.extern FUN_021F86D4
-	.extern FUN_021F86E0
-	.extern FUN_021F878C
-	.extern FUN_021F87D4
-	.extern FUN_021F88BC
-	.extern FUN_021F8A40
-	.extern FUN_021F8A78
-	.extern FUN_021F8AE8
-	.extern FUN_021F8B10
-	.extern FUN_021F8B28
-	.extern FUN_0220C834
-	.extern FUN_0220F3E8
 	.extern BattleMon_GetPokemon
 	.extern BattleMon_GetVisibleMon
 	.extern FUN_overlay_d_93__021b86b8
@@ -326,207 +50,13 @@
 	.extern FUN_overlay_d_93__021d4c84
 	.extern thunk_FUN_overlay_d_93__021b8d08
 	.extern thunk_FUN_overlay_d_93__021d4cec
+	.extern Heap_AllocDebug
+	.extern Heap_Free
+	.extern _021F39A0
+	.extern _021F39D8
+	.extern _021F39DC
 
 	.text
-
-	thumb_func_start FUN_overlay_d_93__021ee8d8
-FUN_overlay_d_93__021ee8d8: ; 0x021EE8D8
-	lsl r2, r2, #0x18
-	lsr r2, r2, #0x18
-	mov r3, #4
-	lsl r2, r2, #0x1f
-	strb r3, [r0, #4]
-	lsr r3, r2, #0x18
-	mov r2, #0x20
-	orr r2, r3
-	strb r2, [r0, #5]
-	mov r2, #2
-	str r2, [r1]
-	add r0, r0, #4
-	bx lr
-	.balign 4, 0
-	thumb_func_end FUN_overlay_d_93__021ee8d8
-
-	thumb_func_start FUN_overlay_d_93__021ee8f4
-FUN_overlay_d_93__021ee8f4: ; 0x021EE8F4
-	push {r3, r4, r5, r6, lr}
-	sub sp, #4
-	add r4, r0, #0
-	add r0, r1, #0
-	ldrb r1, [r4]
-	mov ip, r2
-	cmp r1, #0
-	bne _021EE914
-	ldrb r2, [r4, #3]
-	mov r1, #0x3f
-	bic r2, r1
-	mov r1, #1
-	orr r1, r2
-	strb r1, [r4, #3]
-	mov r1, #2
-	strb r1, [r4]
-	thumb_func_end FUN_overlay_d_93__021ee8f4
-_021EE914:
-	ldrb r6, [r4, #1]
-	mov r2, #1
-	lsl r2, r0
-	add r1, r6, #0
-	tst r1, r2
-	bne _021EE966
-	lsl r1, r3, #2
-	str r1, [sp]
-	ldr r5, [sp]
-	ldrb r1, [r4]
-	add r5, r5, #1
-	add r5, r1, r5
-	cmp r5, #0x3c
-	bhi _021EE95E
-	lsl r2, r2, #0x18
-	lsr r2, r2, #0x18
-	orr r2, r6
-	strb r2, [r4, #1]
-	ldrb r2, [r4, #2]
-	lsl r0, r0, #5
-	add r2, r2, #1
-	strb r2, [r4, #2]
-	add r2, r0, #0
-	orr r2, r3
-	add r0, r4, r1
-	strb r2, [r0, #4]
-	ldrb r1, [r4]
-	add r2, r4, #4
-	mov r0, ip
-	add r1, r1, #1
-	add r1, r2, r1
-	ldr r2, [sp]
-	blx FUN_02082D44
-	add sp, #4
-	strb r5, [r4]
-	pop {r3, r4, r5, r6, pc}
-_021EE95E:
-	ldrb r1, [r4, #3]
-	mov r0, #0x80
-	orr r0, r1
-	strb r0, [r4, #3]
-_021EE966:
-	add sp, #4
-	pop {r3, r4, r5, r6, pc}
-	.balign 4, 0
-
-	thumb_func_start FUN_overlay_d_93__021ee96c
-FUN_overlay_d_93__021ee96c: ; 0x021EE96C
-	push {r4, r5}
-	ldrb r4, [r0, #3]
-	lsl r3, r4, #0x18
-	lsr r3, r3, #0x1f
-	bne _021EE99E
-	strb r1, [r0, #4]
-	lsl r1, r4, #0x1a
-	lsr r3, r1, #0x1a
-	lsl r4, r4, #0x19
-	lsr r4, r4, #0x1f
-	lsl r4, r4, #0x1f
-	lsl r3, r3, #0x1d
-	ldrb r5, [r0, #2]
-	mov r1, #0xf
-	lsr r4, r4, #0x18
-	lsr r3, r3, #0x19
-	and r1, r5
-	orr r3, r4
-	orr r1, r3
-	strb r1, [r0, #5]
-	ldrb r1, [r0]
-	add r0, r0, #4
-	str r1, [r2]
-	pop {r4, r5}
-	bx lr
-	thumb_func_end FUN_overlay_d_93__021ee96c
-_021EE99E:
-	mov r0, #0
-	pop {r4, r5}
-	bx lr
-
-	thumb_func_start FUN_overlay_d_93__021ee9a4
-FUN_overlay_d_93__021ee9a4: ; 0x021EE9A4
-	mov r2, #0
-	strb r2, [r0, #4]
-	mov r2, #0x30
-	strb r2, [r0, #5]
-	mov r2, #2
-	str r2, [r1]
-	add r0, r0, #4
-	bx lr
-	thumb_func_end FUN_overlay_d_93__021ee9a4
-
-	thumb_func_start FUN_overlay_d_93__021ee9b4
-FUN_overlay_d_93__021ee9b4: ; 0x021EE9B4
-	push {r3, r4, r5, lr}
-	add r4, r0, #0
-	add r0, r1, #0
-	add r1, r4, #4
-	add r5, r2, #0
-	blx FUN_02082D44
-	mov r0, #0
-	ldrb r1, [r4, #3]
-	strb r0, [r4, #1]
-	strb r0, [r4, #2]
-	mov r0, #0x3f
-	bic r1, r0
-	strb r1, [r4, #3]
-	ldrb r1, [r4, #3]
-	mov r0, #0x40
-	strb r5, [r4]
-	bic r1, r0
-	strb r1, [r4, #3]
-	ldrb r1, [r4, #3]
-	mov r0, #0x80
-	bic r1, r0
-	strb r1, [r4, #3]
-	pop {r3, r4, r5, pc}
-	thumb_func_end FUN_overlay_d_93__021ee9b4
-
-	thumb_func_start FUN_overlay_d_93__021ee9e4
-FUN_overlay_d_93__021ee9e4: ; 0x021EE9E4
-	push {r4, r5, r6, lr}
-	add r4, r1, #0
-	ldr r1, [r4]
-	cmp r1, #0
-	bne _021EE9F2
-	mov r1, #2
-	str r1, [r4]
-	thumb_func_end FUN_overlay_d_93__021ee9e4
-_021EE9F2:
-	ldrb r1, [r0]
-	ldr r5, [r4]
-	cmp r5, r1
-	bhs _021EEA2C
-	add r1, r0, r5
-	ldrb r1, [r1, #4]
-	mov r5, #7
-	add r0, r0, #4
-	asr r6, r1, #5
-	and r5, r6
-	strb r5, [r2]
-	mov r2, #0x1f
-	and r1, r2
-	strb r1, [r3]
-	ldrb r1, [r3]
-	lsl r5, r1, #2
-	ldr r1, [r4]
-	add r2, r5, #0
-	add r1, r1, #1
-	str r1, [r4]
-	add r0, r0, r1
-	ldr r1, [sp, #0x10]
-	blx FUN_02082D44
-	ldr r0, [r4]
-	add r0, r0, r5
-	str r0, [r4]
-	mov r0, #1
-	pop {r4, r5, r6, pc}
-_021EEA2C:
-	mov r0, #0
-	pop {r4, r5, r6, pc}
 
 	thumb_func_start FUN_overlay_d_93__021eea30
 FUN_overlay_d_93__021eea30: ; 0x021EEA30
@@ -575,7 +105,7 @@ FUN_overlay_d_93__021eea58: ; 0x021EEA58
 	ldr r3, _021EEAC8 ; =_021F3AE8
 	lsl r1, r1, #4
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	str r7, [r0]
 	strb r5, [r0, #0xd]
 	ldrb r1, [r0, #0xc]
@@ -632,7 +162,7 @@ FUN_overlay_d_93__021eead0: ; 0x021EEAD0
 
 	thumb_func_start FUN_021EEAE0
 FUN_021EEAE0: ; 0x021EEAE0
-	ldr r3, _021EEAE4 ; =FUN_020307B0
+	ldr r3, _021EEAE4 ; =Heap_Free
 	bx r3
 	.balign 4, 0
 	thumb_func_end FUN_021EEAE0
@@ -2115,3 +1645,27 @@ LAB_overlay_d_93__021ef6f0: ; 0x021EF6F0
 	thumb_func_end LAB_overlay_d_93__021ef6f0
 _021EF718: .word 0x021F6398
 
+
+
+	.section .rodata, 4
+	.global battle_adapter_rodata
+battle_adapter_rodata:
+_021F3990:
+	.byte 0x0F, 0x00, 0x0E, 0x00, 0x0D, 0x00, 0x10, 0x00, 0xB6, 0x00, 0xCC, 0x00, 0xE9, 0x00, 0xB8, 0x00
+	.byte 0x94, 0x00, 0x96, 0x00, 0x98, 0x00, 0x9A, 0x00, 0x9C, 0x00, 0x9E, 0x00, 0xA0, 0x00, 0xA2, 0x00
+	.byte 0xB0, 0x00, 0x84, 0x00, 0x86, 0x00, 0x80, 0x00, 0x82, 0x00, 0x7C, 0x00, 0x7E, 0x00, 0x88, 0x00
+	.byte 0x8A, 0x00, 0x8C, 0x00, 0x8E, 0x00, 0x90, 0x00, 0x92, 0x00, 0xA4, 0x00, 0xA6, 0x00, 0xA8, 0x00
+	.byte 0xAA, 0x00, 0xAC, 0x00, 0xAE, 0x00, 0x00, 0x00, 0x1B, 0x00, 0x00, 0x00, 0x61, 0xF4, 0x1E, 0x02
+	.byte 0x5A, 0x00, 0x00, 0x00, 0x61, 0xF4, 0x1E, 0x02, 0x99, 0x00, 0x00, 0x00, 0x09, 0xF5, 0x1E, 0x02
+	.byte 0xAE, 0x00, 0x00, 0x00, 0x09, 0xF5, 0x1E, 0x02, 0xAA, 0x03, 0x00, 0x00, 0xA5, 0xF3, 0x1E, 0x02
+	.byte 0x21, 0x00, 0x00, 0x00, 0x95, 0xF5, 0x1E, 0x02, 0x14, 0x04, 0x00, 0x00, 0x05, 0xF2, 0x1E, 0x02
+	.byte 0x17, 0x04, 0x00, 0x00, 0x05, 0xF2, 0x1E, 0x02, 0x4D, 0x01, 0x00, 0x00, 0x05, 0xF2, 0x1E, 0x02
+	.byte 0x71, 0x04, 0x00, 0x00, 0x05, 0xF2, 0x1E, 0x02, 0x09, 0x00, 0x00, 0x00, 0x05, 0xF2, 0x1E, 0x02
+	.byte 0x0C, 0x00, 0x00, 0x00, 0x05, 0xF2, 0x1E, 0x02, 0x12, 0x00, 0x00, 0x00, 0x05, 0xF2, 0x1E, 0x02
+	.byte 0x15, 0x00, 0x00, 0x00, 0x05, 0xF2, 0x1E, 0x02
+
+	.section .data, 4
+	.global battle_adapter_data
+battle_adapter_data:
+_021F3AE8:
+	.byte 0x62, 0x74, 0x6C, 0x5F, 0x61, 0x64, 0x61, 0x70, 0x74, 0x65, 0x72, 0x2E, 0x63, 0x00, 0x00, 0x00

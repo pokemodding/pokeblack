@@ -18,7 +18,7 @@
 	.extern FUN_0205DC74
 	.extern FUN_0205EA70
 	.extern FUN_020819FC
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_02085A38
 	.extern FUN_0216007C
 	.extern FUN_021656A0
@@ -426,7 +426,7 @@ FUN_0205CE84: ; 0x0205CE84
 	mov r0, r5
 	mov r1, r4
 	mov r2, #0xa
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	cmp r8, #0
 	addeq sp, sp, #0xc
 	moveq r0, r4
@@ -473,7 +473,7 @@ FUN_0205CF30: ; 0x0205CF30
 	mov r4, #0
 	ldr r2, _0205D004 ; =0x00000376
 	mov r1, r4
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	ldrb r0, [r6, #0x4a]
 	add r0, r0, #0x10
 	cmp r0, #0x80

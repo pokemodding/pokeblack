@@ -6,7 +6,7 @@
 	.extern FUN_02005E50
 	.extern FUN_02005F38
 	.extern FUN_0202208C
-	.extern FUN_020307B0
+	.extern Heap_Free
 	.extern FUN_020362DC
 	.extern FUN_0204047C
 	.extern FUN_02049238
@@ -239,7 +239,7 @@ FUN_overlay_d_179__021b6338: ; 0x021B6338
 	ldr r2, [r1, r2]
 	blx FUN_02082A90
 	add r0, r6, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #4
 	pop {r3, r4, r5, r6, pc}
 	nop
@@ -597,7 +597,7 @@ _021B66C4:
 	blx FUN_0207ECF0
 _021B66CE:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	pop {r4, r5, r6, pc}
 	nop
 _021B66D8: .word 0x0000807F

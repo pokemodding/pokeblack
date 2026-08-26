@@ -1,7 +1,7 @@
 	.include "asm/macros/function.inc"
 
 	.extern FUN_020071CC
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_02088864
 	.extern FUN_0209C2B0
 
@@ -23,7 +23,7 @@ FUN_0200846C: ; 0x0200846C
 	lsr r0, r0, #0x10
 	mov r1, #0x20
 	mov r2, #0
-	.hword 0xF028, 0xE95A ; blx FUN_02030734
+	.hword 0xF028, 0xE95A ; blx Heap_AllocDebug
 	add r4, r0, #0
 	bl FUN_020084A0
 	add r0, r4, #0
@@ -41,7 +41,7 @@ FUN_020084A0: ; 0x020084A0
 	mov r1, #0
 	mov r2, #0x20
 	add r4, r0, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	mov r0, #2
 	strb r0, [r4, #0x1a]
 	add r0, r4, #0

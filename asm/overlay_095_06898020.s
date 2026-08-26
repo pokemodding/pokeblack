@@ -2764,7 +2764,7 @@ _0689ACC8: .word 0x021D8435
 
 	thumb_func_start FUN_overlay_95__0689accc
 FUN_overlay_95__0689accc: ; 0x0689ACCC
-	ldr r3, _0689ACD4 ; =FUN_02082BCC
+	ldr r3, _0689ACD4 ; =MI_CpuFill8
 	mov r1, #0
 	mov r2, #9
 	bx r3
@@ -4474,7 +4474,7 @@ _0689CAE0:
 
 	thumb_func_start FUN_overlay_95__0689cb3c
 FUN_overlay_95__0689cb3c: ; 0x0689CB3C
-	ldr r3, _0689CB44 ; =FUN_02082BCC
+	ldr r3, _0689CB44 ; =MI_CpuFill8
 	mov r1, #0
 	mov r2, #0x48
 	bx r3

@@ -124,7 +124,7 @@ FUN_0200EE50: ; 0x0200EE50
 	add r2, r0, #0
 	add r0, r4, #0
 	mov r1, #0
-	.hword 0xF073, 0xEEB6 ; blx FUN_02082BCC
+	.hword 0xF073, 0xEEB6 ; blx MI_CpuFill8
 	pop {r4, pc}
 	thumb_func_end FUN_0200EE50
 
@@ -286,7 +286,7 @@ FUN_0200EF78: ; 0x0200EF78
 	lsl r2, r2, #8
 	add r5, r0, #0
 	mov r7, #0
-	.hword 0xF073, 0xEE20 ; blx FUN_02082BCC
+	.hword 0xF073, 0xEE20 ; blx MI_CpuFill8
 	ldr r0, [r4]
 	ldrb r1, [r4, #4]
 	str r0, [r5]

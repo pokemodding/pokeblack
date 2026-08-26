@@ -9,7 +9,7 @@
 	.extern FUN_020315D4
 	.extern FUN_02034714
 	.extern FUN_0205FAA8
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 
 	.text
 
@@ -196,7 +196,7 @@ FUN_02010bf8: ; 0x02010BF8
 	mov r1, #0
 	add r2, r6, #0
 	add r5, r0, #0
-	.hword 0xF071, 0xEFDA ; blx FUN_02082BCC
+	.hword 0xF071, 0xEFDA ; blx MI_CpuFill8
 	mov r0, #0x5b
 	str r4, [r5]
 	.hword 0xF020, 0xEB82 ; blx FUN_02031324
@@ -277,7 +277,7 @@ FUN_02010db4: ; 0x02010DB4
 	ldr r0, _02010DC8 ; =0x021461E8
 	mov r1, #0
 	mov r2, #0x60
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	bl FUN_02010DF4
 	pop {r3, pc}
 	nop

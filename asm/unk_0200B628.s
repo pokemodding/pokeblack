@@ -2,7 +2,7 @@
 
 	.extern FUN_0201747C
 	.extern FUN_0201A98C
-	.extern FUN_020307b0
+	.extern Heap_Free
 	.extern FUN_02045f5c
 	.extern thunk_FUN_02016f54
 
@@ -333,7 +333,7 @@ FUN_0200bb32: ; 0x0200BB32
 	add r1, r5, #0
 	bl FUN_0201A98C
 	add r0, r5, #0
-	blx FUN_020307b0
+	blx Heap_Free
 	add r4, r4, #1
 	cmp r4, #6
 	blo _0200BB18

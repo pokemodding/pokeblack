@@ -16,7 +16,7 @@
 	.extern FUN_0204E01C
 	.extern FUN_02063790
 	.extern FUN_020637D4
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 
 	.text
 
@@ -133,7 +133,7 @@ FUN_0204CAE4: ; 0x0204CAE4
 	mov r5, r0
 	mov r1, #0
 	mov r2, #0xe4
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	mov r4, #0x1000
 	add r0, r5, #0x1c
 	str r4, [r5, #0x54]
@@ -369,7 +369,7 @@ FUN_0204D104: ; 0x0204D104
 	mov r0, r4
 	mov r1, #0
 	mov r2, #0x7c
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	ldmia sp!, {r4, pc}
 	.balign 4, 0
 _0204D130: .word 0x020A13D0

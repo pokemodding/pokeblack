@@ -12,8 +12,8 @@
 	.extern FUN_020221A4
 	.extern FUN_02022224
 	.extern FUN_020275E4
-	.extern FUN_02030734
-	.extern FUN_020307B0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern FUN_02030D28
 	.extern FUN_02030DA8
 	.extern FUN_02030EAC
@@ -70,7 +70,7 @@
 	.extern FUN_0204B92C
 	.extern FUN_0204B98C
 	.extern FUN_0207C9D0
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_0208B500
 	.extern FUN_0208B528
 	.extern FUN_0209BDBC
@@ -941,11 +941,11 @@ FUN_overlay_d_168__02184398: ; 0x02184398
 	lsr r0, r0, #0x10
 	add r1, r6, #0
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	mov r1, #0
 	add r2, r6, #0
 	add r4, r0, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	mov r0, #0
 	str r4, [r5, #0x1c]
 	str r0, [r5]
@@ -976,7 +976,7 @@ _02184404: .word 0x00001001
 FUN_overlay_d_168__02184408: ; 0x02184408
 	push {r3, lr}
 	ldr r0, [r0, #0x1c]
-	blx FUN_020307B0
+	blx Heap_Free
 	bl FUN_02006D44
 	mov r0, #8
 	blx FUN_02034FB8

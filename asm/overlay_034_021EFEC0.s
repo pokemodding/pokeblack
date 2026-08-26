@@ -48,7 +48,7 @@
 	.extern FUN_0201F02C
 	.extern FUN_0201F158
 	.extern FUN_0201F250
-	.extern FUN_02030734
+	.extern Heap_AllocDebug
 	.extern FUN_0203D34C
 	.extern FUN_0203FCA0
 	.extern FUN_02040588
@@ -102,7 +102,7 @@ FUN_overlay_34__021efec0: ; 0x021EFEC0
 	add r1, #0x1c
 	mov r2, #0
 	str r5, [sp]
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	add r0, r5, #0
 	str r6, [r4]

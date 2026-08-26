@@ -262,7 +262,7 @@ FUN_0201F93C: ; 0x0201F93C
 	ldr r3, _0201F9CC ; =0x020A7384
 	mov r1, #0x38
 	mov r2, #1
-	.hword 0xF010, 0xEEEE ; blx FUN_02030734
+	.hword 0xF010, 0xEEEE ; blx Heap_AllocDebug
 	add r4, r0, #0
 	add r3, r4, #0
 	mov r2, #4

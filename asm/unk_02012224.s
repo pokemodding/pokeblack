@@ -27,8 +27,8 @@
 	.extern FUN_0202E43C
 	.extern FUN_0202E770
 	.extern FUN_0202E888
-	.extern FUN_02030734
-	.extern FUN_020307b0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern MI_CpuCopy8
 	.extern FUN_02159B48
 	.extern FUN_0215E31C
@@ -118,7 +118,7 @@ FUN_020122cc: ; 0x020122CC
 	mov r0, #4
 	mov r1, #0x14
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	str r6, [r4]
 	str r7, [r4, #4]
@@ -130,7 +130,7 @@ FUN_020122cc: ; 0x020122CC
 	ldr r3, _02012300 ; =0x020A727C
 	mov r0, #4
 	mov r2, #1
-	.hword 0xF01E, 0xEA20 ; blx FUN_02030734
+	.hword 0xF01E, 0xEA20 ; blx Heap_AllocDebug
 	str r0, [r4, #0xc]
 	thumb_func_end FUN_020122cc
 
@@ -167,14 +167,14 @@ FUN_02012314: ; 0x02012314
 	ldr r0, [r4, #0xc]
 	cmp r0, #0
 	beq _02012322
-	.hword 0xF01E, 0xEA48 ; blx FUN_020307b0
+	.hword 0xF01E, 0xEA48 ; blx Heap_Free
 _02012322:
 	add r0, r4, #0
 	thumb_func_end FUN_02012314
 
 	thumb_func_start FUN_02012324
 FUN_02012324: ; 0x02012324
-	blx FUN_020307b0
+	blx Heap_Free
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end FUN_02012324
@@ -186,7 +186,7 @@ _0201232C:
 FUN_0201233a: ; 0x0201233A
 	cmp r0, #0
 	beq _02012342
-	.hword 0xF01E, 0xEA38 ; blx FUN_020307b0
+	.hword 0xF01E, 0xEA38 ; blx Heap_Free
 _02012342:
 	mov r0, #0x60
 	str r0, [sp]
@@ -194,7 +194,7 @@ _02012342:
 	mov r0, #4
 	add r1, r4, #0
 	mov r2, #1
-	.hword 0xF01E, 0xE9F2 ; blx FUN_02030734
+	.hword 0xF01E, 0xE9F2 ; blx Heap_AllocDebug
 	str r0, [r5, #0xc]
 	pop {r3, r4, r5, pc}
 	nop
@@ -372,7 +372,7 @@ FUN_020124F4: ; 0x020124F4
 	ldr r3, _020126F8 ; =0x020A728C
 	lsl r1, r1, #4
 	mov r2, #1
-	.hword 0xF01E, 0xE916 ; blx FUN_02030734
+	.hword 0xF01E, 0xE916 ; blx Heap_AllocDebug
 	add r4, r0, #0
 	bl FUN_020070a4
 	str r0, [r4]

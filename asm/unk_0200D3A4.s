@@ -282,7 +282,7 @@ _0200DA64:
 	thumb_func_start FUN_0200da74
 FUN_0200da74: ; 0x0200DA74
 	add r4, r0, #0
-	.hword 0xF075, 0xE8AA ; blx FUN_02082BCC
+	.hword 0xF075, 0xE8AA ; blx MI_CpuFill8
 	mov r0, #1
 	strb r0, [r4, #3]
 	pop {r4, pc}
@@ -503,12 +503,12 @@ _0200DF40:
 	non_word_aligned_thumb_func_start FUN_0200dfca
 FUN_0200dfca: ; 0x0200DFCA
 	lsl r0, r0, #0
-	ldr r3, _0200DFD4 ; =FUN_02082BCC
+	ldr r3, _0200DFD4 ; =MI_CpuFill8
 	mov r1, #0
 	mov r2, #0x42
 	bx r3
 	.balign 4, 0
-_0200DFD4: .word 0x02082BCC ; was FUN_02082BCC
+_0200DFD4: .word 0x02082BCC ; was MI_CpuFill8
 	thumb_func_end FUN_0200dfca
 _0200DFD8:
 	.byte 0x06, 0x23, 0x4B, 0x43, 0x51, 0x00, 0xC0, 0x18

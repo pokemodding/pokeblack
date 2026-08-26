@@ -4,7 +4,7 @@
 	.extern FUN_0205B98C
 	.extern FUN_0205C080
 	.extern FUN_0205EA70
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern MI_CpuCopy8
 	.extern FUN_02085D3C
 	.extern FUN_020862B8
@@ -222,14 +222,14 @@ _0205C33C:
 	mov r1, r6
 	add r0, r0, #0x18
 	mov r2, #0xa
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	ldmia sp!, {r4, r5, r6, pc}
 _0205C394:
 	ldr r0, [r4, #0xc]
 	mov r1, r6
 	add r0, r0, #0x18
 	mov r2, #0xa
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	ldmia sp!, {r4, r5, r6, pc}
 	.balign 4, 0
 _0205C3AC: .word 0x02146AC0
@@ -475,7 +475,7 @@ FUN_0205C6AC: ; 0x0205C6AC
 	mov r5, #0
 	mov r1, r5
 	mov r2, #0x68
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	mov r1, #1
 	mov r0, r6
 	strh r7, [r8, #8]
@@ -531,7 +531,7 @@ FUN_0205C758: ; 0x0205C758
 	mov r1, #0
 	mov r0, r5
 	mov r2, #0x14
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	ldr ip, [r4, #4]
 	ldr r3, _0205C810 ; =FUN_0205A16C
 	ldrh r1, [ip, #8]

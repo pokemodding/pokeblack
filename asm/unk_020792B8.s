@@ -10,7 +10,7 @@
 	.extern FUN_02078D34
 	.extern FUN_02079254
 	.extern FUN_0207A7A8
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 
 	.text
 
@@ -455,7 +455,7 @@ _0207A5F4:
 	ldr r2, [r5, #8]
 	mov r0, r7
 	mov r1, #0
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 _0207A678:
 	add r0, sp, #4
 	bl FUN_02078A80
@@ -483,7 +483,7 @@ _0207A680:
 	ldr r2, [r5, #0x10]
 	mov r0, r7
 	mov r1, #0
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 _0207A6E0:
 	add r0, sp, #4
 	bl FUN_02078A80

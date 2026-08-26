@@ -7,7 +7,7 @@
 	.extern FUN_02077EB8
 	.extern FUN_02078078
 	.extern FUN_0207A528
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_020857B0
 	.extern FUN_02087988
 	.extern FUN_0208799C
@@ -24,7 +24,7 @@ FUN_02078360: ; 0x02078360
 	mov r1, r4
 	mov r2, #0x5c
 	mov r5, r0
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	str r4, [r5, #0x10]
 	str r4, [r5, #0xc]
 	ldmia sp!, {r3, r4, r5, pc}

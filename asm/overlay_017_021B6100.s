@@ -5,7 +5,7 @@
 	.extern FUN_0201D7EC
 	.extern FUN_0201D83C
 	.extern FUN_0202EB0C
-	.extern FUN_020307B0
+	.extern Heap_Free
 	.extern FUN_02034F5C
 	.extern FUN_020435F4
 	.extern FUN_02043754
@@ -262,7 +262,7 @@ FUN_021B6298: ; 0x021B6298
 	blx FUN_02082A60
 _021B62E2:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x16
 	mov r1, #2
 	mov r2, #0
@@ -288,7 +288,7 @@ _021B62E2:
 	blx FUN_02082A60
 _021B6320:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x16
 	mov r1, #0
 	mov r2, #0
@@ -314,7 +314,7 @@ _021B6320:
 	blx FUN_02082A60
 _021B635E:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x10
 	pop {r3, r4, r5, pc}
 	thumb_func_end FUN_021B6298

@@ -8,7 +8,7 @@
 	.extern FUN_0205D434
 	.extern FUN_0205EA44
 	.extern FUN_0205EB20
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern MI_CpuCopy8
 	.extern FUN_020870D0
 	.extern FUN_020949F4
@@ -177,7 +177,7 @@ FUN_0205B37C: ; 0x0205B37C
 	add r0, r2, #0x1400
 	mov r1, #0
 	mov r2, #0x52
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	add r0, r5, #0x1000
 	ldrb r1, [r0, #0x4bd]
 	add r2, r5, #0x68

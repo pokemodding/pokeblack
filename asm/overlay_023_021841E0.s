@@ -43,8 +43,8 @@
 	.extern FUN_02027F60
 	.extern FUN_02027FD8
 	.extern FUN_0203064C
-	.extern FUN_02030734
-	.extern FUN_020307B0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern FUN_0203101C
 	.extern FUN_020310C4
 	.extern FUN_02031140
@@ -124,7 +124,7 @@
 	.extern FUN_0207D534
 	.extern FUN_0207E51C
 	.extern FUN_02082B0C
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_021840FC
 	.extern FUN_02184114
 	.extern FUN_02184174
@@ -357,7 +357,7 @@ LAB_overlay_d_23__02184582: ; 0x02184582
 	ldr r2, _0218466C ; =0x00009E84
 	mov r1, #0
 	add r4, r0, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	mov r0, #0x28
 	blx FUN_0203F8F4
 	mov r0, #0x28
@@ -906,7 +906,7 @@ _02184A1C:
 	mov r0, #0x28
 	lsl r1, r1, #0xa
 	add r2, r7, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r6, #0x7e
 	str r0, [r5, r6]
 	mov r0, #0x6b
@@ -928,7 +928,7 @@ FUN_overlay_d_23__02184b04: ; 0x02184B04
 	add r5, r0, #0
 	ldr r0, _02184B30 ; =0x00004288
 	ldr r0, [r5, r0]
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r4, #0
 	thumb_func_end FUN_overlay_d_23__02184b04
 _02184B12:

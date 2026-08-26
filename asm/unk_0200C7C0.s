@@ -3,8 +3,8 @@
 	.extern FUN_0200C720
 	.extern FUN_02012EBC
 	.extern FUN_0201AF80
-	.extern FUN_020307b0
-	.extern FUN_02082BCC
+	.extern Heap_Free
+	.extern MI_CpuFill8
 
 	.text
 
@@ -78,7 +78,7 @@ FUN_0200c9f6: ; 0x0200C9F6
 	ldr r2, _0200CA08 ; =0x000004D4
 	mov r1, #0
 	add r4, r0, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	ldr r0, _0200CA0C ; =0xBEEFCAFE
 	str r0, [r4]
 	pop {r4, pc}
@@ -428,7 +428,7 @@ _0200CF82:
 	cmp r4, r0
 	bls _0200CF66
 	add r0, r6, #0
-	blx FUN_020307b0
+	blx Heap_Free
 	add r0, r5, #0
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0

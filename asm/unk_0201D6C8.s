@@ -2,7 +2,7 @@
 
 	.extern FUN_0201D69C
 	.extern FUN_0201DB20
-	.extern FUN_020307b0
+	.extern Heap_Free
 	.extern FUN_02045A90
 	.extern FUN_020493D4
 	.extern FUN_0204944C
@@ -198,7 +198,7 @@ FUN_0201D7EC: ; 0x0201D7EC
 
 	non_word_aligned_thumb_func_start FUN_0201d806
 FUN_0201d806: ; 0x0201D806
-	.hword 0xF012, 0xEF96 ; blx FUN_02030734
+	.hword 0xF012, 0xEF96 ; blx Heap_AllocDebug
 	add r4, r0, #0
 	beq _0201D830
 	add r0, r6, #0
@@ -287,7 +287,7 @@ _0201D898:
 	add r0, r7, #0
 	add r1, r6, #0
 	mov r2, #0
-	.hword 0xF012, 0xEF44 ; blx FUN_02030734
+	.hword 0xF012, 0xEF44 ; blx Heap_AllocDebug
 	add r1, r5, #0
 	add r1, #0x84
 	str r0, [r1]
@@ -392,7 +392,7 @@ _0201D94C:
 	ldr r3, _0201D9BC ; =0x020A7358
 	add r0, r7, #0
 	mov r2, #0
-	.hword 0xF012, 0xEEE6 ; blx FUN_02030734
+	.hword 0xF012, 0xEEE6 ; blx Heap_AllocDebug
 	add r1, r5, #0
 	add r1, #0x90
 	str r0, [r1]
@@ -416,7 +416,7 @@ FUN_0201d984: ; 0x0201D984
 	str r0, [sp]
 	add r0, r7, #0
 	mov r2, #0
-	.hword 0xF012, 0xEED4 ; blx FUN_02030734
+	.hword 0xF012, 0xEED4 ; blx Heap_AllocDebug
 	thumb_func_end FUN_0201d984
 
 	non_word_aligned_thumb_func_start FUN_0201d98e
@@ -460,21 +460,21 @@ FUN_0201D9C8: ; 0x0201D9C8
 
 	thumb_func_start FUN_0201d9d4
 FUN_0201d9d4: ; 0x0201D9D4
-	blx FUN_020307b0
+	blx Heap_Free
 _0201D9D8:
 	add r0, r4, #0
 	add r0, #0x84
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _0201D9E6
-	.hword 0xF012, 0xEEE6 ; blx FUN_020307b0
+	.hword 0xF012, 0xEEE6 ; blx Heap_Free
 _0201D9E6:
 	add r0, r4, #0
 	add r0, #0x88
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _0201D9F4
-	blx FUN_020307b0
+	blx Heap_Free
 _0201D9F4:
 	ldr r0, [r4, #0x50]
 	cmp r0, #0

@@ -47,7 +47,7 @@
 	.extern FUN_02028148
 	.extern FUN_02028178
 	.extern FUN_020306F0
-	.extern FUN_020307B0
+	.extern Heap_Free
 	.extern FUN_02030EAC
 	.extern FUN_020315D4
 	.extern FUN_02039338
@@ -2255,7 +2255,7 @@ _021BAA56:
 	cmp r4, #9
 	blt _021BAA56
 	ldr r0, [sp, #0x14]
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [sp, #0x10]
 	blx FUN_02049238
 	ldr r1, _021BAA98 ; =0x021BAA9D
@@ -3312,7 +3312,7 @@ _021BB5CE:
 _021BB5DA:
 	ldr r0, _021BB658 ; =0x00000CB4
 	ldr r0, [r5, r0]
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, _021BB658 ; =0x00000CB4
 	mov r4, #0xa3
 	mov r7, #0

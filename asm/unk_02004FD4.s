@@ -543,7 +543,7 @@ _02005526:
 	mov r2, #0
 	add r3, r7, #0
 	mov r5, #0x28
-	.hword 0xF02B, 0xE8F4 ; blx FUN_02030734
+	.hword 0xF02B, 0xE8F4 ; blx Heap_AllocDebug
 	ldr r4, _020055D4 ; =0x020AA194
 	str r0, [r4, #0x10]
 	mov r0, #4
@@ -555,7 +555,7 @@ _02005526:
 	mov r0, #0
 	mov r2, #0
 	add r3, r7, #0
-	.hword 0xF02B, 0xE8E6 ; blx FUN_02030734
+	.hword 0xF02B, 0xE8E6 ; blx Heap_AllocDebug
 	ldr r1, [r4, #0x10]
 	str r0, [r1, #0x1c]
 	ldr r1, [r4, #0x10]
@@ -572,7 +572,7 @@ _02005526:
 	mov r0, #0
 	mov r2, #0
 	add r3, r7, #0
-	.hword 0xF02B, 0xE8D2 ; blx FUN_02030734
+	.hword 0xF02B, 0xE8D2 ; blx Heap_AllocDebug
 	ldr r1, [r4, #0x10]
 	str r0, [r1, #0x24]
 	ldr r1, [r4, #0x10]

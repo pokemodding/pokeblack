@@ -12,7 +12,7 @@
 	.extern FUN_0207ACD4
 	.extern FUN_0208139C
 	.extern FUN_020816FC
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern MI_CpuCopy8
 	.extern FUN_02085D3C
 	.extern FUN_020862B8
@@ -105,7 +105,7 @@ FUN_02078CCC: ; 0x02078CCC
 	add r0, r4, r5
 	sub r2, r6, r5
 	mov r1, #0
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	ldmia sp!, {r4, r5, r6, pc}
 	arm_func_end FUN_02078CCC
 
@@ -281,7 +281,7 @@ FUN_02078F30: ; 0x02078F30
 	mov r1, #0
 	mov r2, #0x14
 	mov r6, r3
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	ldr sl, _02079028 ; =0x02150D20
 	add r4, sp, #4
 	ldr r0, [sl, #0x18]
@@ -394,7 +394,7 @@ _020790D8:
 	ldr r0, [r5, #4]
 	mov r2, r4
 	mov r1, #0
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	bl FUN_02088234
 	ldmia sp!, {r3, r4, r5, pc}
 _020790F8:

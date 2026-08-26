@@ -78,8 +78,8 @@
 	.extern FUN_0202D01C
 	.extern FUN_0202D034
 	.extern FUN_0202F72C
-	.extern FUN_02030734
-	.extern FUN_020307B0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern FUN_02030EAC
 	.extern FUN_02031140
 	.extern FUN_02035C60
@@ -889,7 +889,7 @@ FUN_overlay_d_198__0220b6d0: ; 0x0220B6D0
 	mul r1, r6
 	lsr r0, r0, #0x10
 	lsl r1, r1, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r7, r0, #0
 	ldr r0, [sp, #0x14]
 	add r1, r7, #0
@@ -910,7 +910,7 @@ FUN_overlay_d_198__0220b6d0: ; 0x0220B6D0
 	mov r0, #6
 	blx FUN_02041B6C
 	add r0, r7, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	pop {r3, r4, r5, r6, r7, pc}
 	nop
@@ -6895,7 +6895,7 @@ FUN_overlay_d_198__0220e82c: ; 0x0220E82C
 	ldr r1, [sp, #0xc]
 	blx FUN_0204A9D0
 	add r0, r7, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [sp, #8]
 	blx FUN_02049238
 	lsl r0, r4, #0x18
@@ -6964,7 +6964,7 @@ FUN_overlay_d_198__0220e8b4: ; 0x0220E8B4
 	ldr r1, [sp, #0xc]
 	blx FUN_0204A9D0
 	ldr r0, [sp, #8]
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [sp, #4]
 	blx FUN_02049238
 	lsl r0, r7, #0x18
@@ -10100,7 +10100,7 @@ _022104C4:
 	add r0, r5, #0
 	blx FUN_02030EAC
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #1
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
@@ -10278,7 +10278,7 @@ FUN_overlay_d_198__02210608: ; 0x02210608
 	add r1, #0xc
 	bl FUN_overlay_d_198__0220b120
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [r5]
 	mov r1, #0x11
 	ldrh r0, [r0, #0x10]
@@ -10293,7 +10293,7 @@ FUN_overlay_d_198__02210608: ; 0x02210608
 	add r1, #0xc
 	bl FUN_overlay_d_198__0220b3b4
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r4, #0x1e
 	str r7, [sp]
 	lsl r4, r4, #4
@@ -11199,7 +11199,7 @@ _02210D5A:
 	lsr r0, r0, #0x18
 	blx FUN_02041B6C
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add r5, r5, #1
 	cmp r5, #2
 	blo _02210D5A
@@ -12180,7 +12180,7 @@ _02211448:
 	lsl r0, r0, #0x10
 	lsr r0, r0, #0x10
 	mov r1, #0xc0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	ldr r2, _022117A8 ; =0x00002499
 	mov r1, #5
 	ldrb r2, [r4, r2]
@@ -12220,7 +12220,7 @@ _02211448:
 	add r2, r6, #0
 	bl FUN_0202CAC4
 	add r0, r6, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r2, _022117A8 ; =0x00002499
 	add r0, sp, #0xc
 	ldrb r2, [r4, r2]

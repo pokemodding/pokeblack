@@ -65,7 +65,7 @@ _02009C8E:
 	add r0, r1, r0
 	mov r1, #0
 	mov r2, #0x30
-	.hword 0xF078, 0xEF98 ; blx FUN_02082BCC
+	.hword 0xF078, 0xEF98 ; blx MI_CpuFill8
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
 _02009CA0: .word 0x0000270F
@@ -382,7 +382,7 @@ _0200A2F4:
 	thumb_func_start FUN_0200a364
 FUN_0200a364: ; 0x0200A364
 	add r7, r3, #0
-	.hword 0xF078, 0xEC32 ; blx FUN_02082BCC
+	.hword 0xF078, 0xEC32 ; blx MI_CpuFill8
 	cmp r4, #0
 	beq _0200A374
 	cmp r4, #1
@@ -430,7 +430,7 @@ _0200A394:
 	ldr r0, [r5]
 	add r1, r4, #0
 	lsl r2, r2, #2
-	.hword 0xF078, 0xEC06 ; blx FUN_02082BCC
+	.hword 0xF078, 0xEC06 ; blx MI_CpuFill8
 	add r0, r5, #0
 	bl FUN_0200A480
 	thumb_func_end FUN_0200a38a

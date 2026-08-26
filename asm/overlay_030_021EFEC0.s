@@ -5,8 +5,8 @@
 	.extern FUN_020120F4
 	.extern FUN_0201283C
 	.extern FUN_02012944
-	.extern FUN_02030734
-	.extern FUN_020307B0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern FUN_0203D34C
 	.extern FUN_0203FB44
 	.extern FUN_0203FCA0
@@ -280,7 +280,7 @@ FUN_overlay_d_30__021f00c8: ; 0x021F00C8
 	mov r1, #0x20
 	mov r2, #1
 	mov r6, #0x15
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	strh r6, [r4, #8]
 	str r5, [r4, #0x18]
@@ -320,7 +320,7 @@ FUN_overlay_d_30__021f0118: ; 0x021F0118
 	mov r1, #0
 	strh r1, [r0]
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	pop {r4, pc}
 	nop
 	thumb_func_end FUN_overlay_d_30__021f0118

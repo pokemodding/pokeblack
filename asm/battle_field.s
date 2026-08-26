@@ -146,8 +146,8 @@
 	.extern FUN_0202E7E4
 	.extern FUN_0203064C
 	.extern FUN_020306F0
-	.extern FUN_02030734
-	.extern FUN_020307B0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern FUN_0203101C
 	.extern FUN_020310C4
 	.extern FUN_02031140
@@ -233,7 +233,7 @@
 	.extern FUN_02082A48
 	.extern FUN_02082A7C
 	.extern FUN_02082A90
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_02082D44
 	.extern FUN_02085CBC
 	.extern FUN_0209AC04
@@ -638,7 +638,7 @@ FUN_overlay_d_93__021ef958: ; 0x021EF958
 	ldr r3, _021EF97C ; =_021F3AF8
 	add r1, #0x5c
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	mov r1, #0
 	add r4, r0, #0
 	bl FUN_overlay_d_93__021ef988
@@ -1158,3 +1158,9 @@ FUN_overlay_d_93__021efce4: ; 0x021EFCE4
 	ldr r0, [r1, r0]
 	bx lr
 	thumb_func_end FUN_overlay_d_93__021efce4
+
+	.section .data, 4
+	.global battle_field_data
+battle_field_data:
+_021F3AF8:
+	.byte 0x62, 0x74, 0x6C, 0x5F, 0x66, 0x69, 0x65, 0x6C, 0x64, 0x2E, 0x63, 0x00

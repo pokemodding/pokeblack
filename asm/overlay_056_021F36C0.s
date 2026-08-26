@@ -26,7 +26,7 @@
 	.extern FUN_02048B0C
 	.extern FUN_02048B30
 	.extern FUN_0207C9D0
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_02164010
 	.extern FUN_0216D88C
 	.extern FUN_0216DAC8
@@ -298,7 +298,7 @@ FUN_overlay_d_56__021f3a14: ; 0x021F3A14
 	add r0, r4, #0
 	mov r1, #0
 	mov r2, #0x30
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end FUN_overlay_d_56__021f3a14

@@ -1,9 +1,5 @@
 @
 @ ARM9 Data Section for Pokemon Black
-@ Auto-generated from ROM analysis
-@
-@ This file contains literal pools and data values
-@ referenced by PC-relative loads in the code.
 @
 
 	.section .rodata

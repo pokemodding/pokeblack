@@ -1,7 +1,7 @@
 	.include "asm/macros/function.inc"
 
 	.extern FUN_02080D68
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern MI_CpuCopy8
 
 	.text
@@ -107,7 +107,7 @@ FUN_0208122C: ; 0x0208122C
 	add r0, r5, #0x18
 	add r0, r0, r8
 	mov r8, r1
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	mov r0, r5
 	bl FUN_02080D68
 	mov r2, #0x40
@@ -118,7 +118,7 @@ _0208128C:
 	add r0, r0, r8
 	sub r2, r2, #8
 	mov r1, #0
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 _020812A8:
 	mov r0, r5
 	str r6, [r5, #0x50]
@@ -131,7 +131,7 @@ _020812A8:
 	mov r0, r5
 	mov r1, #0
 	mov r2, #0x58
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	ldmia sp!, {r4, r5, r6, r7, r8, pc}
 	.balign 4, 0
 _020812DC: .word 0x020A84C4
@@ -159,7 +159,7 @@ _0208132C:
 	movhi r6, r7
 	mov r2, r6
 	add r0, r5, r0
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	ldr r0, [sb, #0x54]
 	sub r7, r7, r6
 	add r0, r0, r6

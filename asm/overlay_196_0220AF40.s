@@ -2,7 +2,7 @@
 
 	.extern FUN_0201C4E4
 	.extern FUN_0201C6C4
-	.extern FUN_02030734
+	.extern Heap_AllocDebug
 	.extern FUN_02041B6C
 	.extern FUN_02045334
 	.extern FUN_02045374
@@ -24,7 +24,7 @@ FUN_overlay_196__0220af40: ; 0x0220AF40
 	mov r1, #0x18
 	mov r2, #0
 	add r4, r0, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	strh r4, [r0, #0x10]
 	mov r1, #1
 	str r1, [r0, #0x14]

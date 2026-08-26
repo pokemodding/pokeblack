@@ -47,7 +47,7 @@
 	.extern FUN_0202F114
 	.extern FUN_0202F138
 	.extern FUN_0202F144
-	.extern FUN_020307B0
+	.extern Heap_Free
 	.extern FUN_02035C60
 	.extern FUN_020362DC
 	.extern FUN_0203630C
@@ -1281,7 +1281,7 @@ _0220BAC0:
 	cmp r0, #3
 	blo _0220BA44
 	ldr r0, [sp, #0xc]
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r7, _0220BB18 ; =0x00000539
 	mov r4, #0
 	sub r0, r7, #4
@@ -2062,7 +2062,7 @@ _0220C19E:
 	ldr r1, [sp, #0x18]
 	blx FUN_0204A9D0
 	add r0, r7, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [sp, #0xc]
 	add r1, r6, #0
 	bl FUN_02020E60
@@ -2271,7 +2271,7 @@ FUN_overlay_d_197__0220c304: ; 0x0220C304
 	mov r3, #0x80
 	bl FUN_020215BC
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add r0, r6, #0
 	blx FUN_02049238
 	add sp, #0x10

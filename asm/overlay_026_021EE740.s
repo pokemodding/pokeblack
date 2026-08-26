@@ -5,7 +5,7 @@
 	.extern FUN_02006224
 	.extern FUN_02014A10
 	.extern FUN_0204B908
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_0209C0A4
 	.extern FUN_0209C2B0
 	.extern FUN_021A2108
@@ -1548,7 +1548,7 @@ FUN_overlay_d_26__021ef9b0: ; 0x021EF9B0
 	mov r1, #0
 	mov r2, #0x40
 	add r5, r0, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	mov r0, #3
 	bl FUN_020056EC
 	str r0, [r5, #0x38]
@@ -1559,7 +1559,7 @@ FUN_overlay_d_26__021ef9b0: ; 0x021EF9B0
 
 	thumb_func_start FUN_overlay_d_26__021ef9cc
 FUN_overlay_d_26__021ef9cc: ; 0x021EF9CC
-	ldr r3, _021EF9D4 ; =FUN_02082BCC
+	ldr r3, _021EF9D4 ; =MI_CpuFill8
 	mov r1, #0
 	mov r2, #0x40
 	bx r3

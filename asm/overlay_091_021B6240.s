@@ -131,8 +131,8 @@
 	.extern FUN_0202F038
 	.extern FUN_0203064C
 	.extern FUN_020306F0
-	.extern FUN_02030734
-	.extern FUN_020307B0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern FUN_02030EAC
 	.extern FUN_0203101C
 	.extern FUN_020310C4
@@ -300,7 +300,7 @@ _021B6284:
 	add r0, r4, #0
 	mov r1, #0x98
 	add r2, r6, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	str r0, [sp, #8]
 	add r0, r4, #0
 	bl FUN_0201A920
@@ -371,7 +371,7 @@ _021B62DC:
 	ldr r0, [r0]
 	bl FUN_0201A98C
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add r0, r6, #1
 	lsl r0, r0, #0x18
 	lsr r6, r0, #0x18
@@ -494,7 +494,7 @@ _021B63D2:
 	add r1, r4, #0
 	bl FUN_0201A98C
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add r0, r5, #1
 	lsl r0, r0, #0x18
 	lsr r5, r0, #0x18
@@ -507,7 +507,7 @@ _021B63D2:
 	mov r1, #0xc
 	mov r2, #0
 	mov r4, #0xc
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	ldr r2, _021B652C ; =0x00003077
 	add r1, r2, #0
 	strh r2, [r0]
@@ -640,7 +640,7 @@ _021B6556:
 	ldr r0, [r0, #0x68]
 	cmp r0, #0
 	beq _021B656A
-	blx FUN_020307B0
+	blx Heap_Free
 _021B656A:
 	mov r0, #0xa
 	lsl r0, r0, #6
@@ -649,7 +649,7 @@ _021B656A:
 	ldr r0, [r0, #0x6c]
 	cmp r0, #0
 	beq _021B657C
-	blx FUN_020307B0
+	blx Heap_Free
 _021B657C:
 	add r0, r4, #1
 	lsl r0, r0, #0x18
@@ -662,15 +662,15 @@ _021B657C:
 	ldr r0, [r0, #0x14]
 	cmp r0, #0
 	beq _021B6596
-	blx FUN_020307B0
+	blx Heap_Free
 _021B6596:
 	mov r4, #0xa
 	lsl r4, r4, #6
 	ldr r0, [r6, r4]
 	ldr r0, [r0]
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [r6, r4]
-	blx FUN_020307B0
+	blx Heap_Free
 _021B65A8:
 	ldr r0, [sp]
 	blx FUN_020315D4
@@ -2661,7 +2661,7 @@ FUN_overlay_d_91__021b7624: ; 0x021B7624
 	add r5, r0, #0
 	lsl r6, r6, #2
 	ldr r0, [r5, r6]
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r4, #0
 	add r6, #0x20
 	sub r7, r4, #1
@@ -3842,7 +3842,7 @@ _021B7FA0:
 	add r2, r6, #0
 	bl FUN_02017E40
 	add r0, r6, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r2, [r4, r5]
 	ldr r0, [r4, #0x38]
 	add r2, #0x44
@@ -8585,7 +8585,7 @@ FUN_overlay_d_91__021ba6a0: ; 0x021BA6A0
 	mov r0, #0x9f
 	str r0, [sp]
 	ldrh r0, [r6]
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r5, r0, #0
 	ldr r0, [sp, #0x18]
 	strb r4, [r5, #4]
@@ -8756,7 +8756,7 @@ FUN_overlay_d_91__021ba81c: ; 0x021BA81C
 	ldr r3, _021BA884 ; =_021BED18
 	mov r1, #0x44
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	mov r0, #6
 	add r7, #0x72
@@ -8824,7 +8824,7 @@ FUN_overlay_d_91__021ba890: ; 0x021BA890
 	thumb_func_end FUN_overlay_d_91__021ba890
 _021BA8C4:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	pop {r4, pc}
 
 	thumb_func_start FUN_overlay_d_91__021ba8cc
@@ -10524,7 +10524,7 @@ FUN_overlay_d_91__021bb594: ; 0x021BB594
 	mov r1, #0x38
 	mov r2, #0
 	mov r6, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	ldrh r0, [r5]
 	mov r1, #1
@@ -10594,7 +10594,7 @@ _021BB624:
 	ldr r0, [r4, #8]
 	blx FUN_02031140
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	pop {r4, pc}
 
 	thumb_func_start FUN_overlay_d_91__021bb644
@@ -11147,7 +11147,7 @@ FUN_overlay_d_91__021bba8c: ; 0x021BBA8C
 	ldr r3, _021BBADC ; =_021BED38
 	mov r1, #0x84
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	bl FUN_020275E4
 	mov r1, #0x40
@@ -11183,9 +11183,9 @@ FUN_overlay_d_91__021bbae0: ; 0x021BBAE0
 	add r0, r4, #0
 	add r0, #0x80
 	ldr r0, [r0]
-	blx FUN_020307B0
+	blx Heap_Free
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end FUN_overlay_d_91__021bbae0
@@ -11709,7 +11709,7 @@ FUN_overlay_d_91__021bbe74: ; 0x021BBE74
 	cmp r0, #1
 	beq _021BBE96
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x1d
 	pop {r4, r5, r6, pc}
 	thumb_func_end FUN_overlay_d_91__021bbe74
@@ -11751,7 +11751,7 @@ _021BBE96:
 	beq _021BBEF4
 _021BBEEA:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0
 	pop {r4, r5, r6, pc}
 _021BBEF4:
@@ -11761,7 +11761,7 @@ _021BBEF4:
 	cmp r0, #0
 	beq _021BBF0A
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #1
 	pop {r4, r5, r6, pc}
 _021BBF0A:
@@ -11771,7 +11771,7 @@ _021BBF0A:
 	cmp r0, #0
 	beq _021BBF20
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #2
 	pop {r4, r5, r6, pc}
 _021BBF20:
@@ -11836,32 +11836,32 @@ _021BBF96:
 	b _021BBFF8
 _021BBF9C:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #3
 	pop {r4, r5, r6, pc}
 _021BBFA6:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #4
 	pop {r4, r5, r6, pc}
 _021BBFB0:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #5
 	pop {r4, r5, r6, pc}
 _021BBFBA:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #6
 	pop {r4, r5, r6, pc}
 _021BBFC4:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #7
 	pop {r4, r5, r6, pc}
 _021BBFCE:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #8
 	pop {r4, r5, r6, pc}
 _021BBFD8:
@@ -11871,12 +11871,12 @@ _021BBFD8:
 	cmp r0, #0
 	beq _021BBFEE
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0xb
 	pop {r4, r5, r6, pc}
 _021BBFEE:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #9
 	pop {r4, r5, r6, pc}
 _021BBFF8:
@@ -11887,7 +11887,7 @@ _021BBFF8:
 	cmp r0, #0
 	beq _021BC010
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0xa
 	pop {r4, r5, r6, pc}
 _021BC010:
@@ -11897,7 +11897,7 @@ _021BC010:
 	cmp r0, #0
 	beq _021BC026
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0xb
 	pop {r4, r5, r6, pc}
 _021BC026:
@@ -11908,7 +11908,7 @@ _021BC026:
 	cmp r0, #0
 	beq _021BC03E
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0xc
 	pop {r4, r5, r6, pc}
 _021BC03E:
@@ -11918,13 +11918,13 @@ _021BC03E:
 	cmp r0, #0
 	ble _021BC054
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0xd
 	pop {r4, r5, r6, pc}
 _021BC054:
 	bge _021BC060
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x13
 	pop {r4, r5, r6, pc}
 _021BC060:
@@ -11934,13 +11934,13 @@ _021BC060:
 	cmp r0, #0
 	ble _021BC076
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0xe
 	pop {r4, r5, r6, pc}
 _021BC076:
 	bge _021BC082
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x14
 	pop {r4, r5, r6, pc}
 _021BC082:
@@ -11950,13 +11950,13 @@ _021BC082:
 	cmp r0, #0
 	ble _021BC098
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0xf
 	pop {r4, r5, r6, pc}
 _021BC098:
 	bge _021BC0A4
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x15
 	pop {r4, r5, r6, pc}
 _021BC0A4:
@@ -11966,13 +11966,13 @@ _021BC0A4:
 	cmp r0, #0
 	ble _021BC0BA
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x10
 	pop {r4, r5, r6, pc}
 _021BC0BA:
 	bge _021BC0C6
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x16
 	pop {r4, r5, r6, pc}
 _021BC0C6:
@@ -11982,13 +11982,13 @@ _021BC0C6:
 	cmp r0, #0
 	ble _021BC0DC
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x11
 	pop {r4, r5, r6, pc}
 _021BC0DC:
 	bge _021BC0E8
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x17
 	pop {r4, r5, r6, pc}
 _021BC0E8:
@@ -11998,13 +11998,13 @@ _021BC0E8:
 	cmp r0, #0
 	ble _021BC0FE
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x12
 	pop {r4, r5, r6, pc}
 _021BC0FE:
 	bge _021BC10A
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add r0, r5, #0
 	pop {r4, r5, r6, pc}
 _021BC10A:
@@ -12015,7 +12015,7 @@ _021BC10A:
 	cmp r0, #0
 	beq _021BC122
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x19
 	pop {r4, r5, r6, pc}
 _021BC122:
@@ -12025,7 +12025,7 @@ _021BC122:
 	cmp r0, #0
 	beq _021BC138
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add r0, r6, #0
 	pop {r4, r5, r6, pc}
 _021BC138:
@@ -12035,7 +12035,7 @@ _021BC138:
 	cmp r0, #0
 	beq _021BC14E
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x1b
 	pop {r4, r5, r6, pc}
 _021BC14E:
@@ -12051,12 +12051,12 @@ _021BC14E:
 	beq _021BC170
 _021BC166:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x1c
 	pop {r4, r5, r6, pc}
 _021BC170:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add r0, r5, #0
 	pop {r4, r5, r6, pc}
 	.balign 4, 0
@@ -13835,7 +13835,7 @@ FUN_overlay_d_91__021bd05c: ; 0x021BD05C
 	mov r1, #0x20
 	mov r2, #0
 	mov r5, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	ldr r0, [sp, #0x10]
 	ldr r0, [r0]
@@ -13992,7 +13992,7 @@ _021BD1A4:
 	ldr r0, [r5, #4]
 	blx FUN_020452E8
 	add r0, r5, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	pop {r4, r5, r6, pc}
 
 	thumb_func_start FUN_overlay_d_91__021bd1bc
@@ -14055,7 +14055,7 @@ FUN_overlay_d_91__021bd218: ; 0x021BD218
 	ldr r3, _021BD450 ; =_021BED48
 	mov r1, #0x18
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	ldr r0, [sp, #0xc]
 	mov r1, #0x4c
@@ -14326,7 +14326,7 @@ FUN_overlay_d_91__021bd454: ; 0x021BD454
 	ldr r0, [r4, #0xc]
 	blx FUN_0204A8D4
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end FUN_overlay_d_91__021bd454
@@ -15469,7 +15469,7 @@ FUN_overlay_d_91__021bdd78: ; 0x021BDD78
 	cmp r0, #1
 	beq _021BDDA6
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	add r0, r5, #0
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15486,7 +15486,7 @@ _021BDDA6:
 	cmp r5, #2
 	bne _021BDDCA
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15499,7 +15499,7 @@ _021BDDCA:
 	cmp r5, #5
 	bne _021BDDE6
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15512,7 +15512,7 @@ _021BDDE6:
 	cmp r5, #4
 	bne _021BDE02
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15525,7 +15525,7 @@ _021BDE02:
 	cmp r5, #3
 	bne _021BDE1E
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15538,7 +15538,7 @@ _021BDE1E:
 	cmp r5, #1
 	bne _021BDE3A
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15567,7 +15567,7 @@ _021BDE5E:
 	cmp r5, #0
 	bne _021BDEA4
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15586,7 +15586,7 @@ _021BDE7A:
 	cmp r5, r0
 	bhs _021BDEA4
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15603,7 +15603,7 @@ _021BDEA4:
 	cmp r0, #0x64
 	bhs _021BDECA
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15639,7 +15639,7 @@ _021BDEE2:
 	cmp r0, #5
 	blo _021BDF1A
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15655,7 +15655,7 @@ _021BDF1A:
 	cmp r0, #1
 	bne _021BDF3E
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15673,7 +15673,7 @@ _021BDF4C:
 	cmp r0, #1
 	bne _021BDF64
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15758,7 +15758,7 @@ _021BDFF6:
 	cmp r1, r0
 	bge _021BE048
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15767,7 +15767,7 @@ _021BE01E:
 	cmp r5, #0
 	ble _021BE030
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15778,7 +15778,7 @@ _021BE030:
 	cmp r0, #1
 	bne _021BE048
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15815,7 +15815,7 @@ _021BE06C:
 	cmp r1, r0
 	bge _021BE0C0
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15825,7 +15825,7 @@ _021BE094:
 	cmp r0, #0
 	ble _021BE0A8
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15836,7 +15836,7 @@ _021BE0A8:
 	cmp r0, #1
 	bne _021BE0C0
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15874,7 +15874,7 @@ _021BE0E4:
 	cmp r1, r0
 	bge _021BE13A
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15884,7 +15884,7 @@ _021BE10E:
 	cmp r0, #0
 	ble _021BE122
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15895,7 +15895,7 @@ _021BE122:
 	cmp r0, #1
 	bne _021BE13A
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15933,7 +15933,7 @@ _021BE15E:
 	cmp r1, r0
 	bge _021BE1B4
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15943,7 +15943,7 @@ _021BE188:
 	cmp r0, #0
 	ble _021BE19C
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15954,7 +15954,7 @@ _021BE19C:
 	cmp r0, #1
 	bne _021BE1B4
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -15992,7 +15992,7 @@ _021BE1D8:
 	cmp r1, r0
 	bge _021BE22E
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -16002,7 +16002,7 @@ _021BE202:
 	cmp r0, #0
 	ble _021BE216
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -16013,7 +16013,7 @@ _021BE216:
 	cmp r0, #1
 	bne _021BE22E
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -16049,7 +16049,7 @@ _021BE250:
 	cmp r1, r0
 	bge _021BE2A2
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -16058,7 +16058,7 @@ _021BE278:
 	cmp r7, #0
 	ble _021BE28A
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
@@ -16069,13 +16069,13 @@ _021BE28A:
 	cmp r0, #1
 	bne _021BE2A2
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x18
 	mov r0, #1
 	pop {r3, r4, r5, r6, r7, pc}
 _021BE2A2:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0
 	add sp, #0x18
 	pop {r3, r4, r5, r6, r7, pc}
@@ -16105,7 +16105,7 @@ FUN_overlay_d_91__021be2b4: ; 0x021BE2B4
 	cmp r0, #1
 	beq _021BE2EC
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x78
 	add r0, r7, #0
 	pop {r3, r4, r5, r6, r7, pc}
@@ -16677,7 +16677,7 @@ _021BE79A:
 	cmp r6, #1
 	bne _021BE7AE
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x78
 	mov r0, #0
 	pop {r3, r4, r5, r6, r7, pc}
@@ -16707,7 +16707,7 @@ _021BE7AE:
 	add r0, r5, #0
 	bl FUN_overlay_d_91__021bea48
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x78
 	add r0, r7, #0
 	pop {r3, r4, r5, r6, r7, pc}
@@ -16733,7 +16733,7 @@ _021BE7F2:
 	add r0, r5, #0
 	bl FUN_overlay_d_91__021bea48
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x78
 	add r0, r7, #0
 	pop {r3, r4, r5, r6, r7, pc}
@@ -16760,13 +16760,13 @@ _021BE82C:
 	add r0, r5, #0
 	bl FUN_overlay_d_91__021bea48
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add sp, #0x78
 	add r0, r7, #0
 	pop {r3, r4, r5, r6, r7, pc}
 _021BE868:
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add r0, r7, #0
 	add sp, #0x78
 	pop {r3, r4, r5, r6, r7, pc}

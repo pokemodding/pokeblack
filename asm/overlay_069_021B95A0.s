@@ -43,7 +43,7 @@
 	.extern FUN_0202CD94
 	.extern FUN_0202CEBC
 	.extern FUN_0203064C
-	.extern FUN_020307B0
+	.extern Heap_Free
 	.extern FUN_02030EAC
 	.extern FUN_0203159C
 	.extern FUN_02035C08
@@ -298,7 +298,7 @@ FUN_overlay_d_69__021b9784: ; 0x021B9784
 	push {r4, r5, r6, lr}
 	add r5, r0, #0
 	ldr r0, [r5, #8]
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r6, #1
 	mov r4, #0
 	lsl r6, r6, #8

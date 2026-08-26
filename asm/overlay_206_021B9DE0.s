@@ -30,8 +30,8 @@
 	.extern FUN_0202D7D8
 	.extern FUN_0202D81C
 	.extern FUN_0202D898
-	.extern FUN_02030734
-	.extern FUN_020307B0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern FUN_02030EAC
 	.extern FUN_0203FB44
 	.extern FUN_0204047C
@@ -89,7 +89,7 @@
 	.extern FUN_02061CA4
 	.extern FUN_02062A98
 	.extern FUN_0207D658
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 
 	.text
 
@@ -175,11 +175,11 @@ FUN_overlay_d_206__021b9e68: ; 0x021B9E68
 	add r1, r5, #0
 	mov r2, #0
 	add r6, r0, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	mov r1, #0
 	add r2, r5, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	strh r6, [r4]
 	strh r7, [r4, #0xc]
 	ldr r0, [sp, #0x10]
@@ -512,7 +512,7 @@ _021BA118:
 	ldrh r0, [r4]
 	mov r2, #0
 	mov r5, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	str r0, [sp, #0x20]
 	ldr r2, [sp, #0x20]
 	add r0, r6, #0
@@ -541,7 +541,7 @@ _021BA156:
 	cmp r5, #5
 	blo _021BA156
 	ldr r0, [sp, #0x20]
-	blx FUN_020307B0
+	blx Heap_Free
 	add r0, r4, #0
 	bl FUN_overlay_d_206__021bafc4
 	add r0, r4, #0
@@ -778,7 +778,7 @@ _021BA32E:
 	ldr r0, [r4, #0x2c]
 	bl FUN_0201C4C0
 	add r0, r4, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	pop {r3, r4, r5, pc}
 
 	thumb_func_start FUN_overlay_d_206__021ba374
@@ -1378,7 +1378,7 @@ _021BA942:
 	mov r0, #0x2b
 	lsl r0, r0, #4
 	ldr r0, [r5, r0]
-	blx FUN_020307B0
+	blx Heap_Free
 	pop {r4, r5, r6, pc}
 
 	thumb_func_start FUN_overlay_d_206__021ba960
@@ -1583,7 +1583,7 @@ _021BAACA:
 	ldrh r1, [r5, #0xc]
 	lsl r1, r1, #1
 	ldrh r7, [r0, r1]
-	blx FUN_020307B0
+	blx Heap_Free
 _021BAAE4:
 	ldr r6, _021BACA8 ; =0x000003E7
 	cmp r7, r6
@@ -1896,7 +1896,7 @@ _021BAD48:
 	ldrh r1, [r5, #0xc]
 	lsl r1, r1, #1
 	ldrh r4, [r0, r1]
-	blx FUN_020307B0
+	blx Heap_Free
 _021BAD62:
 	ldr r1, _021BAF44 ; =0x000003E7
 	cmp r4, r1
@@ -2527,7 +2527,7 @@ _021BB252:
 	add r0, sp, #0x10
 	mov r1, #0
 	mov r2, #8
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	add r0, sp, #0x10
 	strh r4, [r0]
 	strh r6, [r0, #2]
@@ -3351,7 +3351,7 @@ _021BB89E:
 	cmp r5, #2
 	blt _021BB818
 	ldr r0, [sp, #0x24]
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [sp, #0xc]
 	mov r5, #0
 	lsl r0, r0, #0x10

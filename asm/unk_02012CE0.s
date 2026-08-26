@@ -23,11 +23,11 @@
 	.extern FUN_0201A2A8
 	.extern FUN_0201A30C
 	.extern FUN_0202428C
-	.extern FUN_020307b0
+	.extern Heap_Free
 	.extern FUN_02034F84
 	.extern FUN_02034FE8
 	.extern FUN_020457B0
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 
 	.text
 
@@ -350,7 +350,7 @@ FUN_020130C4: ; 0x020130C4
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #0xf0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	add r4, #8
 	add r0, r4, #0
 	bl FUN_02013220
@@ -369,7 +369,7 @@ _020130E2:
 	ldr r0, [r5, #0x24]
 	cmp r0, #0
 	beq _020130F0
-	blx FUN_020307b0
+	blx Heap_Free
 _020130F0:
 	ldr r0, [r5, #0x48]
 	cmp r0, #0
@@ -381,7 +381,7 @@ _020130FA:
 	ldr r0, [r5, #0x34]
 	cmp r0, #0
 	beq _02013108
-	blx FUN_020307b0
+	blx Heap_Free
 _02013108:
 	add r4, r4, #1
 	cmp r4, #4
@@ -391,12 +391,12 @@ _02013108:
 	ldr r0, [r0]
 	cmp r0, #0
 	beq _0201311C
-	blx FUN_020307b0
+	blx Heap_Free
 _0201311C:
 	add r0, r6, #0
 	mov r1, #0
 	mov r2, #0xf0
-	.hword 0xF06F, 0xED54 ; blx FUN_02082BCC
+	.hword 0xF06F, 0xED54 ; blx MI_CpuFill8
 	pop {r4, r5, r6, pc}
 	thumb_func_end FUN_020130dc
 _02013128:
@@ -537,7 +537,7 @@ FUN_02013234: ; 0x02013234
 	add r5, r0, #0
 	mov r1, #0x28
 	mov r2, #1
-	.hword 0xF01D, 0xEA78 ; blx FUN_02030734
+	.hword 0xF01D, 0xEA78 ; blx Heap_AllocDebug
 	add r4, r0, #0
 	mov r0, #0x10
 	add r1, r5, #0

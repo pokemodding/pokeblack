@@ -2,7 +2,7 @@
 
 	.extern SVC_GetCRC16
 	.extern FUN_02082A60
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern MI_CpuCopy8
 	.extern FUN_02084A84
 	.extern FUN_020857B0
@@ -230,7 +230,7 @@ FUN_02087F60: ; 0x02087F60
 	mov r1, r4
 	mov r2, #0x300
 	str r0, [r5, #8]
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	mov r0, #3
 	str r0, [r5, #4]
 	ldr r0, [r5, #8]
@@ -287,7 +287,7 @@ FUN_02087FBC: ; 0x02087FBC
 	ldr r0, [r4, #8]
 	mov r1, r6
 	mov r2, r5
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	mov r0, r6
 	str r6, [r4, #4]
 	ldmia sp!, {r4, r5, r6, pc}
@@ -330,7 +330,7 @@ FUN_0208806C: ; 0x0208806C
 	beq _020880F4
 	mov r1, r5
 	mov r2, r6
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	bl FUN_02088118
 	mov r0, r5
 	ldmia sp!, {r3, r4, r5, r6, r7, pc}

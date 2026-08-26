@@ -1,5 +1,6 @@
-# Overlays the ROM stores uncompressed, one id per line.
-# Every other overlay is BLZ compressed by compstatic.
+# Overlays the ROM stores uncompressed
+
+# Every other overlay is BLZ compressed by compstatic
 1
 2
 7

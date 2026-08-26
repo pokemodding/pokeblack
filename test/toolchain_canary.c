@@ -1,5 +1,5 @@
-// Frozen input for `make check-toolchain`. Never edit this file: its compiled
-// output is hash-locked in test/toolchain_canary.sha1.
+//DO NOT EDIT: hash checked in toolchain
+
 
 typedef unsigned char u8;
 typedef unsigned short u16;

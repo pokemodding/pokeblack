@@ -665,10 +665,10 @@ Overlay OVY_93
 	Object		asm/battle_calc.o
 	Object		asm/battle_view_core.o
 	Object		asm/battle_view_scu.o
-	Object		asm/battle_rec.o
+	Object		src/battle_record.o
 	Object		asm/battle_adapter.o
 	Object		asm/battle_field.o
-	Object		asm/battle_rodata.o
+	Object		asm/battle_unattributed.o
 }
 Overlay OVY_94
 {

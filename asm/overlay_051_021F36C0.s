@@ -6,7 +6,7 @@
 	.extern FUN_020122C0
 	.extern FUN_020124E8
 	.extern FUN_02012EC4
-	.extern FUN_02030734
+	.extern Heap_AllocDebug
 	.extern FUN_02082C60
 	.extern FUN_02163994
 	.extern FUN_02164208
@@ -153,7 +153,7 @@ FUN_overlay_d_51__021f3730: ; 0x021F3730
 	add r0, r4, #0
 	mov r1, #0xa4
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	ldr r0, [sp, #4]
 	add r1, sp, #0x1c

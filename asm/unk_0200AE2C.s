@@ -5,8 +5,8 @@
 	.extern FUN_020072CC
 	.extern FUN_0200B888
 	.extern FUN_0200B8AC
-	.extern FUN_02030734
-	.extern FUN_02082BCC
+	.extern Heap_AllocDebug
+	.extern MI_CpuFill8
 	.extern MI_CpuCopy8
 
 	.text
@@ -248,7 +248,7 @@ FUN_0200B040: ; 0x0200B040
 	add r0, r4, #0
 	mov r1, #0
 	mov r2, #8
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	add r0, r5, #0
 	mov r1, #0xd
 	bl FUN_0200AE54
@@ -402,7 +402,7 @@ FUN_0200B3DC: ; 0x0200B3DC
 	ldr r3, _0200B3FC ; =0x020A71C4
 	lsl r1, r1, #0xc
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	bl FUN_0200B448
 	add r0, r4, #0
@@ -421,7 +421,7 @@ FUN_0200b424: ; 0x0200B424
 	push {r4, lr}
 	ldr r4, _0200B434 ; =0x0214616C
 	ldr r0, [r4]
-	.hword 0xF025, 0xE9C2 ; blx FUN_020307b0
+	.hword 0xF025, 0xE9C2 ; blx Heap_Free
 	mov r0, #0
 	str r0, [r4]
 	pop {r4, pc}

@@ -27,7 +27,7 @@
 	.extern FUN_02027584
 	.extern FUN_0202889C
 	.extern FUN_0202E794
-	.extern FUN_020307b0
+	.extern Heap_Free
 	.extern MI_CpuCopy8
 	.extern FUN_02159BBC
 	.extern FUN_0215E334
@@ -44,7 +44,7 @@ FUN_02012704: ; 0x02012704
 	ldr r5, _02012794 ; =0x000006AC
 	add r4, r0, #0
 	ldr r0, [r4, r5]
-	blx FUN_020307b0
+	blx Heap_Free
 	add r0, r5, #0
 	sub r0, #0x1c
 	ldr r0, [r4, r0]
@@ -66,7 +66,7 @@ FUN_02012704: ; 0x02012704
 	bl FUN_02006E64
 	sub r0, r5, #4
 	ldr r0, [r4, r0]
-	blx FUN_020307b0
+	blx Heap_Free
 	add r0, r5, #0
 	sub r0, #8
 	ldr r0, [r4, r0]
@@ -74,7 +74,7 @@ FUN_02012704: ; 0x02012704
 	add r0, r5, #0
 	sub r0, #0x18
 	ldr r0, [r4, r0]
-	blx FUN_020307b0
+	blx Heap_Free
 	add r0, r5, #4
 	ldr r0, [r4, r0]
 	bl FUN_0216CCB0
@@ -100,7 +100,7 @@ FUN_02012780: ; 0x02012780
 	ldr r0, [r4, r5]
 	bl FUN_0202889C
 	add r0, r4, #0
-	blx FUN_020307b0
+	blx Heap_Free
 	pop {r3, r4, r5, pc}
 	nop
 _02012794: .word 0x000006AC
@@ -182,7 +182,7 @@ _0201281C:
 FUN_02012826: ; 0x02012826
 	mov r1, #0
 	sub r2, #0x2c
-	.hword 0xF070, 0xE9D0 ; blx FUN_02082BCC
+	.hword 0xF070, 0xE9D0 ; blx MI_CpuFill8
 	mov r0, #0xff
 	lsl r0, r0, #2
 	add r0, r4, r0

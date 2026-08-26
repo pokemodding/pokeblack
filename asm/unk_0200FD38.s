@@ -398,7 +398,7 @@ FUN_02010068: ; 0x02010068
 	blx FUN_02082A60
 _020100BC:
 	add r0, r7, #0
-	.hword 0xF020, 0xEB78 ; blx FUN_020307b0
+	.hword 0xF020, 0xEB78 ; blx Heap_Free
 	ldr r1, _02010150 ; =0x0209DEA4
 	add r0, r6, #0
 	ldrh r1, [r1, r4]
@@ -429,7 +429,7 @@ FUN_020100e4: ; 0x020100E4
 	blx FUN_02082A60
 _020100FC:
 	add r0, r7, #0
-	.hword 0xF020, 0xEB58 ; blx FUN_020307b0
+	.hword 0xF020, 0xEB58 ; blx Heap_Free
 	thumb_func_end FUN_020100e4
 
 	non_word_aligned_thumb_func_start FUN_02010102
@@ -464,7 +464,7 @@ FUN_02010122: ; 0x02010122
 	blx FUN_02082A60
 _0201013C:
 	add r0, r4, #0
-	.hword 0xF020, 0xEB38 ; blx FUN_020307b0
+	.hword 0xF020, 0xEB38 ; blx Heap_Free
 	add sp, #0x10
 	pop {r3, r4, r5, r6, r7, pc}
 	nop

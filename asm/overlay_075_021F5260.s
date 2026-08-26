@@ -12,7 +12,7 @@
 	.extern FUN_0208068C
 	.extern FUN_02080B98
 	.extern FUN_02080C44
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_021899F0
 	.extern FUN_021899F8
 	.extern FUN_02189A08
@@ -36,7 +36,7 @@ FUN_overlay_75__021f5260: ; 0x021F5260
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #0x30
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	add r2, r4, #0
 	ldmia r5!, {r0, r1}
 	add r2, #0x18

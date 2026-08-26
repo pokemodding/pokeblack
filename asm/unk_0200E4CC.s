@@ -379,7 +379,7 @@ FUN_0200ea3c: ; 0x0200EA3C
 	ldr r0, [sp]
 	mov r1, #0
 	lsl r2, r2, #2
-	.hword 0xF074, 0xE8B2 ; blx FUN_02082BCC
+	.hword 0xF074, 0xE8B2 ; blx MI_CpuFill8
 	mov r0, #0
 	str r0, [sp, #0x10]
 	ldr r0, [sp, #0x18]

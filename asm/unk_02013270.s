@@ -28,7 +28,7 @@
 	.extern FUN_0202A3FC
 	.extern FUN_0202A440
 	.extern FUN_0202A4B4
-	.extern FUN_020307b0
+	.extern Heap_Free
 	.extern FUN_0216AAE4
 
 	.text
@@ -40,7 +40,7 @@ FUN_02013270: ; 0x02013270
 	ldr r0, [r4, #0x14]
 	.hword 0xF032, 0xEAC8 ; blx FUN_02045808
 	add r0, r4, #0
-	blx FUN_020307b0
+	blx Heap_Free
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end FUN_02013270

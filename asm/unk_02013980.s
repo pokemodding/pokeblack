@@ -1,6 +1,6 @@
 	.include "asm/macros/function.inc"
 
-	.extern FUN_02030734
+	.extern Heap_AllocDebug
 	.extern FUN_0204A298
 
 	.text
@@ -21,7 +21,7 @@ FUN_02013980: ; 0x02013980
 	mov r1, #3
 	lsl r1, r1, #0xa
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, #0x94
 	str r0, [r4]
 _020139A4:
@@ -46,7 +46,7 @@ FUN_020139B0: ; 0x020139B0
 	ldr r3, _02013A40 ; =0x020A72B0
 	mov r1, #0x4c
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	str r0, [r4]
 	mov r0, #0xc
 	add r1, r5, #0

@@ -6,7 +6,7 @@
 	.extern FUN_020080a0
 	.extern FUN_020080fc
 	.extern FUN_02020fe4
-	.extern FUN_02030734
+	.extern Heap_AllocDebug
 
 	.text
 
@@ -20,7 +20,7 @@ FUN_02007aa4: ; 0x02007AA4
 	str r1, [sp]
 	mov r1, #4
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	str r4, [r0]
 	add sp, #4
 	pop {r3, r4, pc}
@@ -31,10 +31,10 @@ _02007AC4: .word 0x020A706C
 
 	thumb_func_start FUN_02007AC8
 FUN_02007AC8: ; 0x02007AC8
-	ldr r3, _02007ACC ; =FUN_020307b0
+	ldr r3, _02007ACC ; =Heap_Free
 	bx r3
 	.balign 4, 0
-_02007ACC: .word 0x020307B0 ; was FUN_020307b0
+_02007ACC: .word 0x020307B0 ; was Heap_Free
 	thumb_func_end FUN_02007AC8
 _02007AD0:
 	.byte 0x70, 0xB5, 0x05, 0x1C, 0x00, 0x24, 0x88, 0x26, 0x20, 0x1C, 0x70, 0x43, 0x28, 0x18, 0x0F, 0xF0
@@ -78,7 +78,7 @@ FUN_02007b20: ; 0x02007B20
 	ldr r3, _02007B40 ; =0x020A707C
 	lsl r1, r1, #2
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	bl FUN_02007b08
 	add r0, r4, #0

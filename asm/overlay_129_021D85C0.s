@@ -26,7 +26,7 @@
 	.extern FUN_020257D0
 	.extern FUN_0202590C
 	.extern FUN_020306F0
-	.extern FUN_020307B0
+	.extern Heap_Free
 	.extern FUN_020315D4
 	.extern FUN_02035C60
 	.extern FUN_020362DC
@@ -115,7 +115,7 @@ _021D8610:
 	ldr r0, [r2]
 	str r0, [r6]
 	add r0, r3, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	b _021D8636
 _021D8624:
 	sub r6, #0x24

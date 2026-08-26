@@ -13,12 +13,15 @@ typedef signed short s16;
 typedef signed int s32;
 typedef signed long long s64;
 
-// Boolean
+// oolean
 typedef u8 bool8;
 typedef u32 bool32;
+typedef s32 BOOL;
 
 #define TRUE  1
 #define FALSE 0
 #define NULL  ((void*)0)
+
+#define NELEMS(a) (sizeof(a) / sizeof((a)[0]))
 
 #endif // TYPES_H

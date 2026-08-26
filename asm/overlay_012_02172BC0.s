@@ -32,8 +32,8 @@
 	.extern FUN_0201AB28
 	.extern FUN_0201AC2C
 	.extern FUN_0203064C
-	.extern FUN_02030734
-	.extern FUN_020307B0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern FUN_02034714
 	.extern FUN_02034A5C
 	.extern FUN_02034AC4
@@ -46,7 +46,7 @@
 	.extern FUN_0203D378
 	.extern FUN_0203D3A8
 	.extern FUN_0203D3F8
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern MI_CpuCopy8
 	.extern FUN_02087C6C
 	.extern FUN_02157450
@@ -79,7 +79,7 @@ FUN_overlay_12__02172bc0: ; 0x02172BC0
 	add r1, r6, #0
 	mov r2, #1
 	mov r7, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r5, r0, #0
 	str r4, [r5]
 	bl FUN_021734E0
@@ -266,7 +266,7 @@ FUN_overlay_d_12__0217325c: ; 0x0217325C
 	add r0, r5, #0
 	mov r1, #0
 	mov r2, #0x64
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	ldr r0, [r4, #0x20]
 	cmp r0, #0
 	beq _0217328A
@@ -493,7 +493,7 @@ FUN_021734E0: ; 0x021734E0
 	add r4, r5, r0
 	add r0, r4, #0
 	mov r2, #0x7c
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	ldr r0, _02173514 ; =0x0000FFFF
 	bl FUN_020056EC
 	strh r0, [r4, #0xc]
@@ -529,7 +529,7 @@ FUN_overlay_d_12__02173524: ; 0x02173524
 	add r0, r6, #0
 	mov r1, #0
 	mov r2, #0x4c
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	add r0, r6, #0
 	bl FUN_overlay_d_12__02173518
 	add r4, r6, #0
@@ -587,7 +587,7 @@ FUN_0217365C: ; 0x0217365C
 	mov r1, #0
 	add r5, r0, #0
 	mov r4, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	mov r7, #0xff
 	mov r6, #0x24
 _0217366E:
@@ -597,7 +597,7 @@ _0217366E:
 	add r0, #0x1a
 	add r1, r7, #0
 	mov r2, #6
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	add r4, r4, #1
 	cmp r4, #0x1e
 	blt _0217366E
@@ -1307,7 +1307,7 @@ _021748B6:
 	blt _021748B6
 _021748D6:
 	ldr r0, [sp, #0x20]
-	blx FUN_020307B0
+	blx Heap_Free
 	ldr r0, [sp, #0x28]
 	mov r1, #1
 	bl FUN_overlay_d_12__02175240
@@ -2157,7 +2157,7 @@ FUN_overlay_d_12__02175280: ; 0x02175280
 	mov r2, #0x58
 	str r3, [sp, #4]
 	mov r4, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	mov r0, #3
 	str r0, [r7, #0x44]
 	mov r0, #0x56
@@ -2254,7 +2254,7 @@ _02175348: .word 0x0217563C
 
 	thumb_func_start FUN_overlay_d_12__0217534c
 FUN_overlay_d_12__0217534c: ; 0x0217534C
-	ldr r3, _02175354 ; =FUN_02082BCC
+	ldr r3, _02175354 ; =MI_CpuFill8
 	mov r1, #0
 	mov r2, #0x58
 	bx r3

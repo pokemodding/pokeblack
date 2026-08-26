@@ -7,7 +7,7 @@
 	.extern FUN_02012EC4
 	.extern FUN_0202B57C
 	.extern FUN_0202B914
-	.extern FUN_020307B0
+	.extern Heap_Free
 	.extern FUN_02048F60
 	.extern FUN_02188C80
 	.extern FUN_02188C84
@@ -109,7 +109,7 @@ FUN_overlay_d_54__021f37b4: ; 0x021F37B4
 	ldr r0, [sp, #0xc]
 	str r0, [r5, #8]
 	add r0, r6, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0x7f
 	mov r1, #2
 	add r2, r7, #0
@@ -134,7 +134,7 @@ FUN_overlay_d_54__021f37b4: ; 0x021F37B4
 	bl FUN_021C4DC0
 	add r0, r6, #0
 	str r7, [r5, #0xc]
-	blx FUN_020307B0
+	blx Heap_Free
 	add r1, r4, #0
 	thumb_func_end FUN_overlay_d_54__021f37b4
 _021F385C:
@@ -174,7 +174,7 @@ _021F3888:
 	str r1, [r2, #0x18]
 	ldr r1, [r0, #4]
 	str r1, [r2, #0x20]
-	blx FUN_020307B0
+	blx Heap_Free
 	add r4, r4, #1
 	cmp r4, #2
 	blt _021F3888

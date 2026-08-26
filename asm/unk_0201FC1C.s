@@ -176,7 +176,7 @@
 	.extern FUN_02082A48
 	.extern FUN_02082A60
 	.extern FUN_02082A7C
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern MI_CpuCopy8
 	.extern FUN_02083484
 	.extern FUN_0208459C
@@ -1482,7 +1482,7 @@ FUN_02020D18: ; 0x02020D18
 	lsr r0, r0, #0x10
 	mov r1, #0xc
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	cmp r0, #0
 	beq _02020D34
 	mov r1, #0
@@ -1691,7 +1691,7 @@ FUN_02020fe4: ; 0x02020FE4
 	bl FUN_02021014
 	add r5, r0, #0
 	add r0, r4, #0
-	blx FUN_020307b0
+	blx Heap_Free
 	add r0, r5, #0
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
@@ -2211,10 +2211,10 @@ _02021530:
 
 	thumb_func_start FUN_02021540
 FUN_02021540: ; 0x02021540
-	ldr r3, _02021544 ; =FUN_020307b0
+	ldr r3, _02021544 ; =Heap_Free
 	bx r3
 	.balign 4, 0
-_02021544: .word 0x020307B0 ; was FUN_020307b0
+_02021544: .word 0x020307B0 ; was Heap_Free
 	thumb_func_end FUN_02021540
 _02021548:
 	.byte 0x18, 0xB4, 0x14, 0x24, 0x4C, 0x43, 0x02, 0x51
@@ -2342,7 +2342,7 @@ _0202168A:
 	ldr r2, [sp, #0x18]
 	bl FUN_020215BC
 	add r0, r4, #0
-	blx FUN_020307b0
+	blx Heap_Free
 	add sp, #8
 	pop {r4, r5, r6, pc}
 	thumb_func_end FUN_0202166e
@@ -3869,7 +3869,7 @@ FUN_0202255c: ; 0x0202255C
 	mov r1, #8
 	mov r2, #0
 	mov r6, #8
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r1, r0, #0
 	str r5, [r1]
 	ldr r0, _020225B0 ; =0x020225D5
@@ -3981,27 +3981,27 @@ FUN_020226A0: ; 0x020226A0
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #0x14
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	add r0, r4, #0
 	add r0, #0x14
 	mov r1, #0
 	mov r2, #0x30
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	add r0, r4, #0
 	add r0, #0x44
 	mov r1, #0
 	mov r2, #0x30
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	add r0, r4, #0
 	add r0, #0x74
 	mov r1, #0
 	mov r2, #0x18
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	add r4, #0x8c
 	add r0, r4, #0
 	mov r1, #0
 	mov r2, #0xc0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end FUN_020226A0
@@ -4150,11 +4150,11 @@ FUN_020229a4: ; 0x020229A4
 	mov r1, #0x24
 	mov r2, #0
 	mov r6, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	mov r1, #0
 	mov r2, #0x24
 	str r0, [r5, #0x14]
-	.hword 0xF060, 0xE902 ; blx FUN_02082BCC
+	.hword 0xF060, 0xE902 ; blx MI_CpuFill8
 	ldr r4, [r5, #0x14]
 	cmp r7, #0
 	ldrh r1, [r5, #0x24]
@@ -4908,7 +4908,7 @@ FUN_02023464: ; 0x02023464
 	lsr r0, r0, #0x10
 	mov r1, #0x4c
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	ldr r1, [r5, #0x10]
 	str r4, [r5, #0x14]
@@ -5775,7 +5775,7 @@ FUN_02023f9a: ; 0x02023F9A
 	mov r1, #0
 	mov r2, #0x20
 	mov r4, #0
-	.hword 0xF05E, 0xEE10 ; blx FUN_02082BCC
+	.hword 0xF05E, 0xEE10 ; blx MI_CpuFill8
 	ldr r0, _02023FD0 ; =0x021468FC
 	str r4, [r0, #0x3c]
 _02023FB2:
@@ -5786,7 +5786,7 @@ _02023FB2:
 	mov r1, #0
 	mov r2, #0x20
 	mov r4, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	ldr r0, _02023FD0 ; =0x021468FC
 	str r4, [r0, #0x1c]
 _02023FC8:
@@ -7550,7 +7550,7 @@ _0202575A:
 	cmp r6, r0
 	blo _0202571C
 	add r0, r5, #0
-	blx FUN_020307b0
+	blx Heap_Free
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
 	thumb_func_end FUN_02025748
@@ -7783,7 +7783,7 @@ _02025C54:
 
 	thumb_func_start FUN_02025ce8
 FUN_02025ce8: ; 0x02025CE8
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	str r5, [r0]
 	str r4, [r0, #0x18]
 	str r6, [r0, #0x1c]
@@ -8131,7 +8131,7 @@ FUN_020261E4: ; 0x020261E4
 	mov r1, #0x88
 	mov r2, #1
 	add r6, r0, #0
-	.hword 0xF00A, 0xEA9E ; blx FUN_02030734
+	.hword 0xF00A, 0xEA9E ; blx Heap_AllocDebug
 	str r0, [sp, #8]
 	str r4, [r0]
 	add r0, r4, #0
@@ -8321,7 +8321,7 @@ FUN_020263D8: ; 0x020263D8
 	mov r2, #8
 	str r1, [r4, #0x20]
 	str r1, [r4, #0x1c]
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	add r0, r4, #0
 	bl FUN_020264F4
 	pop {r4, pc}
@@ -8394,13 +8394,13 @@ _020264AC:
 
 	thumb_func_start FUN_020264F4
 FUN_020264F4: ; 0x020264F4
-	ldr r3, _02026500 ; =FUN_02082BCC
+	ldr r3, _02026500 ; =MI_CpuFill8
 	add r0, #0x24
 	mov r1, #0
 	mov r2, #0x18
 	bx r3
 	nop
-_02026500: .word 0x02082BCC ; was FUN_02082BCC
+_02026500: .word 0x02082BCC ; was MI_CpuFill8
 	thumb_func_end FUN_020264F4
 _02026504:
 	.byte 0xF8, 0xB5, 0x82, 0xB0, 0x05, 0x1C, 0x28, 0x68, 0x2C, 0x1C, 0x0E, 0x1C
@@ -8472,7 +8472,7 @@ _020266F6:
 	add r1, r5, #0
 	mov r2, #1
 	mov r4, #1
-	.hword 0xF00A, 0xE816 ; blx FUN_02030734
+	.hword 0xF00A, 0xE816 ; blx Heap_AllocDebug
 	ldr r1, _02026718 ; =0x02146940
 	sub r2, r4, #2
 	str r0, [r1]
@@ -8830,7 +8830,7 @@ _020269E2:
 	mov r2, #0x60
 	add r0, r1, r0
 	mov r1, #0
-	.hword 0xF05C, 0xE8EA ; blx FUN_02082BCC
+	.hword 0xF05C, 0xE8EA ; blx MI_CpuFill8
 	ldr r1, [sp, #0x14]
 	ldr r0, [sp, #0x18]
 	mov r3, #0xb
@@ -9732,7 +9732,7 @@ FUN_0202751C: ; 0x0202751C
 	add r6, r0, #0
 	add r1, r5, #0
 	mov r2, #1
-	.hword 0xF009, 0xE900 ; blx FUN_02030734
+	.hword 0xF009, 0xE900 ; blx Heap_AllocDebug
 	add r4, r0, #0
 	mov r0, #9
 	add r1, r6, #0
@@ -9778,9 +9778,9 @@ FUN_02027584: ; 0x02027584
 	add r0, r5, #0
 	mov r1, #0
 	add r2, r4, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	add r0, r5, #0
-	.hword 0xF009, 0xE908 ; blx FUN_020307b0
+	.hword 0xF009, 0xE908 ; blx Heap_Free
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
 _020275A4: .word 0x00000B08
@@ -10328,7 +10328,7 @@ FUN_02028760: ; 0x02028760
 	ldr r3, _02028780 ; =0x020A7500
 	mov r1, #0xa
 	mov r2, #0
-	.hword 0xF007, 0xEFE2 ; blx FUN_02030734
+	.hword 0xF007, 0xEFE2 ; blx Heap_AllocDebug
 	add r5, r0, #0
 	bl FUN_020287B4
 	strb r4, [r5]
@@ -10340,10 +10340,10 @@ _02028780: .word 0x020A7500
 
 	thumb_func_start FUN_02028784
 FUN_02028784: ; 0x02028784
-	ldr r3, _02028788 ; =FUN_020307b0
+	ldr r3, _02028788 ; =Heap_Free
 	bx r3
 	.balign 4, 0
-_02028788: .word 0x020307B0 ; was FUN_020307b0
+_02028788: .word 0x020307B0 ; was Heap_Free
 	thumb_func_end FUN_02028784
 
 	thumb_func_start FUN_0202878C
@@ -10481,7 +10481,7 @@ FUN_02028844: ; 0x02028844
 	add r0, r5, #0
 	mov r1, #0xb8
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r1, r6, #0
 	add r4, r0, #0
 	bl FUN_02028CD4
@@ -10525,7 +10525,7 @@ FUN_0202889C: ; 0x0202889C
 	ldr r0, [r0]
 	bl FUN_02028784
 	add r0, r4, #0
-	blx FUN_020307b0
+	blx Heap_Free
 	pop {r4, pc}
 	.balign 4, 0
 	thumb_func_end FUN_0202889C
@@ -11493,7 +11493,7 @@ FUN_02029F14: ; 0x02029F14
 	ldr r3, _02029F3C ; =0x020A76BC
 	mov r1, #0xc
 	mov r2, #1
-	.hword 0xF006, 0xEC08 ; blx FUN_02030734
+	.hword 0xF006, 0xEC08 ; blx Heap_AllocDebug
 	add r4, r0, #0
 	mov r0, #0
 	strh r0, [r4, #4]
@@ -11510,10 +11510,10 @@ _02029F40: .word 0x02146944
 
 	thumb_func_start FUN_02029F44
 FUN_02029F44: ; 0x02029F44
-	ldr r3, _02029F48 ; =FUN_020307b0
+	ldr r3, _02029F48 ; =Heap_Free
 	bx r3
 	.balign 4, 0
-_02029F48: .word 0x020307B0 ; was FUN_020307b0
+_02029F48: .word 0x020307B0 ; was Heap_Free
 	thumb_func_end FUN_02029F44
 
 	thumb_func_start FUN_02029F4C
@@ -11917,7 +11917,7 @@ FUN_0202A440: ; 0x0202A440
 	add r0, r7, #0
 	mov r1, #0x14
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	add r0, r6, #0
 	add r1, r4, #0
@@ -11950,7 +11950,7 @@ FUN_0202A440: ; 0x0202A440
 	add r0, r5, #0
 	bl FUN_0202428C
 	add r0, r4, #0
-	.hword 0xF006, 0xE984 ; blx FUN_020307b0
+	.hword 0xF006, 0xE984 ; blx Heap_Free
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
 _0202A4AC: .word 0x00000159
@@ -11982,7 +11982,7 @@ FUN_0202A4B4: ; 0x0202A4B4
 	mov r2, #0
 	add r3, r6, #0
 	str r5, [sp]
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	str r0, [sp, #0x70]
 	add r0, r5, #1
 	str r0, [sp]
@@ -11991,7 +11991,7 @@ FUN_0202A4B4: ; 0x0202A4B4
 	mov r1, #0x6c
 	mov r2, #0
 	add r3, r6, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	str r0, [sp, #0x68]
 	bl FUN_020173EC
 	add r1, r0, #0
@@ -12001,7 +12001,7 @@ FUN_0202A4B4: ; 0x0202A4B4
 	lsr r0, r0, #0x10
 	mov r2, #0
 	add r3, r6, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	ldr r0, [sp, #0x10]
 	ldr r1, [sp, #0x70]
@@ -12561,11 +12561,11 @@ _0202A932:
 	b _0202A86C
 _0202A96E:
 	ldr r0, [sp, #0x70]
-	blx FUN_020307b0
+	blx Heap_Free
 	ldr r0, [sp, #0x68]
-	.hword 0xF005, 0xEF1C ; blx FUN_020307b0
+	.hword 0xF005, 0xEF1C ; blx Heap_Free
 	add r0, r4, #0
-	blx FUN_020307b0
+	blx Heap_Free
 	add sp, #0x80
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -12766,7 +12766,7 @@ FUN_0202AAF4: ; 0x0202AAF4
 	add r0, r5, #0
 	mov r1, #0x1c
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	add r1, r5, #0
 	add r2, r6, #0
@@ -12844,7 +12844,7 @@ FUN_0202AB8C: ; 0x0202AB8C
 	lsl r1, r6, #2
 	mov r2, #0
 	mov r4, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	str r0, [r5, #0x14]
 	cmp r6, #0
 	ble _0202ABCA
@@ -13198,7 +13198,7 @@ FUN_0202AEEC: ; 0x0202AEEC
 	mov r1, #0x28
 	mov r2, #0
 	mov r7, #0x28
-	.hword 0xF005, 0xEC1A ; blx FUN_02030734
+	.hword 0xF005, 0xEC1A ; blx Heap_AllocDebug
 	add r4, r0, #0
 	mov r0, #0x84
 	add r1, r6, #0
@@ -13210,7 +13210,7 @@ FUN_0202AEEC: ; 0x0202AEEC
 	add r1, r4, #0
 	bl FUN_0202AF3C
 	add r0, r5, #0
-	blx FUN_020307b0
+	blx Heap_Free
 	add r0, r4, #0
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
@@ -13595,7 +13595,7 @@ FUN_0202B1AC: ; 0x0202B1AC
 	mov r1, #0x18
 	mov r2, #0
 	mov r6, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	str r6, [r4]
 	str r6, [r4, #4]
@@ -13771,7 +13771,7 @@ FUN_0202B2FC: ; 0x0202B2FC
 	add r3, r7, #0
 	add r6, r0, #0
 	mov r4, #0
-	.hword 0xF005, 0xEA12 ; blx FUN_02030734
+	.hword 0xF005, 0xEA12 ; blx Heap_AllocDebug
 	add r5, r0, #0
 	mov r0, #0x92
 	.hword 0xF01D, 0xEE8C ; blx FUN_02049030
@@ -13784,7 +13784,7 @@ FUN_0202B2FC: ; 0x0202B2FC
 	mul r1, r2
 	mov r2, #0
 	add r3, r7, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	str r0, [r5, #4]
 	ldrb r0, [r5]
 	cmp r0, #0
@@ -13856,7 +13856,7 @@ FUN_0202B3A0: ; 0x0202B3A0
 	add r0, r5, #0
 	mov r1, #0x38
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	strh r5, [r4]
 	str r6, [r4, #8]
@@ -13966,7 +13966,7 @@ FUN_0202B4BC: ; 0x0202B4BC
 	add r0, r5, #0
 	mov r1, #0x28
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	bl FUN_0202B584
 	add r0, r4, #0
@@ -14304,7 +14304,7 @@ FUN_0202B894: ; 0x0202B894
 	mov r2, #0
 	add r5, r0, #0
 	mov r6, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	strh r5, [r4]
 	str r6, [r4, #4]
@@ -14405,7 +14405,7 @@ FUN_0202B958: ; 0x0202B958
 	lsl r1, r5, #3
 	mov r2, #0
 	mov r4, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	sub r1, r7, #4
 	str r0, [r6, r1]
 	cmp r5, #0
@@ -14950,7 +14950,7 @@ FUN_0202BE68: ; 0x0202BE68
 	mov r2, #0
 	add r5, r0, #0
 	mov r6, #0
-	.hword 0xF004, 0xEC5C ; blx FUN_02030734
+	.hword 0xF004, 0xEC5C ; blx Heap_AllocDebug
 	add r4, r0, #0
 	str r6, [r4]
 	strb r6, [r4, #4]
@@ -15014,7 +15014,7 @@ FUN_0202BEEC: ; 0x0202BEEC
 	lsl r1, r6, #3
 	mov r2, #0
 	mov r4, #0
-	.hword 0xF004, 0xEC0A ; blx FUN_02030734
+	.hword 0xF004, 0xEC0A ; blx Heap_AllocDebug
 	str r0, [r5, #8]
 	cmp r6, #0
 	ble _0202BF42
@@ -15168,7 +15168,7 @@ FUN_0202C124: ; 0x0202C124
 	str r1, [sp]
 	mov r1, #0x10
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	pop {r3, pc}
 	nop
 _0202C138: .word 0x0000010A
@@ -15195,7 +15195,7 @@ FUN_0202C148: ; 0x0202C148
 	lsl r1, r7, #2
 	mov r2, #0
 	mov r5, #0
-	.hword 0xF004, 0xEAE4 ; blx FUN_02030734
+	.hword 0xF004, 0xEAE4 ; blx Heap_AllocDebug
 	str r0, [r6, #8]
 	cmp r7, #0
 	ble _0202C190
@@ -15365,7 +15365,7 @@ FUN_0202C384: ; 0x0202C384
 	str r1, [sp]
 	mov r1, #0x3c
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	pop {r3, pc}
 	nop
 _0202C398: .word 0x0000012A
@@ -15597,7 +15597,7 @@ FUN_0202C590: ; 0x0202C590
 	str r1, [sp]
 	mov r1, #0xc
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	pop {r3, pc}
 	nop
 _0202C5A4: .word 0x00000115
@@ -16878,12 +16878,12 @@ _0202E1F0:
 
 	thumb_func_start FUN_0202E43C
 FUN_0202E43C: ; 0x0202E43C
-	ldr r3, _0202E444 ; =FUN_02082BCC
+	ldr r3, _0202E444 ; =MI_CpuFill8
 	mov r1, #0
 	mov r2, #4
 	bx r3
 	.balign 4, 0
-_0202E444: .word 0x02082BCC ; was FUN_02082BCC
+_0202E444: .word 0x02082BCC ; was MI_CpuFill8
 	thumb_func_end FUN_0202E43C
 _0202E448:
 	.byte 0x18, 0xB4, 0x09, 0x4B, 0x00, 0x24, 0x61, 0x00
@@ -16907,7 +16907,7 @@ FUN_0202e474: ; 0x0202E474
 	add r0, r4, #0
 	mov r1, #0x3c
 	mov r2, #1
-	.hword 0xF002, 0xE950 ; blx FUN_02030734
+	.hword 0xF002, 0xE950 ; blx Heap_AllocDebug
 	add r4, r0, #0
 	ldr r0, [sp, #4]
 	str r5, [r4]
@@ -17027,7 +17027,7 @@ FUN_0202E770: ; 0x0202E770
 	ldr r3, _0202E790 ; =0x020A77EC
 	mov r1, #0x4c
 	mov r2, #1
-	.hword 0xF001, 0xEFDA ; blx FUN_02030734
+	.hword 0xF001, 0xEFDA ; blx Heap_AllocDebug
 	add r4, r0, #0
 	bl FUN_0202E79C
 	add r0, r4, #0
@@ -17039,10 +17039,10 @@ _0202E790: .word 0x020A77EC
 
 	thumb_func_start FUN_0202E794
 FUN_0202E794: ; 0x0202E794
-	ldr r3, _0202E798 ; =FUN_020307b0
+	ldr r3, _0202E798 ; =Heap_Free
 	bx r3
 	.balign 4, 0
-_0202E798: .word 0x020307B0 ; was FUN_020307b0
+_0202E798: .word 0x020307B0 ; was Heap_Free
 	thumb_func_end FUN_0202E794
 
 	thumb_func_start FUN_0202E79C
@@ -17052,7 +17052,7 @@ FUN_0202E79C: ; 0x0202E79C
 	mov r1, #0
 	mov r2, #0x4c
 	mov r4, #0
-	.hword 0xF054, 0xEA12 ; blx FUN_02082BCC
+	.hword 0xF054, 0xEA12 ; blx MI_CpuFill8
 	add r0, r5, #0
 	add r0, #0xc
 	str r4, [r5]
@@ -18896,8 +18896,8 @@ _0203072C:
 	ldmia sp!, {r4, pc}
 	arm_func_end FUN_020306F0
 
-	arm_func_start FUN_02030734
-FUN_02030734: ; 0x02030734
+	arm_func_start Heap_AllocDebug
+Heap_AllocDebug: ; 0x02030734
 	stmdb sp!, {r4, r5, r6, r7, r8, lr}
 	mov r8, r0
 	mov r7, r1
@@ -18922,7 +18922,7 @@ _02030774:
 	mov r1, r4
 	mov r2, r7
 	bl FUN_02030A00
-	arm_func_end FUN_02030734
+	arm_func_end Heap_AllocDebug
 
 	thumb_func_start FUN_02030790
 FUN_02030790: ; 0x02030790
@@ -18939,10 +18939,10 @@ FUN_020307A8: ; 0x020307A8
 	ldmia sp!, {r4, r5, r6, r7, r8, pc}
 	arm_func_end FUN_020307A8
 
-	arm_func_start FUN_020307b0
-FUN_020307b0: ; 0x020307B0
+	arm_func_start Heap_Free
+Heap_Free: ; 0x020307B0
 	stmdb sp!, {r4, lr}
-	arm_func_end FUN_020307b0
+	arm_func_end Heap_Free
 _020307B4:
 	.byte 0x00, 0x40
 
@@ -19634,7 +19634,7 @@ FUN_02031354: ; 0x02031354
 	mov r5, r0
 	mov r2, r4
 	mov r1, #0x20
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	strh r5, [r0]
 	sub r1, r4, #1
 	stmib r0, {r1, r4}
@@ -19769,7 +19769,7 @@ FUN_02031538: ; 0x02031538
 	mov r2, r4
 	str ip, [sp]
 	mov r1, #0x20
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	stmia r0, {r6, r7}
 	str r4, [r0, #8]
 	str r4, [r0, #0xc]
@@ -19785,10 +19785,10 @@ _0203158C: .word 0x020A783C
 
 	arm_func_start FUN_02031590
 FUN_02031590: ; 0x02031590
-	ldr ip, _02031598 ; =FUN_020307b0
+	ldr ip, _02031598 ; =Heap_Free
 	bx ip
 	.balign 4, 0
-_02031598: .word 0x020307B0 ; was FUN_020307b0
+_02031598: .word 0x020307B0 ; was Heap_Free
 	arm_func_end FUN_02031590
 
 	arm_func_start FUN_0203159C
@@ -19801,7 +19801,7 @@ FUN_0203159C: ; 0x0203159C
 	ldr r3, _020315D0 ; =0x020A783C
 	mov r2, #0
 	str ip, [sp]
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	str r0, [r4, #0x14]
 	add sp, sp, #4
 	ldmia sp!, {r3, r4, pc}
@@ -19815,7 +19815,7 @@ FUN_020315D4: ; 0x020315D4
 	stmdb sp!, {r4, lr}
 	mov r4, r0
 	ldr r0, [r4, #0x14]
-	bl FUN_020307b0
+	bl Heap_Free
 	mov r0, #0
 	str r0, [r4, #0x14]
 	ldmia sp!, {r4, pc}
@@ -19902,7 +19902,7 @@ FUN_020316c8: ; 0x020316C8
 	mov r2, r8
 	mov r0, r0, lsr #0x10
 	str r4, [sp]
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	mov r1, r0
 	ldr r7, _02031748 ; =0x02146994
 	mov r0, r8
@@ -19952,7 +19952,7 @@ _02031784:
 	mov r0, r0, lsr #0x10
 	mov r2, #1
 	str r4, [sp]
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	ldr r1, [r7, #8]
 	arm_func_end FUN_0203174C
 
@@ -20001,7 +20001,7 @@ _020317F4:
 	mov r0, r6, lsl #0x10
 	ldr r1, [r4, #0x13c]
 	mov r0, r0, lsr #0x10
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	str r0, [r4, #0x138]
 	mov r1, #0x10
 	str r1, [sp]
@@ -20030,7 +20030,7 @@ _020317F4:
 	mov r2, sb
 	mov r3, r8
 	mov r0, r0, lsr #0x10
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	str r0, [r4, #0x34]
 	strb sb, [r4, #0x1d]
 _020318D8:
@@ -20087,15 +20087,15 @@ FUN_0203195c: ; 0x0203195C
 	ldr r0, [r4, #0x2c]
 	bl FUN_020339B4
 	ldr r0, [r4, #0x138]
-	bl FUN_020307b0
+	bl Heap_Free
 	ldrb r0, [r4, #0x1d]
 	cmp r0, #1
 	bne _02031988
 	ldr r0, [r4, #0x34]
-	bl FUN_020307b0
+	bl Heap_Free
 _02031988:
 	mov r0, r4
-	bl FUN_020307b0
+	bl Heap_Free
 	ldmia sp!, {r4, pc}
 	arm_func_end FUN_0203195c
 _02031994:
@@ -20581,7 +20581,7 @@ FUN_02031FE0: ; 0x02031FE0
 	ldr r1, [sl, #0x30]
 	ldr r3, _02032680 ; =0x020A7848
 	mov r2, r5
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	mov sb, #1
 	mov fp, r0
 	mov r0, sl
@@ -20613,7 +20613,7 @@ FUN_02031FE0: ; 0x02031FE0
 	mov r0, r5
 	bl FUN_02082A7C
 	mov r0, fp
-	bl FUN_020307b0
+	bl Heap_Free
 	add sp, sp, #0x3c
 	mov r0, r5
 	ldmia sp!, {r4, r5, r6, r7, r8, sb, sl, fp, pc}
@@ -20725,14 +20725,14 @@ _02032228:
 	bne _02032254
 	bl FUN_02033410
 	mov r0, fp
-	bl FUN_020307b0
+	bl Heap_Free
 	add sp, sp, #0x3c
 	mov r0, #3
 	ldmia sp!, {r4, r5, r6, r7, r8, sb, sl, fp, pc}
 _02032254:
 	bl FUN_02033410
 	mov r0, fp
-	bl FUN_020307b0
+	bl Heap_Free
 	add sp, sp, #0x3c
 	mov r0, #0
 	ldmia sp!, {r4, r5, r6, r7, r8, sb, sl, fp, pc}
@@ -20947,7 +20947,7 @@ _02032554:
 	mov r1, #1
 	bl FUN_02033410
 	mov r0, fp
-	bl FUN_020307b0
+	bl Heap_Free
 	add sp, sp, #0x3c
 	mov r0, #3
 	ldmia sp!, {r4, r5, r6, r7, r8, sb, sl, fp, pc}
@@ -21001,7 +21001,7 @@ _02032620:
 	mov r0, sl
 	bl FUN_02031F94
 	mov r0, fp
-	bl FUN_020307b0
+	bl Heap_Free
 	ldr r0, [sl, #0x2c]
 	mov r4, #0
 	bl FUN_02033BF0
@@ -22485,7 +22485,7 @@ FUN_02033908: ; 0x02033908
 	mov r3, sb
 	str r8, [sp]
 	mov r8, r0
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	mov r2, r4
 	mov r4, r0
 	mov r0, sl
@@ -22503,7 +22503,7 @@ FUN_02033908: ; 0x02033908
 	mov r1, #0xc
 	mul r1, r6, r1
 	mov r2, #1
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	str r0, [r4, #0x14]
 	ldr r1, [sp, #0x30]
 	mov r0, r4
@@ -22522,9 +22522,9 @@ FUN_020339B4: ; 0x020339B4
 	stmdb sp!, {r4, lr}
 	mov r4, r0
 	ldr r0, [r4, #0x14]
-	bl FUN_020307b0
+	bl Heap_Free
 	mov r0, r4
-	bl FUN_020307b0
+	bl Heap_Free
 	ldmia sp!, {r4, pc}
 	arm_func_end FUN_020339B4
 
@@ -22757,7 +22757,7 @@ _02033C30:
 	mov r2, r8
 	add r1, r4, #0x10
 	str r7, [sp]
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	mov r7, r0
 	strh r5, [r7]
 	add r0, r7, #0xc
@@ -22769,7 +22769,7 @@ _02033C30:
 	mov r1, r8
 	mov r2, r4
 	str r8, [r7, #8]
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	mov r0, r7
 	add sp, sp, #4
 	ldmia sp!, {r3, r4, r5, r6, r7, r8, pc}
@@ -25068,11 +25068,11 @@ FUN_020357E0: ; 0x020357E0
 	mov r1, r6
 	mov r2, r5
 	str r4, [sp]
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	mov r4, r0
 	mov r1, r5
 	mov r2, r6
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	strh r5, [r4, #0x58]
 	strh r5, [r4, #0x5a]
 	bl FUN_0208A924
@@ -25130,7 +25130,7 @@ FUN_020358A0: ; 0x020358A0
 	beq _020358E8
 	mov r1, r4
 	mov r2, #0x7c
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	add sp, sp, #0x10
 	ldmia sp!, {r4, r5, r6, r7, r8, pc}
 _020358E8:
@@ -25417,11 +25417,11 @@ FUN_02035EE8: ; 0x02035EE8
 	mov r1, r5
 	mov r2, r4
 	str ip, [sp]
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	mov r1, r4
 	mov r2, r5
 	mov r4, r0
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	mov r0, #8
 	str r0, [r4, #0x40]
 	mov r1, #0xf
@@ -26346,7 +26346,7 @@ FUN_02036AF4: ; 0x02036AF4
 	mov r2, #0x28
 	mov r7, r0
 	mov r4, r3
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	arm_func_end FUN_02036AF4
 
 	arm_func_start FUN_02036b14
@@ -26358,7 +26358,7 @@ FUN_02036b14: ; 0x02036B14
 	str r2, [sp]
 	mov r0, r4
 	mov r2, #1
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	str r0, [r7, #0x18]
 	str r6, [r7, #0x1c]
 	str r5, [r7, #0x14]
@@ -26378,7 +26378,7 @@ FUN_02036B4C: ; 0x02036B4C
 	mov r4, #0
 	ldr r0, [r5, #0x18]
 	mov r1, r4
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	str r4, [r5]
 	str r4, [r5, #4]
 	str r4, [r5, #8]
@@ -26390,10 +26390,10 @@ FUN_02036B4C: ; 0x02036B4C
 	arm_func_start FUN_02036B88
 FUN_02036B88: ; 0x02036B88
 	ldr r0, [r0, #0x18]
-	ldr ip, _02036B94 ; =FUN_020307b0
+	ldr ip, _02036B94 ; =Heap_Free
 	bx ip
 	.balign 4, 0
-_02036B94: .word 0x020307B0 ; was FUN_020307b0
+_02036B94: .word 0x020307B0 ; was Heap_Free
 	arm_func_end FUN_02036B88
 
 	arm_func_start FUN_02036B98
@@ -26437,7 +26437,7 @@ FUN_02036BD4: ; 0x02036BD4
 	mov r1, #0x14
 	mov r2, #0
 	str r4, [sp]
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	mov r4, r0
 _02036C24:
 	strh r6, [r4, #4]
@@ -26636,7 +26636,7 @@ FUN_02036E80: ; 0x02036E80
 	strneh r2, [r1, #4]
 	strne ip, [r1, #8]
 	strneh r2, [r1, #0xc]
-	bl FUN_020307b0
+	bl Heap_Free
 	ldmia sp!, {r3, pc}
 	.balign 4, 0
 _02036EC4: .word 0x40000200
@@ -26940,7 +26940,7 @@ FUN_02037288: ; 0x02037288
 	mov r0, r8
 	mov r1, #0x1f0
 	mov r2, #1
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	str r0, [sb]
 	cmp r4, #0
 	add r1, r7, #0x40
@@ -26957,7 +26957,7 @@ FUN_02037288: ; 0x02037288
 	mov r0, r8
 	mov r3, r4
 	add r1, r1, r1, lsl #1
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	ldr r2, [sb]
 	mov r1, #0xe8
 	str r0, [r2, #0x14]
@@ -26968,7 +26968,7 @@ FUN_02037288: ; 0x02037288
 	mov r2, r5
 	mov r3, r4
 	mov r1, r1, lsl #1
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	ldr r2, [sb]
 	mov r1, #0xe9
 	str r0, [r2, #0x18]
@@ -26979,7 +26979,7 @@ FUN_02037288: ; 0x02037288
 	mov r2, r5
 	mul r1, r6, r1
 	mov r3, r4
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	ldr r1, [sb]
 	str r0, [r1, #0x10]
 	bl FUN_0203D6BC
@@ -26989,7 +26989,7 @@ FUN_02037288: ; 0x02037288
 	mov r0, r8
 	mov r2, r5
 	mov r3, r4
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	ldr r1, [sb]
 	str r0, [r1]
 	bl FUN_0203D6BC
@@ -26999,7 +26999,7 @@ FUN_02037288: ; 0x02037288
 	mov r0, r8
 	mov r2, r5
 	mov r3, r4
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	ldr r2, [sb]
 	mov r1, #0xee
 	str r0, [r2, #4]
@@ -27008,7 +27008,7 @@ FUN_02037288: ; 0x02037288
 	mov r1, r7
 	mov r2, r5
 	mov r3, r4
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	mov r3, r4
 	ldr r4, [sb]
 	mov r2, #0xef
@@ -27017,7 +27017,7 @@ FUN_02037288: ; 0x02037288
 	mov r1, r7, lsl #1
 	mov r0, r8
 	mov r2, r5
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	ldr r2, [sb]
 	mov r1, #0x64
 	str r0, [r2, #0xc]
@@ -27067,7 +27067,7 @@ FUN_02037478: ; 0x02037478
 	ldr r0, [r2, #0x10]
 	mul r2, r3, r8
 	mov r1, r7
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	cmp r8, #0
 	ble _020374F4
 _020374C0:
@@ -27094,7 +27094,7 @@ _020374F4:
 	mov r7, sl
 	mov r8, sl
 	mov sb, sl
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	ldr r0, [r6]
 	mov r2, r4, lsl #1
 	ldr r1, [r0, #0xc]
@@ -27114,7 +27114,7 @@ _02037550:
 	rsb r2, r5, r5, lsl #4
 	ldr r0, [r0, #4]
 	mov r1, #0
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	ldr r0, [r6]
 	rsb r2, r5, r5, lsl #4
 	ldr r1, [r0, #4]
@@ -27141,7 +27141,7 @@ _020375AC:
 	ldr r0, [r0, #0x14]
 	mov r1, r4
 	add r2, r2, r2, lsl #1
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	ldr r0, [r6]
 	ldr r2, [r0, #0x1e0]
 	ldr r1, [r0, #0x14]
@@ -27405,13 +27405,13 @@ FUN_02037B08: ; 0x02037B08
 	cmp r0, #0
 	ldmeqia sp!, {r4, pc}
 	ldr r0, [r0, #0x14]
-	bl FUN_020307b0
+	bl Heap_Free
 	ldr r0, [r4]
 	ldr r0, [r0, #0x18]
-	bl FUN_020307b0
+	bl Heap_Free
 	ldr r0, [r4]
 	ldr r0, [r0, #0x10]
-	bl FUN_020307b0
+	bl Heap_Free
 	ldr r0, [r4]
 	add r0, r0, #0xf4
 	bl FUN_02036B88
@@ -27420,18 +27420,18 @@ FUN_02037B08: ; 0x02037B08
 	bl FUN_02036B88
 	ldr r0, [r4]
 	ldr r0, [r0]
-	bl FUN_020307b0
+	bl Heap_Free
 	ldr r0, [r4]
 	ldr r0, [r0, #4]
-	bl FUN_020307b0
+	bl Heap_Free
 	ldr r0, [r4]
 	ldr r0, [r0, #8]
-	bl FUN_020307b0
+	bl Heap_Free
 	ldr r0, [r4]
 	ldr r0, [r0, #0xc]
-	bl FUN_020307b0
+	bl Heap_Free
 	ldr r0, [r4]
-	bl FUN_020307b0
+	bl Heap_Free
 	mov r0, #0
 	str r0, [r4]
 	ldmia sp!, {r4, pc}
@@ -28559,7 +28559,7 @@ FUN_02038AE0: ; 0x02038AE0
 	mov r0, sb
 	mov r1, #0
 	mov r2, r7
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	ldr r0, [r8, #0x24]
 	cmp r0, #0
 	moveq r0, #1
@@ -29425,7 +29425,7 @@ _02039794:
 	ldr r0, [r0, #8]
 	cmp r0, #0
 	beq _020397A8
-	bl FUN_020307b0
+	bl Heap_Free
 _020397A8:
 	add r4, r4, #1
 	cmp r4, #8
@@ -29435,7 +29435,7 @@ _020397B4:
 	mov r0, r8
 	mov r1, sl
 	mov r2, #0x50
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	cmp r5, #0xff
 	bne _0203980C
 	ldr r4, _02039830 ; =0x020A7A68
@@ -29448,7 +29448,7 @@ _020397E0:
 	mov r1, r6
 	mov r2, r5
 	mov r3, r4
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	add r1, r8, sl, lsl #2
 	add sl, sl, #1
 	str r0, [r1, #8]
@@ -29497,7 +29497,7 @@ _02039880:
 	ldr r3, _020398AC ; =0x020A7A68
 	mov r1, #0x20
 	mov r2, #1
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	ldr r1, _020398A8 ; =0x021469D4
 	str r0, [r1]
 	ldmia sp!, {r3, r4, r5, pc}
@@ -30108,7 +30108,7 @@ FUN_0203A494: ; 0x0203A494
 	mov r1, #0x22c
 	mov r2, #1
 	str ip, [sp]
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	str r0, [r4]
 _0203A4DC:
 	mov r0, r8
@@ -30697,7 +30697,7 @@ _0203ADB4:
 	mov r2, r5
 	mov r1, #0x64
 	str ip, [sp]
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	ldr r1, _0203AE14 ; =0x021469DC
 	mov r2, #0x32
 	str r0, [r1]
@@ -31440,7 +31440,7 @@ FUN_0203BCA0: ; 0x0203BCA0
 	ldr r0, [r0]
 	mov r1, #0xff
 	add r0, r0, #0x57
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 _0203BCB0:
 	ldr r4, _0203BCD4 ; =0x021469DC
 	ldr r1, _0203BCD8 ; =FUN_0203BBB0
@@ -32033,7 +32033,7 @@ _0203CBD8:
 	mov r2, r5
 	mov r3, r4
 	mov r1, #0x354
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	ldr r1, _0203CD84 ; =0x021469E0
 	mov r6, r0
 	str r6, [r1, #8]
@@ -32831,7 +32831,7 @@ FUN_0203d7cc: ; 0x0203D7CC
 	mov r3, r2
 	add r1, r1, #0x20
 	mov r2, #1
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	add r1, r0, #0x20
 	bic r1, r1, #0x1f
 	str r0, [r1, #-4]
@@ -32941,7 +32941,7 @@ _0203D918:
 	mov r1, #0x10c
 	mov r2, #1
 	str r6, [sp]
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	mov ip, r0
 	mov r7, r5
 	mov r6, ip
@@ -32997,7 +32997,7 @@ FUN_0203D9EC: ; 0x0203D9EC
 	mov r0, #0x20
 	bl FUN_02034FB8
 	ldr r0, [r4]
-	bl FUN_020307b0
+	bl Heap_Free
 	mov r0, #0
 	str r0, [r4]
 	ldmia sp!, {r4, pc}
@@ -34487,7 +34487,7 @@ FUN_0203f3b4: ; 0x0203F3B4
 	mov r0, r5
 	mov r1, r4
 	mov r2, #0x48
-	bl FUN_02082BCC
+	bl MI_CpuFill8
 	str r4, [r5]
 	str r4, [r5, #4]
 	mov r0, r5
@@ -34896,7 +34896,7 @@ _02040240:
 	ldr r0, [sb]
 	mov r2, r7
 	ldrh r0, [r0]
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	ldr r1, [sb]
 	ldr r2, [r5, #8]
 	add r1, r1, r8

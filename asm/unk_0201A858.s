@@ -3,7 +3,7 @@
 	.extern FUN_02017528
 	.extern FUN_02017E1C
 	.extern FUN_0201AFD4
-	.extern FUN_02030734
+	.extern Heap_AllocDebug
 	.extern FUN_020495F4
 	.extern FUN_02082AC0
 	.extern _0302CD0C
@@ -131,7 +131,7 @@ FUN_0201A920: ; 0x0201A920
 	ldr r1, _0201A940 ; =0x00000534
 	ldr r3, _0201A944 ; =0x020A7304
 	mov r2, #0
-	.hword 0xF015, 0xEF02 ; blx FUN_02030734
+	.hword 0xF015, 0xEF02 ; blx Heap_AllocDebug
 	add r4, r0, #0
 	bl FUN_0201A948
 	add r0, r4, #0
@@ -440,7 +440,7 @@ FUN_0201ADE4: ; 0x0201ADE4
 	ldr r3, _0201AE10 ; =0x020A7310
 	mov r1, #0x3c
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	add r0, r5, #0
 	add r1, r6, #0
@@ -455,10 +455,10 @@ _0201AE10: .word 0x020A7310
 
 	thumb_func_start FUN_0201AE14
 FUN_0201AE14: ; 0x0201AE14
-	ldr r3, _0201AE18 ; =FUN_020307b0
+	ldr r3, _0201AE18 ; =Heap_Free
 	bx r3
 	.balign 4, 0
-_0201AE18: .word 0x020307B0 ; was FUN_020307b0
+_0201AE18: .word 0x020307B0 ; was Heap_Free
 	thumb_func_end FUN_0201AE14
 _0201AE1C:
 	.byte 0x2B, 0x29, 0x00, 0xD9

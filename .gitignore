@@ -25,14 +25,14 @@ build/
 !*/fnt.bin
 !*/twl_tail.bin
 
-# Reverse-engineering scratch (regenerable dumps and workspaces)
+# Reverse-engineering scratch
 asm_dumps/
 ghidra_projects/
 IRBO.yml
 tools/IRBO.yml
 asm/unk_02006EA4.s.backup
 
-# Tools (built from source or user-provided, never tracked)
+# Tools 
 tools/*.exe
 tools/*.o
 tools/local

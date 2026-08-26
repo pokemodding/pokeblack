@@ -35,7 +35,7 @@
 	.extern FUN_02035390
 	.extern FUN_020353B0
 	.extern FUN_02035614
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_02158318
 	.extern FUN_0215FA00
 	.extern FUN_02188BE8
@@ -90,7 +90,7 @@ FUN_02011e0a: ; 0x02011E0A
 	ldr r2, [sp, #4]
 	mov r1, #0
 	add r6, r0, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	ldr r0, _02011EA4 ; =0x02146248
 	ldr r2, [sp]
 	str r6, [r0]

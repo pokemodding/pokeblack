@@ -9,7 +9,7 @@ import sys
 
 FUNC_START_RE = re.compile(r'^\s*\w*func_start\s+(\S+)\s*$')
 GLOBAL_RE = re.compile(r'^\s*\.global\s+(\S+)\s*$')
-SECTION_ANCHOR_RE = re.compile(r'^\s*\.global\s+(\S+_(?:data|sinit|bss))\s*$')
+SECTION_ANCHOR_RE = re.compile(r'^\s*\.global\s+(\S+_(?:data|rodata|sinit|bss))\s*$')
 
 # a carved function with no caller left in asm would otherwise be dropped
 C_DEFN_RE = re.compile(r'^[A-Za-z_][\w \t\*]*?\b([A-Za-z_]\w*)\s*\([^;]*\)\s*\{', re.M)

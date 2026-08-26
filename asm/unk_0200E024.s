@@ -301,7 +301,7 @@ FUN_0200e2b8: ; 0x0200E2B8
 	ldr r3, _0200E360 ; =0x020A720C
 	lsl r1, r1, #4
 	mov r2, #1
-	.hword 0xF022, 0xEA2C ; blx FUN_02030734
+	.hword 0xF022, 0xEA2C ; blx Heap_AllocDebug
 	add r4, r0, #0
 	mov r0, #0
 	str r0, [sp, #8]
@@ -367,7 +367,7 @@ _0200E344:
 	blt _0200E2E4
 _0200E354:
 	add r0, r4, #0
-	.hword 0xF022, 0xEA2C ; blx FUN_020307b0
+	.hword 0xF022, 0xEA2C ; blx Heap_Free
 	ldr r0, [sp, #0xc]
 	add sp, #0x10
 	pop {r3, r4, r5, r6, r7, pc}

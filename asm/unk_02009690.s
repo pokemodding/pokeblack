@@ -2,7 +2,7 @@
 
 	.extern FUN_02034a5c
 	.extern FUN_02034ac4
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern MI_CpuCopy8
 	.extern FUN_0235B750
 
@@ -127,7 +127,7 @@ FUN_020097C4: ; 0x020097C4
 	ldr r3, _020097EC ; =0x020A7198
 	lsr r0, r0, #0x10
 	mov r2, #1
-	.hword 0xF026, 0xEFAE ; blx FUN_02030734
+	.hword 0xF026, 0xEFAE ; blx Heap_AllocDebug
 	add r4, r0, #0
 	bl FUN_02009800
 	add r0, r4, #0
@@ -154,7 +154,7 @@ FUN_02009800: ; 0x02009800
 	ldr r2, _0200984C ; =0x000007C4
 	mov r1, #0
 	add r5, r0, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	ldr r4, _02009850 ; =0x0000000A
 	add r0, r4, #0
 	blx FUN_02034a5c
@@ -422,7 +422,7 @@ _02009A8C:
 	add r0, r0, r4
 	mov r1, #0
 	mov r2, #0x30
-	.hword 0xF079, 0xE880 ; blx FUN_02082BCC
+	.hword 0xF079, 0xE880 ; blx MI_CpuFill8
 	ldr r0, [sp]
 	lsr r1, r4, #2
 	add r0, #0x40
@@ -430,7 +430,7 @@ _02009A8C:
 	add r0, r0, r1
 	mov r1, #0
 	mov r2, #0xc
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0
 	thumb_func_end FUN_02009a8a
@@ -468,12 +468,12 @@ FUN_02009b0e: ; 0x02009B0E
 	mov r1, #0
 	add r0, r4, r0
 	mov r2, #0x30
-	.hword 0xF079, 0xE852 ; blx FUN_02082BCC
+	.hword 0xF079, 0xE852 ; blx MI_CpuFill8
 	ldr r0, [sp, #4]
 	mov r1, #0
 	add r0, r5, r0
 	mov r2, #0xc
-	.hword 0xF079, 0xE84C ; blx FUN_02082BCC
+	.hword 0xF079, 0xE84C ; blx MI_CpuFill8
 	add sp, #8
 	pop {r3, r4, r5, r6, r7, pc}
 	.balign 4, 0

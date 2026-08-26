@@ -11,7 +11,7 @@
 	.extern FUN_020169E8
 	.extern FUN_02016BA0
 	.extern FUN_02016FC8
-	.extern FUN_020307b0
+	.extern Heap_Free
 	.extern FUN_02049F34
 	.extern FUN_020649D4
 	.extern FUN_0207B5C0
@@ -198,7 +198,7 @@ FUN_02014b52: ; 0x02014B52
 	lsr r0, r0, #0x10
 	mov r1, #0x2c
 	mov r2, #1
-	.hword 0xF01B, 0xEDE6 ; blx FUN_02030734
+	.hword 0xF01B, 0xEDE6 ; blx Heap_AllocDebug
 	add r4, r0, #0
 	add r0, r5, #0
 	lsl r3, r6, #0x10
@@ -241,11 +241,11 @@ FUN_02014bba: ; 0x02014BBA
 	add r5, r0, #0
 	ldr r0, [r5, #4]
 	ldr r0, [r0, #0xc]
-	blx FUN_020307b0
+	blx Heap_Free
 	ldr r0, [r5, #4]
-	.hword 0xF01B, 0xEDF4 ; blx FUN_020307b0
+	.hword 0xF01B, 0xEDF4 ; blx Heap_Free
 	add r0, r5, #0
-	blx FUN_020307b0
+	blx Heap_Free
 	ldr r0, [r4, #0xc]
 	.hword 0xF01C, 0xE96C ; blx FUN_02030EAC
 	mov r0, #0
@@ -269,9 +269,9 @@ _02014BF2:
 	blt _02014BE2
 _02014BFA:
 	ldr r0, [r4, #0x14]
-	blx FUN_020307b0
+	blx Heap_Free
 	add r0, r4, #0
-	.hword 0xF01B, 0xEDD6 ; blx FUN_020307b0
+	.hword 0xF01B, 0xEDD6 ; blx Heap_Free
 	pop {r3, r4, r5, pc}
 _02014C08:
 	.byte 0xF0, 0xB5, 0x85, 0xB0, 0x05, 0x1C, 0x28, 0x69

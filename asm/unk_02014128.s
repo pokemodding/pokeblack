@@ -11,8 +11,8 @@
 	.extern FUN_02013B90
 	.extern FUN_02013C70
 	.extern FUN_020289B8
-	.extern FUN_02030734
-	.extern FUN_02082BCC
+	.extern Heap_AllocDebug
+	.extern MI_CpuFill8
 	.extern FUN_0215FA34
 	.extern FUN_0215FA44
 	.extern FUN_02188BD8
@@ -206,7 +206,7 @@ _020143D8:
 
 	thumb_func_start FUN_020143e8
 FUN_020143e8: ; 0x020143E8
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	pop {r3, r4, r5, pc}
 	.balign 4, 0
 	thumb_func_end FUN_020143e8
@@ -251,7 +251,7 @@ FUN_02014428: ; 0x02014428
 FUN_02014430: ; 0x02014430
 	mov r1, #0x14
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	mov r1, #0
 	strh r1, [r0, #0x12]
 	pop {r3, pc}
@@ -261,10 +261,10 @@ _02014440: .word 0x020A72BC
 
 	thumb_func_start FUN_02014444
 FUN_02014444: ; 0x02014444
-	ldr r3, _02014448 ; =FUN_020307b0
+	ldr r3, _02014448 ; =Heap_Free
 	bx r3
 	.balign 4, 0
-_02014448: .word 0x020307B0 ; was FUN_020307b0
+_02014448: .word 0x020307B0 ; was Heap_Free
 	thumb_func_end FUN_02014444
 _0201444C:
 	.byte 0x00, 0x68, 0x70, 0x47

@@ -5,8 +5,8 @@
 	.extern FUN_02016C38
 	.extern FUN_02016C60
 	.extern FUN_02021F64
-	.extern FUN_02030734
-	.extern FUN_020307b0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern FUN_0204A07C
 	.extern FUN_0204A17C
 	.extern FUN_02063A54
@@ -135,7 +135,7 @@ FUN_02016630: ; 0x02016630
 	lsl r0, r0, #0x10
 	lsr r0, r0, #0x10
 	mov r1, #0x2c
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r5, r0, #0
 	str r7, [r5, #0x20]
 	ldr r0, [r7, #8]
@@ -211,7 +211,7 @@ FUN_0201689a: ; 0x0201689A
 	mov r6, #0
 	blx FUN_02063A54
 	ldr r0, [r4, #0x10]
-	.hword 0xF019, 0xEF80 ; blx FUN_020307b0
+	.hword 0xF019, 0xEF80 ; blx Heap_Free
 	mov r0, #5
 	ldr r1, [r4, #0x24]
 	lsl r0, r0, #6
@@ -250,7 +250,7 @@ _020168D8:
 	mov r2, #0
 	.hword 0xF04D, 0xEAB6 ; blx FUN_02063E54
 	ldr r0, [r4, #0x14]
-	blx FUN_020307b0
+	blx Heap_Free
 _020168F0:
 	ldr r1, [r4, #0x24]
 	cmp r1, #0
@@ -268,7 +268,7 @@ _020168FA:
 	str r0, [r1, #0xc]
 _0201690A:
 	add r0, r4, #0
-	blx FUN_020307b0
+	blx Heap_Free
 	add r0, r5, #0
 	.hword 0xF01A, 0xEACC ; blx FUN_02030EAC
 	pop {r4, r5, r6, pc}
@@ -302,7 +302,7 @@ FUN_02016984: ; 0x02016984
 	lsl r0, r0, #0x10
 	lsr r0, r0, #0x10
 	mov r2, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r1, r5, #0
 	add r1, #0x98
 	str r0, [r1]
@@ -363,7 +363,7 @@ _020169F8:
 	lsr r0, r0, #0x10
 	mov r1, #0x2c
 	mov r6, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	str r7, [r4, #0x20]
 	ldr r0, [r7, #8]
@@ -398,7 +398,7 @@ _02016A28:
 	lsl r0, r0, #0x10
 	lsr r0, r0, #0x10
 	mov r1, #0x10
-	.hword 0xF019, 0xEE6A ; blx FUN_02030734
+	.hword 0xF019, 0xEE6A ; blx Heap_AllocDebug
 	add r1, r5, #0
 	str r0, [r4, #4]
 	add r1, #0xc0
@@ -431,7 +431,7 @@ _02016A28:
 	lsl r0, r0, #0x10
 	ldr r1, [r1]
 	lsr r0, r0, #0x10
-	.hword 0xF019, 0xEE48 ; blx FUN_02030734
+	.hword 0xF019, 0xEE48 ; blx Heap_AllocDebug
 	ldr r1, [r4, #4]
 	str r0, [r1, #0xc]
 	add r0, r6, #0

@@ -1,7 +1,7 @@
 	.include "asm/macros/function.inc"
 
 	.extern FUN_0203EFC8
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_021763BC
 
 	.text
@@ -12,7 +12,7 @@ FUN_0200BDE4: ; 0x0200BDE4
 	add r4, r0, #0
 	mov r1, #0
 	mov r2, #0x10
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	add r0, r4, #0
 	bl FUN_021763BC
 	pop {r4, pc}
@@ -435,7 +435,7 @@ _0200C520:
 	non_word_aligned_thumb_func_start FUN_0200c6fe
 FUN_0200c6fe: ; 0x0200C6FE
 	mov r4, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	ldr r1, _0200C71C ; =0x00001FE0
 	add r0, r6, #0
 	add r1, r5, r1

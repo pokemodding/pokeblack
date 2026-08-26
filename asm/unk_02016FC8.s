@@ -399,7 +399,7 @@ FUN_020173F0: ; 0x020173F0
 	ldrh r0, [r0]
 	ldr r3, _0201742C ; =0x020A72E4
 	mov r2, #1
-	.hword 0xF019, 0xE992 ; blx FUN_02030734
+	.hword 0xF019, 0xE992 ; blx Heap_AllocDebug
 	add r6, r0, #0
 	beq _02017424
 	ldr r1, [sp, #8]
@@ -489,7 +489,7 @@ _020174CC:
 	add r2, r5, #0
 	bl FUN_02017E40
 	add r0, r5, #0
-	.hword 0xF019, 0xE94E ; blx FUN_020307b0
+	.hword 0xF019, 0xE94E ; blx Heap_Free
 	add r0, r4, #0
 	bl FUN_020185C4
 	add r0, r4, #0

@@ -2,7 +2,7 @@
 
 	.extern FUN_020056EC
 	.extern FUN_020120F4
-	.extern FUN_020307B0
+	.extern Heap_Free
 	.extern FUN_02045B38
 	.extern FUN_02045C04
 	.extern FUN_020490F4
@@ -708,7 +708,7 @@ _021F3ED0:
 	mov r5, #0
 	blx FUN_0204944C
 	add r0, r6, #0
-	blx FUN_020307B0
+	blx Heap_Free
 	add r0, r7, #0
 	mov r1, #6
 	blx FUN_020493D4
@@ -741,7 +741,7 @@ FUN_overlay_d_55__021f3f20: ; 0x021F3F20
 	push {r4, lr}
 	add r4, r0, #0
 	ldr r0, [r4, #0x38]
-	blx FUN_020307B0
+	blx Heap_Free
 	mov r0, #0
 	str r0, [r4, #0x38]
 	pop {r4, pc}

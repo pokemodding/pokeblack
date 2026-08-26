@@ -10,7 +10,7 @@
 	.extern FUN_02034A5C
 	.extern FUN_02040588
 	.extern FUN_020409B4
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_0209C0A4
 	.extern FUN_021F3AF0
 	.extern FUN_021F3BF0
@@ -724,7 +724,7 @@ FUN_overlay_d_185__021f8d98: ; 0x021F8D98
 	add r0, sp, #0x1c
 	mov r1, #0
 	mov r2, #8
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	mov r0, #0x50
 	add r1, sp, #0x1c
 	strh r0, [r1]

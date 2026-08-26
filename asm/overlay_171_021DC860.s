@@ -121,7 +121,7 @@
 	.extern FUN_0204B92C
 	.extern FUN_0204B944
 	.extern FUN_0207D63C
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_0209C054
 	.extern FUN_0209C0A4
 	.extern FUN_021B6AE4
@@ -147,7 +147,7 @@ FUN_overlay_171__021dc860: ; 0x021DC860
 	mov r1, #0
 	add r2, r6, #0
 	add r4, r0, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	str r5, [r4]
 	mov r0, #1
 	pop {r4, r5, r6, pc}

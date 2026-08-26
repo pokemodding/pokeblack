@@ -7,12 +7,12 @@
 	.extern FUN_02007b50
 	.extern FUN_02007b64
 	.extern FUN_02007b68
-	.extern FUN_02030734
+	.extern Heap_AllocDebug
 	.extern FUN_02072a44
 	.extern FUN_02072aa0
 	.extern FUN_02072d20
 	.extern FUN_0207457C
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_02085A38
 	.extern FUN_0208A638
 	.extern FUN_0208BEF0
@@ -531,22 +531,22 @@ FUN_02006cbc: ; 0x02006CBC
 	add r3, r7, #0
 	add r5, r0, #0
 	mov r6, #0
-	.hword 0xF029, 0xED32 ; blx FUN_02030734
+	.hword 0xF029, 0xED32 ; blx Heap_AllocDebug
 	mov r1, #0
 	mov r2, #0x28
 	add r4, r0, #0
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	mov r0, #0x5f
 	str r0, [sp]
 	ldr r1, _02006D30 ; =0x00002014
 	add r0, r5, #0
 	mov r2, #0
 	add r3, r7, #0
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	ldr r2, _02006D30 ; =0x00002014
 	mov r1, #0
 	add r5, r0, #0
-	.hword 0xF07B, 0xEF6C ; blx FUN_02082BCC
+	.hword 0xF07B, 0xEF6C ; blx MI_CpuFill8
 	str r5, [r4, #0x24]
 	mov r0, #1
 	mov r5, #1

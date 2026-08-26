@@ -2,14 +2,14 @@
 
 	.extern FUN_02008550
 	.extern FUN_02008554
-	.extern FUN_02030734
+	.extern Heap_AllocDebug
 	.extern FUN_020399A8
 	.extern FUN_0203CD98
 	.extern FUN_0203D1A4
 	.extern FUN_0203D1C0
 	.extern FUN_0203D1E8
 	.extern FUN_0203D378
-	.extern FUN_02082BCC
+	.extern MI_CpuFill8
 	.extern FUN_02087C6C
 	.extern FUN_0217357C
 	.extern FUN_02173614
@@ -35,7 +35,7 @@ FUN_overlay_d_22__02183b60: ; 0x02183B60
 	add r1, r2, #0
 	ldr r3, _02183BDC ; =_021841C0
 	mov r2, #1
-	blx FUN_02030734
+	blx Heap_AllocDebug
 	add r4, r0, #0
 	blx FUN_0203D378
 	cmp r0, #1
@@ -52,7 +52,7 @@ _02183B8A:
 	add r0, r6, #0
 	mov r1, #0
 	mov r2, #0x28
-	blx FUN_02082BCC
+	blx MI_CpuFill8
 	add r2, r6, #0
 	ldmia r5!, {r0, r1}
 	stmia r2!, {r0, r1}

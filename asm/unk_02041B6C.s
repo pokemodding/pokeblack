@@ -1,7 +1,7 @@
 	.include "asm/macros/function.inc"
 
-	.extern FUN_02030734
-	.extern FUN_020307b0
+	.extern Heap_AllocDebug
+	.extern Heap_Free
 	.extern FUN_0203D814
 	.extern FUN_02040860
 	.extern FUN_02040968
@@ -539,7 +539,7 @@ FUN_02042508: ; 0x02042508
 	mov r1, r4
 	mov r0, r0, lsr #0x10
 	mov r2, #0
-	bl FUN_02030734
+	bl Heap_AllocDebug
 	mov sb, r0
 	mov r0, r7
 	mov r1, sb
@@ -551,7 +551,7 @@ FUN_02042508: ; 0x02042508
 	mov r3, r4
 	bl FUN_020425B4
 	mov r0, sb
-	bl FUN_020307b0
+	bl Heap_Free
 	ldmia sp!, {r3, r4, r5, r6, r7, r8, sb, pc}
 _02042594:
 	mov r2, r5
